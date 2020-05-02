@@ -11,8 +11,26 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Define API routes here
+const testUsers = [
+  {
+    id: 1,
+    username: 'Brian'
+  }
+]
 
+// Define API routes here
+app.get('/api/user/:id', (req, res) => {
+  let passedId = parseInt(req.params.id);
+  let index = 0;
+  for(let i = 0; i < testUsers.length; i++){
+    if(testUsers[i].id === passedId){
+      index = i;
+      break;
+    }
+  }
+  const user = testUsers[index];
+  res.json(user);
+})
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {

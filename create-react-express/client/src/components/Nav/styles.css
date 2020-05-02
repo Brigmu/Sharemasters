@@ -1,0 +1,18 @@
+nav {
+    height: 50px;
+    width: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: green;
+    color: white;
+    /* padding: 5px 20px; */
+    /* align-items: flex-end; */
+}
+
+.nav-login {
+    margin-top: 15px;
+    margin-right: 30px;
+    text-decoration: none;
+    color: white;
+}
