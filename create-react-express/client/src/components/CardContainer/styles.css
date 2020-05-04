@@ -1,0 +1,18 @@
+.card-container{
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    display: inline-flex;
+    align-items: flex-start;
+    /* justify-content: space-evenly; */
+    /* margin-top: 20px; */
+    /* margin: 20px; */
+    /* border: solid green 2px;
+    padding: 20px; */
+    box-shadow: black 1px 1px 5px 1px;
+    /* background-color: white; */
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    /* overflow-wrap: normal; */
+}

@@ -3,7 +3,7 @@ import './styles.css';
 import UserContext from '../../utils/UserContext/UserContext';
 
 const Nav = (props) => {
-    const {id, username} = useContext(UserContext);
+    const {username} = useContext(UserContext);
     return (
         <nav className={props.class}>
             <p>Welcome {username}</p>
