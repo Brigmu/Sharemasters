@@ -4,6 +4,7 @@ import "./App.css";
 import Signup from './pages/Signup/Signup';
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
+import ItemPage from "./pages/Item/Item"
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route exact path = '/' component={Home} />
           <Route exact path = '/signup' component={Signup} />
           <Route exact path = '/login' component={Login} />
+          <Route exact path = '/item/:id' component={ItemPage} />
         </Switch>
       
       </div>
