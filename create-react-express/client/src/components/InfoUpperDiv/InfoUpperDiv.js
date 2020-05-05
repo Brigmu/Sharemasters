@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ItemPageImage from '../ItemPageImage/ItemPageImage';
 // import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import API from '../../utils/API/API';
+import { getItem } from '../../utils/API/API';
 
 
 function ItemUpperDiv() {
@@ -11,12 +11,10 @@ function ItemUpperDiv() {
 
     const { id } = useParams();
     useEffect(() => {
-        API.getItem(id)
-            .then(res => {
-                console.log(res.data)
-                setItem(res.data)
+        getItem(id, (res) => {
+            console.log('hi from useEffect/getItem')
+            setItem(res.data)
             })
-            .catch(err => console.log(err));
     }, []);
 
     

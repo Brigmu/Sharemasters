@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-export default {
-    getItem: function(id) {
-        return axios.get('/api/items/' + id)
-    }
+export const getItem = (id) => {
+    fetch('/api/items/' + id)
+    .then(response => response.json())
+    .catch(err => console.log(err));
+    // return axios.get('/api/items/' + id)
 }
 
 export const getUserData = (id, cb) => {

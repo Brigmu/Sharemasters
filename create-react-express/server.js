@@ -40,17 +40,17 @@ app.get('/api/user/:id', (req, res) => {
 //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 // });
 
-const db = require('./models')
-app.get('/api/items/:id', (req, res) => {
-  db.Item.findOne({ _id: parseInt(req.params.id) }, (err, data) => {
-    if (err) {
-      console.log(err);
-    } else 
+// const db = require('./models')
+// app.get('/api/items/1', (req, res) => {
+//   db.Item.findAll({}, (err, data) => {
+//     if (err) {
+//       console.log(err);
+//     } else 
 
-  res.json(data);
-  console.log('hi')
-})
-})
+//   res.json(data);
+//   // console.log('hi from server route')
+// })
+// })
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/shareish");
