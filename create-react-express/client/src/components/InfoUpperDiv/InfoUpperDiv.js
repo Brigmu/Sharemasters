@@ -10,10 +10,12 @@ function ItemUpperDiv() {
     const [item, setItem] = useState({})
 
     const { id } = useParams();
-    console.log(id)
     useEffect(() => {
         API.getItem(id)
-            .then(res => console.log(res.data))
+            .then(res => {
+                console.log(res.data)
+                setItem(res.data)
+            })
             .catch(err => console.log(err));
     }, []);
 
@@ -31,7 +33,7 @@ function ItemUpperDiv() {
                 </ItemPageImage>
             </div>
             <div className="upper-div">
-                <p>Owner: {item.name}</p>
+                <p>Owner: {item.owner_id}</p>
                 <p>Location: </p>
                 <button className="btn waves-effect waves-light red lighten-2" onClick={HandleSubmitButton}>
                     Rent This!
