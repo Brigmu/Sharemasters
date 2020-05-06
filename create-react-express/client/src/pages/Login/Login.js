@@ -8,7 +8,7 @@ const Login = () => {
     const passowrdRef = useRef();
     const handleSubmit = (e) => {
         e.preventDefault();
-        const userData = {username: usernameRef.current.value, passowrd: passowrdRef.current.value};
+        const userData = {username: usernameRef.current.value, password: passowrdRef.current.value};
         loginUser(userData);
 
     }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Nav from '../../components/Nav/Nav';
 import './styles.css';
 import UserContext from '../../utils/UserContext/UserContext';
-import API from '../../utils/API/API';
+import {getUserData} from '../../utils/API/API';
 
 
 
@@ -13,7 +13,10 @@ const Home = () => {
     });
     
     useEffect(()=>{
-        API.loginUser({username: "thirduser", password: "password3"}, res => console.log(res));
+        getUserData(1, (results) => {
+            console.log(results);
+            setUserInfo(results);
+        })
     }, [])
     
     return (
