@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     /* border: solid purple 2px; */
-    padding: 75px;
+    padding: 20px 75px;
     color: white;
     text-shadow: 0px 0px 10px black;
     position: relative;
@@ -19,10 +19,10 @@
 
 #scroll-left-btn{
     left: 10px;
-    top: 225px
+    top: 52.5%;
 }
 
 #scroll-right-btn{
     right: 10px;
-    top: 225px;
+    top: 52.5%;
 }
