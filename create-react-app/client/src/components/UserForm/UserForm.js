@@ -8,10 +8,10 @@ const UserForm = (props) => {
             <h1>{props.title}</h1>
             <div className='form-div'>
                 <label>Username:</label>
-                <input className='user-login-input' type='text' placeholder='Enter Username'></input>
+                <input className='user-login-input' type='text' placeholder='Enter Username' ref={props.userRef}></input>
                 <label>Password:</label>
-                <input className='user-login-input' type='password' placeholder='Enter password'></input>
-                <button type='submit'>Submit</button>
+                <input className='user-login-input' type='password' placeholder='Enter password' ref={props.pwRef}></input>
+                <button type='submit' onClick={props.handleSubmit}>Submit</button>
                 <p>{props.paragraphText}</p>
                 <a href={props.href}>{props.anchorText}</a>
                 {/* <p><Link to={props.ref}>

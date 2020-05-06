@@ -1,21 +1,20 @@
-import axios from "axios";
+import axios from 'axios';
 
-export default {
 
-  loginUser: function(user) {
-    return axios.post("/api/passport/login", user);
-  },
+//get data for currently logged in user
+export const getUserData = (cb) => {
+    fetch(`/api/passport/user_data`)
+    .then(response => response.json())
+    .then(data => {
+        cb(data);
+    })
+    .catch(err => console.log(err));
+}
 
-  signupUser: function(user) {
-    return axios.post("/api/passport/signup", user);
-  },
+export const loginUser = (userData) => {
+    return axios.post('/api/passport/login', userData)
+}
 
-  logoutUser: function() {
-    return axios.get("/api/passport/logout");
-  },
-
-  //get info for currently logged in user
-  getUser: function() {
-    return axios.post("/api/passport/user_data");
-  }
-};
+export const signupUser = (userData) => {
+    return axios.post('/api/passport/signup', userData)
+}
