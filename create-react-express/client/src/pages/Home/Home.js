@@ -3,7 +3,8 @@ import Nav from '../../components/Nav/Nav';
 import './styles.css';
 import UserContext from '../../utils/UserContext/UserContext';
 import {getUserData} from '../../utils/API/API';
-
+import SearchBar from '../../components/SearchBar';
+import Hero from '../../components/Hero';
 
 
 const Home = () => {
@@ -22,7 +23,7 @@ const Home = () => {
     return (
         <div className = 'homepage'>
             <UserContext.Provider value={userInfo}>
-                <Nav />
+                <Hero />
             </UserContext.Provider>
         </div>
     )
