@@ -18,6 +18,14 @@ const testUsers = [
   }
 ]
 
+app.post('/api/signup', (req, res) => {
+  console.log(req.body);
+  res.json(req.body);
+})
+
+app.post('/api/login', (req, res) => {
+  console.log(req.body);
+})
 // Define API routes here
 app.get('/api/user/:id', (req, res) => {
   let passedId = parseInt(req.params.id);
