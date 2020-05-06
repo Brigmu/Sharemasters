@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 // import RentThisButton from '../RentThisButton/RentThisButton';
-import ItemPageImage from '../ItemPageImage/ItemPageImage';
+// import ItemPageImage from '../ItemPageImage/ItemPageImage';
 // import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getItem } from '../../utils/API/API';
@@ -13,7 +13,8 @@ function ItemUpperDiv() {
     useEffect(() => {
         getItem(id, (res) => {
             console.log('hi from useEffect/getItem')
-            setItem(res.data)
+            console.log(res)
+            setItem(res)
             })
     }, []);
 
@@ -26,9 +27,8 @@ function ItemUpperDiv() {
     return (
         <div >
             <div className="upper-div">
-                <ItemPageImage>
+                <img className="itempageimage" src={item.image_url} alt={item.name} />
 
-                </ItemPageImage>
             </div>
             <div className="upper-div">
                 <p>Owner: {item.owner_id}</p>

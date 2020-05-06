@@ -13,6 +13,9 @@ const itemSchema = new mongoose.Schema({
     category: {
         type: String
     },
+    image_url: {
+        type: String
+    },
     pending_request: {
         type: Boolean
     },

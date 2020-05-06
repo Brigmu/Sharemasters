@@ -1,4 +1,5 @@
 const db = require('../models');
+const mongoose = require('mongoose')
 
 module.exports = {
     findAll: function(req, res) {
@@ -7,9 +8,8 @@ module.exports = {
           .then(data => res.json(data))
           .catch(err => res.status(422).json(err));
     },
-    findOne: function(req, res) {
-        console.log('hi from controller')
-        db.Item.findOne({ _id: req.param.id })
+    findById: function(req, res) {
+        db.Item.findById(req.params.id)
         .then(data => res.json(data))
 
         .catch(err => res.status(422).json(err));
