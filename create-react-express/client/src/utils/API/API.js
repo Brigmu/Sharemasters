@@ -10,9 +10,9 @@ export const getUserData = (id, cb) => {
 }
 
 export const loginUser = (userData) => {
-    return axios.post('/api/login', userData)
+    return axios.post('/api/passport/login', userData)
 }
 
 export const signupUser = (userData) => {
-    return axios.post('/api/signup', userData)
+    return axios.post('/api/passport/signup', userData)
 }

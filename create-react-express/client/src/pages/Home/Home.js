@@ -13,10 +13,10 @@ const Home = () => {
     });
     
     useEffect(()=>{
-        // getUserData(1, (results) => {
-        //     console.log(results);
-        //     setUserInfo(results);
-        // })
+        getUserData(1, (results) => {
+            console.log(results);
+            setUserInfo(results);
+        })
     }, [])
     
     return (
