@@ -5,25 +5,23 @@ import {signupUser} from '../../utils/API/API';
 
 const Signup = () => {
     const usernameRef = useRef();
-    const passowrdRef = useRef();
+    const passwordRef = useRef();
     const handleSubmit = (e) => {
         e.preventDefault();
         let username = usernameRef.current.value;
-        let password = passowrdRef.current.value
-        const userData = {username: username, passowrd: password};
-        signupUser(userData)
-        .then(results => {
-            console.log(results);
-        })
+        let password = passwordRef.current.value
+        const userData = {username: username, password: password};
+        signupUser(userData);
+
 
         usernameRef.current.value='';
-        passowrdRef.current.value='';
+        passwordRef.current.value='';
         
 
     }
     return (
         <div className='signup-page'>
-            <UserForm title='Signup' href='/login' paragraphText = 'Already have an account?' anchorText='Login' userRef={usernameRef} pwRef={passowrdRef} handleSubmit={handleSubmit}/>
+            <UserForm title='Signup' href='/login' paragraphText = 'Already have an account?' anchorText='Login' userRef={usernameRef} pwRef={passwordRef} handleSubmit={handleSubmit}/>
         </div>
     )
 }

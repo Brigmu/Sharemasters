@@ -4,7 +4,10 @@ import axios from 'axios';
 //get data for currently logged in user
 export const getUserData = (cb) => {
     fetch(`/api/passport/user_data`)
-    .then(response => response.json())
+    .then(response => {
+        console.log(response);
+        response.json();
+    })
     .then(data => {
         cb(data);
     })
@@ -12,7 +15,7 @@ export const getUserData = (cb) => {
 }
 
 export const loginUser = (userData) => {
-    return axios.post('/api/passport/login', userData)
+    return axios.post('/api/passport/login', userData);
 }
 
 export const signupUser = (userData) => {
