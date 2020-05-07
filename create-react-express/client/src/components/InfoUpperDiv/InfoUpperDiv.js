@@ -10,10 +10,12 @@ function ItemUpperDiv() {
     const [item, setItem] = useState({})
 
     const { id } = useParams();
+
     useEffect(() => {
         getItem(id, (res) => {
             console.log('hi from useEffect/getItem')
-            setItem(res.data)
+            console.log(res);
+            setItem(res)
             })
     }, []);
 
