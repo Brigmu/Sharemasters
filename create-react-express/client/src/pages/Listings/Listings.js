@@ -1,5 +1,5 @@
 import React, {useRef, useState, useEffect, useContext} from 'react'
-import './styles.css';
+// import './styles.css';
 import Nav from '../../components/Nav/Nav'
 // import CardContainer from '../../components/CardContainer/CardContainer'
 import CategoryWrapper from '../../components/CategoryWrapper/CategoryWrapper'
@@ -85,7 +85,9 @@ const Listings = (props) => {
                 <Nav />
                 <label>Filter:</label>
                 <input type='text' id='filter' onChange={e => setFilter(e.target.value)}></input>
-                <CategoryWrapper category='All' reference={allCategoryRef} handleBtns={handleListingsBtns} handleSwipe={e => handleSwipe(e)}/>
+                
+                {/* <CategoryWrapper category='All' reference={allCategoryRef} handleBtns={handleListingsBtns} handleSwipe={e => handleSwipe(e)}/> */}
+
                 <CategoryWrapper category='Yard' reference={yardCategoryRef} handleBtns={handleListingsBtns} handleSwipe={e => handleSwipe(e)}/>
                 <CategoryWrapper category='Kitchen' reference={kitchenCategoryRef} handleBtns={handleListingsBtns} handleSwipe={e => handleSwipe(e)}/>
                 <CategoryWrapper category='Home Improvement' reference={homeCategoryRef} handleBtns={handleListingsBtns} handleSwipe={e => handleSwipe(e)}/>
