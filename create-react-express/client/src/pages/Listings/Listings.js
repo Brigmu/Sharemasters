@@ -1,10 +1,12 @@
 import React, {useRef, useState, useEffect, useContext} from 'react'
 // import './styles.css';
-import Nav from '../../components/Nav/Nav'
+import './styles.css';
+import Nav from '../../components/Nav/Nav';
 // import CardContainer from '../../components/CardContainer/CardContainer'
 import CategoryWrapper from '../../components/CategoryWrapper/CategoryWrapper'
 import ItemContext from '../../utils/ItemContext/ItemContext';
 import FilteredContext from '../../utils/API/FilteredContext/FilteredContext';
+import { useHistory } from 'react-router-dom';
 
 const Listings = (props) => {
     const itemListings = useContext(ItemContext);
@@ -24,6 +26,10 @@ const Listings = (props) => {
     const allCategoryRef = useRef();
     const kitchenCategoryRef = useRef();
     const homeCategoryRef = useRef();
+    const electronicsCategoryRef = useRef();
+    const eventsCategoryRef = useRef();
+    const miscCategoryRef = useRef();
+    const recreationCategoryRef = useRef();
 
     // const filterRef = useRef();
 
@@ -36,14 +42,26 @@ const Listings = (props) => {
             case 'All':
                 element = allCategoryRef;
             break;
+            case 'Electronics':
+                element = electronicsCategoryRef;
+            break;
+            case 'Events':
+                element = eventsCategoryRef;
+            break;
             case 'Yard':
                 element = yardCategoryRef;
             break;
-            case 'Kitchen':
+            case 'Kitchen Appliances':
                 element = kitchenCategoryRef;
             break;
             case 'Home Improvement':
                 element = homeCategoryRef;
+            break;
+            case 'Miscellaneous':
+                element = miscCategoryRef;
+            break;
+            case 'Recreation':
+                element = recreationCategoryRef;
             break;
             default:
                 element = allCategoryRef;
@@ -79,18 +97,29 @@ const Listings = (props) => {
         }
     }
 
+    const history = useHistory();
+
+    const handleItemClick = (e) => {
+        const id = e.target.id;
+        console.log('clicked');
+        // <Redirect to='/newlisting' />
+        history.push('/newlisting');
+    }
+
     return (
         <FilteredContext.Provider value={filtered}>
             <div className='listings-page'>
                 <Nav />
                 <label>Filter:</label>
                 <input type='text' id='filter' onChange={e => setFilter(e.target.value)}></input>
-                
-                {/* <CategoryWrapper category='All' reference={allCategoryRef} handleBtns={handleListingsBtns} handleSwipe={e => handleSwipe(e)}/> */}
-
-                <CategoryWrapper category='Yard' reference={yardCategoryRef} handleBtns={handleListingsBtns} handleSwipe={e => handleSwipe(e)}/>
-                <CategoryWrapper category='Kitchen' reference={kitchenCategoryRef} handleBtns={handleListingsBtns} handleSwipe={e => handleSwipe(e)}/>
-                <CategoryWrapper category='Home Improvement' reference={homeCategoryRef} handleBtns={handleListingsBtns} handleSwipe={e => handleSwipe(e)}/>
+                <CategoryWrapper category='All' reference={allCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                <CategoryWrapper category='Home Improvement' reference={homeCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                <CategoryWrapper category='Electronics' reference={electronicsCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                <CategoryWrapper category='Events' reference={eventsCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                <CategoryWrapper category='Kitchen Appliances' reference={kitchenCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                <CategoryWrapper category='Miscellaneous' reference={miscCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                <CategoryWrapper category='Recreation' reference={recreationCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                <CategoryWrapper category='Yard' reference={yardCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
             </div>
         </FilteredContext.Provider>
     )

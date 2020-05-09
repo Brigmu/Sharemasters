@@ -11,7 +11,7 @@ import TileLevel from '../TileLevel';
 
 const CardContainer = (props) => {
     const itemListings = useContext(FilteredContext);
-    console.log(itemListings);
+    // console.log(itemListings);
     // const handleMouseDown = (e) => {
     //     console.log('mousedown');
     // }
@@ -32,9 +32,7 @@ const CardContainer = (props) => {
         // bulma css edit - cna 
         <TileContainer>
             {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
-                <TileLevel >
-                    <Card img={item.img} itemName={item.name} id={item.id}/>
-                </TileLevel>
+                <ItemCard img={item.img} itemName={item.name} id={item.id} handleItemClick={props.handleItemClick}/>
             ))}
         </TileContainer>
     )

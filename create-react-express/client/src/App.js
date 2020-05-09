@@ -6,6 +6,7 @@ import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 import ItemContext from "./utils/ItemContext/ItemContext";
 import Listings from './pages/Listings/Listings'
+import ListingPage from "./pages/ListingPost/ListingPost";
 
 function App() {
   const [itemListings, setItemListings] = useState([]);
@@ -31,6 +32,7 @@ function App() {
           <Route exact path = '/signup' component={Signup} />
           <Route exact path = '/login' component={Login} />
           <Route exact path = '/listings' component={Listings} />
+          <Route exact path = '/newlisting' component={ListingPage} />
         </Switch>
       
       </div>
