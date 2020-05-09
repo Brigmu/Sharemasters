@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css">
+    <!-- <link rel="stylesheet" href="./debug.css"> -->
+    <!-- <style>
+        /* ! debug.css | MIT License | zaydek.github.com/debug.css */
+        :not(path):not(g) {
+            color:                    hsla(210, 100%, 100%, 0.9) !important;
+            background:               hsla(210, 100%,  50%, 0.5) !important;
+            outline:    solid 0.25rem hsla(210, 100%, 100%, 0.5) !important;
+
+            box-shadow: none !important;
+        }
+    </style> -->
+</head>
+<body>
+    <!-- hero -->
+    <div class="hero is-medium is-primary">
+        <div class="hero-head">
+            <!-- navbar -->
+            <div class="navbar">
+                <div class="navbar-start">
+                    <div class="navbar-item">
+                        Logo Image
+                    </div>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        Home
+                    </div>
+                    <div class="navbar-item">
+                        Profile
+                    </div>
+                    <div class="navbar-item">
+                        <div class="burger">
+                            Burger
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- navbar end -->
+        </div>
+        <!-- hero body -->
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <!-- columns -->
+                <div class="columns">
+                    <!-- gutter columns for padding  -->
+                    <div class="column"></div>
+                    <div class="column is-two-thirds">
+                        <!-- website title & tagline -->
+                        <h1 class="title">
+                            Shareish!
+                        </h1>
+                        <h2 class="subtitle">
+                            share what you cherish
+                        </h2>
+                        <!-- search bar -->
+                        <form class="tile field has-addons">
+                            <div class="control is-expanded">
+                                <input 
+                                    class="input"
+                                    name="term"
+                                    type="text"
+                                    placeholder="What are you looking for?"
+                                    id="term"
+                                />
+                            </div>
+                            <div class="control">
+                                <button class="button is-info" onClick={props.handleFormSubmit}>
+                                    <span class="icon">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- gutter columns for padding  -->
+                    <div class="column"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- important to make sure sections are denoted by tag as well as class -->
+    <section class="section">
+        <div class="container">
+            <!-- columns -->
+            <div class="columns">
+                <div class="column">
+                    <!-- notification box for content with colored background -->
+                    <div class="notification is-size-4 has-text-centered">
+                    Browse Listings
+                    </div>
+                    
+                </div>
+                <div class="column">
+                    <!-- notification box for content with colored background -->
+                    <div class="notification is-size-4 has-text-centered">
+                        Post a Listing
+                    </div>
+                </div>
+                <div class="column">
+                    <!-- notification box for content with colored background -->
+                    <div class="notification is-size-4 has-text-centered">
+                        View Rentals
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        Hot Items
+    </section>
+</body>
+</html>
