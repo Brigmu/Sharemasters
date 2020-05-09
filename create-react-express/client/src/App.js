@@ -8,6 +8,8 @@ import ItemContext from "./utils/ItemContext/ItemContext";
 import Listings from './pages/Listings/Listings'
 import ListingPage from "./pages/ListingPost/ListingPost";
 
+const connectEnsureLogin = require('connect-ensure-login');
+
 function App() {
   const [itemListings, setItemListings] = useState([]);
 
