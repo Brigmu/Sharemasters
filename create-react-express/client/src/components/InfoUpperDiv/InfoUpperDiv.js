@@ -25,20 +25,34 @@ function ItemUpperDiv() {
 
 
     return (
-        <div >
-            <div className="upper-div">
-                <img className="itempageimage" src={item.image_url} alt={item.name} />
+        <div className="columns upper-div">
+            <div className="column">
+                <figure className="upper-inner-div image-div image ">
+                    <img className="itempageimage" src={item.image_url} alt={item.name} />
 
+                </figure>
             </div>
-            <div className="upper-div">
-                <p>Owner: {item.owner_id}</p>
-                <p>Location: </p>
-                <button className="btn waves-effect waves-light red lighten-2" onClick={HandleSubmitButton}>
-                    Rent This!
-                </button>
-                <button className="grey lighten-4" onClick={HandleSubmitButton}>
-                    Message the Owner
-                </button>
+            <div className="column upper-inner-div item-info">
+                <h1>{ item.name }</h1>
+                <h2>Owner: {item.owner_id}</h2>
+                <p>Location: Here</p>
+                <div>
+                    <button className="button is-success half-button" onClick={HandleSubmitButton}>
+                        Rent This!
+                    </button>
+                    <button className="button is-info half-button" onClick={HandleSubmitButton}>
+                        Message the Owner
+                    </button>
+                </div>
+
+                <div className="half-button-div">
+                    <button className="button is-danger half-button" onClick={HandleSubmitButton}>
+                        Save
+                    </button>
+                    <button className="button is-warning half-button" onClick={HandleSubmitButton}>
+                        Alert
+                    </button>
+                </div>
             </div>
         </div>
     )

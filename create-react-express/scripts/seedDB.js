@@ -131,7 +131,7 @@ const itemSeed = [
 
 const userSeed = [
     {
-        _id: "1",
+        owner_id: "1",
         firstName: "Courtney",
         lastName: "Seto",
         password: "123",
@@ -145,7 +145,7 @@ const userSeed = [
         createdAt: new Date(Date.now())
     },
     {
-        _id: "2",
+        owner_id: "2",
         firstName: "Christine",
         lastName: "Na",
         password: "123",
@@ -159,7 +159,7 @@ const userSeed = [
         createdAt: new Date(Date.now())
     },
     {
-        _id: "3",
+        owner_id: "3",
         firstName: "Ryan",
         lastName: "Tam",
         password: "123",
@@ -173,7 +173,7 @@ const userSeed = [
         createdAt: new Date(Date.now())
     },
     {
-        _id: "4",
+        owner_id: "4",
         firstName: "Brigham",
         lastName: "Mueller",
         password: "123",
@@ -187,7 +187,7 @@ const userSeed = [
         createdAt: new Date(Date.now())
     },
     {
-        _id: "5",
+        owner_id: "5",
         firstName: "Michele",
         lastName: "Super",
         password: "123",
