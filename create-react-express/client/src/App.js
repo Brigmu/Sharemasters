@@ -5,6 +5,8 @@ import Signup from './pages/Signup/Signup';
 import Home from "./pages/Home/Home";
 import Login from "./pages/Login/Login";
 
+const connectEnsureLogin = require('connect-ensure-login');
+
 function App() {
   return (
     <Router>
