@@ -3,7 +3,7 @@ import SearchBar from "../SearchBar";
 
 function Hero(props) {
     return (
-        <section class="hero is-primary is-small">
+        <section class="hero is-primary is-small is-mobile">
             {/* <!-- Hero head: will stick at the top --> */}
             <div class="hero-head">
                 <nav class="navbar">
@@ -12,6 +12,7 @@ function Hero(props) {
                         <a class="navbar-item">
                             <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo" />
                         </a>
+                        {/* need to figure out how to get navbar to show in mobile */}
                         <span class="navbar-burger burger" data-target="navbarMenuHeroA">
                             <span></span>
                             <span></span>
@@ -44,10 +45,10 @@ function Hero(props) {
             <div class="hero-body">
                 <div class="container has-text-centered">
                 <h1 class="title">
-                    Share Masters
+                    Shareish!
                 </h1>
                 <h2 class="subtitle">
-                    [insert fun tagline here]
+                    share what you cherish
                 </h2>
                 </div>
                 <SearchBar />

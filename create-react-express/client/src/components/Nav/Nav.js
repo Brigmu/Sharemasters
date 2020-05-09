@@ -1,36 +1,47 @@
 import React, { useContext } from 'react';
 import './styles.css';
+import { Navbar } from "react-bulma-components";
 import UserContext from '../../utils/UserContext/UserContext';
 
-const Nav = (props) => {
-    const {username} = useContext(UserContext);
+const Nav = () => {
+    const { username } = useContext(UserContext);
     return (
-        <nav className="navbar is-primary" role="navigation" >
-            <div className="navbar-brand">
-                <a className="navbar-item" href="https://bulma.io">
-                    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" />
-                </a>
-
-                <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                </a>
-            </div>
-            <p className="navbar-item">Welcome {username}</p>
-            <div class="navbar-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                    <a class="button is-primary">
-                        <strong>Sign up</strong>
-                    </a>
-                    <a class="button is-light">
-                        Log in
-                    </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
+        <Navbar 
+            color="primary"
+            fixed="top"
+        >
+            <Navbar.Brand>
+                <Navbar.Item renderAs="a" href="#">
+                    <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28" />
+                </Navbar.Item>
+                <Navbar.Burger />
+            </Navbar.Brand>
+            <Navbar.Menu >
+                <Navbar.Container>
+                    <Navbar.Item href="#">
+                        Home
+                    </Navbar.Item>
+                    <Navbar.Item dropdown hoverable href="#">
+                    <Navbar.Link arrowless={false}>
+                        Profile
+                    </Navbar.Link>
+                    <Navbar.Dropdown>
+                        <Navbar.Item href="#">
+                            Your Rentals
+                        </Navbar.Item>
+                        <Navbar.Item href="#">
+                            Your Listings
+                        </Navbar.Item>
+                    </Navbar.Dropdown>
+                    </Navbar.Item>
+                </Navbar.Container>
+                <Navbar.Container position="end">
+                    <Navbar.Item href="#">
+                        At the end
+                    </Navbar.Item>
+                </Navbar.Container>
+            </Navbar.Menu>
+        </Navbar>
     )
 }
 

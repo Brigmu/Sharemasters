@@ -1,8 +1,13 @@
 import React, { useContext } from 'react'
-import './styles.css';
+// import './styles.css';
 // import ItemContext from '../../utils/ItemContext/ItemContext';
-import ItemCard from '../ItemCard/ItemCard';
+
+// import ItemCard from '../ItemCard/ItemCard';
+import Card from "../Card";
+
 import FilteredContext from '../../utils/API/FilteredContext/FilteredContext';
+import TileContainer from '../TileContainer';
+import TileLevel from '../TileLevel';
 
 const CardContainer = (props) => {
     const itemListings = useContext(FilteredContext);
@@ -15,13 +20,23 @@ const CardContainer = (props) => {
     }
 
     return (
-        <div className = 'card-container' ref={props.reference} onMouseDown={handleMouseDown} onTouchEnd={props.handleSwipe} onTouchMove={props.handleSwipe}>
+        // original brigham code 
+        // <div className = 'card-container' ref={props.reference} onMouseDown={handleMouseDown} onTouchEnd={props.handleSwipe} onTouchMove={props.handleSwipe}>
             
+        //     {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
+        //         <ItemCard img={item.img} itemName={item.name} id={item.id}/>
+        //     ))}
+            
+        // </div>
+
+        // bulma css edit - cna 
+        <TileContainer>
             {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
-                <ItemCard img={item.img} itemName={item.name} id={item.id}/>
+                <TileLevel >
+                    <Card img={item.img} itemName={item.name} id={item.id}/>
+                </TileLevel>
             ))}
-            
-        </div>
+        </TileContainer>
     )
 }
 
