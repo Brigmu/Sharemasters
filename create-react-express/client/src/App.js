@@ -9,6 +9,7 @@ import Listings from './pages/Listings/Listings'
 import ListingPage from "./pages/ListingPost/ListingPost";
 
 const connectEnsureLogin = require('connect-ensure-login');
+import ItemPage from "./pages/Item/Item"
 
 function App() {
   const [itemListings, setItemListings] = useState([]);
@@ -35,6 +36,7 @@ function App() {
           <Route exact path = '/login' component={Login} />
           <Route exact path = '/listings' component={Listings} />
           <Route exact path = '/newlisting' component={ListingPage} />
+          <Route exact path = '/items/:id' component={ItemPage} />
         </Switch>
       
       </div>

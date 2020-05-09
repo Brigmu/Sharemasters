@@ -6,6 +6,8 @@ const db = require("./models");
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const routes = require('./routes/')
+const mongoose = require("mongoose");
 
 
 // Define middleware here
@@ -36,6 +38,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+// front-end test code
 const testUsers = [
   {
     id: 1,
@@ -166,6 +169,7 @@ const testItems = [
   }
 ]
 
+// front end test api calls 
 // Define API routes here
 app.get('/api/items', (req, res) => {
   res.json(testItems);
@@ -183,13 +187,19 @@ app.get('/api/user/:id', (req, res) => {
   const user = testUsers[index];
   res.json(user);
 })
+// front-end test data code
+
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+  res.sendFile(path.join(__dirname, "./client/public/index.html"));
 });
+
 // Add routes, both API and view
 app.use(routes);
+
+// Connect to the Mongo DB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/shareish");
 
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
