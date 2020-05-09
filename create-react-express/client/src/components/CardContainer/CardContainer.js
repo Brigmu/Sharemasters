@@ -6,7 +6,7 @@ import FilteredContext from '../../utils/API/FilteredContext/FilteredContext';
 
 const CardContainer = (props) => {
     const itemListings = useContext(FilteredContext);
-    console.log(itemListings);
+    // console.log(itemListings);
     // const handleMouseDown = (e) => {
     //     console.log('mousedown');
     // }
@@ -18,7 +18,7 @@ const CardContainer = (props) => {
         <div className = 'card-container' ref={props.reference} onMouseDown={handleMouseDown} onTouchEnd={props.handleSwipe} onTouchMove={props.handleSwipe}>
             
             {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
-                <ItemCard img={item.img} itemName={item.name} id={item.id}/>
+                <ItemCard img={item.img} itemName={item.name} id={item.id} handleItemClick={props.handleItemClick}/>
             ))}
             
         </div>
