@@ -2,5 +2,6 @@
 
 module.exports = {
     User: require("./user.js"),
-    Profile: require("./profile")
+    Profile: require("./profile"),
+    Item: require("./items")
 };

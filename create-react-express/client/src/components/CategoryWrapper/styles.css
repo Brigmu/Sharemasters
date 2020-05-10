@@ -1,0 +1,28 @@
+/* .category-wrapper{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column; */
+    /* border: solid purple 2px; */
+    /* padding: 20px 75px;
+    color: white;
+    text-shadow: 0px 0px 10px black;
+    position: relative;
+} */
+
+.scroll-btn{
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+}
+
+#scroll-left-btn{
+    left: 10px;
+    top: 52.5%;
+}
+
+#scroll-right-btn{
+    right: 10px;
+    top: 52.5%;
+}
