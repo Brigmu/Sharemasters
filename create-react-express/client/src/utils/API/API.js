@@ -2,12 +2,13 @@ import axios from 'axios';
 
 
 //get data for currently logged in user
-export const getUserData = (cb) => {
+export const getUserData = () => {
     fetch(`/api/passport/user_data`)
     .then(response => {
         console.log(response);
         response.json();
     })
+    // return axios.get('/api/passport/user_data');
 }
 
 export const getItem = (id, cb) => {
@@ -19,16 +20,6 @@ export const getItem = (id, cb) => {
     .catch(err => console.log(err));
     // return axios.get('/api/items/' + id)
 }
-
-// export const getUserData = (id, cb) => {
-//     fetch(`/api/user/${id}`)
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log(data);
-//         cb(data);
-//     })
-//     .catch(err => console.log(err));
-// }
 
 export const postListing = (data) => {
     return axios.post('/api/listing', data);
