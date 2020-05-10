@@ -1,5 +1,6 @@
 const path = require("path");
 const router = require("express").Router();
+const connectEnsureLogin = require('connect-ensure-login');
 const apiRoutes = require("./api");
 
 // API Routes

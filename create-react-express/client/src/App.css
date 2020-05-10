@@ -1,3 +1,12 @@
+/*! debug.css | MIT License | zaydek.github.com/debug.css */
+/* *:not(path):not(g) {
+	color:                    hsla(210, 100%, 100%, 0.9) !important;
+	background:               hsla(210, 100%,  50%, 0.5) !important;
+	outline:    solid 0.25rem hsla(210, 100%, 100%, 0.5) !important;
+
+	box-shadow: none !important;
+} */
+
 .App {
   text-align: center;
   height: 100%;
@@ -11,12 +20,13 @@ body{
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 #root {
   height: 100%;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .App-logo {

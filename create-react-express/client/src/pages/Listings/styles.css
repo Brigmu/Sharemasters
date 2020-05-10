@@ -1,0 +1,16 @@
+.listings-page {
+    height: 100%;
+    width: 100%;
+    background: url('../../images/garagebg.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: repeat-y;
+}
+
+label{
+    color: white;
+}
+
+input{
+    min-width: 20%;
+}
