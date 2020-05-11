@@ -7,9 +7,9 @@ import Login from "./pages/Login/Login";
 import ItemContext from "./utils/ItemContext/ItemContext";
 import Listings from './pages/Listings/Listings'
 import ListingPage from "./pages/ListingPost/ListingPost";
+import ItemPage from "./pages/Item/Item"
 
 const connectEnsureLogin = require('connect-ensure-login');
-import ItemPage from "./pages/Item/Item"
 
 function App() {
   const [itemListings, setItemListings] = useState([]);
