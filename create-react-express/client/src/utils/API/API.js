@@ -1,14 +1,21 @@
 import axios from 'axios';
 
 
-//get data for currently logged in user
-export const getUserData = () => {
-    fetch(`/api/passport/user_data`)
-    .then(response => {
-        console.log(response);
-        response.json();
-    })
-    // return axios.get('/api/passport/user_data');
+//get username and id for currently logged in user
+export const getCurrentUser = () => {
+    return axios.get('/api/passport/user_data');
+}
+
+//get profile data for matching userId
+    // owned and rented are arrays of Item Objects
+export const getCurrentProfile = (id) => {
+    return axios.get('api/profile/' + id);
+}
+
+//get profile data for all users 
+    // owned and rented are arrays of Item ObjectId
+export const getAllProfiles = () => {
+    return axios.get('api/profile/users');
 }
 
 export const getItem = (id, cb) => {
@@ -30,5 +37,17 @@ export const loginUser = (userData) => {
 }
 
 export const signupUser = (userData) => {
-    return axios.post('/api/passport/signup', userData)
+    return axios.post('/api/passport/signup', userData);
+}
+
+export const logoutUser = () => {
+    return axios.get('/api/passport/logout')
+}
+
+export const createProfile = (userData) => {
+    return axios.post('/api/profile', userData);
+}
+
+export const updateProfile = (id, userData) => {
+    return axios.put('/api/profile/' + id, userData);
 }
