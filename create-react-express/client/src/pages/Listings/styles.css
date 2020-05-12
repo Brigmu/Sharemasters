@@ -5,11 +5,11 @@
     background-attachment: fixed;
     background-position: center;
     background-repeat: repeat-y; */
-    scroll-snap-align: center;
+    /* scroll-snap-align: center; */
 }
 
 label{
-    color: white;
+    color: black;
 }
 
 input{
@@ -24,6 +24,18 @@ input{
 .carousel{
     max-width: 1550px;
     position: relative;
+    text-align: center;
+}
+
+.carousel h1 {
+    font-size: 40px;
+    /* margin: 40px 60px; */
+    margin: 60px 0px 60px 100px;
+    /* min-height: 200px; */
+}
+
+#filters{
+    list-style: none;
 }
 
 .carousel-item{

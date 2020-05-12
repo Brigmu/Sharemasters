@@ -6,6 +6,7 @@ const db = require("./models");
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const path = require('path');
 
 
 // Define middleware here
@@ -47,121 +48,141 @@ const testUsers = [
 const testItems = [
   {
     id: 'byl1',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Lawnmower',
     img: 'https://images.pexels.com/photos/589/garden-grass-meadow-green.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'cyw1',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Wheelbarrow',
     img: 'https://images.pexels.com/photos/1557768/pexels-photo-1557768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'byl2',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Lawnmower',
     img: 'https://images.pexels.com/photos/589/garden-grass-meadow-green.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'cyw2',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Wheelbarrow',
     img: 'https://images.pexels.com/photos/1557768/pexels-photo-1557768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'byl3',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Lawnmower',
     img: 'https://images.pexels.com/photos/589/garden-grass-meadow-green.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'cyw3',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Wheelbarrow',
     img: 'https://images.pexels.com/photos/1557768/pexels-photo-1557768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'byl4',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Lawnmower',
     img: 'https://images.pexels.com/photos/589/garden-grass-meadow-green.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'cyw4',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Wheelbarrow',
     img: 'https://images.pexels.com/photos/1557768/pexels-photo-1557768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'byl5',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Lawnmower',
     img: 'https://images.pexels.com/photos/589/garden-grass-meadow-green.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'cyw5',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Wheelbarrow',
     img: 'https://images.pexels.com/photos/1557768/pexels-photo-1557768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'byl6',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Lawnmower',
     img: 'https://images.pexels.com/photos/589/garden-grass-meadow-green.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'cyw6',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Wheelbarrow',
     img: 'https://images.pexels.com/photos/1557768/pexels-photo-1557768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'byl7',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Lawnmower',
     img: 'https://images.pexels.com/photos/589/garden-grass-meadow-green.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'cyw7',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Wheelbarrow',
     img: 'https://images.pexels.com/photos/1557768/pexels-photo-1557768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'byl8',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Lawnmower',
     img: 'https://images.pexels.com/photos/589/garden-grass-meadow-green.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'cyw8',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Wheelbarrow',
     img: 'https://images.pexels.com/photos/1557768/pexels-photo-1557768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'byl9',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Lawnmower',
     img: 'https://images.pexels.com/photos/589/garden-grass-meadow-green.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'cyw9',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Wheelbarrow',
     img: 'https://images.pexels.com/photos/1557768/pexels-photo-1557768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'byl10',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Lawnmower',
     img: 'https://images.pexels.com/photos/589/garden-grass-meadow-green.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   },
   {
     id: 'cyw10',
-    category: 'Yard',
+    category: 'Yardwork',
+    price: 50.00,
     name: 'Wheelbarrow',
     img: 'https://images.pexels.com/photos/1557768/pexels-photo-1557768.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260'
   }
