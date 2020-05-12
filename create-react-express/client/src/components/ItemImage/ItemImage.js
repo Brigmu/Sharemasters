@@ -1,10 +1,32 @@
-import React from 'react'
-import './styles.css'
+import React, { useState } from 'react';
+import axios from 'axios'; 
+import './styles.css';
 
-const ItemImage = (props) => {
+const ItemImage = () => {
+    const [image, setImage] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const uploadImage = (e) => {
+        const files = e.target.files[0];
+        const formData = new FormData();
+        formData.append('upload_preset', 'sharemasters');
+        formData.append('file', files);
+        setLoading(true);
+
+        console.log(files);
+        console.log(formData);
+
+    axios.post('https://api.cloudinary.com/v1_1/djz8ibfox/image/upload', formData)
+    .then(res => console.log(res))
+    .then(res => setImage(res.data.url))
+    .then(setLoading(false))
+    .catch(err => console.log(err));
+    }
+
     return(
         <div className='item-img-div'>
-            {props.img ? <img className='item-img' src='' alt='item'></img>:<div className='placeholder-div'><h1>Upload an image</h1></div>}
+            <input name="file" type="file" class="file-upload" data-cloudinary-field="image_id" data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}" onChange={uploadImage}/>
+            {loading ? <div className='placeholder-div'><h1>Upload an image</h1></div> : <img className='item-img' src={image} />}
         </div>
     )
 }
