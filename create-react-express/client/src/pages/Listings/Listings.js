@@ -18,28 +18,45 @@ const Listings = (props) => {
 
     const [filter, setFilter] = useState();
     const [filtered, setFiltered] = useState([...itemListings]);
-    const [electonicsItems, setElectronicsItems] = useState()
-    const [eventItems, setEventItems] = useState();
-    const [homeImpovementItems, setHomeImprovementItems] = useState();
-    const [kitchenItems, setKitchenItems] = useState();
-    const [miscItems, setMiscItems] = useState();
-    const [recreationItems, setRecreationItems] = useState();
-    const [yardItems, setYardItems] = useState();
+    const [electonicsItems, setElectronicsItems] = useState([])
+    const [eventItems, setEventItems] = useState([]);
+    const [homeImpovementItems, setHomeImprovementItems] = useState([]);
+    const [kitchenItems, setKitchenItems] = useState([]);
+    const [miscItems, setMiscItems] = useState([]);
+    const [recreationItems, setRecreationItems] = useState([]);
+    const [yardItems, setYardItems] = useState([]);
+    const [filterType, setFilterType] = useState('name');
 
     useEffect(()=> {
-        const filterKeyword = new RegExp(filter);
-        let filteredListings = itemListings.filter(item => {
-            return filterKeyword.test(item.name.toLowerCase());
-        });
-        setFiltered(filteredListings);
-    }, [filter, itemListings])
+        switch(filterType){
+            case 'name':
+                const filterKeyword = new RegExp(filter);
+                let filteredListings = itemListings.filter(item => {
+                    return filterKeyword.test(item.name.toLowerCase());
+                });
+                setFiltered(filteredListings);
+            break;
+            case 'price':
+                if(!filter){
+                    setFiltered(itemListings);
+                } else{
+                filteredListings = itemListings.filter(item => {
+                    return parseInt(item.price) >= parseInt(filter);
+                })
+                setFiltered(filteredListings);
+                }
+            break;
+            default:
+                setFiltered(itemListings);
+        }
+    }, [filter, itemListings, filterType])
 
     useEffect(()=>{
         let filteredListings = filtered.filter(item => {
             return item.category === 'electronics'
         })
         setElectronicsItems(filteredListings)
-    }, [filtered])
+    }, [filtered, filter])
 
     useEffect(()=>{
         let filteredListings = filtered.filter(item => {
@@ -78,7 +95,7 @@ const Listings = (props) => {
 
     useEffect(()=>{
         let filteredListings = filtered.filter(item => {
-            return item.category === 'yardwork'
+            return item.category === 'Yardwork'
         })
         setYardItems(filteredListings)
     }, [filtered])
@@ -168,16 +185,48 @@ const Listings = (props) => {
         history.push('/newlisting');
     }
 
+    const nameFilterCheck = (e) => {
+        setFilterType(e.target.value);
+    }
 
 
     return (
         <FilteredContext.Provider value={filtered}>
             <div className='listings-page'>
-                <Nav />
+                <Nav>
+                </Nav>
                 <section className = 'section'>
                     <Columns>
                         <Column size='is-2'>
                             <div className='content'>
+                                <p>Select filter type</p>
+                                {filterType === 'price' ?
+                                <ul id='filters'>
+                                     
+                                    <li>
+                                    <input type='radio' id='nameFilter' value='name' name='filter'onChange={nameFilterCheck}></input>
+                                    <label htmlFor='nameFilter'>Name</label>
+                                    </li>
+                                    <li>
+                                    <input type='radio' id='priceFilter' value='price' name='filter' onChange={nameFilterCheck} checked></input>
+                                    <label htmlFor='priceFilter'>Price</label>
+                                    </li>
+                                </ul>
+                                     :
+                                <ul id='filters'>
+                                    <li>
+                                        <input type='radio' id='nameFilter' value='name' name='filter' checked onChange={nameFilterCheck}></input>
+                                        <label htmlFor='nameFilter'>Name</label>
+                                    </li>
+                                    <li>
+                                        <input type='radio' id='priceFilter' value='price' name='filter' onChange={nameFilterCheck}></input>
+                                        <label htmlFor='priceFilter'>Price</label>
+                                    </li>
+                                </ul>}
+                                
+                                {/* <label>Filter:</label> */}
+                                
+                                <input type='text' id='filter' onChange={e => setFilter(e.target.value)}></input>
                             <div class="title is-4">
                                 Category List
                             </div>
@@ -201,74 +250,72 @@ const Listings = (props) => {
                                         <i class="fas fa-angle-left"></i>
                                     </span></button>
                                 </Column> */}
-                                {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
+                                {filtered.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : filtered.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
                             <Title title='Electronics' colorClass='is-danger' id='electronics' handleScrollClick={handleScrollClick}/>
                             <Columns size='carousel' reference={electronicsCategoryRef}>
-                            {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
+                            {electonicsItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : electonicsItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                         {/* <ItemCard img={item.img} itemName={item.name} id={item.id} handleItemClick={props.handleItemClick}/> */}
                                     </Column>
                                 ))}
                             </Columns>
                             <Title title='Events' colorClass='is-primary' id='events' handleScrollClick={handleScrollClick}/>
                             <Columns size='carousel' reference={eventsCategoryRef}>
-                                {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
+                                {eventItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : eventItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
                             <Title title='Home Improvement' colorClass='is-info' id='home-imp' handleScrollClick={handleScrollClick}/>
                             <Columns size='carousel' reference={homeCategoryRef}>
-                                {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
+                                {homeImpovementItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : homeImpovementItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
                             <Title title='Kitchen Appliances' colorClass='is-danger' id='kitchen' handleScrollClick={handleScrollClick}/>
                             <Columns size='carousel' reference={kitchenCategoryRef}>
-                                {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
+                                {kitchenItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : kitchenItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
                             <Title title='Miscellaneous' colorClass='is-primary' id='misc' handleScrollClick={handleScrollClick}/>
                             <Columns size='carousel' reference={miscCategoryRef}>
-                                {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
+                                {miscItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : miscItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
                             <Title title='Recreation' colorClass='is-info' id='recreation' handleScrollClick={handleScrollClick}/>
                             <Columns size='carousel' reference={recreationCategoryRef}>
-                                {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
+                                {recreationItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : recreationItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
                             <Title title='Yardwork' colorClass='is-danger' id='yard' handleScrollClick={handleScrollClick}/>
                             <Columns size='carousel' reference={yardCategoryRef}>
-                                {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
+                                {yardItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : yardItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
                         </Column>
                     </Columns>
                 </section>
-                <label>Filter:</label>
-                <input type='text' id='filter' onChange={e => setFilter(e.target.value)}></input>
                 {/* <CategoryWrapper category='All' reference={allCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
                 <CategoryWrapper category='Home Improvement' reference={homeCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
                 <CategoryWrapper category='Electronics' reference={electronicsCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
