@@ -1,9 +1,10 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState } from 'react'
 // import './styles.css';
 import UserForm from '../../components/UserForm/UserForm';
 import Nav from '../../components/Nav/Nav';
 import NavLogin from '../../components/NavLogin/NavLogin';
-import {signupUser, loginUser, getUserData, createProfile, logoutUser} from '../../utils/API/API';
+import LogoutButton from "../../components/LogoutButton/LogoutButton";
+import {signupUser, loginUser, getCurrentUser, getCurrentProfile, createProfile} from '../../utils/API/API';
 
 const Signup = () => {
     //signup refs
@@ -17,6 +18,10 @@ const Signup = () => {
     //login refs
     const usernameLoginRef = useRef();
     const passwordLoginRef = useRef();
+
+    //error context
+    const [loginErrorState, setLoginError] = useState({});
+    const [signupErrorState, setSignupError] = useState({});
 
     const profileInputs = [usernameRef, passwordRef, firstNameRef, lastNameRef, emailRef, zipCodeRef];
     const loginInputs = [usernameLoginRef, passwordLoginRef];
@@ -34,12 +39,22 @@ const Signup = () => {
         signupUser(newUser)
             .then(res => {
                 console.log(res.data.message);
+                setSignupError({});
                 createProfile(newUser)
-                    .then(res => console.log(`Profile for ${res.data.username} has been created`))
-                    .catch(err => console.log(err.response))
+                    .then(res => {
+                        console.log(`Profile for ${res.data.username} has been created`);
+                        //reroute
+                    })
+                    .catch(err => {
+                        console.log(err.response);
+                    })
                     //handle errors
             })
-            .catch(err => console.log(err.response));
+            .catch(err => {
+                console.log(err.response);
+                setSignupError(err.response.data.err);
+                console.log(signupErrorState);
+            });
         profileInputs.forEach(input => input.current.value = '' );           
     }
 
@@ -51,17 +66,18 @@ const Signup = () => {
         }
         loginUser(user)
             .then(res => {
-                console.log(res);
-                getCurrentUser().then((res) => {console.log(res.data.user)});
+                setLoginError({ error: false});
+                getCurrentUser().then(res => {
+                    console.log(res.data.user);
+                    //set user state
+                });
             })
-            .catch(err => console.log(err.response))
+            .catch(err => {
+                console.log(err.response.data.message);
+                setLoginError({ error: true});
+                console.log(loginErrorState);
+            })
         loginInputs.forEach(input => input.current.value = '' );           
-    }
-
-    const handleLogout = (e) => {
-        e.preventDefault();
-        logoutUser()
-            .then(res => console.log(res.data.message))
     }
 
     return (
@@ -71,8 +87,9 @@ const Signup = () => {
                     usernameLoginRef={usernameLoginRef}
                     passwordLoginRef={passwordLoginRef}
                     handleLogin={handleLogin}
+                    loginError={loginErrorState}
                 />
-                <button onClick={handleLogout} className="button is-danger">Logout</button>
+                <LogoutButton />
             </Nav>
             <UserForm 
                 usernameRef={usernameRef} 
@@ -82,6 +99,7 @@ const Signup = () => {
                 emailRef={emailRef}
                 zipCodeRef={zipCodeRef}
                 handleSubmit={handleSubmit}
+                signupError={signupErrorState}
             />
         </div>
     )

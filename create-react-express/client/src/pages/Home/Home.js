@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
 import UserContext from '../../utils/UserContext/UserContext';
-import {getUserData} from '../../utils/API/API';
+import {getCurrentUser} from '../../utils/API/API';
 import Hero from '../../components/Hero';
 import TileContainer from '../../components/TileContainer';
 import TileLevel from '../../components/TileLevel';
@@ -30,7 +30,7 @@ const Home = () => {
     });
     
     useEffect(()=>{
-        getUserData(1, (results) => {
+        getCurrentUser(1, (results) => {
             console.log(results);
             setUserInfo(results);
         })
@@ -40,6 +40,7 @@ const Home = () => {
         <div className = 'homepage'>
             <UserContext.Provider value={userInfo}>
                 <Hero />
+                <div>{userInfo.username}</div>
                 <Container>
                     <TileContainer>
                         {options.map(option => 
