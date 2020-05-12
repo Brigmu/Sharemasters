@@ -8,7 +8,7 @@ router.get("/users", profileController.findAll);
 // api/profile
 router.post("/", profileController.addOne);
   
-// api/profile/:id
+// api/profile/:id    --- returns user with matching userId (passport ObjectId)
 router.route("/:id")
   .get(profileController.findOne)
   .put(profileController.update)

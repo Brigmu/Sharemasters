@@ -2,6 +2,7 @@ const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const passport = require("passport");
+// const LocalStrategy = require("passport-Local").Strategy;
 const db = require("./models");
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
@@ -15,7 +16,7 @@ app.use(express.static(__dirname + "/client/public"));
 
 // We need to use sessions to keep track of our user's login status
 app.use(
-  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+  session({ secret: "keyboard cat", resave: false, saveUninitialized: false })
 );
 app.use(passport.initialize());
 app.use(passport.session());
