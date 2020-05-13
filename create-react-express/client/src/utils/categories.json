@@ -1,0 +1,37 @@
+[
+    {
+        "category": "Home Improvement",
+        "color": "info",
+        "ref": "home"
+    },
+    {
+        "category": "Electronics",
+        "color": "warning",
+        "ref": "electronics"
+    },
+    {
+        "category": "Events",
+        "color": "primary",
+        "ref": "events"
+    },
+    {
+        "category": "Kitchen Appliances",
+        "color": "danger",
+        "ref": "kitchen"
+    },
+    {
+        "category": "Recreation",
+        "color": "white",
+        "ref": "recreation"
+    },
+    {
+        "category": "Yard",
+        "color": "success",
+        "ref": "yard"
+    },
+    {
+        "category": "Miscellaneous",
+        "color": "black",
+        "ref": "misc"
+    }
+]

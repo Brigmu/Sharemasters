@@ -2,7 +2,9 @@ import React from "react";
 
 function Card(props) {
     return (
-        <div className={"box"} key={props.id}>
+        <div className={"box"} key={props.id}
+            onClick={props.handleItemClick}
+        >
             <figure className="image is-128x128">
                 <img src={props.img}></img>
             </figure>

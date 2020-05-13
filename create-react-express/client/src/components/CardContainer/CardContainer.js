@@ -3,11 +3,10 @@ import React, { useContext } from 'react'
 // import ItemContext from '../../utils/ItemContext/ItemContext';
 
 import ItemCard from '../ItemCard/ItemCard';
-import Card from "../Card";
-
+import ColumnContainer from "../ColumnContainer";
+import Column from "../Column";
 import FilteredContext from '../../utils/API/FilteredContext/FilteredContext';
-import TileContainer from '../TileContainer';
-import TileLevel from '../TileLevel';
+import Container from '../Container';
 
 const CardContainer = (props) => {
     const itemListings = useContext(FilteredContext);
@@ -30,11 +29,15 @@ const CardContainer = (props) => {
         // </div>
 
         // bulma css edit - cna 
-        <TileContainer>
+        <Container>
+            <ColumnContainer>
             {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
-                <ItemCard img={item.img} itemName={item.name} id={item.id} handleItemClick={props.handleItemClick}/>
+                <Column>
+                    <Card img={item.img} itemName={item.name} id={item.id} handleItemClick={props.handleItemClick}/>
+                </Column>
             ))}
-        </TileContainer>
+            </ColumnContainer>
+        </Container>
     )
 }
 
