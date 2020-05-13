@@ -4,21 +4,19 @@ import './styles.css';
 
 const ItemImage = () => {
     const [image, setImage] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const uploadImage = (e) => {
         const files = e.target.files[0];
         const formData = new FormData();
         formData.append('upload_preset', 'sharemasters');
         formData.append('file', files);
-        setLoading(true);
-
         console.log(files);
         console.log(formData);
 
     axios.post('https://api.cloudinary.com/v1_1/djz8ibfox/image/upload', formData)
-    .then(res => console.log(res))
-    .then(res => setImage(res.data.url))
+    .then(res => console.log(res.data))
+    .then(res => setImage(res.data.secure_url))
     .then(setLoading(false))
     .catch(err => console.log(err));
     }
