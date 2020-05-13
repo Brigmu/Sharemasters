@@ -8,13 +8,14 @@
 } */
 
 .App {
-  text-align: center;
+  /* text-align: center; */
   height: 100%;
   width: 100%;
 }
 
 html {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 body{
   padding: 0;

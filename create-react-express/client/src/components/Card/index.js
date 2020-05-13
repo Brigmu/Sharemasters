@@ -1,14 +1,14 @@
 import React from "react";
+import './styles.css';
 
 function Card(props) {
     return (
-        <div className={"box"} key={props.id}
-            onClick={props.handleItemClick}
-        >
-            <figure className="image is-128x128">
-                <img src={props.img}></img>
+        <div className={"box"} key={props.id}>
+            <figure className="image is-156x156">
+                <img src={props.img} alt =''></img>
             </figure>
-            <h1>{props.itemName}</h1>
+            <h2>{props.itemName}</h2>
+            <h2>${props.price}/day</h2>
         </div>
     )
 }
