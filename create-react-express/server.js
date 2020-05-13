@@ -6,11 +6,6 @@ const db = require("./models");
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
-<<<<<<< HEAD
-const path = require('path');
-
-=======
->>>>>>> 0b9afbad855f4da273f423785a2e95380ddbc912
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));

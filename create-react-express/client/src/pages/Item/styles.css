@@ -15,6 +15,9 @@ h2 {
     vertical-align: top;
     width: 100%;
 }
+.basic-item-info {
+    padding: 0 0 0 5px;
+}
 .middle-div {
     text-align: left;
 }
@@ -29,7 +32,10 @@ h2 {
 }
 .item-info {
     text-align: left;
-    padding: 25px 0 0 0;
+    padding: 25px 0 0 10px;
+}
+.buttons-div {
+    text-align: center;
 }
 button {
     margin: 10px 0 0 0;

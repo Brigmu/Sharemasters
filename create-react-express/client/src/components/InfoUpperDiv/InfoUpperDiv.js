@@ -34,19 +34,22 @@ function ItemUpperDiv() {
                 </figure>
             </div>
             <div className="column upper-inner-div item-info">
-                <h1>{ item.name }</h1>
-                <h2>Owner: {item.owner_id}</h2>
-                <p>Location: Here</p>
-                <div>
+                <div className="basic-item-info">
+                    <h1>{ item.name }</h1>
+                    <h1>PRICE</h1>
+                    <h2>Owner: {item.owner_id}</h2>
+                    <p>Location: Here</p>
+                </div>
+                <div className="buttons-div">
                     <button className="button is-success half-button" onClick={HandleSubmitButton}>
                         Rent This!
                     </button>
                     <button className="button is-info half-button" onClick={HandleSubmitButton}>
-                        Message the Owner
+                        Message Owner
                     </button>
                 </div>
 
-                <div className="half-button-div">
+                <div className="buttons-div">
                     <button className="button is-danger half-button" onClick={HandleSubmitButton}>
                         Save
                     </button>
