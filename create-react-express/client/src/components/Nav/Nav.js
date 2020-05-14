@@ -3,6 +3,7 @@ import './styles.css';
 // import { Navbar } from "react-bulma-components";
 import UserContext from '../../utils/UserContext/UserContext';
 // import { PromiseProvider } from 'mongoose';
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 const Nav = (props) => {
     const { username } = useContext(UserContext);
@@ -12,10 +13,12 @@ const Nav = (props) => {
                 <div className="navbar-item">
                     Logo Image
                 </div>
-                
             </div>
             {props.children}
             <div className="navbar-end">
+                <div class="navbar-item">
+                    <LogoutButton />
+                </div>
                 <div class="navbar-item">
                     Home
                 </div>

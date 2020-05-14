@@ -25,7 +25,11 @@ const ProfileSchema = new Schema({
     required: true,
     unique: true
   },
-  zipCode: Number,
+  location: {
+    lat: { type: Number},
+    long: { type: Number}
+  },
+  address: String,
   rented: [
     {
       type: Schema.Types.ObjectId,

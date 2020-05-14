@@ -8,7 +8,7 @@ export const getCurrentUser = () => {
 
 //get profile data for matching userId
     // owned and rented are arrays of Item Objects
-export const getCurrentProfile = (id) => {
+export const getProfile = (id) => {
     return axios.get('api/profile/' + id);
 }
 
