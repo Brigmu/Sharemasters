@@ -41,7 +41,7 @@ export const signupUser = (userData) => {
 }
 
 export const logoutUser = () => {
-    return axios.get('/api/passport/logout')
+    return axios.get('/api/passport/logout');
 }
 
 export const createProfile = (userData) => {

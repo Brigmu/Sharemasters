@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
+
+import { UserProvider } from "./utils/UserContext/UserContext";
+
 import Signup from './pages/Signup/Signup';
 import Home from "./pages/Home/Home";
 import ItemContext from "./utils/ItemContext/ItemContext";
@@ -27,6 +30,7 @@ function App() {
   }, [])
 
   return (
+    <UserProvider>
     <ItemContext.Provider value={itemListings}>
     <Router>
       <div className="App">
@@ -41,6 +45,7 @@ function App() {
       </div>
     </Router>
     </ItemContext.Provider>
+    </UserProvider>
   );
 }
 

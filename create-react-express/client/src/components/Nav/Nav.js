@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import './styles.css';
-// import { Navbar } from "react-bulma-components";
-import UserContext from '../../utils/UserContext/UserContext';
-// import { PromiseProvider } from 'mongoose';
+import { useStoreContext } from "../../utils/UserContext/UserContext";
 import LogoutButton from "../LogoutButton/LogoutButton";
 
 const Nav = (props) => {
-    const { username } = useContext(UserContext);
+    const [state, dispatch] = useStoreContext();
+
+
     return (
         <div className="section navbar is-primary">
             <div className="navbar-start">
@@ -16,10 +16,13 @@ const Nav = (props) => {
             </div>
             {props.children}
             <div className="navbar-end">
-                <div class="navbar-item">
-                    <LogoutButton />
+                <div className="navbar-item">
+                    {state.user ? state.user.username : ""}
                 </div>
-                <div class="navbar-item">
+                <div className="navbar-item">
+                    {state.user ? <LogoutButton /> : ""}
+                </div>
+                <div className="navbar-item">
                     Home
                 </div>
                 <div className="navbar-item">

@@ -1,13 +1,15 @@
 import React, {useRef, useState } from 'react'
-import { useHistory } from 'react-router-dom';
+import { useHistory, StaticRouter } from 'react-router-dom';
 import FormField from "../FormField/FormField";
 import FormControl from "../FormControl/FormControl";
 import FormIcon from "../FormIcon/FormIcon";
 import {loginUser, getCurrentUser, getProfile} from '../../utils/API/API';
-
+import { useStoreContext } from "../../utils/UserContext/UserContext";
+import { SET_USER, CLEAR_USER } from "../../utils/UserContext/UserActions";
 
 const NavLogin = () => {
-
+    const [state, dispatch] = useStoreContext();
+        
     //login refs
     const usernameLoginRef = useRef();
     const passwordLoginRef = useRef();
@@ -18,6 +20,13 @@ const NavLogin = () => {
     const loginInputs = [usernameLoginRef, passwordLoginRef];
 
     const history = useHistory();
+
+    const setUserState = (user) => {
+        dispatch({
+            type: SET_USER,
+            user: user
+        });
+    };
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -32,7 +41,8 @@ const NavLogin = () => {
                     console.log(res.data.user);
                     getProfile(res.data.user._id)
                         .then(res => {
-                            console.log(res.data);
+                            console.log(res.data[0]);
+                            setUserState(res.data[0]);
                             //set user state
                             // history.push("/");
                     });
@@ -47,7 +57,7 @@ const NavLogin = () => {
     }
 
     return (
-        <div>
+        <div className="container">
             <FormField fieldClass="is-horizontal">
                 <FormControl controlClass="has-icons-left">
                     <input 
