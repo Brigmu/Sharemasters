@@ -25,6 +25,10 @@ const ProfileSchema = new Schema({
     required: true,
     unique: true
   },
+  coordinates: {
+    lat: { type: Number },
+    lng: { type: Number }
+  },
   address: String,
   city: String,
   state: {
@@ -33,26 +37,15 @@ const ProfileSchema = new Schema({
   },
   zipCode: {
     type: Number,
-    max: [5, 'Please enter five-digit zip code']
+    max: 5
   },
-  fullAddress: {
-    type: String
-  },
-  coordinates: {
-    lat: {
-      type: Number
-    },
-    lng: {
-      type: Number
-    }
-  },
-  rentalHistory: [
+  owned: [
     {
       type: Schema.Types.ObjectId,
       ref: "Item"
     }
   ],
-  owned: [
+  rentalHistory: [
     {
       type: Schema.Types.ObjectId,
       ref: "Item"
@@ -63,7 +56,6 @@ const ProfileSchema = new Schema({
     default: Date.now
   }
 });
-
 
 const Profile = mongoose.model("Profiles", ProfileSchema);
 
