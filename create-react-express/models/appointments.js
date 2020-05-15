@@ -11,25 +11,11 @@ const appointmentSchema = new mongoose.Schema({
     renter_id: {
         type: String
     },
-    // For when we have time and dates for appointments
-    // pickup_date: {
-    //     type: Date,
-    //     default: Date.now()
-    // },
-    // pickup_time: {
-    //     type: Number
-    // },
-    // return_date: {
-    //     type: Date,
-    // },
-    // return_time: {
-    //     type: Number
-    // },
-    canceled: {
+    is_cancelled: {
         type: Boolean,
         default: false
     },
-    returned: {
+    is_returned: {
         type: Boolean,
         default: false
     },
@@ -38,7 +24,6 @@ const appointmentSchema = new mongoose.Schema({
         default: Date.now()
     }
 })
-
 
 const Appointments = mongoose.model("Appointment", appointmentSchema)
 
