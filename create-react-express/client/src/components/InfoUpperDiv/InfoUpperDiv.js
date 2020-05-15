@@ -4,7 +4,14 @@ import ItemPageImage from '../ItemPageImage/ItemPageImage';
 // import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getItem } from '../../utils/API/API';
+
+//ui components
 import Section from "../../components/Section";
+import Container from "../../components/Container";
+import Notification from "../../components/Notification";
+import Columns from '../Columns/Columns';
+import Column from '../Column';
+
 
 
 function ItemUpperDiv() {
@@ -29,7 +36,34 @@ function ItemUpperDiv() {
     return (
         <div >
             <Section>
-
+                <Container>
+                    <Notification>
+                        <div class="section">
+                            <p className="title">Item Name</p>
+                            <figure className="image is-128x128">
+                                <img src="https://bulma.io/images/placeholders/128x128.png" alt =''></img>
+                            </figure>
+                            <br></br>
+                            <div className="content">
+                                    <p className="title is-5">Owner</p>
+                                    <p className="title is-5">Location</p>
+                                    <div className="field is-grouped">
+                                        <p className="control">
+                                            <button className="button is-primary" onClick={HandleSubmitButton}>
+                                                Rent This!
+                                            </button>
+                                        </p>
+                                        <p className="control">
+                                            <button className="button is-primary is-light" onClick={HandleSubmitButton}>
+                                                Message the Owner
+                                            </button>
+                                        </p>
+                                    </div>
+                            </div>
+                        </div>
+                    </Notification>
+                </Container>
+                
             </Section>
             {/* <div className="upper-div">
                 <ItemPageImage>
