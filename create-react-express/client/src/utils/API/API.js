@@ -2,12 +2,13 @@ import axios from 'axios';
 
 
 //get data for currently logged in user
-export const getUserData = (cb) => {
+export const getUserData = () => {
     fetch(`/api/passport/user_data`)
     .then(response => {
         console.log(response);
         response.json();
     })
+    // return axios.get('/api/passport/user_data');
 }
 
 export const getItem = (id, cb) => {
