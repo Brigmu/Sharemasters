@@ -3,6 +3,8 @@ import React, { useContext } from 'react'
 // import ItemContext from '../../utils/ItemContext/ItemContext';
 
 // import ItemCard from '../ItemCard/ItemCard';
+
+//required Card component
 import Card from '../Card/index';
 import ColumnContainer from "../ColumnContainer";
 import Column from "../Column";
