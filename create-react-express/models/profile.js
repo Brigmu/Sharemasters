@@ -25,14 +25,20 @@ const ProfileSchema = new Schema({
     required: true,
     unique: true
   },
-  location: {
-    lat: { type: Number},
-    long: { type: Number}
+  coordinates: {
+    lat: { type: Number },
+    lng: { type: Number }
   },
   address: String,
   city: String,
-  state: String,
-  zipCode: Number,
+  state: {
+    type: String,
+    max: [2, 'Please enter two-letter state abbreviation']
+  },
+  zipCode: {
+    type: Number,
+    max: 5
+  },
   owned: [
     {
       type: Schema.Types.ObjectId,
@@ -50,7 +56,6 @@ const ProfileSchema = new Schema({
     default: Date.now
   }
 });
-
 
 const Profile = mongoose.model("Profiles", ProfileSchema);
 

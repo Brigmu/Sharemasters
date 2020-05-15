@@ -4,108 +4,128 @@ const db = require('../models/')
 mongoose.connect(
     process.env.MONGODB_URI ||
     "mongodb://localhost/shareish"
-  );
+);
 
 const itemSeed = [
     {
-        owner_id: "1",
-        name: "Wheelbarrow",
-        description: "10 gallon",
-        category: "Misc.",
-        pending_request: false,
-        is_rented: false,
-        appointment: "",
-        created_at: "01/01/2020"
+        ownerId: "1",
+        itemId: "projector_screen_clgino",
+        name: "Outdoor Projector Screen",
+        description: "outdoor projector screen",
+        category: "Electronics",
+        address: "",
+        city: "",
+        state: "",
+        zipCode: "",
+        fullAddress: "",
+        coordinates: {
+            lat: "",
+            lng: "",
+        },
+        price: "",
+        img: "https://res.cloudinary.com/djz8ibfox/image/upload/v1589498143/appImages/projector_screen_clgino.png",
+        pendingRequest: false,
+        isRented: false,
+        active: true,
+        createdAt: "01/01/2020"
     },
     {
-        owner_id: "1",
-        name: "Shovel",
-        description: "Flat edge",
-        category: "Tool",
-        pending_request: true,
-        is_rented: false,
-        appointment: "",
-        created_at: "01/01/2020"
+        ownerId: "1",
+        itemId: "projector_uulm1c",
+        name: "Projector",
+        description: "Portable 6,000-lumen WUXGA (1920 x 1200) LCD Video Projector with 10,000:1 Contrast, 1.6 x Optical Zoom, Flexible Setup Functions and Comprehensive Connection Options",
+        category: "Electronics",
+        address: "",
+        city: "",
+        state: "",
+        zipCode: "",
+        fullAddress: "",
+        coordinates: {
+            lat: "",
+            lng: "",
+        },
+        price: "",
+        img: "https://res.cloudinary.com/djz8ibfox/image/upload/v1589498112/appImages/projector_uulm1c.jpg",
+        pendingRequest: false,
+        isRented: false,
+        active: true,
+        createdAt: "01/01/2020"
     },
     {
-        owner_id: "2",
-        name: "Electric Weed Whacker",
-        description: "Black and Decker. Two batteries. Each battery should last about 20-30 minutes",
-        category: "Lawn",
-        pending_request: false,
-        is_rented: false,
-        appointment: "",
-        created_at: "01/01/2020"
+        ownerId: "2",
+        itemId: "karaoke_jh1uxt",
+        name: "Portable Karaoke System",
+        description: " A professional sounding karaoke speaker that will interface with any of your existing devices to view the words to the songs on a screen of your choice (tablet, laptop, iPhone, etc). The system is rechargeable so you can play it wirelessly on the go! It also has Bluetooth built in allowing you to wirelessly stream the music from your iPad or Bluetooth phone to the speaker.",
+        category: "Electronics",
+        address: "",
+        city: "",
+        state: "",
+        zipCode: "",
+        fullAddress: "",
+        coordinates: {
+            lat: "",
+            lng: "",
+        },
+        price: "",
+        img: "https://res.cloudinary.com/djz8ibfox/image/upload/v1589498134/appImages/karaoke_jh1uxt.jpg",
+        pendingRequest: false,
+        isRented: false,
+        active: true,
+        createdAt: "01/01/2020"
     },
     {
-        owner_id: "2",
-        name: "Lawn Mower",
-        description: "Honda. Self-propelled",
-        category: "Lawn",
-        pending_request: false,
-        is_rented: false,
-        appointment: "",
-        created_at: "01/01/2020"
+        ownerId: "2",
+        itemId: "speakers_fssur1",
+        name: "Outdoor Speakers",
+        description: "200W 12” Outdoor Portable PA Kit–Bluetooth Wireless Speaker Microphone Battery",
+        address: "",
+        city: "",
+        state: "",
+        zipCode: "",
+        fullAddress: "",
+        coordinates: {
+            lat: "",
+            lng: "",
+        },
+        price: "",
+        category: "Electronics",
+        img: "https://res.cloudinary.com/djz8ibfox/image/upload/v1589498110/appImages/speakers_fssur1.jpg",
+        pendingRequest: false,
+        isRented: false,
+        active: true,
+        createdAt: "01/01/2020"
     },
     {
-        owner_id: "3",
-        name: "Hammer",
-        description: "Red hammer",
-        category: "Tool",
-        pending_request: false,
-        is_rented: false,
-        appointment: "",
-        created_at: "01/01/2020"
+        ownerId: "3",
+        itemId: "6a071073183df73e3dc364ea05b6b0f4",
+        name: "food warmer",
+        description: '27.5"W Freestanding Warming Drawer w/ (2) 21.5" Compartments, 120v',
+        address: "",
+        city: "",
+        state: "",
+        zipCode: "",
+        fullAddress: "",
+        coordinates: {
+            lat: "",
+            lng: "",
+        },
+        price: "50",
+        category: "Kitchen Appliances",
+        img: "https://res.cloudinary.com/djz8ibfox/image/upload/v1589501919/appImages/nog8onlbupvey6bzwjza.jpg",
+        pendingRequest: false,
+        isRented: false,
+        active: true,
+        createdAt: "01/01/2020"
     },
     {
-        owner_id: "3", 
-        name: "Circular Saw",
-        description: "Stanley. 7 inch blade.",
-        category: "Tool",
-        pending_request: false,
-        is_rented: false,
-        appointment: "",
-        created_at: "01/01/2020"
-    },
-    {
-        owner_id: "4", 
-        name: "Pressure Washer",
-        description: "Honda. 50ft hose.",
-        category: "Tool",
-        pending_request: false,
-        is_rented: false,
-        appointment: "",
-        created_at: "01/01/2020"
-    },
-    {
-        owner_id: "4",
-        name: "Car Jack",
-        description: "Hand pump.",
-        category: "Car",
-        pending_request: false,
-        is_rented: false,
-        appointment: "",
-        created_at: "01/01/2020"
-    },
-    {
-        owner_id: "5",
-        name: "Paint Sprayer",
-        description: "Interior and exterior paints.",
-        category: "Tool",
-        pending_request: false,
-        is_rented: false,
-        appointment: "",
-        created_at: "01/01/2020"
-    },
-    {
-        owner_id: 5,
-        name: "Chainsaw",
-        description: "14 inch",
-        category: "Lawn",
-        pending_request: false,
-        is_rented: false,
-        appointment: "",
-        created_at: "01/01/2020"
+        appointmentId: "",
+        itemId: "",
+        renterId: "",
+        startDate: "",
+        endDate: "",
+        isReturned: false,
+        isCancelled: false,
+        createdAt: "01/01/2020"
     }
 ];
 
@@ -113,82 +133,109 @@ const userSeed = [
     {
         firstName: "Courtney",
         lastName: "Seto",
-        password: "123",
-        zipCode: 98101,
-        username: "setoc",
         email: "courtney@gmail.com",
-        items: {
-            rented: [],
-            owned: ["1","2"]
+        username: "setoc",
+        password: "123",
+        address: "",
+        city: "",
+        state: "",
+        zipCode: "",
+        fullAddress: "",
+        coordinates: {
+            lat: "",
+            lng: "",
         },
+        rentalHistory: ["itemId"],
+        owned: ["1", "2"],
         createdAt: new Date(Date.now())
     },
     {
         firstName: "Christine",
         lastName: "Na",
-        password: "123",
-        zipCode: 98101,
-        username: "crispy",
         email: "christine@gmail.com",
-        items: {
-            rented: [],
-            owned: ["3","4"]
+        username: "crispy",
+        password: "123",
+        address: "",
+        city: "",
+        state: "",
+        zipCode: "98101",
+        fullAddress: "",
+        coordinates: {
+            lat: "",
+            lng: "",
         },
+        rentalHistory: [],
+        owned: ["3", "4"],
         createdAt: new Date(Date.now())
     },
     {
         firstName: "Ryan",
         lastName: "Tam",
+        email: "ryan@gmail.com",
+        username: "ryntm",
         password: "123",
         zipCode: 98155,
-        username: "ryntm",
-        email: "ryan@gmail.com",
-        items: {
-            rented: [],
-            owned: ["5","6"]
+        fullAddress: "",
+        coordinates: {
+            lat: "",
+            lng: "",
         },
+        rentalHistory: [],
+        owned: ["5", "6"],
         createdAt: new Date(Date.now())
     },
     {
         firstName: "Brigham",
         lastName: "Mueller",
-        password: "123",
-        zipCode: 98155,
-        username: "brigmue",
         email: "brigham@gmail.com",
-        items: {
-            rented: [],
-            owned: ["7","8"]
+        username: "brigmue",
+        password: "123",
+        address: "",
+        city: "",
+        state: "",
+        zipCode: 98155,
+        fullAddress: "",
+        coordinates: {
+            lat: "",
+            lng: "",
         },
+        rentalHistory: [],
+        owned: ["7", "8"],
         createdAt: new Date(Date.now())
     },
     {
         firstName: "Michele",
-        lastName: "Super",
-        password: "123",
-        zipCode: 98101,
-        username: "mitch",
+        lastName: "Acheson",
         email: "michele@gmail.com",
-        items: {
-            rented: [],
-            owned: ["9","10"]
+        username: "mitch",
+        password: "123",
+        address: "",
+        city: "",
+        state: "",
+        zipCode: "98014",
+        fullAddress: "",
+        coordinates: {
+            lat: "",
+            lng: "",
         },
+        rentalHistory: [],
+        owned: ["9", "10"],
         createdAt: new Date(Date.now())
     }
-]
+];
 
 
 db.Item
-  .remove({})
-  .then(() => db.Item.collection.insertMany(itemSeed))
-  .then(data => {
-    console.log(data.result.n + " item records inserted!");
-    process.exit(0);
-  })
-  .catch(err => {
-    console.error(err);
-    process.exit(1);
-  });
+    .remove({})
+    .then(() => db.Item.collection.insertMany(itemSeed))
+    .then(data => {
+        console.log(data.result.n + " item records inserted!");
+        process.exit(0);
+    })
+    .catch(err => {
+        console.error(err);
+        process.exit(1);
+    });
 
 //   db.User
 //   .remove({})
