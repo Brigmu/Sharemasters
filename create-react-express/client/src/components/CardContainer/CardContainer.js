@@ -2,7 +2,8 @@ import React, { useContext } from 'react'
 // import './styles.css';
 // import ItemContext from '../../utils/ItemContext/ItemContext';
 
-import ItemCard from '../ItemCard/ItemCard';
+// import ItemCard from '../ItemCard/ItemCard';
+import Card from '../Card/index';
 import ColumnContainer from "../ColumnContainer";
 import Column from "../Column";
 import FilteredContext from '../../utils/API/FilteredContext/FilteredContext';
