@@ -8,10 +8,11 @@ import {getCurrentUser, getProfile} from '../../utils/API/API';
 
 //pages
 import Hero from '../../components/Hero';
-import TileContainer from '../../components/TileContainer';
-import TileLevel from '../../components/TileLevel';
 import Notification from "../../components/Notification";
 import Container from '../../components/Container';
+import Section from '../../components/Section';
+import ColumnContainer from "../../components/ColumnContainer";
+import Column from "../../components/Column";
 
 const options = [
     {
@@ -19,7 +20,7 @@ const options = [
         color: "is-primary is-light"
     },
     {
-        message: "Post a Listings",
+        message: "Post a Listing",
         color: "is-primary"
     },
     {
@@ -55,7 +56,25 @@ const Home = () => {
     
     return (
         <div className = 'homepage'>
-            <Hero />
+            {/* <UserContext.Provider value={userInfo}>
+                <Hero />
+                <Section>
+                    <Container>
+                        <ColumnContainer>
+                            {options.map(option => 
+                                <Column>
+                                    <Notification
+                                        color={option.color}
+                                    >
+                                    {option.message}
+                                    </Notification>
+                                </Column>    
+                            )}
+                        </ColumnContainer>
+                    </Container>
+                </Section>
+            </UserContext.Provider>
+            <Hero /> */}
             <div>{state.user ? `Welcome, ${state.user.username}!` : "Welcome!"}</div>
             <Container>
                 <TileContainer>

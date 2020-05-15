@@ -1,0 +1,22 @@
+.title{
+    position: relative;
+}
+
+.link-offset{
+    position: absolute;
+    top: -500px;
+}
+
+.scroll-btn{
+    position: absolute;
+    max-width: 30px;
+    top: 200px;
+}
+
+.scroll-left{
+    left: -50px;
+}
+
+.scroll-right{
+    right: -50px;
+}
