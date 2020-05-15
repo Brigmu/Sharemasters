@@ -41,3 +41,7 @@ export const loginUser = (userData) => {
 export const signupUser = (userData) => {
     return axios.post('/api/passport/signup', userData)
 }
+
+export const uploadImageToDB = (formData) => {
+    return axios.post('https://api.cloudinary.com/v1_1/djz8ibfox/image/upload', formData)
+}
