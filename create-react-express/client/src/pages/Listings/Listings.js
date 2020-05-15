@@ -1,12 +1,14 @@
 import React, {useRef, useState, useEffect, useContext} from 'react'
 // import './styles.css';
-import './styles.css';
 import Nav from '../../components/Nav/Nav';
-// import CardContainer from '../../components/CardContainer/CardContainer'
 import CategoryWrapper from '../../components/CategoryWrapper/CategoryWrapper'
 import ItemContext from '../../utils/ItemContext/ItemContext';
 import FilteredContext from '../../utils/API/FilteredContext/FilteredContext';
 import { useHistory } from 'react-router-dom';
+// import Section from "../../components/Section";
+// import ColumnContainer from '../../components/ColumnContainer';
+// import Column from '../../components/Column';
+// import categories from "../../utils/categories.json";
 import Columns from '../../components/Columns/Columns';
 import Column from '../../components/Column/Column';
 import ItemCard from '../../components/ItemCard/ItemCard';
@@ -193,6 +195,45 @@ const Listings = (props) => {
     return (
         <FilteredContext.Provider value={filtered}>
             <div className='listings-page'>
+                {/* <Nav />
+                <label>Filter:</label>
+                <input type='text' id='filter' onChange={e => setFilter(e.target.value)}></input>
+                <Section>
+                    <ColumnContainer>
+                        <Column
+                            size = "is-2"
+                        >
+                            <div class="title is-4">
+                                Category List               
+                            </div>
+                            <div class="content">
+                                <ul>
+                                    <li><a>Electronics</a></li>
+                                    <li><a>Events</a></li>
+                                    <li><a>Home Improvement</a></li>
+                                    <li><a>Kitchen Appliances</a></li>
+                                    <li><a>Recreation</a></li>
+                                    <li><a>Miscellaneous</a></li>
+                                </ul>
+                            </div>
+                        </Column>
+                        <Column
+                            size=""
+                        >
+                            <CategoryWrapper category='All' color ="primary is-light" reference={allCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>    
+                            {categories.map(item => 
+                                <CategoryWrapper category={item.category} color={item.color} reference={props.ref + "CategoryRef"} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                        )}
+                        </Column>
+                        {/* <CategoryWrapper category='Home Improvement' color ="info" reference={homeCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                        <CategoryWrapper category='Electronics' color ="warning" reference={electronicsCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                        <CategoryWrapper category='Events' color ="primary" reference={eventsCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                        <CategoryWrapper category='Kitchen Appliances' color ="danger" reference={kitchenCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                        <CategoryWrapper category='Recreation' reference={recreationCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                        <CategoryWrapper category='Yard' color="success" reference={yardCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/>
+                        <CategoryWrapper category='Miscellaneous' color ="black" reference={miscCategoryRef} handleBtns={handleListingsBtns} handleItemClick={handleItemClick}/> */}
+                    {/* </ColumnContainer> */}
+                {/* </Section> */}
                 <Nav>
                 </Nav>
                 <section className = 'section'>
