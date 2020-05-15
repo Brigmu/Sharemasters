@@ -7,7 +7,7 @@ import Login from "./pages/Login/Login";
 import ItemContext from "./utils/ItemContext/ItemContext";
 import Listings from './pages/Listings/Listings'
 import ListingPage from "./pages/ListingPost/ListingPost";
-import ItemPage from "./pages/Item/Item"  
+import ItemPage from "./pages/Item/Item";
 
 const connectEnsureLogin = require('connect-ensure-login');
 

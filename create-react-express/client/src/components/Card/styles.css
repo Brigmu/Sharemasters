@@ -1,0 +1,5 @@
+.box{
+    min-width: 200px;
+    margin: 0px 5px;
+    box-shadow: black 1px 1px 5px 1px;
+}
