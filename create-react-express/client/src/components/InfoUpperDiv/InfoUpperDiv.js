@@ -4,6 +4,7 @@ import ItemPageImage from '../ItemPageImage/ItemPageImage';
 // import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getItem } from '../../utils/API/API';
+import Section from "../../components/Section";
 
 
 function ItemUpperDiv() {
@@ -27,7 +28,10 @@ function ItemUpperDiv() {
 
     return (
         <div >
-            <div className="upper-div">
+            <Section>
+
+            </Section>
+            {/* <div className="upper-div">
                 <ItemPageImage>
 
                 </ItemPageImage>
@@ -41,7 +45,7 @@ function ItemUpperDiv() {
                 <button className="grey lighten-4" onClick={HandleSubmitButton}>
                     Message the Owner
                 </button>
-            </div>
+            </div> */}
         </div>
     )
 }
