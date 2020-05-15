@@ -5,7 +5,7 @@ import FormControl from "../FormControl/FormControl";
 // import FormInput from "../FormInput/FormInput";
 import FormIcon from "../FormIcon/FormIcon";
 import FormHelp from "../FormHelp/FormHelp";
-import { loginUser, signupUser, getCurrentUser, createProfile, getProfile } from '../../utils/API/API';
+import { loginUser, signupUser, getCurrentUser, createProfile, getProfile, deleteUser } from '../../utils/API/API';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
 import { SET_USER } from "../../utils/UserContext/UserActions";
 
@@ -65,28 +65,26 @@ const UserForm = (props) => {
             createProfile(newUser)
                 .then(res => {
                     alert(`Profile for ${ res.data.username } has been created`);
-                    loginHelper(user);  
+                    loginHelper(user);
+                    // reset form
+                    profileInputs.forEach(input => input.current.value = '' );  
                 })
                 .catch(err => {
-                    console.log(err.response);
-                    setSignupError(err.response.data.err);
+                    //delete user from passport if profile create fails
+                    deleteUser(newUser.username);
+                    setSignupError(err.response.data.err.errors);
                 })
         })
         .catch(err => {
             // signup fail
             setSignupError(err.response.data.err);
         });
-        
-        // reset form
-        profileInputs.forEach(input => input.current.value = '' );        
     }
 
     const loginHelper = (user) => {
         loginUser(user)
         .then(() => {
-
             // login success -> get user profile -> set user state
-
             getCurrentUser().then(res => {
                 getProfile(res.data.user._id)
                     .then(res => {
@@ -105,12 +103,12 @@ const UserForm = (props) => {
             <div className="container notification is-info is-light">
                 <FormField label="First Name" >
                     <FormControl>
-                        <input className="input" type="text" placeholder="Alex" ref={firstNameRef} />
+                        <input className={`input ${signupErrorState.firstName ? "is-danger" : ""}`} type="text" placeholder="Alex" ref={firstNameRef} />
                     </FormControl>
                 </FormField>
                 <FormField label="Last Name">
                     <FormControl>
-                        <input className="input" type="text" placeholder="Lee" ref={lastNameRef} />
+                        <input className={`input ${signupErrorState.lastName ? "is-danger" : ""}`} type="text" placeholder="Lee" ref={lastNameRef} />
                     </FormControl>
                 </FormField>
                 <FormField label="Address">
@@ -149,7 +147,7 @@ const UserForm = (props) => {
                 <FormField label="Email">
                     <FormControl controlClass="has-icons-left has-icons-right">
                         <input 
-                            className="input"
+                            className={`input ${signupErrorState.email ? "is-danger" : ""}`}
                             type="email"
                             placeholder="Email input"
                             ref={emailRef} />

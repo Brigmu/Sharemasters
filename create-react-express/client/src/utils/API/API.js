@@ -59,3 +59,7 @@ export const addRented = (id, itemId) => {
 export const addOwned = (id, itemId) => {
     return axios.put('/api/profile/owned/' + id, itemId);
 }
+
+export const deleteUser = (username) => {
+    return axios.delete('api/passport/' + username);
+}

@@ -57,5 +57,11 @@ module.exports = {
   findUser: function(req, res) {
     console.log(req.user)
     return res.status(200).json({ user: req.user })
+  },
+
+  deleteUser: function(req, res) {
+    db.User.deleteOne({ username: req.params.username })
+      .then(data => res.json(data))
+      .catch(err => res.status(422).json(err))
   }
 };
