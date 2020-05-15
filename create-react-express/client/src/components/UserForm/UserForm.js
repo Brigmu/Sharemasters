@@ -5,56 +5,100 @@ import FormControl from "../FormControl/FormControl";
 // import FormInput from "../FormInput/FormInput";
 import FormIcon from "../FormIcon/FormIcon";
 import FormHelp from "../FormHelp/FormHelp";
-import {signupUser, getCurrentUser, createProfile} from '../../utils/API/API';
+import { loginUser, signupUser, getCurrentUser, createProfile, getProfile } from '../../utils/API/API';
+import { useStoreContext } from "../../utils/UserContext/UserContext";
+import { SET_USER } from "../../utils/UserContext/UserActions";
 
 const UserForm = (props) => {
+    const [state, dispatch] = useStoreContext();
+
+    const setUserState = (user) => {
+        dispatch({
+            type: SET_USER,
+            user: user
+        });
+    };
+
     //signup refs
     const usernameRef = useRef();
     const passwordRef = useRef(); 
     const firstNameRef = useRef();
     const lastNameRef = useRef();
     const emailRef = useRef();
+    const addressRef = useRef();
+    const cityRef = useRef();
+    const stateRef = useRef();
     const zipCodeRef = useRef();
 
     const [signupErrorState, setSignupError] = useState({});
 
-    const profileInputs = [usernameRef, passwordRef, firstNameRef, lastNameRef, emailRef, zipCodeRef];
+    const profileInputs = [usernameRef, passwordRef, firstNameRef, lastNameRef, emailRef, zipCodeRef, addressRef, cityRef, stateRef];
     
     const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        // for signup
         const newUser = {
             firstName: firstNameRef.current.value,
             lastName: lastNameRef.current.value,
             username: usernameRef.current.value,
+            address: addressRef.current.value,
+            city: cityRef.current.value,
+            state: stateRef.current.value,
             zipCode: zipCodeRef.current.value,
             email: emailRef.current.value,
             password: passwordRef.current.value
         }
+
+        // for login
+        const user = {
+            username: usernameRef.current.value,
+            password: passwordRef.current.value
+        }
+
         signupUser(newUser)
-            .then(res => {
-                console.log(res.data.message);
-                setSignupError({});
-                createProfile(newUser)
-                    .then(res => {
-                        console.log(`Profile for ${res.data.username} has been created`);
-                        history.push("/");
-                    })
-                    .catch(err => {
-                        console.log(err.response);
-                    })
-                    //handle errors
-            })
-            .catch(err => {
-                console.log(err.response);
-                setSignupError(err.response.data.err);
-                console.log(signupErrorState);
-            });
-        profileInputs.forEach(input => input.current.value = '' );           
+        .then(() => {
+            //signup success
+            setSignupError({});
+            createProfile(newUser)
+                .then(res => {
+                    alert(`Profile for ${ res.data.username } has been created`);
+                    loginHelper(user);  
+                })
+                .catch(err => {
+                    console.log(err.response);
+                    setSignupError(err.response.data.err);
+                })
+        })
+        .catch(err => {
+            // signup fail
+            setSignupError(err.response.data.err);
+        });
+        
+        // reset form
+        profileInputs.forEach(input => input.current.value = '' );        
     }
 
+    const loginHelper = (user) => {
+        loginUser(user)
+        .then(() => {
 
+            // login success -> get user profile -> set user state
+
+            getCurrentUser().then(res => {
+                getProfile(res.data.user._id)
+                    .then(res => {
+                        setUserState(res.data[0]);
+                        history.push("/");
+                });
+            });
+        })
+        .catch(err => {
+            console.log(err.response.data.message);
+        })       
+    }
 
     return (
         <section className="section">
@@ -69,11 +113,28 @@ const UserForm = (props) => {
                         <input className="input" type="text" placeholder="Lee" ref={lastNameRef} />
                     </FormControl>
                 </FormField>
-                <FormField label="Zip Code">
+                <FormField label="Address">
                     <FormControl>
-                        <input className="input" type="text" placeholder="zip code" ref={zipCodeRef} />
+                        <input className="input" type="text" placeholder="5555 N Main St" ref={addressRef} />
                     </FormControl>
                 </FormField>
+                <div className="is-horizontal">
+                    <FormField label="City">
+                        <FormControl>
+                            <input className="input" type="text" placeholder="Seattle" ref={cityRef} />
+                        </FormControl>
+                    </FormField>
+                    <FormField label="State">
+                        <FormControl>
+                            <input className="input" type="text" placeholder="Washington" ref={stateRef} />
+                        </FormControl>
+                    </FormField>
+                    <FormField label="Zip Code">
+                        <FormControl>
+                            <input className="input" type="text" placeholder="98001" ref={zipCodeRef} />
+                        </FormControl>
+                    </FormField>
+                </div>
                 <FormField label="Username">
                     <FormControl controlClass="has-icons-left has-icons-right">
                         <input 

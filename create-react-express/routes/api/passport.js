@@ -9,7 +9,6 @@ router.post("/login", userController.checkUser);
 // api/passport/signup
 router.post("/signup", userController.addUser);
 
-
 // api/passport/logout
 // Route for logging user out
 router.get("/logout", userController.userLogout);

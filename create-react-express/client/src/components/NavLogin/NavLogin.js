@@ -9,17 +9,6 @@ import { SET_USER } from "../../utils/UserContext/UserActions";
 
 const NavLogin = () => {
     const [state, dispatch] = useStoreContext();
-        
-    //login refs
-    const usernameLoginRef = useRef();
-    const passwordLoginRef = useRef();
-
-    //error context
-    const [loginErrorState, setLoginError] = useState({});
-
-    const loginInputs = [usernameLoginRef, passwordLoginRef];
-
-    const history = useHistory();
 
     const setUserState = (user) => {
         dispatch({
@@ -27,32 +16,43 @@ const NavLogin = () => {
             user: user
         });
     };
+        
+    // login refs
+    const usernameLoginRef = useRef();
+    const passwordLoginRef = useRef();
+    const loginInputs = [usernameLoginRef, passwordLoginRef];
+
+    // error context
+    const [loginErrorState, setLoginError] = useState({});
+
+    // handle redirect
+    const history = useHistory();
 
     const handleLogin = (e) => {
         e.preventDefault();
+
         const user = {
             username: usernameLoginRef.current.value,
             password: passwordLoginRef.current.value
         }
+
         loginUser(user)
             .then(res => {
+                // login success  -> get user profile -> set user state
                 setLoginError({ error: false});
                 getCurrentUser().then(res => {
-                    console.log(res.data.user);
                     getProfile(res.data.user._id)
                         .then(res => {
-                            console.log(res.data[0]);
                             setUserState(res.data[0]);
-                            //set user state
-                            // history.push("/");
+                            history.push("/");
                     });
                 });
             })
             .catch(err => {
-                console.log(err.response.data.message);
-                setLoginError({ error: true});
-                console.log(loginErrorState);
+                setLoginError({ error: true, message: err.message });
             })
+
+        // reset form
         loginInputs.forEach(input => input.current.value = '' );           
     }
 

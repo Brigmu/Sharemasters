@@ -51,3 +51,11 @@ export const createProfile = (userData) => {
 export const updateProfile = (id, userData) => {
     return axios.put('/api/profile/' + id, userData);
 }
+
+export const addRented = (id, itemId) => {
+    return axios.put('/api/profile/history/' + id, itemId);
+}
+
+export const addOwned = (id, itemId) => {
+    return axios.put('/api/profile/owned/' + id, itemId);
+}

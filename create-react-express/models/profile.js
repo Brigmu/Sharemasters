@@ -30,13 +30,16 @@ const ProfileSchema = new Schema({
     long: { type: Number}
   },
   address: String,
-  rented: [
+  city: String,
+  state: String,
+  zipCode: Number,
+  owned: [
     {
       type: Schema.Types.ObjectId,
       ref: "Item"
     }
   ],
-  owned: [
+  rentalHistory: [
     {
       type: Schema.Types.ObjectId,
       ref: "Item"

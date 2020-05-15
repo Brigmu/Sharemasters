@@ -11,7 +11,7 @@ module.exports = {
     findOne: function(req, res) {
         db.Profile.find({ userId: req.params.id })
             .populate("owned")
-            .populate("rented")
+            .populate("rentalHistory")
             .then(data => res.json(data))
             .catch(err => res.status(422).json(err));
             
@@ -23,11 +23,22 @@ module.exports = {
                 newProfile.userId = user._id;
                 newProfile.save()
                 .then(data => res.json(data))
-                .catch(err => {res.status(422).json(err)});
+                .catch(err => {res.status(422).json({message: 'Missing or Invalid Fields', err: err})});
             })
+            .catch(err => {res.status(422).json({message: 'Disconnect between user and profile', err: err})})
     },
     update: function(req, res) {
-        db.Profile.updateOne({ _id: req.params.id }, { $set: req.body })
+        db.Profile.update({ _id: req.params.id }, { $set: req.body })
+            .then(data => res.json(data))
+            .catch(err => res.status(422).json(err));
+    },
+    addRented: function(req, res) {
+        db.Profile.update({ _id: req.params.id }, { $push: { rentalHistory: req.body.itemId }})
+            .then(data => res.json(data))
+            .catch(err => res.status(422).json(err));
+    },
+    addOwned: function(req, res) {
+        db.Profile.update({ _id: req.params.id }, { $push: { owned: req.body.itemId }})
             .then(data => res.json(data))
             .catch(err => res.status(422).json(err));
     }
