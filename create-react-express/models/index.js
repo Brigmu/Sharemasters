@@ -3,5 +3,6 @@
 module.exports = {
     User: require("./user.js"),
     Profile: require("./profile"),
-    Item: require("./items")
+    Item: require("./items"),
+    Appointment: require("./appointments")
 };
