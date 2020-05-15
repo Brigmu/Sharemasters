@@ -45,8 +45,8 @@ function ItemUpperDiv() {
                             </figure>
                             <br></br>
                             <div className="content">
-                                    <p className="title is-5">Owner</p>
-                                    <p className="title is-5">Location</p>
+                                    <p className="title is-5">Owner: {item.owner_id}</p>
+                                    <p className="title is-5">Location: {item.location}</p>
                                     <div className="field is-grouped">
                                         <p className="control">
                                             <button className="button is-primary" onClick={HandleSubmitButton}>
