@@ -12,38 +12,50 @@ module.exports = {
   checkUser: function(req, res, next) {
     passport.authenticate('local', 
       (err, user, info) => {
-        if (err) { 
-          return res.status(400).json({errors : err }); 
+        if (err) {
+          res.status(400).json({message: 'Unable to process authentication request'});
         }
-        if (!user) { 
-          return res.status(400).json({errors : "No user found" });
-        }
-  
-        req.logIn(user, err => {
-          if (err) { 
-            res.status(400).json({errors : err }); 
+        req.login(user, (err) => {
+          if (err) {
+            res.status(422).json({message: 'Invalid username or password'});
+          } else {
+            return res.status(200).json({message: 'You were authenticated & logged in!'});
           }
-          return res.status(200).json({ success: `logged in ${user.id}`});
-        });
+        })
       })(req, res, next)
   },
 
 
   addUser: function(req, res) {
     db.User
-      .register({username: req.body.username} , req.body.password)
-      .then(() => { res.redirect(307, "/api/passport/login") })
-      .catch(err => res.status(422).json(err));
+      .register({username: req.body.username} , req.body.password, (err, user) => {
+        if (err) {
+          res.status(422).json({
+            success: false,
+            message: 'Unable to register user',
+            err: err
+          })
+        } else {
+          res.json({
+            success: true,
+            message: "Your account has been saved"
+          })
+
+        }
+      })
   },
 
 
   userLogout: function(req, res) {
     req.logout();
+    return res.json({
+      message: "Your account has been logged out"
+    });
   },
 
 
   findUser: function(req, res) {
     console.log(req.user)
-    res.send({ user: req.user })
+    return res.status(200).json({ user: req.user })
   }
 };

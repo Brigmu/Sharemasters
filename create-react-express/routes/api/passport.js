@@ -4,11 +4,10 @@ const userController = require("../../controllers/userController");
 const passport = require('passport');
 
 // api/passport/login
-router.post("/login", userController.findUser);
+router.post("/login", userController.checkUser);
   
 // api/passport/signup
 router.post("/signup", userController.addUser);
-
 
 // api/passport/logout
 // Route for logging user out
