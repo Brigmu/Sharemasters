@@ -5,7 +5,7 @@ import FormControl from "../FormControl/FormControl";
 import FormIcon from "../FormIcon/FormIcon";
 import {loginUser, getCurrentUser, getProfile} from '../../utils/API/API';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-import { SET_USER, CLEAR_USER } from "../../utils/UserContext/UserActions";
+import { SET_USER } from "../../utils/UserContext/UserActions";
 
 const NavLogin = () => {
     const [state, dispatch] = useStoreContext();
