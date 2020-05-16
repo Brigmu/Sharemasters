@@ -2,12 +2,23 @@ import React, { useState, useEffect } from "react";
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 //user context
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-import { SET_USER, CLEAR_USER } from "../../utils/UserContext/UserActions";
-import {getCurrentUser, getProfile} from '../../utils/API/API';
+// import { SET_USER, CLEAR_USER } from "../../utils/UserContext/UserActions";
+// import {getCurrentUser, getProfile} from '../../utils/API/API';
+
 import Nav from "../../components/Nav/Nav";
-import Section from "../../components/Section";
 import NavTabs from "../../components/NavTabs/NavTabs";
-import {Container} from 'react-bulma-components';
+import {Section, Container} from 'react-bulma-components';
+import ProfileItemContainer from "../../components/ProfileItemContainer";
+
+//put buttons in ProfileItemContent children
+// Rental Buttons
+import ReturnButton from "../../components/ReturnButton";
+import MessageOwnerButton from "../../components/MessageOwnerButton";
+
+// Listings and Return Buttons 
+// Accept/Reject for Listings and Confirm/Report for Returns
+import SuccessButton from "../../components/SuccessButton";
+import RejectButton from "../../components/RejectButton";
 
 const Profile = () => {
     // state information
@@ -19,7 +30,6 @@ const Profile = () => {
         setSelected(nextPage);
     }
 
-    
 
     return (
         <div className='profile-page'>
@@ -29,10 +39,42 @@ const Profile = () => {
                 <NavTabs handlePageChange={handlePageChange} tabs={['Profile', 'Rentals', 'Requests', 'Returns']} />
             </Container>
             <Section>
-                {selected === 'Rentals' ? <div className='notification is-info'><button data-page='Requests' onClick={handlePageChange}>Next Page</button></div>
-                    : selected === 'Requests' ? <div className='notification is-warning'><button data-page='Returns' onClick={handlePageChange}>Next Page</button></div>
-                        : selected === 'Returns' ? <div className='notification is-primary'><button data-page='Profile' onClick={handlePageChange}>Next Page</button></div>
-                            : <div className='notification is-danger'><button data-page='Rentals' onClick={handlePageChange}>Next Page</button></div>}
+                <Container>
+                    {
+                        selected === 'Rentals' ? (                
+                            <ProfileItemContainer 
+                                image={"https://www.wweek.com/resizer/86tt-U3ytIrtb7bBYXAIg7XWz7A=/1200x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/wweek/wp-content/uploads/2019/08/30145212/Nicolas-Cage.jpg"}
+                                title={"Title"}
+                                startDate={"1/1/1"}
+                                endDate={"1/1/1"}>
+                                <ReturnButton onClick={handlePageChange}>Return</ReturnButton>
+                                <MessageOwnerButton></MessageOwnerButton>
+                            </ProfileItemContainer>
+                        )
+                        : selected === 'Requests' ? (                
+                            <ProfileItemContainer 
+                                image={"https://www.wweek.com/resizer/86tt-U3ytIrtb7bBYXAIg7XWz7A=/1200x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/wweek/wp-content/uploads/2019/08/30145212/Nicolas-Cage.jpg"}
+                                title={"Title"}
+                                startDate={"1/1/1"}
+                                endDate={"1/1/1"}>
+                                <SuccessButton onClick={handlePageChange}>Accept</SuccessButton>
+                                <RejectButton onClick={handlePageChange}>Reject</RejectButton>
+                            </ProfileItemContainer>
+                        )
+                        : selected === 'Returns' ? (                
+                            <ProfileItemContainer 
+                                image={"https://www.wweek.com/resizer/86tt-U3ytIrtb7bBYXAIg7XWz7A=/1200x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/wweek/wp-content/uploads/2019/08/30145212/Nicolas-Cage.jpg"}
+                                title={"Title"}
+                                startDate={"1/1/1"}
+                                endDate={"1/1/1"}>
+                                <SuccessButton onClick={handlePageChange}>Confirm</SuccessButton>
+                                <RejectButton onClick={handlePageChange}>Report</RejectButton>
+                            </ProfileItemContainer>
+                        )
+                        : <div className='notification is-danger'><button data-page='Rentals' onClick={handlePageChange}>Next Page</button></div>}
+                </Container>
+
+
             </Section>
         </div>
         

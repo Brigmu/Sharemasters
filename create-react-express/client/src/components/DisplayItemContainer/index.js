@@ -14,6 +14,8 @@ import SuccessButton from "../SuccessButton";
 import RejectButton from "../RejectButton";
 
 const DisplayItemsContainer = (props) => {
+
+    //handling the items
     return (
         <Section>
             <Container>

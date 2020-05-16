@@ -11,9 +11,13 @@ const ProfileItemContainer = (props) => {
                         <img src={props.image} />
                     </figure>
                 </div>
-                <div className="title is-5">{props.title}</div>
-                <div className="title is-5">Start Date: <span>{props.startDate}</span></div>
-                <div className="title is-5">End Date: <span>{props.endDate}</span></div>
+                <div className="media-content">
+                    <div className="content">
+                        <div className="title is-5">{props.title}</div>
+                        <div className="title is-5">Start Date: <span>{props.startDate}</span></div>
+                        <div className="title is-5">End Date: <span>{props.endDate}</span></div>
+                    </div>
+                </div>
             </article>
             <div className="field is-grouped">
                 {props.children}
