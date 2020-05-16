@@ -1,5 +1,6 @@
 import React from "react";
 import SearchBar from "../SearchBar";
+import { useStoreContext } from "../../utils/UserContext/UserContext";
 
 function Hero(props) {
     return (
@@ -31,7 +32,7 @@ function Hero(props) {
                                 Profile
                                 </a>
                                 <span class="navbar-item">
-                                <a class="button is-primary is-inverted">
+                                <a href="/signup" class="button is-primary is-inverted">
                                     <span>Log In</span>
                                 </a>
                                 </span>

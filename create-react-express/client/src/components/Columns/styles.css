@@ -1,0 +1,4 @@
+.carousel {
+    overflow: scroll;
+    overflow-y: hidden;
+}

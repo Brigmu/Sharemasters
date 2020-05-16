@@ -25,14 +25,21 @@ const ProfileSchema = new Schema({
     required: true,
     unique: true
   },
+  location: {
+    lat: { type: Number},
+    long: { type: Number}
+  },
+  address: String,
+  city: String,
+  state: String,
   zipCode: Number,
-  rented: [
+  owned: [
     {
       type: Schema.Types.ObjectId,
       ref: "Item"
     }
   ],
-  owned: [
+  rentalHistory: [
     {
       type: Schema.Types.ObjectId,
       ref: "Item"
