@@ -37,6 +37,7 @@ const Profile = () => {
                 //set state res.data.rented
                 //set stete res.data.owned
             })
+            .catch(err => {console.log(err.response)})
     }
 
     return (
