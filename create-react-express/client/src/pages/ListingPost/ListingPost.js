@@ -4,7 +4,7 @@ import Nav from '../../components/Nav/Nav'
 // import UserForm from '../../components/UserForm/UserForm';
 // import Container from '../../components/Container/Container'
 import { useHistory } from 'react-router-dom';
-import UserContext from '../../utils/UserContext/UserContext';
+import { useStoreContext } from '../../utils/UserContext/UserContext';
 import Field from '../../components/Field/Field';
 import DropdownMenu from '../../components/Dropdown/Dropdown';
 import ItemImage from '../../components/ItemImage/ItemImage';
@@ -12,7 +12,8 @@ import {uploadImageToDB} from '../../utils/API/API';
 
 
 const ListingPage = (props) => {
-    const user = useContext(UserContext);
+    // const user = useContext(UserContext);
+    const [state, dispatch] = useStoreContext();
     const [image, setImage] = useState('');
     const history = useHistory();
     // if(!user.id){
