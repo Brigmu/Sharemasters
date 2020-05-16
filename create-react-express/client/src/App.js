@@ -10,12 +10,8 @@ import ItemContext from "./utils/ItemContext/ItemContext";
 import Listings from './pages/Listings/Listings'
 import ListingPage from "./pages/ListingPost/ListingPost";
 import ItemPage from "./pages/Item/Item";
-<<<<<<< HEAD
-import RentalConfirmation from './pages/RentalComfirmation/RentalConfirmation';
-import Profile from "./pages/Profile/Profile";
-=======
 import RentalConfirmation from './pages/RentalConfirmation/RentalConfirmation';
->>>>>>> f36d45b18832832c709f1162d8bf6133f378e739
+import Profile from "./pages/Profile/Profile";
 
 const connectEnsureLogin = require('connect-ensure-login');
 
