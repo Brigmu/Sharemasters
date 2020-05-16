@@ -1,34 +1,70 @@
 const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
-    owner_id: {
-        type: String
+    ownerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
     },
     name: {
-        type: String
+        type: String,
+        required: true
     },
     description: {
         type: String
     },
     category: {
+        type: String,
+        required: true
+    },
+    address: {
         type: String
     },
-    pending_request: {
-        type: Boolean
-    },
-    is_rented: {
-        type: Boolean
-    },
-    appointment: {
-        // id of the appointment in appointment collection
+    city: {
         type: String
     },
-    created_at: {
+    state: {
+        type: String,
+        max: [2, 'Please enter two-letter state abbreviation']
+    },
+    zipCode: {
+        type: Number,
+        max: 5
+    },
+    fullAddress: {
+        type: String
+    },
+    coordinates: {
+        lat: {
+            type: Number
+        },
+        lng: {
+            type: Number
+        }
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    img: {
+        type: String
+    },
+    pendingRequest: {
+        type: Boolean,
+        default: false
+    },
+    isRented: {
+        type: Boolean,
+        default: false
+    },
+    active: {
+        type: Boolean,
+        default: true
+    },
+    createdAt: {
         type: Date,
         default: Date.now()
     }
-})
-
+});
 
 const Item = mongoose.model("Item", itemSchema)
 

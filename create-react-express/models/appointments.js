@@ -1,45 +1,34 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
 const appointmentSchema = new mongoose.Schema({
-    item_id: {
-        type: String
+    itemId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Item'
     },
-    owner_id: {
-        type: String
+    renterId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     },
-    renter_id: {
-        type: String
+    startDate: {
+        type: Date,
     },
-    // For when we have time and dates for appointments
-    // pickup_date: {
-    //     type: Date,
-    //     default: Date.now()
-    // },
-    // pickup_time: {
-    //     type: Number
-    // },
-    // return_date: {
-    //     type: Date,
-    // },
-    // return_time: {
-    //     type: Number
-    // },
-    canceled: {
+    endDate: {
+        type: Date,
+    },
+    isReturned: {
         type: Boolean,
         default: false
     },
-    returned: {
+    isCancelled: {
         type: Boolean,
         default: false
     },
-    created_at: {
+    createdAt: {
         type: Date,
         default: Date.now()
     }
-})
+});
 
+const Appointment = mongoose.model("Appointment", appointmentSchema)
 
-const Appointments = mongoose.model("Appointment", appointmentSchema)
-
-module.exports = Appointments
+module.exports = Appointment;
