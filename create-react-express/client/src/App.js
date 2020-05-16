@@ -10,6 +10,7 @@ import ItemContext from "./utils/ItemContext/ItemContext";
 import Listings from './pages/Listings/Listings'
 import ListingPage from "./pages/ListingPost/ListingPost";
 import ItemPage from "./pages/Item/Item";
+import RentalConfirmation from './pages/RentalComfirmation/RentalConfirmation';
 
 const connectEnsureLogin = require('connect-ensure-login');
 
@@ -40,6 +41,7 @@ function App() {
           <Route exact path = '/listings' component={Listings} />
           <Route exact path = '/newlisting' component={ListingPage} />
           <Route exact path = '/items/:id' component={ItemPage} />
+          <Route exact path = '/rentalconfirm' component={RentalConfirmation} />
         </Switch>
   
       </div>
