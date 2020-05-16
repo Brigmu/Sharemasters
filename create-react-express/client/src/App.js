@@ -10,7 +10,7 @@ import ItemContext from "./utils/ItemContext/ItemContext";
 import Listings from './pages/Listings/Listings'
 import ListingPage from "./pages/ListingPost/ListingPost";
 import ItemPage from "./pages/Item/Item";
-import RentalConfirmation from './pages/RentalComfirmation/RentalConfirmation';
+import RentalConfirmation from './pages/RentalConfirmation/RentalConfirmation';
 
 const connectEnsureLogin = require('connect-ensure-login');
 

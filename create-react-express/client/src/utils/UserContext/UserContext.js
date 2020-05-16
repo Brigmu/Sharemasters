@@ -26,7 +26,7 @@ const reducer = (state, action) => {
                     coordinates: {
                         lat: null,
                         lng: null
-                      },
+                    },
                     address: "",
                     city: "",
                     state: "",
@@ -46,7 +46,7 @@ const UserProvider = ({ value = [], ...props }) => {
         coordinates: {
             lat: null,
             lng: null
-          },
+        },
         address: "",
         city: "",
         state: "",
