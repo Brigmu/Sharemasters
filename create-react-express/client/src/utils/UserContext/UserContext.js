@@ -23,10 +23,14 @@ const reducer = (state, action) => {
                     firstName: "",
                     lastName: "",
                     email: "",
-                    location: {
+                    coordinates: {
                         lat: null,
-                        long: null
-                    }
+                        lng: null
+                      },
+                    address: "",
+                    city: "",
+                    state: "",
+                    zipCode: null
                 }
             }
     }
