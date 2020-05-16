@@ -57,12 +57,12 @@ const ListingPage = (props) => {
         const data = {
             itemName: itemNameRef.current.value,
             description: descriptionRef.current.value,
-            location: `${streetRef.current.value} ${zipcodeRef.current.value} ${stateRef.current.value}`,
+            fullAddress: `${streetRef.current.value} ${zipcodeRef.current.value} ${stateRef.current.value}`,
             price: priceRef.current.value,
             category: category,
             img: image,
-            is_rented: false,
-            pending_request: false,
+            isRented: false,
+            pendingRequest: false,
         }
         console.log(data);
 
