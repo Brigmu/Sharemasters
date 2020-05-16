@@ -47,7 +47,11 @@ export const loginUser = (userData) => {
 }
 
 export const signupUser = (userData) => {
-    return axios.post('/api/passport/signup', userData);
+    return axios.post('/api/passport/signup', userData)
+}
+
+export const uploadImageToDB = (formData) => {
+    return axios.post('https://api.cloudinary.com/v1_1/djz8ibfox/image/upload', formData)
 }
 
 export const logoutUser = () => {
@@ -68,4 +72,8 @@ export const addRented = (id, itemId) => {
 
 export const addOwned = (id, itemId) => {
     return axios.put('/api/profile/owned/' + id, itemId);
+}
+
+export const deleteUser = (username) => {
+    return axios.delete('api/passport/' + username);
 }

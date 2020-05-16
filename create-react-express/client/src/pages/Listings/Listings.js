@@ -43,7 +43,7 @@ const Listings = (props) => {
                     setFiltered(itemListings);
                 } else{
                 filteredListings = itemListings.filter(item => {
-                    return parseInt(item.price) >= parseInt(filter);
+                    return parseInt(item.price) <= parseInt(filter);
                 })
                 setFiltered(filteredListings);
                 }
@@ -268,6 +268,7 @@ const Listings = (props) => {
                                 {/* <label>Filter:</label> */}
                                 
                                 <input type='text' id='filter' onChange={e => setFilter(e.target.value)}></input>
+                                <hr></hr>
                             <div class="title is-4">
                                 Category List
                             </div>

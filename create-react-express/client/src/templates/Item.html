@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css">
+    <!-- <link rel="stylesheet" href="./debug.css"> -->
+    <style>
+        /* ! debug.css | MIT License | zaydek.github.com/debug.css */
+        /* :not(path):not(g) {
+            color:                    hsla(210, 100%, 100%, 0.9) !important;
+            background:               hsla(210, 100%,  50%, 0.4) !important;
+            outline:    solid 0.25rem hsla(210, 100%, 100%, 0.4) !important;
+
+            box-shadow: none !important;
+        } */
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- navbar -->
+    <div class="section navbar is-primary">
+        <div class="navbar-start">
+            <div class="navbar-item">
+                Logo Image
+            </div>
+        </div>
+        <!-- search bar -->
+        <div class="container navbar-item">
+            <form class="tile field has-addons">
+                <div class="control is-expanded">
+                    <input 
+                        class="input"
+                        name="term"
+                        type="text"
+                        placeholder="What are you looking for?"
+                        id="term"
+                    />
+                </div>
+                <div class="control">
+                    <button class="button is-info" onClick={props.handleFormSubmit}>
+                        <span class="icon">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                Home
+            </div>
+            <div class="navbar-item">
+                Profile
+            </div>
+            <div class="navbar-item">
+                <div class="burger">
+                    Burger
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- navbar end -->
+    <!-- important to make sure sections are denoted by tag as well as class -->
+    <section class="section">
+        <div class="container">
+            <div class="title">Volleyball Net</div>
+            <div class="columns">
+                <div class="column is-half">
+                    <figure class="image">
+                        <img src="https://bulma.io/images/placeholders/128x128.png" alt="">
+                    </figure>
+                </div>
+                <div class="column">
+                    <div class="content">
+                        <div class="title is-5">Owner: Sugawara Kochi
+                        </div>
+                        <div class="title is-5">Location: Miyagi, Japan</div>
+                    </div>
+                    <!-- <div class="field is-grouped">
+                        <p class="control">
+                            <button class="button is-primary" onClick={HandleSubmitButton}>
+                                Rent This!
+                            </button>
+                        </p> -->
+                        <p class="control">
+                            <button class="button is-primary is-light is-outlined" onClick={HandleSubmitButton}>
+                                Message Owner
+                            </button>
+                        </p>
+                    <!-- </div> -->
+                    <br>
+                    <br>
+                    <div class="notification">
+                        <div class="title is-5">Request Rental</div>
+                        <div class="field">
+                            <label class="label">Start Date</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Alex">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">End Date</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Lee">
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link">Submit</button>
+                            </div>
+                            <div class="control">
+                                <button class="button is-link is-light is-outlined">Cancel</button>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+            
+        </div>
+    </section>
+</body>
+</html>

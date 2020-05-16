@@ -13,6 +13,7 @@ import Container from '../../components/Container';
 import Section from '../../components/Section';
 import ColumnContainer from "../../components/ColumnContainer";
 import Column from "../../components/Column";
+import {TileContainer, TileLevel} from 'react-bulma-components';
 
 const options = [
     {

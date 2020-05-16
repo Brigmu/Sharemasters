@@ -17,4 +17,7 @@ router.get("/logout", userController.userLogout);
 // Route for getting some data about our user to be used client side
 router.get("/user_data", userController.findUser);
 
+// api/passport/:username
+router.delete("/:username", userController.deleteUser);
+
 module.exports = router;
