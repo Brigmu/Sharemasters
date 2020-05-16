@@ -6,10 +6,8 @@ import React, { useContext } from 'react'
 
 //required Card component
 import Card from '../Card/index';
-import ColumnContainer from "../ColumnContainer";
-import Column from "../Column";
 import FilteredContext from '../../utils/API/FilteredContext/FilteredContext';
-import Container from '../Container';
+import { Container, Columns } from "react-bulma-components";
 
 const CardContainer = (props) => {
     const itemListings = useContext(FilteredContext);
@@ -33,13 +31,13 @@ const CardContainer = (props) => {
 
         // bulma css edit - cna 
         <Container>
-            <ColumnContainer>
+            <Columns>
             {itemListings.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : itemListings.map(item => (
-                <Column>
+                <Columns.Column>
                     <Card img={item.img} itemName={item.name} id={item.id} handleItemClick={props.handleItemClick}/>
-                </Column>
+                </Columns.Column>
             ))}
-            </ColumnContainer>
+            </Columns>
         </Container>
     )
 }
