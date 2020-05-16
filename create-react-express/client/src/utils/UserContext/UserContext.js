@@ -23,7 +23,7 @@ const reducer = (state, action) => {
                     firstName: "",
                     lastName: "",
                     email: "",
-                    location: {
+                    coordinates: {
                         lat: null,
                         long: null
                     }
@@ -39,7 +39,7 @@ const UserProvider = ({ value = [], ...props }) => {
         firstName: "",
         lastName: "",
         email: "",
-        location: {
+        coordinates: {
           lat: null,
           long: null
         }
