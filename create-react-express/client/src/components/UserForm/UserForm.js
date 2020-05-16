@@ -1,4 +1,4 @@
-import React, {useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import FormField from "../FormField/FormField";
 import FormControl from "../FormControl/FormControl";
@@ -20,7 +20,7 @@ const UserForm = (props) => {
 
     //signup refs
     const usernameRef = useRef();
-    const passwordRef = useRef(); 
+    const passwordRef = useRef();
     const firstNameRef = useRef();
     const lastNameRef = useRef();
     const emailRef = useRef();
@@ -32,7 +32,7 @@ const UserForm = (props) => {
     const [signupErrorState, setSignupError] = useState({});
 
     const profileInputs = [usernameRef, passwordRef, firstNameRef, lastNameRef, emailRef, zipCodeRef, addressRef, cityRef, stateRef];
-    
+
     const history = useHistory();
 
     const handleSubmit = (e) => {
@@ -58,43 +58,43 @@ const UserForm = (props) => {
         }
 
         signupUser(newUser)
-        .then(() => {
-            //signup success
-            setSignupError({});
-            createProfile(newUser)
-                .then(res => {
-                    alert(`Profile for ${ res.data.username } has been created`);
-                    loginHelper(user);
-                    // reset form
-                    profileInputs.forEach(input => input.current.value = '' );  
-                })
-                .catch(err => {
-                    //delete user from passport if profile create fails
-                    deleteUser(newUser.username);
-                    setSignupError(err.response.data.err.errors);
-                })
-        })
-        .catch(err => {
-            // signup fail
-            setSignupError(err.response.data.err);
-        });
+            .then(() => {
+                //signup success
+                setSignupError({});
+                createProfile(newUser)
+                    .then(res => {
+                        alert(`Profile for ${res.data.username} has been created`);
+                        loginHelper(user);
+                        // reset form
+                        profileInputs.forEach(input => input.current.value = '');
+                    })
+                    .catch(err => {
+                        //delete user from passport if profile create fails
+                        deleteUser(newUser.username);
+                        setSignupError(err.response.data.err.errors);
+                    })
+            })
+            .catch(err => {
+                // signup fail
+                setSignupError(err.response.data.err);
+            });
     }
 
     const loginHelper = (user) => {
         loginUser(user)
-        .then(() => {
-            // login success -> get user profile -> set user state
-            getCurrentUser().then(res => {
-                getProfile(res.data.user._id)
-                    .then(res => {
-                        setUserState(res.data[0]);
-                        history.push("/");
+            .then(() => {
+                // login success -> get user profile -> set user state
+                getCurrentUser().then(res => {
+                    getProfile(res.data.user._id)
+                        .then(res => {
+                            setUserState(res.data[0]);
+                            history.push("/");
+                        });
                 });
-            });
-        })
-        .catch(err => {
-            console.log(err.response.data.message);
-        })       
+            })
+            .catch(err => {
+                console.log(err.response.data.message);
+            })
     }
 
     return (
@@ -110,6 +110,17 @@ const UserForm = (props) => {
                         <input className={`input ${signupErrorState.lastName ? "is-danger" : ""}`} type="text" placeholder="Lee" ref={lastNameRef} />
                     </FormControl>
                 </FormField>
+                <FormField label="Email">
+                    <FormControl controlClass="has-icons-left has-icons-right">
+                        <input
+                            className={`input ${signupErrorState.email ? "is-danger" : ""}`}
+                            type="email"
+                            placeholder="Email input"
+                            ref={emailRef} />
+                        <FormIcon size="small" side="left" icon="envelope" />
+                        <FormIcon size="small" side="right" icon="exclamation-triangle" />
+                    </FormControl>
+                </FormField>
                 <FormField label="Address">
                     <FormControl>
                         <input className="input" type="text" placeholder="5555 N Main St" ref={addressRef} />
@@ -123,7 +134,7 @@ const UserForm = (props) => {
                     </FormField>
                     <FormField label="State">
                         <FormControl>
-                            <input className={`input ${signupErrorState.state ? "is-danger" : ""}`} type="text" placeholder="Washington" ref={stateRef} />
+                            <input className={`input ${signupErrorState.state ? "is-danger" : ""}`} type="text" placeholder="WA" ref={stateRef} />
                         </FormControl>
                     </FormField>
                     <FormField label="Zip Code">
@@ -134,7 +145,7 @@ const UserForm = (props) => {
                 </div>
                 <FormField label="Username">
                     <FormControl controlClass="has-icons-left has-icons-right">
-                        <input 
+                        <input
                             className="input"
                             type="text"
                             placeholder="Username"
@@ -143,22 +154,11 @@ const UserForm = (props) => {
                         <FormIcon size="small" side="right" icon="check" />
                     </FormControl>
                 </FormField>
-                <FormField label="Email">
-                    <FormControl controlClass="has-icons-left has-icons-right">
-                        <input 
-                            className={`input ${signupErrorState.email ? "is-danger" : ""}`}
-                            type="email"
-                            placeholder="Email input"
-                            ref={emailRef} />
-                        <FormIcon size="small" side="left" icon="envelope" />
-                        <FormIcon size="small" side="right" icon="exclamation-triangle" />
-                    </FormControl>
-                    </FormField>
                 <FormField label="Password">
                     <FormControl controlClass="has-icons-left has-icons-right">
-                        <input 
+                        <input
                             className="input"
-                            type="text"
+                            type="password"
                             placeholder="Enter a secure password"
                             ref={passwordRef} />
                         <FormIcon size="small" side="left" icon="lock" />

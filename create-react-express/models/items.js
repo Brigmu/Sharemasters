@@ -56,6 +56,20 @@ const itemSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    appointments: {
+        current: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Appointments"
+            }
+        ],
+        history: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Appointments"
+            }
+        ],
+    },
     active: {
         type: Boolean,
         default: true
