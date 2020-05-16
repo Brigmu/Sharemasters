@@ -47,7 +47,7 @@ const RentalConfirmation = (props) => {
         setPendingItems(filteredItems);
     }
 
-    const handleConfirma = (e) => {
+    const handleConfirm = (e) => {
         console.log(e.target);
         const itemId = parseInt(e.target.getAttribute('data-id'));
         filterOffItem(itemId, pendingItems);
@@ -81,7 +81,7 @@ const RentalConfirmation = (props) => {
                                 <h2 className='is-size-6 pending-item-info '>Total: {`$${item.total}`}</h2>
                             </div>
                             <Button data-id={item.id} onClick={handleDecline} className='is-pulled-right' color='danger'>Deny</Button>
-                            <Button data-id={item.id} onClick={handleConfirma} className='is-pulled-right' color='success'>Confirm</Button>
+                            <Button data-id={item.id} onClick={handleConfirm} className='is-pulled-right' color='success'>Confirm</Button>
                         </div>
                         )) : <div className='notification is-warning has-text-centered'><h2 className='is-size-6'>No pending item rentals</h2></div>}
                     </Column>
