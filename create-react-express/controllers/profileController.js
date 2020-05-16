@@ -11,6 +11,7 @@ module.exports = {
     findOne: function(req, res) {
         db.Profile.find({ userId: req.params.id })
             .populate("owned")
+            .populate("rentals")
             .populate("rentalHistory")
             .then(data => res.json(data))
             .catch(err => res.status(422).json(err));

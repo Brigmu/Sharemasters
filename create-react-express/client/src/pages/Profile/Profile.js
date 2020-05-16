@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import 'react-bulma-components/dist/react-bulma-components.min.css';
+
 //user context
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-// import { SET_USER, CLEAR_USER } from "../../utils/UserContext/UserActions";
-// import {getCurrentUser, getProfile} from '../../utils/API/API';
+import { SET_USER, CLEAR_USER } from "../../utils/UserContext/UserActions";
+import { getProfile } from '../../utils/API/API';
 
 import Nav from "../../components/Nav/Nav";
 import NavTabs from "../../components/NavTabs/NavTabs";
@@ -21,15 +22,22 @@ import SuccessButton from "../../components/SuccessButton";
 import RejectButton from "../../components/RejectButton";
 
 const Profile = () => {
-    // state information
+    const [state, dipatch] = useStoreContext();
 
-    const [selected, setSelected] = useState('Proflie');
+    const [selected, setSelected] = useState('Profile');
 
     const handlePageChange = (e) => {
         const nextPage = e.target.getAttribute('data-page');
         setSelected(nextPage);
     }
 
+    const setAll = () => {
+        getProfile(state.user.userId)
+            .then(res => {
+                //set state res.data.rented
+                //set stete res.data.owned
+            })
+    }
 
     return (
         <div className='profile-page'>
