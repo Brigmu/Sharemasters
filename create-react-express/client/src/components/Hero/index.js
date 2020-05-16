@@ -1,6 +1,7 @@
 import React from "react";
 import SearchBar from "../SearchBar";
 import { useStoreContext } from "../../utils/UserContext/UserContext";
+import { NavLink } from "react-router-dom"; 
 
 function Hero(props) {
     return (
@@ -22,14 +23,17 @@ function Hero(props) {
                         </div>
                         <div id="navbarMenuHeroA" class="navbar-menu">
                             <div class="navbar-end">
-                                <a class="navbar-item is-active">
-                                Home
+                                <a href="/" class="navbar-item">
+                                    Home
+                                {/* <NavLink to="/" activeClassName="is-active">Home</NavLink> */}
                                 </a>
-                                <a class="navbar-item">
-                                Browse
+                                <a href="/listings" class="navbar-item">
+                                    Browse
+                                {/* <NavLink to="/listings" activeClassName="is-active">Browse</NavLink> */}
                                 </a>
-                                <a class="navbar-item">
-                                Profile
+                                <a href="/profile" class="navbar-item">
+                                    Profile
+                                {/* <NavLink to="/profile" activeClassName="is-active">Profile</NavLink> */}
                                 </a>
                                 <span class="navbar-item">
                                 <a href="/signup" class="button is-primary is-inverted">
@@ -52,6 +56,7 @@ function Hero(props) {
                     share what you cherish
                 </h2>
                 </div>
+                <br></br>
                 <SearchBar />
             </div>
 
