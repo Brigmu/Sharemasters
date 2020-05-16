@@ -13,9 +13,13 @@ router.route("/:id")
   .get(profileController.findOne)
   .put(profileController.update)
 
+// api/profile/rentals/:id
+router.route("/rentals/:id")
+  .put(profileController.addRental)
+
 // api/profile/history/:id
 router.route("/history/:id")
-  .put(profileController.addRented)
+  .put(profileController.addRentalHistory)
 
 // api/profile/owned/:id
 router.route("/owned/:id")
