@@ -4,7 +4,7 @@ import Nav from '../../components/Nav/Nav'
 // import UserForm from '../../components/UserForm/UserForm';
 // import Container from '../../components/Container/Container'
 import { useHistory } from 'react-router-dom';
-import {useStoreContext} from '../../utils/UserContext/UserContext';
+import { useStoreContext } from '../../utils/UserContext/UserContext';
 import Field from '../../components/Field/Field';
 import DropdownMenu from '../../components/Dropdown/Dropdown';
 import ItemImage from '../../components/ItemImage/ItemImage';
@@ -58,12 +58,12 @@ const ListingPage = (props) => {
         const data = {
             itemName: itemNameRef.current.value,
             description: descriptionRef.current.value,
-            location: `${streetRef.current.value} ${zipcodeRef.current.value} ${stateRef.current.value}`,
+            fullAddress: `${streetRef.current.value} ${zipcodeRef.current.value} ${stateRef.current.value}`,
             price: priceRef.current.value,
             category: category,
             img: image,
-            is_rented: false,
-            pending_request: false,
+            isRented: false,
+            pendingRequest: false,
         }
         console.log(data);
 
