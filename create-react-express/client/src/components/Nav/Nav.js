@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
+import { NavLink } from "react-router-dom";
 import './styles.css';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
 import LogoutButton from "../LogoutButton/LogoutButton";
+import SignUpButton from '../SignUpButton';
 
 const Nav = (props) => {
     const [state, dispatch] = useStoreContext();
-
 
     return (
         <div className="section navbar is-primary">
@@ -20,17 +21,20 @@ const Nav = (props) => {
                     {state.user ? state.user.username : ""}
                 </div>
                 <div className="navbar-item">
-                    {state.user ? <LogoutButton /> : ""}
+                    {state.user ? <LogoutButton /> : <SignUpButton />}
                 </div>
                 <div className="navbar-item">
-                    Home
+                    <NavLink to="/" activeClassName="is-active">Home</NavLink>
                 </div>
                 <div className="navbar-item">
-                    Profile
+                    <NavLink to="/profile" activeClassName="is-active">Profile</NavLink>
                 </div>
+                {/* fix burger menu for mobile */}
                 <div className="navbar-item">
                     <div className="burger">
-                        Burger
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
                 </div>
             </div>
