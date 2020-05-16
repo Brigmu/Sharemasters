@@ -22,12 +22,28 @@ import RejectButton from "../../components/RejectButton";
 
 const Profile = () => {
     // state information
+    const [allitems, setallitems] = useState([])
+    const [requests, setRequests] = useState([]);
+    const [rentals, setRentals] = useState([]);
+    const [returns, setReturns] = useState([]);
 
     const [selected, setSelected] = useState('Proflie');
 
     const handlePageChange = (e) => {
         const nextPage = e.target.getAttribute('data-page');
         setSelected(nextPage);
+    }
+
+    const handleItemReturn = (id) => {
+        //make api call to change item with id to not rented
+    }
+
+    const handleAccept = (id) => {
+        //make api call to set item with id to rented and pending to false
+    }
+
+    const handleReject = (id) => {
+        //make api call to set pending to false. handle rejection message?
     }
 
 
@@ -41,36 +57,36 @@ const Profile = () => {
             <Section>
                 <Container>
                     {
-                        selected === 'Rentals' ? (                
+                        selected === 'Rentals' ? <>{rentals.length !== 0 ? rentals.map(rental => (                
                             <ProfileItemContainer 
-                                image={"https://www.wweek.com/resizer/86tt-U3ytIrtb7bBYXAIg7XWz7A=/1200x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/wweek/wp-content/uploads/2019/08/30145212/Nicolas-Cage.jpg"}
-                                title={"Title"}
-                                startDate={"1/1/1"}
-                                endDate={"1/1/1"}>
-                                <ReturnButton onClick={handlePageChange}>Return</ReturnButton>
+                                image={rental.img}
+                                title={rental.itemName}
+                                startDate={rental.appointment.startDate}
+                                endDate={rental.appointment.endDate}>
+                                <ReturnButton onClick={handleItemReturn} data-id={rental.id}>Return</ReturnButton>
                                 <MessageOwnerButton></MessageOwnerButton>
                             </ProfileItemContainer>
-                        )
-                        : selected === 'Requests' ? (                
+                        )):<div>No Rentals</div>}</>
+                        : selected === 'Requests' ? <>{requests.length !== 0 ? requests.map(request => (                
                             <ProfileItemContainer 
-                                image={"https://www.wweek.com/resizer/86tt-U3ytIrtb7bBYXAIg7XWz7A=/1200x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/wweek/wp-content/uploads/2019/08/30145212/Nicolas-Cage.jpg"}
-                                title={"Title"}
-                                startDate={"1/1/1"}
-                                endDate={"1/1/1"}>
-                                <SuccessButton onClick={handlePageChange}>Accept</SuccessButton>
-                                <RejectButton onClick={handlePageChange}>Reject</RejectButton>
+                                image={request.img}
+                                title={request.itemName}
+                                startDate={request.appointment.startDate}
+                                endDate={request.appointment.endDate}>
+                                <SuccessButton onClick={handleAccept} data-id={request.id}>Accept</SuccessButton>
+                                <RejectButton onClick={handleReject} data-id={request.id}>Reject</RejectButton>
                             </ProfileItemContainer>
-                        )
-                        : selected === 'Returns' ? (                
+                        )):<div>No Requests</div>}</>
+                        : selected === 'Returns' ? <>{returns.length !== 0 ? returns.map(returnItem => (                
                             <ProfileItemContainer 
-                                image={"https://www.wweek.com/resizer/86tt-U3ytIrtb7bBYXAIg7XWz7A=/1200x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/wweek/wp-content/uploads/2019/08/30145212/Nicolas-Cage.jpg"}
-                                title={"Title"}
-                                startDate={"1/1/1"}
-                                endDate={"1/1/1"}>
-                                <SuccessButton onClick={handlePageChange}>Confirm</SuccessButton>
-                                <RejectButton onClick={handlePageChange}>Report</RejectButton>
+                                image={returnItem.img}
+                                title={returnItem.itemName}
+                                startDate={returnItem.appointment.startDate}
+                                endDate={returnItem.appointment.endDate}>
+                                <SuccessButton onClick={handlePageChange} data-id={returnItem.id}>Confirm</SuccessButton>
+                                <RejectButton onClick={handlePageChange} data-id={returnItem.id}>Report</RejectButton>
                             </ProfileItemContainer>
-                        )
+                        )):<div>No Returns</div>}</>
                         : <div className='notification is-danger'><button data-page='Rentals' onClick={handlePageChange}>Next Page</button></div>}
                 </Container>
 
