@@ -16,7 +16,7 @@ const Home = () => {
     const options = [
         {
             message:"Browse Listings",
-            color: "is-primary is-light",
+            color: "is-primary is-light is-outlined",
             link: "listings"
         },
         {
@@ -57,30 +57,32 @@ const Home = () => {
     return (
         <div>
             <Hero />
-            <Section>
-                <Tile
-                    kind="ancestor"
-                >
-                    <Tile kind="parent">
-                        <Tile renderAs="article" kind="child" notification>
-                        <Heading className="has-text-centered">{state.user ? `Welcome, ${state.user.username}!` : "Welcome!"}</Heading>
+                <Section>
+                    <Tile
+                        kind="ancestor"
+                    >
+                        <Tile kind="parent">
+                            <Tile renderAs="article" kind="child" notification>
+                            <Heading className="has-text-centered">{state.user ? `Welcome, ${state.user.username}!` : "Welcome!"}</Heading>
+                            </Tile>
                         </Tile>
                     </Tile>
-                </Tile>
-            </Section>
-            <Section>
-                <Container>
-                    <Columns>
-                        {options.map(option =>  
-                            <Columns.Column>
-                                <div className={"notification has-text-centered " + option.color}>
-                                    <Link to={"/" + option.link}>{option.message}</Link> 
-                                </div>    
-                            </Columns.Column>
-                        )}
-                    </Columns>
-                </Container>
-            </Section>
+                </Section>
+                <Section>
+                    <Container>
+                        <Columns>
+                            {options.map(option =>  
+                                <Columns.Column>
+                                    <Link to={"/" + option.link}>
+                                        <div className={"notification has-text-centered " + option.color}>
+                                        {option.message}
+                                        </div>    
+                                    </Link> 
+                                </Columns.Column>
+                            )}
+                        </Columns>
+                    </Container>
+                </Section>
         </div>
     );
 }
