@@ -43,10 +43,14 @@ const UserProvider = ({ value = [], ...props }) => {
         firstName: "",
         lastName: "",
         email: "",
-        location: {
-          lat: null,
-          long: null
-        }
+        coordinates: {
+            lat: null,
+            lng: null
+          },
+        address: "",
+        city: "",
+        state: "",
+        zipCode: null
     });
 
     return <Provider value={[state, dispatch]} {...props} />;
