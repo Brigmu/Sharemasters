@@ -9,8 +9,10 @@ import { getItem } from '../../utils/API/API';
 import Section from "../../components/Section";
 import Container from "../../components/Container";
 import Notification from "../../components/Notification";
-import Columns from '../Columns/Columns';
-import Column from '../Column';
+// import Columns from '../Columns/Columns';
+// import Column from '../Column';
+import ItemGooglemap from '../ItemGoogleMaps/ItemGoogleMaps'
+
 
 
 
@@ -38,10 +40,10 @@ function ItemUpperDiv() {
             <Section>
                 <Container>
                     <Notification>
-                        <div class="section">
-                            <p className="title">Item Name</p>
+                        <div className="section">
+                            <p className="title">{item.name}</p>
                             <figure className="image is-128x128">
-                                <img src="https://bulma.io/images/placeholders/128x128.png" alt =''></img>
+                                <img src={item.image_url} alt =''></img>
                             </figure>
                             <br></br>
                             <div className="content">
@@ -58,6 +60,19 @@ function ItemUpperDiv() {
                                                 Message the Owner
                                             </button>
                                         </p>
+                                    </div>
+                                    <div className="middle-div">
+                                        <Section>
+                                            <Container>
+                                                <Notification>
+                                                    <p>Description: { item.description } ---- Tempor exercitation sunt id magna elit enim non mollit occaecat ad amet amet nostrud. 
+                                                        In id culpa excepteur cupidatat. Et ex laboris quis non fugiat ad adipisicing 
+                                                        laborum pariatur dolore pariatur cillum non.</p>
+                                                    <br></br>
+                                                    <ItemGooglemap />
+                                                </Notification>
+                                            </Container>
+                                        </Section>
                                     </div>
                             </div>
                         </div>

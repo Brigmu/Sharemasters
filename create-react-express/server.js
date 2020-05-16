@@ -7,7 +7,7 @@ const db = require("./models");
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
-const path = require('path');
+// const path = require('path');
 
 
 // Define middleware here
@@ -208,15 +208,16 @@ app.get('/api/user/:id', (req, res) => {
   res.json(user);
 })
 // front-end test data code
+app.use(routes);
 
 // Send every other request to the React app
+
+// Add routes, both API and view
 // Define any API routes before this runs
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/public/index.html"));
 });
 
-// Add routes, both API and view
-app.use(routes);
 
 // Connect to the Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/shareish");

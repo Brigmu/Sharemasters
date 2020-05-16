@@ -16,15 +16,6 @@ const itemSchema = new mongoose.Schema({
     image_url: {
         type: String
     },
-    location: {
-        lat: {
-            type: Number
-        },
-        lng: {
-            type: Number
-        }
-    
-    },
     pending_request: {
         type: Boolean
     },

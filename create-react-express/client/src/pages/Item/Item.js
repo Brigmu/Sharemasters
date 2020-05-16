@@ -1,8 +1,9 @@
 import React from 'react';
 // import { useParams } from 'react-router-dom';
 // import API from '../../utils/API';
-import ItemUpperDiv from '../../components/InfoUpperDiv/InfoUpperDiv';
 import Nav from "../../components/Nav/Nav";
+import ItemUpperDiv from '../../components/InfoUpperDiv/InfoUpperDiv';
+import ItemMiddleDiv from '../../components/InfoMiddleDiv/InfoMiddleDiv';
 import './styles.css';
 
 
@@ -25,9 +26,9 @@ function ItemPage() {
 
         //    </ItemUpperDiv> */}
 
-            <ItemMiddleDiv>
+            {/* <ItemMiddleDiv>
 
-            </ItemMiddleDiv>
+            </ItemMiddleDiv> */}
 
         </div>
     )

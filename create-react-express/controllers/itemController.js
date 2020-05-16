@@ -1,16 +1,16 @@
 // const db = require('../models');
-const Item = require("../models/items");
+const db = require("../models");
 const mongoose = require("mongoose");
 
 module.exports = {
     findAll: function(req, res) {
-        Item.find(req.query)
+        db.Item.find(req.query)
           .sort({ date: -1 })
           .then(data => res.json(data))
           .catch(err => res.status(422).json(err));
     },
-    findOne: function(req, res) {
-        Item.findById(req.params.id)
+    findById: function(req, res) {
+        db.Item.findById(req.params.id)
         .then(data => res.json(data))
         .catch(err => res.status(422).json(err));
             

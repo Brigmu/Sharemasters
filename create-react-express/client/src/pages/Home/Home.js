@@ -77,7 +77,7 @@ const Home = () => {
             <Hero /> */}
             <div>{state.user ? `Welcome, ${state.user.username}!` : "Welcome!"}</div>
             <Container>
-                <TileContainer>
+                {/* <TileContainer>
                     {options.map(option => 
                         <TileLevel>
                             <Notification
@@ -87,7 +87,7 @@ const Home = () => {
                             </Notification>
                         </TileLevel>
                     )}
-                </TileContainer>
+                </TileContainer> */}
             </Container>
         </div>
     )
