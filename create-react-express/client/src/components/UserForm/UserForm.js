@@ -2,7 +2,6 @@ import React, {useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import FormField from "../FormField/FormField";
 import FormControl from "../FormControl/FormControl";
-// import FormInput from "../FormInput/FormInput";
 import FormIcon from "../FormIcon/FormIcon";
 import FormHelp from "../FormHelp/FormHelp";
 import { loginUser, signupUser, getCurrentUser, createProfile, getProfile, deleteUser } from '../../utils/API/API';
@@ -124,12 +123,12 @@ const UserForm = (props) => {
                     </FormField>
                     <FormField label="State">
                         <FormControl>
-                            <input className="input" type="text" placeholder="Washington" ref={stateRef} />
+                            <input className={`input ${signupErrorState.state ? "is-danger" : ""}`} type="text" placeholder="Washington" ref={stateRef} />
                         </FormControl>
                     </FormField>
                     <FormField label="Zip Code">
                         <FormControl>
-                            <input className="input" type="text" placeholder="98001" ref={zipCodeRef} />
+                            <input className={`input ${signupErrorState.zipCode ? "is-danger" : ""}`} type="text" placeholder="98001" ref={zipCodeRef} />
                         </FormControl>
                     </FormField>
                 </div>

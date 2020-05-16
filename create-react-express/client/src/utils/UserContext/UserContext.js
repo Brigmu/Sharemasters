@@ -25,8 +25,12 @@ const reducer = (state, action) => {
                     email: "",
                     coordinates: {
                         lat: null,
-                        long: null
-                    }
+                        lng: null
+                      },
+                    address: "",
+                    city: "",
+                    state: "",
+                    zipCode: null
                 }
             }
     }
