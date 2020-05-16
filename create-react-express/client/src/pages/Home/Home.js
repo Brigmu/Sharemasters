@@ -8,9 +8,7 @@ import {getCurrentUser, getProfile} from '../../utils/API/API';
 
 //pages
 import Hero from '../../components/Hero';
-import Container from '../../components/Container';
-import Section from '../../components/Section';
-import { Tile, Heading, Columns } from "react-bulma-components";
+import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
 import { Link } from 'react-router-dom';
 
 const Home = () => {
