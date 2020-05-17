@@ -1,7 +1,8 @@
 import React from 'react';
 // import { useParams } from 'react-router-dom';
 // import API from '../../utils/API';
-import ItemUpperDiv from '../../components/InfoUpperDiv/InfoUpperDiv';
+import ItemInfo from '../../components/ItemInfo/ItemInfo';
+import ItemRequestForm from '../../components/ItemRequestForm/ItemRequestForm';
 import Nav from "../../components/Nav/Nav";
 import './styles.css';
 
@@ -10,20 +11,11 @@ function ItemPage() {
     
     return (
         <div>
-            {/* inserted nav bar component */}
             <Nav />
-            <ItemUpperDiv>
-
-            </ItemUpperDiv>
+            <ItemInfo />
+            <ItemRequestForm />
         </div>
 
-        // ryan original code:
-        // <ItemUpperDiv>
-
-        // </ItemUpperDiv>
-        // <ItemLowerDiv>
-
-        // </ItemLowerDiv>
     )
 }
 
