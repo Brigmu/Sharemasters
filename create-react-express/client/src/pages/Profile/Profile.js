@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import 'react-bulma-components/dist/react-bulma-components.min.css';
+
 //user context
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-// import { SET_USER, CLEAR_USER } from "../../utils/UserContext/UserActions";
-// import {getCurrentUser, getProfile} from '../../utils/API/API';
+import { SET_USER, CLEAR_USER } from "../../utils/UserContext/UserActions";
+import { getProfile } from '../../utils/API/API';
 
 import Nav from "../../components/Nav/Nav";
 import NavTabs from "../../components/NavTabs/NavTabs";
@@ -26,8 +27,12 @@ const Profile = () => {
     const [requests, setRequests] = useState([]);
     const [rentals, setRentals] = useState([]);
     const [returns, setReturns] = useState([]);
+    const [state, dipatch] = useStoreContext();
 
-    const [selected, setSelected] = useState('Proflie');
+    console.log(state);
+    console.log(state.user);
+
+    const [selected, setSelected] = useState('Profile');
 
     const handlePageChange = (e) => {
         const nextPage = e.target.getAttribute('data-page');
@@ -46,6 +51,18 @@ const Profile = () => {
         //make api call to set pending to false. handle rejection message?
     }
 
+    const setAll = () => {
+        getProfile(state.user.userId)
+            .then(res => {
+                //set state res.data.rented
+                //set stete res.data.owned
+            })
+            .catch(err => {console.log(err.response)})
+    }
+
+    useEffect(() => {
+        // setAll()
+    }, [])
 
     return (
         <div className='profile-page'>
@@ -87,7 +104,19 @@ const Profile = () => {
                                 <RejectButton onClick={handlePageChange} data-id={returnItem.id}>Report</RejectButton>
                             </ProfileItemContainer>
                         )):<div>No Returns</div>}</>
-                        : <div className='notification is-danger'><button data-page='Rentals' onClick={handlePageChange}>Next Page</button></div>}
+                        : <div className="box">
+                        <div className="title">Username: CrowMama</div>
+                        <br />
+                        {/* <figure class="image is-128x128">
+                            <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" alt="" />
+                        </figure> */}
+                        <br />
+                        <div className="content">
+                            <div className="title is-5">Name: Sugawara Kochi
+                            </div>
+                            <div className="title is-5">Location: Miyagi, Japan</div>
+                        </div>
+                        </div>}
                 </Container>
 
 

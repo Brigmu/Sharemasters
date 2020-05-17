@@ -39,6 +39,12 @@ const ProfileSchema = new Schema({
     type: Number,
     max: 5
   },
+  rentals: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item"
+    }
+  ],
   owned: [
     {
       type: Schema.Types.ObjectId,

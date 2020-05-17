@@ -56,7 +56,11 @@ export const updateProfile = (id, userData) => {
     return axios.put('/api/profile/' + id, userData);
 }
 
-export const addRented = (id, itemId) => {
+export const addRental = (id, itemId) => {
+    return axios.put('/api/profile/rentals/' + id, itemId);
+}
+
+export const addRentalHistory = (id, itemId) => {
     return axios.put('/api/profile/history/' + id, itemId);
 }
 

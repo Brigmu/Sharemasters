@@ -11,6 +11,7 @@ module.exports = {
     findOne: function(req, res) {
         db.Profile.find({ userId: req.params.id })
             .populate("owned")
+            .populate("rentals")
             .populate("rentalHistory")
             .then(data => res.json(data))
             .catch(err => res.status(422).json(err));
@@ -32,7 +33,12 @@ module.exports = {
             .then(data => res.json(data))
             .catch(err => res.status(422).json(err));
     },
-    addRented: function(req, res) {
+    addRental: function(req, res) {
+        db.Profile.update({ _id: req.params.id }, { $push: { rentals: req.body.itemId }})
+            .then(data => res.json(data))
+            .catch(err => res.status(422).json(err));
+    },
+    addRentalHistory: function(req, res) {
         db.Profile.update({ _id: req.params.id }, { $push: { rentalHistory: req.body.itemId }})
             .then(data => res.json(data))
             .catch(err => res.status(422).json(err));
