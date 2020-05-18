@@ -3,9 +3,18 @@ const itemController = require("../../controllers/itemController");
 
 // Matches with "/api/items/:id"
 router.route("/:id")
-  .get(itemController.findById);
+  .get(itemController.findById)
+  
   // .put(itemController.update)
 
-router.get('/all', itemController.findAll)
+// doesn't work
+router.route("/all")
+  .get(itemController.findAll)
+
+
+router.route('/')
+  .post(itemController.create)
+
+
 
 module.exports = router;

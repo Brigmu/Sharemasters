@@ -39,7 +39,7 @@ export const getItem = (id, cb) => {
 // }
 
 export const postListing = (data) => {
-    return axios.post('/api/listing', data);
+    return axios.post('http://localhost:3001/api/items', data);
 }
 
 export const loginUser = (userData) => {
