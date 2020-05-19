@@ -10,7 +10,21 @@ module.exports = {
           .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
-        db.Item.find({ item_id: req.params.id })
+        db.Item.aggregate([
+        { $match: { itemId: req.params.id } },
+        { $lookup: {
+            from: "users",
+            localField: "ownerId",
+            foreignField: "userId",
+            as: "ownerInfo"
+        }}
+    //     ,
+    //     { $group: { _id: "$itemId"},
+    //     firstName: { $first: "$ownerInfo.firstName"},
+    //     lastName: { $first: "$ownerInfo.lastName"}
+    // }
+
+    ])
         .then(data => res.json(data))
         .catch(err => res.status(422).json(err));
     },
