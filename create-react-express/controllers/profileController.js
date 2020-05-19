@@ -29,7 +29,7 @@ module.exports = {
             .catch(err => {res.status(422).json({message: 'Disconnect between user and profile', err: err})})
     },
     update: function(req, res) {
-        db.Profile.update({ _id: req.params.id }, { $set: req.body })
+        db.Profile.update({ userId: req.params.id }, { $set: req.body })
             .then(data => res.json(data))
             .catch(err => res.status(422).json(err));
     },
