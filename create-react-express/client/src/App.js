@@ -20,7 +20,7 @@ const connectEnsureLogin = require('connect-ensure-login');
 function App() {
   const [itemListings, setItemListings] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     //API call
     //setItemListings(results)
     fetch('/api/items')
@@ -30,7 +30,7 @@ function App() {
       setItemListings(results);
     })
     .catch(err => console.log(err));
-  }, [])
+  }, []);
 
   return (
     <UserProvider>
