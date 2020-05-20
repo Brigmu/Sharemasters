@@ -59,7 +59,7 @@ const itemSchema = new mongoose.Schema({
     appointments: {
         current: [
             {
-                type: Schema.Types.ObjectId,
+                type: mongoose.Schema.Types.ObjectId,
                 ref: "Appointments"
             }
         ],
