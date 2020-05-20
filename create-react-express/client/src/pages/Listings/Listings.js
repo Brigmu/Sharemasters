@@ -269,7 +269,7 @@ const Listings = (props) => {
                                 
                                 <input type='text' id='filter' onChange={e => setFilter(e.target.value)}></input>
                                 <hr></hr>
-                            <div class="title is-4">
+                            <div className="title is-4">
                                 Category List
                             </div>
                             <div className=''>
