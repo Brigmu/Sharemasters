@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css">
+    <!-- <link rel="stylesheet" href="./debug.css"> -->
+    <style>
+        /* ! debug.css | MIT License | zaydek.github.com/debug.css */
+        /* :not(path):not(g) {
+            color:                    hsla(210, 100%, 100%, 0.9) !important;
+            background:               hsla(210, 100%,  50%, 0.4) !important;
+            outline:    solid 0.25rem hsla(210, 100%, 100%, 0.4) !important;
+
+            box-shadow: none !important;
+        } */
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- navbar -->
+    <div class="section navbar is-primary">
+        <div class="navbar-start">
+            <div class="navbar-item">
+                Logo Image
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="control has-icons-left has-icons-right">
+                <input class="input is-success" type="text" placeholder="Username">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                </span>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="control has-icons-left has-icons-right">
+                <input class="input" type="email" placeholder="Password">
+                <span class="icon is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </div>
+        </div>
+        <div class="field is-horizontal">
+            <div class="control">
+                <button class="button is-info">Log In</button>
+            </div>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                Home
+            </div>
+            <div class="navbar-item">
+                Profile
+            </div>
+            <div class="navbar-item">
+                <div class="burger">
+                    Burger
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- navbar end -->
+
+    <!-- important to make sure sections are denoted by tag as well as class -->
+    <section class="section">
+        <div class="container notification is-info is-light">
+            <div class="field">
+                <label class="label">First Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Alex">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Last Name</label>
+                <div class="control">
+                    <input class="input" type="text" placeholder="Lee">
+                </div>
+            </div>
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-danger" type="email" placeholder="Email input" value="hello@">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                </div>
+                <p class="help is-danger">This email is invalid</p>
+            </div>
+
+            <div class="field">
+                <label class="label">Username</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-success" type="text" placeholder="Username">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-user"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-check"></i>
+                    </span>
+                </div>
+                <p class="help is-success">This username is available</p>
+            </div>
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input class="input is-danger" type="email" placeholder="Enter a secure password">
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </span>
+                </div>
+                <p class="help is-danger">This password is invalid</p>
+            </div>
+            <div class="field">
+                <div class="control">
+                    <label class="checkbox">
+                        <input type="checkbox">
+                        I agree to the <a href="#">terms and conditions</a>
+                    </label>
+                </div>
+            </div>
+
+            <div class="field is-grouped">
+                <div class="control">
+                    <button class="button is-link">Submit</button>
+                </div>
+                <div class="control">
+                    <button class="button is-link is-light">Cancel</button>
+                </div>
+            </div>
+    </section>
+</body>
+
+</html>

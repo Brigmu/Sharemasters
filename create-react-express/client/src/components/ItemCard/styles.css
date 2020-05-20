@@ -1,0 +1,24 @@
+.item-card{
+    padding: 5px;
+    border: solid purple 2px;
+    box-shadow: black 2px 3px 20px 3px;
+    margin: 5px;
+    margin-left: 20px;
+    margin-right: 20px;
+    transition: transform 250ms ease-in;
+    background-color: white;
+    min-width: 215px;
+}
+
+.item-card img {
+    height: 150px;
+    width: 200px;
+}
+
+.item-card:hover{
+    transform: scale(1.05);
+}
+
+.item-card h4 {
+    color:black;   
+}

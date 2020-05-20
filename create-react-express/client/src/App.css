@@ -1,0 +1,52 @@
+/*! debug.css | MIT License | zaydek.github.com/debug.css */
+/* *:not(path):not(g) {
+	color:                    hsla(210, 100%, 100%, 0.9) !important;
+	background:               hsla(210, 100%,  50%, 0.5) !important;
+	outline:    solid 0.25rem hsla(210, 100%, 100%, 0.5) !important;
+
+	box-shadow: none !important;
+} */
+
+.App {
+  /* text-align: center; */
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+body{
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

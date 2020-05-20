@@ -1,0 +1,10 @@
+.login-page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: url('../../images/garagebg.jpg');
+    background-attachment: fixed;
+    background-position: center;
+}

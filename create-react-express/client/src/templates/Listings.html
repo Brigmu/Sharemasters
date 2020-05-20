@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.4.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.8.2/css/bulma.min.css">
+    <!-- <link rel="stylesheet" href="./debug.css"> -->
+    <style>
+        /* ! debug.css | MIT License | zaydek.github.com/debug.css */
+        /* :not(path):not(g) {
+            color:                    hsla(210, 100%, 100%, 0.9) !important;
+            background:               hsla(210, 100%,  50%, 0.4) !important;
+            outline:    solid 0.25rem hsla(210, 100%, 100%, 0.4) !important;
+
+            box-shadow: none !important;
+        } */
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- navbar -->
+    <div class="section navbar is-primary">
+        <div class="navbar-start">
+            <div class="navbar-item">
+                Logo Image
+            </div>
+        </div>
+        <!-- search bar -->
+        <div class="container navbar-item">
+            <form class="tile field has-addons">
+                <div class="control is-expanded">
+                    <input 
+                        class="input"
+                        name="term"
+                        type="text"
+                        placeholder="What are you looking for?"
+                        id="term"
+                    />
+                </div>
+                <div class="control">
+                    <button class="button is-info" onClick={props.handleFormSubmit}>
+                        <span class="icon">
+                            <i class="fas fa-search"></i>
+                        </span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                Home
+            </div>
+            <div class="navbar-item">
+                Profile
+            </div>
+            <div class="navbar-item">
+                <div class="burger">
+                    Burger
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- navbar end -->
+    <div class="container">
+        <div class="tabs">
+            <ul>
+              <li class="is-active"><a>Profile</a></li>
+              <li><a>Rentals</a></li>
+              <li><a>Listings</a></li>
+              <li><a>Returns</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- important to make sure sections are denoted by tag as well as class -->
+    <section class="section">
+        <div class="columns">
+            <div class="column is-2">
+                <div class="title is-4">
+                    Category List               
+                </div>
+                <div class="content">
+                    <ul>
+                        <li><a>Electronics</a></li>
+                        <li><a>Events</a></li>
+                        <li><a>Home Improvement</a></li>
+                        <li><a>Kitchen Appliances</a></li>
+                        <li><a>Recreation</a></li>
+                        <li><a>Miscellaneous</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="level notification is-info">
+                    <p class="title">
+                        Category
+                    </p>
+                </div>
+                <!-- columns -->
+                <div class="columns">
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                                Lawnmower
+                            </p>
+                        </div>
+                        
+                    </div>
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                            Bicycle
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                                Kitchenaid
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                                Projector
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                                Sewing Machine
+                            </p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- NEW CATEGORY -->
+                <div class="level notification is-warning">
+                    <p class="title">
+                        Category
+                    </p>
+                </div>
+                <!-- columns -->
+                <div class="columns">
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                                Lawnmower
+                            </p>
+                        </div>
+                        
+                    </div>
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                            Bicycle
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                                Kitchenaid
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                                Projector
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                                Sewing Machine
+                            </p>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- NEW CATEGORY -->
+                <div class="level notification is-primary">
+                    <p class="title">
+                        Category
+                    </p>
+                </div>
+                <!-- columns -->
+                <div class="columns">
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                                Lawnmower
+                            </p>
+                        </div>
+                        
+                    </div>
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                            Bicycle
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                                Kitchenaid
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                                Projector
+                            </p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- notification box for content with colored background -->
+                        <div class="notification is-size-4 has-text-centered">
+                            <img class="image center is-square" src="">
+                            <p class="content is-4 is-mobile">
+                                Sewing Machine
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="container"> -->
+        <!-- </div> -->
+    </section>
+</body>
+</html>

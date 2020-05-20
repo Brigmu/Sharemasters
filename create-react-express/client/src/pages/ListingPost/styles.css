@@ -1,0 +1,15 @@
+.listing-page {
+    width: 100%;
+    min-height: 100vh;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+    /* justify-content: center; */
+    /* background: url('../../images/garagebg.jpg');
+    background-attachment: fixed;
+    background-position: center; */
+}
+
+.App{
+    min-height: 100vh;
+}

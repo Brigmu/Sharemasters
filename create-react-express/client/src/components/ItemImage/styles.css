@@ -1,0 +1,29 @@
+.item-img{
+    height: 100%;
+    width: 100%;
+}
+
+.placeholder-div {
+    height: 100%;
+    width: 100%;
+    min-width: 400px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.placeholder-div h1 {
+    color: black;
+}
+
+.item-img-div {
+    height: 50%;
+    width: 40%;
+    min-width: 400px;
+    min-height: 400px;
+    background-color: white;
+    border: solid black 2px;
+    margin-bottom: 3%;
+}
