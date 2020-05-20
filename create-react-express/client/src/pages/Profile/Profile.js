@@ -3,8 +3,8 @@ import 'react-bulma-components/dist/react-bulma-components.min.css';
 
 //user context
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-import { useUserItemsContext } from "../../utils/UserItemsContext/UserItemsContext"0
-import { UserItemsProvider } from "./utils/UserItemsContext/UserItemsContext";;
+import { useUserItemsContext } from "../../utils/UserItemsContext/UserItemsContext";
+import { UserItemsProvider } from "../../utils/UserItemsContext/UserItemsContext";
 import { SET_OWNED, SET_RENTALS } from "../../utils/UserItemsContext/UserItemsActions";
 import { getProfile } from '../../utils/API/API';
 
@@ -89,7 +89,7 @@ const Profile = () => {
         declineRental(id, statusData);
     }
 
-    const setRentals = (items) => {
+    const setRentalsHelper = (items) => {
         setItems({
             type: SET_RENTALS,
             rentals: items
@@ -106,7 +106,7 @@ const Profile = () => {
     const setAll = () => {
         getProfile(state.user.userId)
             .then(res => {
-                setRentals(res.data.rentals);
+                setRentalsHelper(res.data.rentals);
                 setOwned(res.data.owned);
             })
             .catch(err => {console.log(err.response)})
