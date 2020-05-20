@@ -46,7 +46,7 @@ const UserForm = (props) => {
             address: addressRef.current.value,
             city: cityRef.current.value,
             state: stateRef.current.value,
-            zipCode: zipCodeRef.current.value,
+            zipCode: parseInt(zipCodeRef.current.value),
             email: emailRef.current.value,
             password: passwordRef.current.value
         }
@@ -57,9 +57,13 @@ const UserForm = (props) => {
             password: passwordRef.current.value
         }
 
+        console.log(user);
+
         signupUser(newUser)
-        .then(() => {
+        .then((res) => {
             //signup success
+            console.log(res);
+            console.log(newUser);
             setSignupError({});
             createProfile(newUser)
                 .then(res => {
@@ -88,7 +92,7 @@ const UserForm = (props) => {
                 getProfile(res.data.user._id)
                     .then(res => {
                         setUserState(res.data[0]);
-                        history.push("/");
+                        history.push("/profile");
                 });
             });
         })

@@ -71,3 +71,19 @@ export const addOwned = (id, itemId) => {
 export const deleteUser = (username) => {
     return axios.delete('api/passport/' + username);
 }
+
+export const approveRental = (id, status) => {
+    return axios.put(`/api.items/rentstatus/${id}`, status);
+}
+
+export const declineRental = (id, status) => {
+    return axios.put(`/api.items/pendingstatus/${id}`, status);
+}
+
+export const returnItem = (id, status) => {
+    return axios.put(`/api/items/rentstatus/${id}`, status)
+}
+
+export const confirmReturn = (id, status) => {
+    return axios.put(`/api/items/rentstatus/${id}`, status)
+}

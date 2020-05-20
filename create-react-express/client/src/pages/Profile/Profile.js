@@ -21,14 +21,69 @@ import MessageOwnerButton from "../../components/MessageOwnerButton";
 import SuccessButton from "../../components/SuccessButton";
 import RejectButton from "../../components/RejectButton";
 
+//API functions
+import {approveRental, declineRental, returnItem, confirmReturn} from '../../utils/API/API';
+
 const Profile = () => {
+    // state information
+    const [allitems, setallitems] = useState([])
+    const [requests, setRequests] = useState([]);
+    const [rentals, setRentals] = useState([]);
+    const [returns, setReturns] = useState([]);
     const [state, dipatch] = useStoreContext();
 
+    console.log(state);
+    console.log(state.user);
+
     const [selected, setSelected] = useState('Profile');
+
+    const filterRequests = (array) => {
+        const filteredItems = array.filter(item => {
+            return (item.pendingRequest);
+        })
+        setRequests(filteredItems);
+    }
+
+    const filterRental = (array) => {
+        const filteredItems = array.filter(item => {
+            return (item.isRented);
+        })
+        setRentals(filteredItems);
+    }
+
+    const filterReturns = (array) => {
+        const filteredItems = array.filter(item => {
+            return (!item.active)
+        })
+        setReturns(filteredItems);
+    }
 
     const handlePageChange = (e) => {
         const nextPage = e.target.getAttribute('data-page');
         setSelected(nextPage);
+    }
+
+    const handleItemReturn = (id) => {
+        //make api call to change item with id to not rented
+        let statusData = {isRented: false, active: false};
+        returnItem(id, statusData);
+    }
+
+    const handleConfirmReturned = (id) => {
+        let statusData = {active: true}
+        confirmReturn(id, statusData);
+    }
+
+    const handleAccept = (id) => {
+        //make api call to set item with id to rented and pending to false
+        let statusData = {pendingRequest: false, isRented: true}
+        approveRental(id, statusData);
+    }
+
+    const handleReject = (id) => {
+        //make api call to set pending to false. handle rejection message?
+        let statusData = {pendingRequest: false};
+        declineRental(id, statusData);
     }
 
     const setAll = () => {
@@ -40,6 +95,10 @@ const Profile = () => {
             .catch(err => {console.log(err.response)})
     }
 
+    useEffect(() => {
+        // setAll()
+    }, [])
+
     return (
         <div className='profile-page'>
             <Nav />
@@ -50,37 +109,51 @@ const Profile = () => {
             <Section>
                 <Container>
                     {
-                        selected === 'Rentals' ? (                
+                        selected === 'Rentals' ? <>{rentals.length !== 0 ? rentals.map(rental => (                
                             <ProfileItemContainer 
-                                image={"https://www.wweek.com/resizer/86tt-U3ytIrtb7bBYXAIg7XWz7A=/1200x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/wweek/wp-content/uploads/2019/08/30145212/Nicolas-Cage.jpg"}
-                                title={"Title"}
-                                startDate={"1/1/1"}
-                                endDate={"1/1/1"}>
-                                <ReturnButton onClick={handlePageChange}>Return</ReturnButton>
+                                image={rental.img}
+                                title={rental.itemName}
+                                startDate={rental.appointment.startDate}
+                                endDate={rental.appointment.endDate}>
+                                <ReturnButton onClick={handleItemReturn} data-id={rental.id}>Return</ReturnButton>
                                 <MessageOwnerButton></MessageOwnerButton>
                             </ProfileItemContainer>
-                        )
-                        : selected === 'Requests' ? (                
+                        )):<div>No Rentals</div>}</>
+                        : selected === 'Requests' ? <>{requests.length !== 0 ? requests.map(request => (                
                             <ProfileItemContainer 
-                                image={"https://www.wweek.com/resizer/86tt-U3ytIrtb7bBYXAIg7XWz7A=/1200x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/wweek/wp-content/uploads/2019/08/30145212/Nicolas-Cage.jpg"}
-                                title={"Title"}
-                                startDate={"1/1/1"}
-                                endDate={"1/1/1"}>
-                                <SuccessButton onClick={handlePageChange}>Accept</SuccessButton>
-                                <RejectButton onClick={handlePageChange}>Reject</RejectButton>
+                                image={request.img}
+                                title={request.itemName}
+                                startDate={request.appointment.startDate}
+                                endDate={request.appointment.endDate}>
+                                <SuccessButton onClick={handleAccept} data-id={request.id}>Accept</SuccessButton>
+                                <RejectButton onClick={handleReject} data-id={request.id}>Reject</RejectButton>
                             </ProfileItemContainer>
-                        )
-                        : selected === 'Returns' ? (                
+                        )):<div>No Requests</div>}</>
+                        : selected === 'Returns' ? <>{returns.length !== 0 ? returns.map(returnItem => (                
                             <ProfileItemContainer 
-                                image={"https://www.wweek.com/resizer/86tt-U3ytIrtb7bBYXAIg7XWz7A=/1200x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/wweek/wp-content/uploads/2019/08/30145212/Nicolas-Cage.jpg"}
-                                title={"Title"}
-                                startDate={"1/1/1"}
-                                endDate={"1/1/1"}>
-                                <SuccessButton onClick={handlePageChange}>Confirm</SuccessButton>
-                                <RejectButton onClick={handlePageChange}>Report</RejectButton>
+                                image={returnItem.img}
+                                title={returnItem.itemName}
+                                startDate={returnItem.appointment.startDate}
+                                endDate={returnItem.appointment.endDate}>
+                                <SuccessButton onClick={handleItemReturn} data-id={returnItem.id}>Confirm</SuccessButton>
+                                <RejectButton onClick={handlePageChange} data-id={returnItem.id}>Report</RejectButton>
                             </ProfileItemContainer>
-                        )
-                        : <div className='notification is-danger'><button data-page='Rentals' onClick={handlePageChange}>Next Page</button></div>}
+                        )):<div>No Returns</div>}</>
+                        : <div className="box">
+                        <div className="title">Username: {state.user ? state.user.username : <></>}</div>
+                        <br />
+                        {/* <figure class="image is-128x128">
+                            <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" alt="" />
+                        </figure> */}
+                        <br />
+                        <div className="content">
+                            <div className="title is-5">Name: {state.user ? state.user.firstName: <></>} {state.user ? state.user.lastName: <></>}
+                            </div>
+                    <div className="title is-5">Location: {state.user ? `${state.user.address} ${state.user.city} ${state.user.state}`: <> </>}</div>
+                        </div>
+                            <div className='title is-5'>Total listings: {state.user ? state.user.owned.length : 'no listing'}</div>
+                            <div className='title is-5'>Items Renting: {state.user ? state.user.rentals.length : 'no listing'}</div>
+                        </div>}
                 </Container>
 
 
