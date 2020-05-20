@@ -60,13 +60,13 @@ const itemSchema = new mongoose.Schema({
         current: [
             {
                 type: Schema.Types.ObjectId,
-                ref: "Appointments"
+                ref: "Appointment"
             }
         ],
         history: [
             {
                 type: Schema.Types.ObjectId,
-                ref: "Appointments"
+                ref: "Appointment"
             }
         ],
     },
