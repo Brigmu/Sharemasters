@@ -8,7 +8,7 @@ mongoose.connect(
 
 const itemSeed = [
     {
-        itemId: "5ec25a887a6a714d905524aa",
+        // itemId: "5ec25a887a6a714d905524aa",
         ownerId: "5ec24cc7c7e382486c6ff128",
         name: "Wheelbarrow",
         description: "10 gallon",
@@ -31,7 +31,7 @@ const itemSeed = [
         created_at: "01/01/2020"
     },
     {
-        itemId: "5ec25a887a6a714d905524ab",
+        // itemId: "5ec25a887a6a714d905524ab",
         ownerId: "5ec24cc7c7e382486c6ff128",
         name: "Shovel",
         description: "Flat edge",
@@ -54,7 +54,7 @@ const itemSeed = [
         created_at: "01/01/2020"
     },
     {
-        itemId: "5ec25a887a6a714d905524ac",
+        // itemId: "5ec25a887a6a714d905524ac",
         ownerId: "5ec24cc7c7e382486c6ff129",
         name: "Electric Weed Whacker",
         description: "Black and Decker. Two batteries. Each battery should last about 20-30 minutes",
@@ -77,7 +77,7 @@ const itemSeed = [
         created_at: "01/01/2020"
     },
     {
-        itemId: "5ec25a887a6a714d905524ad",
+        // itemId: "5ec25a887a6a714d905524ad",
         ownerId: "5ec24cc7c7e382486c6ff129",
         name: "Lawn Mower",
         description: "Honda. Self-propelled",
@@ -100,7 +100,7 @@ const itemSeed = [
         created_at: "01/01/2020"
     },
     {
-        itemId: "5ec25a887a6a714d905524ae",
+        // itemId: "5ec25a887a6a714d905524ae",
         ownerId: "5ec24cc7c7e382486c6ff12a",
         name: "Hammer",
         description: "Red hammer",
@@ -123,7 +123,7 @@ const itemSeed = [
         created_at: "01/01/2020"
     },
     {
-        itemId: "5ec25a887a6a714d905524af",
+        // itemId: "5ec25a887a6a714d905524af",
         ownerId: "5ec24cc7c7e382486c6ff12a", 
         name: "Circular Saw",
         description: "Stanley. 7 inch blade.",
@@ -146,7 +146,7 @@ const itemSeed = [
         created_at: "01/01/2020"
     },
     {
-        itemId: "5ec25a887a6a714d905524ag",
+        // itemId: "5ec25a887a6a714d905524ag",
         ownerId: "5ec24cc7c7e382486c6ff12b", 
         name: "Pressure Washer",
         description: "Honda. 50ft hose.",
@@ -169,7 +169,7 @@ const itemSeed = [
         created_at: "01/01/2020"
     },
     {
-        itemId: "5ec25a887a6a714d905524ah",
+        // itemId: "5ec25a887a6a714d905524ah",
         ownerId: "5ec24cc7c7e382486c6ff12b",
         name: "Car Jack",
         description: "Hand pump.",
@@ -192,7 +192,7 @@ const itemSeed = [
         created_at: "01/01/2020"
     },
     {
-        itemId: "5ec25a887a6a714d905524ai",
+        // itemId: "5ec25a887a6a714d905524ai",
         ownerId: "5ec24cc7c7e382486c6ff12c",
         name: "Paint Sprayer",
         description: "Interior and exterior paints.",
@@ -215,7 +215,7 @@ const itemSeed = [
         created_at: "01/01/2020"
     },
     {
-        itemId: "5ec25a887a6a714d905524aj",
+        // itemId: "5ec25a887a6a714d905524aj",
         ownerId: "5ec24cc7c7e382486c6ff12c",
         name: "Chainsaw",
         description: "14 inch",

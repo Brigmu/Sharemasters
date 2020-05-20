@@ -28,6 +28,16 @@ export const getItem = (id, cb) => {
     // return axios.get('/api/items/' + id)
 }
 
+export const renterRequest = (renterId, id ) => {
+    return axios.put('/api/items/' + id)
+}
+
+export const postAppointment = (data) => {
+    return axios.post('/api/appointments', data)
+}
+
+
+
 // export const getUserData = (id, cb) => {
 //     fetch(`/api/user/${id}`)
 //     .then(response => response.json())

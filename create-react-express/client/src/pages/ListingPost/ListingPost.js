@@ -57,7 +57,8 @@ const ListingPage = (props) => {
         e.preventDefault();
         console.log(category);
         const data = {
-            ownerId: "5ec04978cb27585858adadc5",
+            // manually putting in ownId, this will be provided through the usercontext
+            ownerId: "5ec24cc7c7e382486c6ff128",
             name: itemNameRef.current.value,
             description: descriptionRef.current.value,
             category: category,

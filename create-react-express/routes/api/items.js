@@ -4,6 +4,7 @@ const itemController = require("../../controllers/itemController");
 // Matches with "/api/items/:id"
 router.route("/:id")
   .get(itemController.findById)
+  .put(itemController.renterRequest)
   
   // .put(itemController.update)
 

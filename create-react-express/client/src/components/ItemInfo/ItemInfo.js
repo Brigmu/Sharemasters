@@ -24,8 +24,6 @@ function ItemInfo() {
     }, []);
 
     
-    const ownerInfos = item.ownerInfo;
-    console.log(ownerInfos)
 
     return (
         <div class="container">
@@ -39,8 +37,8 @@ function ItemInfo() {
                 <div class="content">
                     <div class="title is-5">Description: {item.description}</div>
                     <div class="title is-5">Price: ${item.price} per day</div>
-                    <div class="title is-5">Location: {item.city} ", " {item.state}</div>
-                    <div class="title is-5">Owner: {ownerInfo.firstName} ", " {item.lastName}</div>
+                    <div class="title is-5">Location: {item.city}, {item.state}</div>
+                    <div class="title is-5">Owner: {item.firstName} ", " {item.lastName}</div>
                     <MessageOwnerButton></MessageOwnerButton>
                 </div>
             </div>
