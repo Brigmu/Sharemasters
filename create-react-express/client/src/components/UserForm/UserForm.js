@@ -46,7 +46,7 @@ const UserForm = (props) => {
             address: addressRef.current.value,
             city: cityRef.current.value,
             state: stateRef.current.value,
-            zipCode: zipCodeRef.current.value,
+            zipCode: parseInt(zipCodeRef.current.value),
             email: emailRef.current.value,
             password: passwordRef.current.value
         }
@@ -56,6 +56,8 @@ const UserForm = (props) => {
             username: usernameRef.current.value,
             password: passwordRef.current.value
         }
+
+        console.log(user);
 
         signupUser(newUser)
             .then(() => {
@@ -82,20 +84,20 @@ const UserForm = (props) => {
 
     const loginHelper = (user) => {
         loginUser(user)
-            .then(() => {
-                // login success -> get user profile -> set user state
-                getCurrentUser().then(res => {
-                    getProfile(res.data.user._id)
-                        .then(res => {
-                            setUserState(res.data[0]);
-                            history.push("/");
-                        });
+        .then(() => {
+            // login success -> get user profile -> set user state
+            getCurrentUser().then(res => {
+                getProfile(res.data.user._id)
+                    .then(res => {
+                        setUserState(res.data[0]);
+                        history.push("/profile");
                 });
             })
             .catch(err => {
                 console.log(err.response.data.message);
             })
-    }
+        });
+    };
 
     return (
         <section className="section">
@@ -173,7 +175,7 @@ const UserForm = (props) => {
                 </div>
             </div>
         </section>
-    )
+    );
 }
 
 export default UserForm;

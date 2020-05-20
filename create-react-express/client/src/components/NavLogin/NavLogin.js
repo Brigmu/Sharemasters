@@ -44,7 +44,7 @@ const NavLogin = () => {
                     getProfile(res.data.user._id)
                         .then(res => {
                             setUserState(res.data[0]);
-                            history.push("/");
+                            history.push("/profile");
                     });
                 });
             })

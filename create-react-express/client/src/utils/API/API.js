@@ -76,7 +76,11 @@ export const updateProfile = (id, userData) => {
     return axios.put('/api/profile/' + id, userData);
 }
 
-export const addRented = (id, itemId) => {
+export const addRental = (id, itemId) => {
+    return axios.put('/api/profile/rentals/' + id, itemId);
+}
+
+export const addRentalHistory = (id, itemId) => {
     return axios.put('/api/profile/history/' + id, itemId);
 }
 
@@ -86,4 +90,20 @@ export const addOwned = (id, itemId) => {
 
 export const deleteUser = (username) => {
     return axios.delete('api/passport/' + username);
+}
+
+export const approveRental = (id, status) => {
+    return axios.put(`/api.items/rentstatus/${id}`, status);
+}
+
+export const declineRental = (id, status) => {
+    return axios.put(`/api.items/pendingstatus/${id}`, status);
+}
+
+export const returnItem = (id, status) => {
+    return axios.put(`/api/items/rentstatus/${id}`, status)
+}
+
+export const confirmReturn = (id, status) => {
+    return axios.put(`/api/items/rentstatus/${id}`, status)
 }

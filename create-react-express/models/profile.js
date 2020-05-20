@@ -36,10 +36,15 @@ const ProfileSchema = new Schema({
     maxlength: [2, 'Please enter two-letter state abbreviation']
   },
   zipCode: {
-    type: Number,
-    maxlength: 5
+    type: Number
   },
   fullAddress: String,
+  rentals: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Item"
+    }
+  ],
   owned: [
     {
       type: Schema.Types.ObjectId,
