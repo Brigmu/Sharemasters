@@ -33,11 +33,13 @@ const ProfileSchema = new Schema({
   city: String,
   state: {
     type: String,
+    maxlength: [2, 'Please enter two-letter state abbreviation']
   },
   zipCode: {
     type: String,
     maxlength: 5
   },
+  fullAddress: String,
   rentals: [
     {
       type: Schema.Types.ObjectId,

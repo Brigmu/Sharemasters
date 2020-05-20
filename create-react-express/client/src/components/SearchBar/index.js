@@ -1,7 +1,8 @@
-import React from "react";
-import Container from "../Container";
+import React, { useState } from "react";
+import { Container } from "react-bulma-components";
 
 function SearchBar(props) {
+    const [state, setState] = useState();
     return (
         <Container>
             <form className="tile field has-addons">

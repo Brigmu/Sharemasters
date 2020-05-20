@@ -24,11 +24,11 @@ const itemSchema = new mongoose.Schema({
     },
     state: {
         type: String,
-        max: [2, 'Please enter two-letter state abbreviation']
+        maxlength: [2, 'Please enter two-letter state abbreviation']
     },
     zipCode: {
         type: Number,
-        max: 5
+        maxlength: 5
     },
     fullAddress: {
         type: String
@@ -55,6 +55,20 @@ const itemSchema = new mongoose.Schema({
     isRented: {
         type: Boolean,
         default: false
+    },
+    appointments: {
+        current: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "Appointments"
+            }
+        ],
+        history: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Appointments"
+            }
+        ],
     },
     active: {
         type: Boolean,

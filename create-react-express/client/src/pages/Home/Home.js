@@ -8,30 +8,29 @@ import {getCurrentUser, getProfile} from '../../utils/API/API';
 
 //pages
 import Hero from '../../components/Hero';
-import Notification from "../../components/Notification";
-import Container from '../../components/Container';
-import Section from '../../components/Section';
-import ColumnContainer from "../../components/ColumnContainer";
-import Column from "../../components/Column";
-import {TileContainer, TileLevel} from 'react-bulma-components';
-
-const options = [
-    {
-        message:"Browse Listings",
-        color: "is-primary is-light"
-    },
-    {
-        message: "Post a Listing",
-        color: "is-primary"
-    },
-    {
-        message: "Manage Your Rentals",
-        color: ""
-    }
-];
+import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     const [state, dispatch] = useStoreContext();
+    const options = [
+        {
+            message:"Browse Listings",
+            color: "is-primary is-light is-outlined",
+            link: "listings"
+        },
+        {
+            message: "Post a Listing",
+            color: "is-primary",
+            link:"newlisting"
+        },
+        {
+            message: "View Your Profile",
+            color: "",
+            link: "profile"
+        }
+    ];
+    
 
     const setUserState = (user) => {
         dispatch({
@@ -53,45 +52,39 @@ const Home = () => {
                 }
             });
         }
-    }, [])
+    }, []);
     
     return (
-        <div className = 'homepage'>
-            {/* <UserContext.Provider value={userInfo}>
-                <Hero />
-                <Section>
-                    <Container>
-                        <ColumnContainer>
-                            {options.map(option => 
-                                <Column>
-                                    <Notification
-                                        color={option.color}
-                                    >
+        <div>
+            <Hero />
+            <Section>
+                <Tile
+                    kind="ancestor"
+                >
+                    <Tile kind="parent">
+                        <Tile renderAs="article" kind="child" notification>
+                        <Heading className="has-text-centered">{state.user ? `Welcome, ${state.user.username}!` : "Welcome!"}</Heading>
+                        </Tile>
+                    </Tile>
+                </Tile>
+            </Section>
+            <Section>
+                <Container>
+                    <Columns>
+                        {options.map(option =>  
+                            <Columns.Column>
+                                <Link to={"/" + option.link}>
+                                    <div key={option.link} className={"notification has-text-centered " + option.color}>
                                     {option.message}
-                                    </Notification>
-                                </Column>    
-                            )}
-                        </ColumnContainer>
-                    </Container>
-                </Section>
-            </UserContext.Provider>
-            <Hero /> */}
-            <div>{state.user ? `Welcome, ${state.user.username}!` : "Welcome!"}</div>
-            <Container>
-                <TileContainer>
-                    {options.map(option => 
-                        <TileLevel>
-                            <Notification
-                                color={option.color}
-                            >
-                                {option.message}
-                            </Notification>
-                        </TileLevel>
-                    )}
-                </TileContainer>
-            </Container>
+                                    </div>    
+                                </Link> 
+                            </Columns.Column>
+                        )}
+                    </Columns>
+                </Container>
+            </Section>
         </div>
-    )
+    );
 }
 
 export default Home;

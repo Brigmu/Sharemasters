@@ -8,7 +8,7 @@ import { useStoreContext } from '../../utils/UserContext/UserContext';
 import Field from '../../components/Field/Field';
 import DropdownMenu from '../../components/Dropdown/Dropdown';
 import ItemImage from '../../components/ItemImage/ItemImage';
-import {uploadImageToDB} from '../../utils/API/API';
+import {uploadImageToDB, postListing} from '../../utils/API/API';
 
 
 const ListingPage = (props) => {
@@ -47,6 +47,7 @@ const ListingPage = (props) => {
     // const locationRef = useRef();
     const streetRef = useRef();
     const zipcodeRef = useRef();
+    const cityRef = useRef();
     const stateRef = useRef();
     // const locationDropdownRef = useRef();
     // const categoryDropdownRef = useRef();
@@ -56,16 +57,28 @@ const ListingPage = (props) => {
         e.preventDefault();
         console.log(category);
         const data = {
-            itemName: itemNameRef.current.value,
+            // manually putting in ownId, this will be provided through the usercontext
+            ownerId: "5ec24cc7c7e382486c6ff128",
+            name: itemNameRef.current.value,
             description: descriptionRef.current.value,
-            fullAddress: `${streetRef.current.value} ${zipcodeRef.current.value} ${stateRef.current.value}`,
-            price: priceRef.current.value,
             category: category,
+            address: streetRef.current.value,
+            city: cityRef.current.value,
+            state: stateRef.current.value,
+            zipCode: zipcodeRef.current.value,
+            fullAddress: `${streetRef.current.value} ${zipcodeRef.current.value} ${stateRef.current.value}`,
+            coordinates: {
+                lat: 47.733,
+                lng: -122.313
+            },
+            price: priceRef.current.value,
             img: image,
-            isRented: false,
             pendingRequest: false,
+            isRented: false,
+            active: false,
         }
         console.log(data);
+        postListing(data);
 
     }
 
@@ -84,18 +97,19 @@ const ListingPage = (props) => {
                     <Field title='Item Name' placeholder='lawnmower' reference={itemNameRef}/>
                     <Field title='Description' placeholder='Tell us about your item' reference={descriptionRef} />
                     <Field title='Price' placeholder='$/day' reference={priceRef}/>
-                    <label class="label">Category</label>
+                    <label className="label">Category</label>
                     <DropdownMenu label='Select Category' items={['Electronics', 'Events', 'Home Improvement', 'Kitchen Appliances', 'Miscellaneous', 'Recreation', 'Yardwork']} extraFunction={handleCategoryDropdown}/>
-                    <label class="label">Location</label>
+                    <label className="label">Location</label>
                     <DropdownMenu label='Select Location' items={['Use my location', 'Enter a location']} extraFunction={handleLocationPref}/>
                     {locationPref === 'Enter a location' ? <Field placeholder='Street' reference={streetRef} /> : <> </>}
-                    {locationPref === 'Enter a location' ? <Field placeholder='Zipcode' reference={zipcodeRef} /> : <> </>}
+                    {locationPref === 'Enter a location' ? <Field placeholder='City' reference={cityRef} /> : <> </>}
                     {locationPref === 'Enter a location' ? <Field placeholder='State' reference={stateRef} /> : <> </>}
-                    <div class='field is-grouped'>
+                    {locationPref === 'Enter a location' ? <Field placeholder='Zipcode' reference={zipcodeRef} /> : <> </>}
+                    <div className='field is-grouped'>
                     <ItemImage image={image} uploadImage={uploadImage}/>
                     </div>
-                    <div class="control">
-                        <button class="button is-link" onClick={handleSubmit}>Submit</button>
+                    <div className="control">
+                        <button className="button is-link" onClick={handleSubmit}>Submit</button>
                     </div>
                 </div>
             </section>

@@ -7,12 +7,16 @@ const db = require("./models");
 const routes = require("./routes");
 const PORT = process.env.PORT || 3001;
 const app = express();
+const cors = require("cors")
 
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(__dirname + "/client/public"));
+
+// adding cors so that frontend can talk to backend
+app.use(cors());
 
 
 // We need to use sessions to keep track of our user's login status
@@ -190,9 +194,9 @@ const testItems = [
 
 // front end test api calls 
 // Define API routes here
-app.get('/api/items', (req, res) => {
-  res.json(testItems);
-})
+// app.get('/api/items', (req, res) => {
+//   res.json(testItems);
+// })
 
 app.get('/api/user/:id', (req, res) => {
   let passedId = parseInt(req.params.id);
@@ -207,11 +211,11 @@ app.get('/api/user/:id', (req, res) => {
   res.json(user);
 })
 // front-end test data code
-
-// Add routes, both API and view
 app.use(routes);
 
 // Send every other request to the React app
+
+// Add routes, both API and view
 // Define any API routes before this runs
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/public/index.html"));
