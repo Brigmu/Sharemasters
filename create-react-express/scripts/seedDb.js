@@ -6,91 +6,6 @@ mongoose.connect(
     "mongodb://localhost/shareish"
   );
 
-
-const blankItem = {
-    ownerId: '',
-    name: '',
-    description: '',
-    category: '',
-    address: '',
-    city: '',
-    state: '',
-    zipCode: '',
-    fullAddress: '',
-    coordinate: {
-        lat: '',
-        lng: '',
-    },
-    price: '',
-    img: '',
-    pendingRequest: false,
-    isRented: false,
-    active: true,
- }
-const itemSeed2 = [
-    {
-       ownerId: 1,
-       name: 'Lawnmower',
-       description: 'Honda. Self propelled',
-       category: 'Yardwork',
-       address: '1111 NE 1st ST',
-       city: 'Seattle',
-       state: 'WA',
-       zipCode: '11111',
-       fullAddress: '1111 NE 1st ST Seattle, WA 11111',
-       coordinate: {
-           lat: '1111',
-           lng: '1111',
-       },
-       price: 10,
-       img: '',
-       pendingRequest: false,
-       isRented: false,
-       active: true,
-    },
-    {
-        ownerId: 1,
-        name: 'Laptop',
-        description: 'Dell laptop',
-        category: 'Electronics',
-        address: '1111',
-        city: 'Seattle',
-        state: 'WA',
-        zipCode: '98101',
-        fullAddress: '',
-        coordinate: {
-            lat: '',
-            lng: '',
-        },
-        price: 500,
-        img: '',
-        pendingRequest: false,
-        isRented: false,
-        active: true,
-     },
-     {
-        ownerId: 1,
-        name: 'Bounce House',
-        description: '25ft inflatable bounce house',
-        category: 'Events',
-        address: '',
-        city: '',
-        state: '',
-        zipCode: '',
-        fullAddress: '',
-        coordinate: {
-            lat: '',
-            lng: '',
-        },
-        price: 200,
-        img: '',
-        pendingRequest: true,
-        isRented: false,
-        active: true,
-     },
-
-]
-
 const itemSeed = [
     {
         owner_id: "1",
@@ -262,44 +177,10 @@ const userSeed = [
     }
 ]
 
-const userSeed2 = [
-    {
-        username: 'brigmu',
-        password: 'password123'
-    },
-    {
-        username: 'macheson',
-        password: 'password123'
-    }
-]
-
-const profileSeed = [
-    {
-        userId: "5ec301df8c8418584878d841",
-        username : "brigmu",
-        firstName: 'Brigham',
-        lastName: 'Mueller',
-        email: 'testemail@email.com',
-        coordinates: {
-            lat: '',
-            lng: ''
-        },
-        address: '',
-        city: '',
-        state: '',
-        zipCode: 11111,
-        rentals: [],
-        owned: [
-            "5ec306208c3e895b04ebdab0",
-            "5ec306208c3e895b04ebdab1",
-            "5ec306208c3e895b04ebdab2"
-        ]
-    }
-]
 
 db.Item
   .remove({})
-  .then(() => db.Item.collection.insertMany(itemSeed2))
+  .then(() => db.Item.collection.insertMany(itemSeed))
   .then(data => {
     console.log(data.result.n + " item records inserted!");
     process.exit(0);
@@ -309,21 +190,9 @@ db.Item
     process.exit(1);
   });
 
-  db.Profile
-    .remove({})
-    .then(() => db.Profile.collection.insertMany(profileSeed))
-    .then(data => {
-        console.log(data.result.n + " item records inserted!");
-        process.exit(0);
-    })
-    .catch(err => {
-        console.error(err);
-        process.exit(1);
-      });
-
 //   db.User
 //   .remove({})
-//   .then(() => db.User.collection.insertMany(userSeed2))
+//   .then(() => db.User.collection.insertMany(userSeed))
 //   .then(data => {
 //     console.log(data.result.n + " user records inserted!");
 //     process.exit(0);
