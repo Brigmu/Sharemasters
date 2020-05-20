@@ -1,0 +1,2 @@
+export const SET_RENTALS = "UPDATE_RENTALS";
+export const CLEAR_RENTALS = "CLEAR_RENTALS";

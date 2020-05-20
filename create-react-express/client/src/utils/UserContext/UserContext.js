@@ -17,21 +17,7 @@ const reducer = (state, action) => {
         case CLEAR_USER:
             return {
                 ...state,
-                user: {
-                    userId: "",
-                    username: "",
-                    firstName: "",
-                    lastName: "",
-                    email: "",
-                    coordinates: {
-                        lat: null,
-                        lng: null
-                    },
-                    address: "",
-                    city: "",
-                    state: "",
-                    zipCode: null
-                }
+                user: {}
             }
     }
 }
@@ -39,6 +25,7 @@ const reducer = (state, action) => {
 const UserProvider = ({ value = [], ...props }) => {
     const [state, dispatch] = useReducer(reducer, {
         userId: "",
+        id: "",
         username: "",
         firstName: "",
         lastName: "",
