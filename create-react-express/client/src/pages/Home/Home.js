@@ -57,32 +57,32 @@ const Home = () => {
     return (
         <div>
             <Hero />
-                <Section>
-                    <Tile
-                        kind="ancestor"
-                    >
-                        <Tile kind="parent">
-                            <Tile renderAs="article" kind="child" notification>
-                            <Heading className="has-text-centered">{state.user ? `Welcome, ${state.user.username}!` : "Welcome!"}</Heading>
-                            </Tile>
+            <Section>
+                <Tile
+                    kind="ancestor"
+                >
+                    <Tile kind="parent">
+                        <Tile renderAs="article" kind="child" notification>
+                        <Heading className="has-text-centered">{state.user ? `Welcome, ${state.user.username}!` : "Welcome!"}</Heading>
                         </Tile>
                     </Tile>
-                </Section>
-                <Section>
-                    <Container>
-                        <Columns>
-                            {options.map(option =>  
-                                <Columns.Column>
-                                    <Link to={"/" + option.link}>
-                                        <div className={"notification has-text-centered " + option.color}>
-                                        {option.message}
-                                        </div>    
-                                    </Link> 
-                                </Columns.Column>
-                            )}
-                        </Columns>
-                    </Container>
-                </Section>
+                </Tile>
+            </Section>
+            <Section>
+                <Container>
+                    <Columns>
+                        {options.map(option =>  
+                            <Columns.Column>
+                                <Link to={"/" + option.link}>
+                                    <div key={option.link} className={"notification has-text-centered " + option.color}>
+                                    {option.message}
+                                    </div>    
+                                </Link> 
+                            </Columns.Column>
+                        )}
+                    </Columns>
+                </Container>
+            </Section>
         </div>
     );
 }
