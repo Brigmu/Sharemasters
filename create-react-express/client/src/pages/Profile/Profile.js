@@ -21,6 +21,9 @@ import MessageOwnerButton from "../../components/MessageOwnerButton";
 import SuccessButton from "../../components/SuccessButton";
 import RejectButton from "../../components/RejectButton";
 
+//API functions
+import {approveRental, declineRental, returnItem, confirmReturn} from '../../utils/API/API';
+
 const Profile = () => {
     // state information
     const [allitems, setallitems] = useState([])
@@ -34,6 +37,27 @@ const Profile = () => {
 
     const [selected, setSelected] = useState('Profile');
 
+    const filterRequests = (array) => {
+        const filteredItems = array.filter(item => {
+            return (item.pendingRequest);
+        })
+        setRequests(filteredItems);
+    }
+
+    const filterRental = (array) => {
+        const filteredItems = array.filter(item => {
+            return (item.isRented);
+        })
+        setRentals(filteredItems);
+    }
+
+    const filterReturns = (array) => {
+        const filteredItems = array.filter(item => {
+            return (!item.active)
+        })
+        setReturns(filteredItems);
+    }
+
     const handlePageChange = (e) => {
         const nextPage = e.target.getAttribute('data-page');
         setSelected(nextPage);
@@ -41,14 +65,25 @@ const Profile = () => {
 
     const handleItemReturn = (id) => {
         //make api call to change item with id to not rented
+        let statusData = {isRented: false, active: false};
+        returnItem(id, statusData);
+    }
+
+    const handleConfirmReturned = (id) => {
+        let statusData = {active: true}
+        confirmReturn(id, statusData);
     }
 
     const handleAccept = (id) => {
         //make api call to set item with id to rented and pending to false
+        let statusData = {pendingRequest: false, isRented: true}
+        approveRental(id, statusData);
     }
 
     const handleReject = (id) => {
         //make api call to set pending to false. handle rejection message?
+        let statusData = {pendingRequest: false};
+        declineRental(id, statusData);
     }
 
     const setAll = () => {
@@ -100,22 +135,24 @@ const Profile = () => {
                                 title={returnItem.itemName}
                                 startDate={returnItem.appointment.startDate}
                                 endDate={returnItem.appointment.endDate}>
-                                <SuccessButton onClick={handlePageChange} data-id={returnItem.id}>Confirm</SuccessButton>
+                                <SuccessButton onClick={handleItemReturn} data-id={returnItem.id}>Confirm</SuccessButton>
                                 <RejectButton onClick={handlePageChange} data-id={returnItem.id}>Report</RejectButton>
                             </ProfileItemContainer>
                         )):<div>No Returns</div>}</>
                         : <div className="box">
-                        <div className="title">Username: CrowMama</div>
+                        <div className="title">Username: {state.user ? state.user.username : <></>}</div>
                         <br />
                         {/* <figure class="image is-128x128">
                             <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" alt="" />
                         </figure> */}
                         <br />
                         <div className="content">
-                            <div className="title is-5">Name: Sugawara Kochi
+                            <div className="title is-5">Name: {state.user ? state.user.firstName: <></>} {state.user ? state.user.lastName: <></>}
                             </div>
-                            <div className="title is-5">Location: Miyagi, Japan</div>
+                    <div className="title is-5">Location: {state.user ? `${state.user.address} ${state.user.city} ${state.user.state}`: <> </>}</div>
                         </div>
+                            <div className='title is-5'>Total listings: {state.user ? state.user.owned.length : 'no listing'}</div>
+                            <div className='title is-5'>Items Renting: {state.user ? state.user.rentals.length : 'no listing'}</div>
                         </div>}
                 </Container>
 

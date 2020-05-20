@@ -37,7 +37,6 @@ const ProfileSchema = new Schema({
   },
   zipCode: {
     type: Number,
-    max: 5
   },
   rentals: [
     {
