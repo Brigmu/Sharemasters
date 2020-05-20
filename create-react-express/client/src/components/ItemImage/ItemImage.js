@@ -26,7 +26,7 @@ const ItemImage = (props) => {
 
     return(
         <div className='item-img-div'>
-            {!props.image ? <> <input name="file" type="file" class="file-upload" data-cloudinary-field="image_id" data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}" onChange={props.uploadImage}/>
+            {!props.image ? <> <input name="file" type="file" className="file-upload" data-cloudinary-field="image_id" data-form-data="{ 'transformation': {'crop':'limit','tags':'samples','width':3000,'height':2000}}" onChange={props.uploadImage}/>
             <div className='placeholder-div'><h1>Upload an image</h1></div> 
             </>
             : <img className='item-img' src={props.image} />}

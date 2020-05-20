@@ -28,6 +28,16 @@ export const getItem = (id, cb) => {
     // return axios.get('/api/items/' + id)
 }
 
+export const renterRequest = (renterId, id ) => {
+    return axios.put('/api/items/' + id)
+}
+
+export const postAppointment = (data) => {
+    return axios.post('/api/appointments', data)
+}
+
+
+
 // export const getUserData = (id, cb) => {
 //     fetch(`/api/user/${id}`)
 //     .then(response => response.json())
@@ -39,7 +49,7 @@ export const getItem = (id, cb) => {
 // }
 
 export const postListing = (data) => {
-    return axios.post('/api/listing', data);
+    return axios.post('http://localhost:3001/api/items', data);
 }
 
 export const loginUser = (userData) => {
