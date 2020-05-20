@@ -33,10 +33,9 @@ const ProfileSchema = new Schema({
   city: String,
   state: {
     type: String,
-    max: [2, 'Please enter two-letter state abbreviation']
   },
   zipCode: {
-    type: Number,
+    type: Number
   },
   rentals: [
     {
