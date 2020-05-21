@@ -5,13 +5,17 @@ import Field from '../../components/Field/Field';
 import { useParams } from 'react-router-dom';
 import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
 import { updateItem, postAppointment, renterRequest } from '../../utils/API/API';
+import { useStoreContext } from '../../utils/UserContext/UserContext';
 
 function ItemRequestForm() {
+    const [state, dispatch] = useStoreContext();
     const { id } = useParams();
     const startDateRef = useRef();
     const endDateRef = useRef();
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+
+    console.log(state.user);
 
 
     const handleFormSubmit = (e) => {
@@ -20,7 +24,7 @@ function ItemRequestForm() {
         const appointment = {
             itemId: id,
             // renter id will be the userId from user context for this field
-            renterId: "5ec24cc7c7e382486c6ff129",
+            renterId: state.user._id,
             startDate: startDateRef.current.value,
             endDate: endDateRef.current.value
         }
@@ -32,7 +36,7 @@ function ItemRequestForm() {
         postAppointment(appointment);
         //update item pendingRequest to true
         // first parameter of this function needs to be the userId from the usercontext
-        renterRequest("5ec24cc7c7e382486c6ff129", id)
+        renterRequest(state.user._id, id)
 
 
     }
@@ -42,7 +46,8 @@ function ItemRequestForm() {
     }
 
     return (
-        <div class="notification">
+        <>
+        {state.user ? <div class="notification">
             <div class="title is-5">Request Rental</div>
             <div className='item-request-form'>
                 <Field title='Start Date' placeholder='01/01/2020' reference={startDateRef} />
@@ -56,8 +61,8 @@ function ItemRequestForm() {
                     <button class="button is-link is-light is-outlined">Cancel</button>
                 </div>
             </div>
-        </div>
-
+        </div>: <div>Please login to rent this item</div>}
+        </>
     )
 }
 

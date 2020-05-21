@@ -36,6 +36,10 @@ module.exports = {
     //     // .populate("ownerInfo")
     //     .then(data => res.json(data))
     //     .catch(err => res.status(422).json(err));
+        db.Item.findById(req.params.id)
+        .populate('ownerId')
+        .then(data => res.json(data))
+        .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
         db.Item.create(req.body)

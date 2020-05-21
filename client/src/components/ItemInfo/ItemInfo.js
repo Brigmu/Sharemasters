@@ -15,12 +15,13 @@ function ItemInfo() {
     const { id } = useParams();
 
     useEffect(() => {
-        getItem(id, (res) => {
+        getItem(id)
+        .then(res => {
             console.log('hi from useEffect/getItem')
-            res = res[0]
-            console.log(res);
-            setItem(res)
+            console.log(res.data);
+            setItem(res.data)
         })
+            
     }, []);
 
     

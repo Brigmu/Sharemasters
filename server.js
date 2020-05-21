@@ -39,6 +39,13 @@ app.get('/api/items/all', (req, res) => {
         // })
 })
 
+app.get('/api/items/:id', (req, res) => {
+  db.Item.findById(req.params.id)
+  // .populate({path:'ownerId', model: 'Profile'})
+  .then(data => res.json(data))
+  .catch(err => res.status(422).json(err));
+})
+
 // We need to use sessions to keep track of our user's login status
 app.use(
   session({ secret: "keyboard cat", resave: false, saveUninitialized: false })
