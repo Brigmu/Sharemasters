@@ -5,7 +5,7 @@ function SearchBar(props) {
     const [state, setState] = useState();
     return (
         <Container>
-            <form className="tile field has-addons">
+            <form className="field has-addons">
                 <div className="control is-expanded">
                     <input 
                         className="input"
