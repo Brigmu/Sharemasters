@@ -3,7 +3,7 @@ import './styles.css';
 
 function Card(props) {
     return (
-        <div className={"box"} key={props.id}>
+        <div className={"box"} key={props.id} data-id={props.itemId}>
             <figure className="image is-156x156">
                 <img src={props.img} alt =''></img>
             </figure>

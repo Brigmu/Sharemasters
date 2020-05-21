@@ -14,12 +14,27 @@ import Column from '../../components/Column/Column';
 import ItemCard from '../../components/ItemCard/ItemCard';
 import Card from '../../components/Card/index';
 import Title from '../../components/Title/Title';
+import {getAllItems} from '../../utils/API/API';
 
 const Listings = (props) => {
     const itemListings = useContext(ItemContext);
+    // const allItems = getAllItems();
+    // console.log(allItems);
 
+    useEffect(() => {
+        console.log('happened')
+        getAllItems()
+        .then(res => {
+            console.log(res.data);
+            console.log('function happened')
+            setAllItems(res.data);
+        })
+        .catch(err => console.log(err))
+    }, [])
+
+    const [allItems, setAllItems] = useState([])
     const [filter, setFilter] = useState();
-    const [filtered, setFiltered] = useState([...itemListings]);
+    const [filtered, setFiltered] = useState([...allItems]);
     const [electonicsItems, setElectronicsItems] = useState([])
     const [eventItems, setEventItems] = useState([]);
     const [homeImpovementItems, setHomeImprovementItems] = useState([]);
@@ -33,7 +48,7 @@ const Listings = (props) => {
         switch(filterType){
             case 'name':
                 const filterKeyword = new RegExp(filter);
-                let filteredListings = itemListings.filter(item => {
+                let filteredListings = allItems.filter(item => {
                     return filterKeyword.test(item.name.toLowerCase());
                 });
                 setFiltered(filteredListings);
@@ -42,7 +57,7 @@ const Listings = (props) => {
                 if(!filter){
                     setFiltered(itemListings);
                 } else{
-                filteredListings = itemListings.filter(item => {
+                filteredListings = allItems.filter(item => {
                     return parseInt(item.price) <= parseInt(filter);
                 })
                 setFiltered(filteredListings);
@@ -51,46 +66,46 @@ const Listings = (props) => {
             default:
                 setFiltered(itemListings);
         }
-    }, [filter, itemListings, filterType])
+    }, [filter, allItems, filterType])
 
     useEffect(()=>{
         let filteredListings = filtered.filter(item => {
-            return item.category === 'electronics'
+            return item.category === 'Electronics'
         })
         setElectronicsItems(filteredListings)
     }, [filtered, filter])
 
     useEffect(()=>{
         let filteredListings = filtered.filter(item => {
-            return item.category === 'events'
+            return item.category === 'Events'
         })
         setEventItems(filteredListings)
     }, [filtered])
 
     useEffect(()=>{
         let filteredListings = filtered.filter(item => {
-            return item.category === 'home improvement'
+            return item.category === 'Home Improvement'
         })
         setHomeImprovementItems(filteredListings)
     }, [filtered])
 
     useEffect(()=>{
         let filteredListings = filtered.filter(item => {
-            return item.category === 'kitchen'
+            return item.category === 'Kitchen Appliances'
         })
         setKitchenItems(filteredListings)
     }, [filtered])
 
     useEffect(()=>{
         let filteredListings = filtered.filter(item => {
-            return item.category === 'miscellaneous'
+            return item.category === 'Miscellaneous'
         })
         setMiscItems(filteredListings)
     }, [filtered])
 
     useEffect(()=>{
         let filteredListings = filtered.filter(item => {
-            return item.category === 'recreation'
+            return item.category === 'Recreation'
         })
         setRecreationItems(filteredListings)
     }, [filtered])
@@ -294,7 +309,7 @@ const Listings = (props) => {
                                 </Column> */}
                                 {filtered.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : filtered.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -302,7 +317,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={electronicsCategoryRef}>
                             {electonicsItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : electonicsItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                         {/* <ItemCard img={item.img} itemName={item.name} id={item.id} handleItemClick={props.handleItemClick}/> */}
                                     </Column>
                                 ))}
@@ -311,7 +326,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={eventsCategoryRef}>
                                 {eventItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : eventItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -319,7 +334,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={homeCategoryRef}>
                                 {homeImpovementItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : homeImpovementItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -327,7 +342,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={kitchenCategoryRef}>
                                 {kitchenItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : kitchenItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -335,7 +350,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={miscCategoryRef}>
                                 {miscItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : miscItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -343,7 +358,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={recreationCategoryRef}>
                                 {recreationItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : recreationItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -351,7 +366,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={yardCategoryRef}>
                                 {yardItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : yardItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
                                     </Column>
                                 ))}
                             </Columns>

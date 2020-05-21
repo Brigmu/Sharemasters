@@ -18,6 +18,10 @@ export const getAllProfiles = () => {
     return axios.get('api/profile/users');
 }
 
+export const getAllItems = () => {
+    return axios.get('/api/items/all');
+}
+
 export const getItem = (id, cb) => {
     fetch('/api/items/' + id)
     .then(response => response.json())

@@ -8,7 +8,7 @@ import { useStoreContext } from '../../utils/UserContext/UserContext';
 import Field from '../../components/Field/Field';
 import DropdownMenu from '../../components/Dropdown/Dropdown';
 import ItemImage from '../../components/ItemImage/ItemImage';
-import {uploadImageToDB, postListing} from '../../utils/API/API';
+import {uploadImageToDB, postListing, addOwned} from '../../utils/API/API';
 
 
 const ListingPage = (props) => {
@@ -16,9 +16,10 @@ const ListingPage = (props) => {
     const [state, dispatch] = useStoreContext();
     const [image, setImage] = useState('');
     const history = useHistory();
-    // if(!user.id){
-    //     history.push('/login');
-    // }
+    console.log(state.user);
+    if(!state.user){
+        history.push('/signup');
+    }
 
     const uploadImage = (e) => {
         const files = e.target.files[0];
@@ -58,7 +59,7 @@ const ListingPage = (props) => {
         console.log(category);
         const data = {
             // manually putting in ownId, this will be provided through the usercontext
-            ownerId: "5ec24cc7c7e382486c6ff128",
+            ownerId: state.user._id,
             name: itemNameRef.current.value,
             description: descriptionRef.current.value,
             category: category,
@@ -75,10 +76,17 @@ const ListingPage = (props) => {
             img: image,
             pendingRequest: false,
             isRented: false,
-            active: false,
+            active: true,
         }
         console.log(data);
-        postListing(data);
+        postListing(data)
+        .then(res => {
+            console.log(res);
+            addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err));
 
     }
 

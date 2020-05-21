@@ -33,7 +33,7 @@ const Profile = () => {
     const [rentals, setRentals] = useState([]);
     const [returns, setReturns] = useState([]);
     const [state, dipatch] = useStoreContext();
-    const [userItems, setItems] = useUserItemsContext(); //userItems.rented and userItems.owned
+    // const [userItems, setItems] = useUserItemsContext(); //userItems.rented and userItems.owned
 
     console.log(state);
     console.log(state.user);
@@ -90,24 +90,25 @@ const Profile = () => {
     }
 
     const setRentalsHelper = (items) => {
-        setItems({
-            type: SET_RENTALS,
-            rentals: items
-        });
+        // setItems({
+        //     type: SET_RENTALS,
+        //     rentals: items
+        // });
     };
 
     const setOwned= (items) => {
-        setItems({
-            type: SET_OWNED,
-            owned: items
-        });
+        // setItems({
+        //     type: SET_OWNED,
+        //     owned: items
+        // });
     };
 
     const setAll = () => {
         getProfile(state.user.userId)
             .then(res => {
-                setRentalsHelper(res.data.rentals);
-                setOwned(res.data.owned);
+                console.log(res.data);
+                // setRentalsHelper(res.data.rentals);
+                // setOwned(res.data.owned);
             })
             .catch(err => {console.log(err.response)})
     }
@@ -131,8 +132,8 @@ const Profile = () => {
                                 <ProfileItemContainer 
                                     image={rental.img}
                                     title={rental.itemName}
-                                    startDate={rental.appointment.startDate}
-                                    endDate={rental.appointment.endDate}>
+                                    startDate={''}
+                                    endDate={''}>
                                     <ReturnButton onClick={handleItemReturn} data-id={rental.id}>Return</ReturnButton>
                                     <MessageOwnerButton></MessageOwnerButton>
                                 </ProfileItemContainer>
@@ -141,8 +142,8 @@ const Profile = () => {
                                 <ProfileItemContainer 
                                     image={request.img}
                                     title={request.itemName}
-                                    startDate={request.appointment.startDate}
-                                    endDate={request.appointment.endDate}>
+                                    startDate={''}
+                                    endDate={''}>
                                     <SuccessButton onClick={handleAccept} data-id={request.id}>Accept</SuccessButton>
                                     <RejectButton onClick={handleReject} data-id={request.id}>Reject</RejectButton>
                                 </ProfileItemContainer>
@@ -151,8 +152,8 @@ const Profile = () => {
                                 <ProfileItemContainer 
                                     image={returnItem.img}
                                     title={returnItem.itemName}
-                                    startDate={returnItem.appointment.startDate}
-                                    endDate={returnItem.appointment.endDate}>
+                                    startDate={''}
+                                    endDate={'test'}>
                                     <SuccessButton onClick={handleItemReturn} data-id={returnItem.id}>Confirm</SuccessButton>
                                     <RejectButton onClick={handlePageChange} data-id={returnItem.id}>Report</RejectButton>
                                 </ProfileItemContainer>

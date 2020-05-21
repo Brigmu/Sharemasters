@@ -18,6 +18,26 @@ app.use(express.static(__dirname + "/client/public"));
 // adding cors so that frontend can talk to backend
 app.use(cors());
 
+app.get('/api/items/all', (req, res) => {
+  db.Item.find({})
+//   .populate({path:'ownerId',
+// model: 'User'})
+  .then(data => {
+    res.json(data);
+  })
+  .catch(err => console.log(err));
+        // .populate({path: 'appointments', 
+        //     populate: [{
+        //         path: 'current',
+        //         model: 'Appointments'
+        //     },
+        //     {
+        //         path: 'history',
+        //         model: 'Appointments'
+        //     }
+        //     ]
+        // })
+})
 
 // We need to use sessions to keep track of our user's login status
 app.use(
