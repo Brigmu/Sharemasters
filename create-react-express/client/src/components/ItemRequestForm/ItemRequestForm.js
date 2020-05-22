@@ -51,7 +51,11 @@ function ItemRequestForm() {
         
         // first parameter of this function needs to be the userId from the usercontext
         // renterRequest("5ec24cc7c7e382486c6ff129", id)
+    }
 
+
+    const handleCancel = (e) => {
+        e.preventDefault();
 
     }
 
@@ -71,7 +75,7 @@ function ItemRequestForm() {
                     <button class="button is-link" onClick={handleFormSubmit}>Submit</button>
                 </div>
                 <div class="control">
-                    <button class="button is-link is-light is-outlined">Cancel</button>
+                    <button class="button is-link is-light is-outlined" onClick={handleCancel}>Cancel</button>
                 </div>
             </div>
         </div>
