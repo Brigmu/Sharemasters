@@ -56,7 +56,8 @@ function ItemRequestForm() {
     }
 
     const handleFormCancel = (e) => {
-        console.log('clear form');
+        startDateRef.current.value = "";
+        endDateRef.current.value = "";
     }
 
     return (

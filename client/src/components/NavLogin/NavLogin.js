@@ -73,7 +73,7 @@ const NavLogin = () => {
                 <FormControl controlClass="has-icons-left has-icons-right">
                     <input 
                         className={`input ${ loginErrorState.error ? "is-danger" : "" }`}
-                        type="text"
+                        type="password"
                         placeholder="Enter a secure password"
                         ref={passwordLoginRef} />
                     <FormIcon size="small" side="left" icon="lock" />

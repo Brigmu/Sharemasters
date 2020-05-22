@@ -58,6 +58,9 @@ const ProfileSchema = new Schema({
       ref: "Item"
     }
   ],
+  avatar: {
+    type: String
+  },
   createdAt: {
     type: Date,
     default: Date.now

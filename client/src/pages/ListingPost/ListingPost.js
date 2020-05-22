@@ -53,7 +53,6 @@ const ListingPage = (props) => {
     // const locationDropdownRef = useRef();
     // const categoryDropdownRef = useRef();
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(category);
@@ -83,11 +82,13 @@ const ListingPage = (props) => {
         .then(res => {
             console.log(res);
             addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res);
+                history.push("/profile");
+            })
             .catch(err => console.log(err))
         })
         .catch(err => console.log(err));
-
     }
 
     const handleLocationPref = (locationValue) => {
