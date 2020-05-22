@@ -1,5 +1,5 @@
 import React, {useRef, useState, useEffect, useContext} from 'react'
-// import './styles.css';
+import './styles.css';
 import Nav from '../../components/Nav/Nav';
 import CategoryWrapper from '../../components/CategoryWrapper/CategoryWrapper'
 import ItemContext from '../../utils/ItemContext/ItemContext';
@@ -215,7 +215,7 @@ const Listings = (props) => {
                 <section className = 'section'>
                     <Columns>
                         <Column size='is-2'>
-                            <div className='content'>
+                            <div className='sidebar'>
                                 <p>Select filter type</p>
                                 {filterType === 'price' ?
                                 <ul id='filters'>

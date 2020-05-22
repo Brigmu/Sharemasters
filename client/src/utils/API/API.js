@@ -33,7 +33,7 @@ export const getItem = (id) => {
 }
 
 export const renterRequest = (renterId, id ) => {
-    return axios.put('/api/items/' + id)
+    return axios.put('/api/items/' + id, renterId)
 }
 
 export const postAppointment = (data) => {
@@ -53,7 +53,7 @@ export const postAppointment = (data) => {
 // }
 
 export const postListing = (data) => {
-    return axios.post('http://localhost:3001/api/items', data);
+    return axios.post('/api/items', data);
 }
 
 export const loginUser = (userData) => {
@@ -84,6 +84,10 @@ export const addRental = (id, itemId) => {
     return axios.put('/api/profile/rentals/' + id, itemId);
 }
 
+export const removeRental = (id, itemId) => {
+    return axios.put(`/api/profile/rentals/reomve/${id}`, itemId)
+}
+
 export const addRentalHistory = (id, itemId) => {
     return axios.put('/api/profile/history/' + id, itemId);
 }
@@ -97,11 +101,11 @@ export const deleteUser = (username) => {
 }
 
 export const approveRental = (id, status) => {
-    return axios.put(`/api.items/rentstatus/${id}`, status);
+    return axios.put(`/api/items/rentstatus/${id}`, status);
 }
 
 export const declineRental = (id, status) => {
-    return axios.put(`/api.items/pendingstatus/${id}`, status);
+    return axios.put(`/api/items/pendingstatus/${id}`, status);
 }
 
 export const returnItem = (id, status) => {

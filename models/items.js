@@ -52,6 +52,10 @@ const itemSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    renterUserId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Profile'
+    },
     isRented: {
         type: Boolean,
         default: false

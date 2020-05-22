@@ -1,13 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect} from 'react';
 import './styles.css';
 import Field from '../../components/Field/Field';
 // import DatePicker from 'react-datepicker';
 import { useParams } from 'react-router-dom';
 import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
-import { updateItem, postAppointment, renterRequest } from '../../utils/API/API';
+import { updateItem, postAppointment, renterRequest, getItem} from '../../utils/API/API';
 import { useStoreContext } from '../../utils/UserContext/UserContext';
 
 function ItemRequestForm() {
+    const [item, setItem] = useState({})
     const [state, dispatch] = useStoreContext();
     const { id } = useParams();
     const startDateRef = useRef();
@@ -15,7 +16,18 @@ function ItemRequestForm() {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
 
-    console.log(state.user);
+    // console.log(state.user._id);
+    console.log(id);
+
+    useEffect(() => {
+        getItem(id)
+        .then(res => {
+            console.log('hi from useEffect/getItem')
+            console.log(res.data);
+            setItem(res.data)
+        })
+            
+    }, []);
 
 
     const handleFormSubmit = (e) => {
@@ -36,7 +48,9 @@ function ItemRequestForm() {
         postAppointment(appointment);
         //update item pendingRequest to true
         // first parameter of this function needs to be the userId from the usercontext
-        renterRequest(state.user._id, id)
+        renterRequest({renterUserId: state.user._id, pendingRequest: true}, id)
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
 
 
     }
@@ -47,21 +61,22 @@ function ItemRequestForm() {
 
     return (
         <>
-        {state.user ? <div class="notification">
-            <div class="title is-5">Request Rental</div>
+        {!state.user ? <div>Please login to rent this item</div> : 
+        state.user._id == item.ownerId ? <div>This is your item </div> : <div className="notification">
+            <div className="title is-5">Request Rental</div>
             <div className='item-request-form'>
                 <Field title='Start Date' placeholder='01/01/2020' reference={startDateRef} />
                 <Field title='End Date' placeholder='01/30/2020' reference={endDateRef} />
             </div>
-            <div class="field is-grouped button-container">
-                <div class="control">
-                    <button class="button is-link" onClick={handleFormSubmit}>Submit</button>
+            <div className="field is-grouped button-container">
+                <div className="control">
+                    <button className="button is-link" onClick={handleFormSubmit}>Submit</button>
                 </div>
-                <div class="control">
-                    <button class="button is-link is-light is-outlined">Cancel</button>
+                <div className="control">
+                    <button className="button is-link is-light is-outlined">Cancel</button>
                 </div>
             </div>
-        </div>: <div>Please login to rent this item</div>}
+        </div>}
         </>
     )
 }

@@ -8,12 +8,12 @@ const Title = (props) => {
             <p className="title">
                 {props.title}
             </p>
-            <button className="button scroll-btn scroll-left" data-direction='left' data-category={props.title} onClick={props.handleScrollClick}>
+            <button className="scroll-btn scroll-left" data-direction='left' data-category={props.title} onClick={props.handleScrollClick}>
                 <span className="icon is-small" data-direction='left' data-category={props.title} onClick={props.handleScrollClick}>
                     <i className="fas fa-angle-left" data-direction='left' data-category={props.title} onClick={props.handleScrollClick}></i>
                 </span>
             </button>
-            <button className="button scroll-btn scroll-right" data-direction='right' data-category={props.title} onClick={props.handleScrollClick}>
+            <button className="scroll-btn scroll-right" data-direction='right' data-category={props.title} onClick={props.handleScrollClick}>
                 <span className="icon is-small" data-direction='right' data-category={props.title} onClick={props.handleScrollClick}>
                     <i className="fas fa-angle-right" data-direction='right' data-category={props.title} onClick={props.handleScrollClick}></i>
                 </span>

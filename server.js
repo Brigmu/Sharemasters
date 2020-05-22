@@ -46,6 +46,30 @@ app.get('/api/items/:id', (req, res) => {
   .catch(err => res.status(422).json(err));
 })
 
+app.put('/api/items/:id', (req, res) => {
+  db.Item.findOneAndUpdate({ _id: mongoose.Types.ObjectId(req.params.id) }, req.body)
+        .then(data => res.json(data))
+        .catch(err => res.status(422).json(err));
+})
+
+app.put('/api/items/rentstatus/:id', (req, res) => {
+  db.Item.findByIdAndUpdate(req.params.id, req.body)
+  .then(data => res.json(data))
+  .catch(err => res.status(422).json(err))
+})
+
+app.put('/api/items/pendingstatus/:id', (req, res) => {
+  db.Item.findByIdAndUpdate(req.params.id, req.body)
+  .then(data => res.json(data))
+  .catch(err => res.status(422).json(err))
+})
+
+app.put('/api/profile/rentals/reomve/:id', (req, res) => {
+  db.Profile.update({ _id: req.params.id }, { $pull: { rentals: req.body.itemId }})
+            .then(data => res.json(data))
+            .catch(err => res.status(422).json(err));
+})
+
 // We need to use sessions to keep track of our user's login status
 app.use(
   session({ secret: "keyboard cat", resave: false, saveUninitialized: false })
