@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 module.exports = {
     findAll: function(req, res) {
-        db.Appointment.find(req.query)
+        db.Appointment.findAll(req.query)
           .sort({ date: -1 })
           .then(data => res.json(data))
           .catch(err => res.status(422).json(err));
@@ -13,22 +13,23 @@ module.exports = {
         .then(data => res.json(data))
         .catch(err => res.status(422).json(err));
     },
+
     create: function(req, res) {
         db.Appointment.create(req.body)
-        .then(res => res.json(res))
+        // .then(res => console.log('Hi from controller'))
         .catch(err => console.log(err));
     },
     updateCancel: function(req, res) {
-        db.Appointments.findOneAndUpdate({ _id: req.params.id }, { $set: { isCanceled: true }, function(err, doc) {
+        db.Appointments.findOneAndUpdate({ _id: req.params.id }, { isCanceled: true }, function(err, doc) {
             if (err) return res.send(500, {error: err})
-            return res.send('Succesfully cancelled.');
-        }} )
+            return res.send('Successfully cancelled.');
+        } )
     },
     updateReturn: function(req, res) {
-        db.Appointments.findOneAndUpdate({ _id: req.params.id }, {$set: { isReturned: true }, function(err, doc) {
+        db.Appointments.findOneAndUpdate({ _id: req.params.id }, { isReturned: true }, function(err, doc) {
             if (err) return res.send(500, {error: err})
             return res.send('Succesfully returned.');
-        }})
+        })
     }
 
 }

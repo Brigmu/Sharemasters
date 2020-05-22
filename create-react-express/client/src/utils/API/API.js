@@ -28,14 +28,39 @@ export const getItem = (id, cb) => {
     // return axios.get('/api/items/' + id)
 }
 
-export const renterRequest = (renterId, id ) => {
-    return axios.put('/api/items/' + id)
+export const renterRequest = (id, appointmentId) => {
+    return axios.put('http://localhost:3001/api/items/' + id, appointmentId)
 }
 
-export const postAppointment = (data) => {
+// export const renterCancel = (renterId, id ) => {
+//     return axios.put('/api/appointment/cancel/' + id)
+// }
+
+// export const ownerCancel = (renterId, id ) => {
+//     return axios.put('/api/appointment/cancel/' + id)
+// }
+
+// Appointment APIs
+export const postAppointment = (data, cb) => {
     return axios.post('/api/appointments', data)
+    .then(res => console.log('Appointment created.'))
+    // .then(response => response.json())
+    // .then(res => {
+    //     cb(res);
+    // })
+    .catch(err => console.log(err));
+
 }
 
+// export const getAppointment = (id, cb) => {
+//     fetch('/api/items/' + id)
+//     .then(response => response.json())
+//     .then(data => {
+//         cb(data);
+//     })
+//     .catch(err => console.log(err));
+//     // return axios.get('/api/items/' + id)
+// }
 
 
 // export const getUserData = (id, cb) => {

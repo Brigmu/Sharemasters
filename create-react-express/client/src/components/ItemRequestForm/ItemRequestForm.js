@@ -1,10 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './styles.css';
 import Field from '../../components/Field/Field';
 // import DatePicker from 'react-datepicker';
 import { useParams } from 'react-router-dom';
 import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
-import { updateItem, postAppointment, renterRequest } from '../../utils/API/API';
+import { updateItem, postAppointment, renterRequest, getAppointment, getItem } from '../../utils/API/API';
 
 function ItemRequestForm() {
     const { id } = useParams();
@@ -12,6 +12,7 @@ function ItemRequestForm() {
     const endDateRef = useRef();
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const [appointmentInfo, setAppointmentInfo] = useState({});
 
 
     const handleFormSubmit = (e) => {
@@ -24,15 +25,32 @@ function ItemRequestForm() {
             startDate: startDateRef.current.value,
             endDate: endDateRef.current.value
         }
-        console.log(appointment);
+        // console.log(appointment);
+ 
+            //submit data to appointments as a request to owner
+            postAppointment(appointment);
+            
+            //getting appointment information to update the the item information with the appointment id
+            
+            setTimeout(() => {
+                getItem(id, (res) => {
+                    console.log(res)
+                    res = res[0].appointmentInfo[res[0].appointmentInfo.length - 1]._id
+                    console.log(res)
+                    let renterRequestUpdate = { 
+                        pendingRequest: true,
+                        appointments: res   
+                    } 
+                    renterRequest(id, renterRequestUpdate)
+                })
+                
+            }, 3000);
+            
 
-        
-        
-        //submit data to appointments as a request to owner
-        postAppointment(appointment);
         //update item pendingRequest to true
+        
         // first parameter of this function needs to be the userId from the usercontext
-        renterRequest("5ec24cc7c7e382486c6ff129", id)
+        // renterRequest("5ec24cc7c7e382486c6ff129", id)
 
 
     }

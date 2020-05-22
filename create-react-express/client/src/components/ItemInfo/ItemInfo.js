@@ -13,13 +13,16 @@ import MessageOwnerButton from '../MessageOwnerButton/MessageOwnerButton';
 function ItemInfo() {
     const [item, setItem] = useState({})
     const { id } = useParams();
+    const [ownerInfo, setOwnerInfo] = useState({})
 
     useEffect(() => {
         getItem(id, (res) => {
-            console.log('hi from useEffect/getItem')
             res = res[0]
             console.log(res);
+            console.log(res.ownerInfo[0]);
+
             setItem(res)
+            setOwnerInfo(res.ownerInfo[0])
         })
     }, []);
 
@@ -38,7 +41,7 @@ function ItemInfo() {
                     <div class="title is-5">Description: {item.description}</div>
                     <div class="title is-5">Price: ${item.price} per day</div>
                     <div class="title is-5">Location: {item.city}, {item.state}</div>
-                    <div class="title is-5">Owner: {item.firstName} ", " {item.lastName}</div>
+                    <div class="title is-5">Owner: {ownerInfo.firstName} {ownerInfo.lastName}</div>
                     <MessageOwnerButton></MessageOwnerButton>
                 </div>
             </div>
