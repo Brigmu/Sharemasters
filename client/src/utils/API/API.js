@@ -85,7 +85,7 @@ export const addRental = (id, itemId) => {
 }
 
 export const removeRental = (id, itemId) => {
-    return axios.put(`/api/profile/rentals/reomve/${id}`, itemId)
+    return axios.put(`/api/profile/rentals/remove/${id}`, itemId)
 }
 
 export const addRentalHistory = (id, itemId) => {

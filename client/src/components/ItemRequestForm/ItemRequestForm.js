@@ -45,12 +45,18 @@ function ItemRequestForm() {
         
         
         //submit data to appointments as a request to owner
-        postAppointment(appointment);
+        postAppointment(appointment)
+        .then(res => {
+            const appointmentId = res.data._id;
+            console.log(appointmentId);
+            renterRequest({renterUserId: state.user._id, pendingRequest: true, $push: {currentAppointment: appointmentId}}, id)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+        })
         //update item pendingRequest to true
         // first parameter of this function needs to be the userId from the usercontext
-        renterRequest({renterUserId: state.user._id, pendingRequest: true}, id)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+
+        
 
 
     }

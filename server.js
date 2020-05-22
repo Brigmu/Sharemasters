@@ -40,10 +40,14 @@ app.get('/api/items/all', (req, res) => {
 })
 
 app.get('/api/items/:id', (req, res) => {
-  db.Item.findById(req.params.id)
-  // .populate({path:'ownerId', model: 'Profile'})
-  .then(data => res.json(data))
-  .catch(err => res.status(422).json(err));
+  db.Item.find({_id: req.params.id})
+  .populate('ownerId')
+  .then(data => {
+    console.log(data)
+    res.json(data)
+  
+  })
+  // .catch(err => res.status(422).json(err));
 })
 
 app.put('/api/items/:id', (req, res) => {

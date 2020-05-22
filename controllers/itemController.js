@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 module.exports = {
     findAll: function(req, res) {
-        db.Item.find({})
+        // db.Item.find({})
         // .populate('ownerId')
         // .populate({path: 'appointments', 
         //     populate: [{
@@ -17,11 +17,11 @@ module.exports = {
         //     }
         //     ]
         // })
-          .then(data => {
-              res.json(data)
+        //   .then(data => {
+        //       res.json(data)
             //   console.log(data);
-            })
-          .catch(err => res.status(422).json(err));
+            // })
+        //   .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
     //     db.Item.aggregate([
@@ -36,10 +36,10 @@ module.exports = {
     //     // .populate("ownerInfo")
     //     .then(data => res.json(data))
     //     .catch(err => res.status(422).json(err));
-        db.Item.findById(req.params.id)
-        .populate('ownerId')
-        .then(data => res.json(data))
-        .catch(err => res.status(422).json(err));
+        // db.Item.findById(req.params.id)
+        // .populate('ownerId')
+        // .then(data => res.json(data))
+        // .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
         db.Item.create(req.body)

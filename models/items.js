@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
 const itemSchema = new mongoose.Schema({
     ownerId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "Profile",
     },
     name: {
@@ -53,27 +54,26 @@ const itemSchema = new mongoose.Schema({
         default: false
     },
     renterUserId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Profile'
     },
     isRented: {
         type: Boolean,
         default: false
     },
-    appointments: {
-        current: [
+    currentAppointment: 
+         [
             {
-                type: mongoose.Schema.Types.ObjectId,
+                type: Schema.Types.ObjectId,
                 ref: "Appointments"
             }
         ],
-        history: [
+    appointmentHistory: [
             {
-                type: mongoose.Schema.Types.ObjectId,
+                type: Schema.Types.ObjectId,
                 ref: "Appointments"
             }
         ],
-    },
     active: {
         type: Boolean,
         default: true

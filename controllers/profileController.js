@@ -11,9 +11,35 @@ module.exports = {
     },
     findOne: function(req, res) {
         db.Profile.find({ userId: req.params.id })
-            .populate("owned")
-            .populate("rentals")
-            .populate("rentalHistory")
+            .populate({path: "owned", populate: {
+                path: 'currentAppointment',
+                model: 'Appointment'
+            }})
+            // .populate({path: 'owned.currentAppointment',
+            // model: 'Appointments'})
+            // populate: {
+            //     path: 'currentAppointment',
+            //     model: 'Appointments'
+            // }})
+            // .populate({path: 'appointments', 
+        //     populate: [{
+        //         path: 'current',
+        //         model: 'Appointments'
+        //     },
+        //     {
+        //         path: 'history',
+        //         model: 'Appointments'
+        //     }
+        //     ]
+        // })
+            .populate({path:"rentals", populate: {
+                path: 'currentAppointment',
+                model: 'Appointment'
+            }})
+            .populate({path: "rentalHistory", populate: {
+                path: 'currentAppointment',
+                model: 'Appointment'
+            }})
             .then(data => res.json(data))
             .catch(err => res.status(422).json(err));
             
