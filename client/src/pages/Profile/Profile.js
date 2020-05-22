@@ -6,12 +6,13 @@ import { useStoreContext } from "../../utils/UserContext/UserContext";
 import { useUserItemsContext } from "../../utils/UserItemsContext/UserItemsContext";
 import { UserItemsProvider } from "../../utils/UserItemsContext/UserItemsContext";
 import { SET_OWNED, SET_RENTALS } from "../../utils/UserItemsContext/UserItemsActions";
-import { getProfile } from '../../utils/API/API';
+import { getProfile, addRental, removeRental } from '../../utils/API/API';
 
 import Nav from "../../components/Nav/Nav";
 import NavTabs from "../../components/NavTabs/NavTabs";
 import {Section, Container} from 'react-bulma-components';
 import ProfileItemContainer from "../../components/ProfileItemContainer";
+import { useHistory} from 'react-router-dom';
 
 //put buttons in ProfileItemContent children
 // Rental Buttons
@@ -28,12 +29,17 @@ import {approveRental, declineRental, returnItem, confirmReturn} from '../../uti
 
 const Profile = () => {
     // state information
-    const [allitems, setallitems] = useState([])
+    // const [allitems, setallitems] = useState([])
     const [requests, setRequests] = useState([]);
     const [rentals, setRentals] = useState([]);
     const [returns, setReturns] = useState([]);
     const [state, dipatch] = useStoreContext();
-    const [userItems, setItems] = useUserItemsContext(); //userItems.rented and userItems.owned
+    // const [userItems, setItems] = useUserItemsContext(); //userItems.rented and userItems.owned
+    const history = useHistory();
+
+    // if(!state.user) {
+    //     history.push('/signup');
+    // }
 
     console.log(state);
     console.log(state.user);
@@ -47,7 +53,7 @@ const Profile = () => {
         setRequests(filteredItems);
     }
 
-    const filterRental = (array) => {
+    const filterRentals = (array) => {
         const filteredItems = array.filter(item => {
             return (item.isRented);
         })
@@ -66,54 +72,103 @@ const Profile = () => {
         setSelected(nextPage);
     }
 
-    const handleItemReturn = (id) => {
+    const handleItemReturn = (e) => {
         //make api call to change item with id to not rented
+        const id = e.target.getAttribute('data-id')
         let statusData = {isRented: false, active: false};
-        returnItem(id, statusData);
+        returnItem(id, statusData)
+        .then(res => {
+            const filtered = filterOffItem(id, state.user.rentals)
+            filterRentals(filtered);
+        })
     }
 
-    const handleConfirmReturned = (id) => {
+    const handleConfirmReturned = (e) => {
+        const id = e.target.getAttribute('data-id')
+        const requestId = e.target.getAttribute('data-renterid');
         let statusData = {active: true}
-        confirmReturn(id, statusData);
+        confirmReturn(id, statusData)
+        .then(res => {
+            //pull item from rented user
+            removeRental(requestId, {itemId: id})
+            const filtered = filterOffItem(id, state.user.owned)
+            filterReturns(state.user.rentals)
+        })
     }
 
-    const handleAccept = (id) => {
+    const handleAccept = (e) => {
         //make api call to set item with id to rented and pending to false
+        const id = e.target.getAttribute('data-id');
+        console.log(id);
+        const requestId = e.target.getAttribute('data-renterid')
+        console.log(requestId);
         let statusData = {pendingRequest: false, isRented: true}
-        approveRental(id, statusData);
+        approveRental(id, statusData)
+        .then(res => {
+            console.log(res.data);
+            addRental(requestId, {itemId: id});
+            const filtered = filterOffItem(id, state.user.owned);
+            filterRequests(filtered)
+            // setRequests(filtered);
+        })
+        .catch(res => console.log(res));
     }
 
-    const handleReject = (id) => {
+    const handleReject = (e) => {
         //make api call to set pending to false. handle rejection message?
+        const id = e.target.getAttribute('data-id');
+        console.log(id);
         let statusData = {pendingRequest: false};
-        declineRental(id, statusData);
+        declineRental(id, statusData)
+        .then(() => {
+            const filtered = filterOffItem(id, state.user.owned);
+            filterRentals(filtered);
+        })
+        .catch(res => console.log(res));
+    }
+    
+    const filterOffItem = (id, array) => {
+        const filteredItems = array.filter(item => {
+            return(item._id !== id)
+        })
+
+        return filteredItems;
     }
 
     const setRentalsHelper = (items) => {
-        setItems({
-            type: SET_RENTALS,
-            rentals: items
-        });
+        // setItems({
+        //     type: SET_RENTALS,
+        //     rentals: items
+        // });
     };
 
     const setOwned= (items) => {
-        setItems({
-            type: SET_OWNED,
-            owned: items
-        });
+        // setItems({
+        //     type: SET_OWNED,
+        //     owned: items
+        // });
     };
 
     const setAll = () => {
         getProfile(state.user.userId)
             .then(res => {
-                setRentalsHelper(res.data.rentals);
-                setOwned(res.data.owned);
+                console.log(res.data);
+                // setRentalsHelper(res.data.rentals);
+                // setOwned(res.data.owned);
             })
             .catch(err => {console.log(err.response)})
     }
 
     useEffect(() => {
-        setAll()
+        if(state.user){
+        filterRequests(state.user.owned);
+        filterRentals(state.user.rentals)
+        filterReturns(state.user.owned)
+        } else {
+            history.push('/signup')
+        }
+        // filterRental()
+        // filterReturns()
     }, [])
 
     return (
@@ -130,31 +185,31 @@ const Profile = () => {
                             selected === 'Rentals' ? <>{rentals.length !== 0 ? rentals.map(rental => (                
                                 <ProfileItemContainer 
                                     image={rental.img}
-                                    title={rental.itemName}
-                                    startDate={rental.appointment.startDate}
-                                    endDate={rental.appointment.endDate}>
-                                    <ReturnButton onClick={handleItemReturn} data-id={rental.id}>Return</ReturnButton>
+                                    title={rental.name}
+                                    startDate={''}
+                                    endDate={''}>
+                                    <ReturnButton onClick={handleItemReturn} data-id={rental._id}>Return</ReturnButton>
                                     <MessageOwnerButton></MessageOwnerButton>
                                 </ProfileItemContainer>
                             )):<div>No Rentals</div>}</>
                             : selected === 'Requests' ? <>{requests.length !== 0 ? requests.map(request => (                
                                 <ProfileItemContainer 
                                     image={request.img}
-                                    title={request.itemName}
-                                    startDate={request.appointment.startDate}
-                                    endDate={request.appointment.endDate}>
-                                    <SuccessButton onClick={handleAccept} data-id={request.id}>Accept</SuccessButton>
-                                    <RejectButton onClick={handleReject} data-id={request.id}>Reject</RejectButton>
+                                    title={request.name}
+                                    startDate={''}
+                                    endDate={''}>
+                                    <SuccessButton onClick={handleAccept} data-renterid={request.renterUserId} data-id={request._id}>Accept</SuccessButton>
+                                    <RejectButton onClick={handleReject} data-id={request._id}>Reject</RejectButton>
                                 </ProfileItemContainer>
                             )):<div>No Requests</div>}</>
                             : selected === 'Returns' ? <>{returns.length !== 0 ? returns.map(returnItem => (                
                                 <ProfileItemContainer 
                                     image={returnItem.img}
-                                    title={returnItem.itemName}
-                                    startDate={returnItem.appointment.startDate}
-                                    endDate={returnItem.appointment.endDate}>
-                                    <SuccessButton onClick={handleItemReturn} data-id={returnItem.id}>Confirm</SuccessButton>
-                                    <RejectButton onClick={handlePageChange} data-id={returnItem.id}>Report</RejectButton>
+                                    title={returnItem.name}
+                                    startDate={''}
+                                    endDate={'test'}>
+                                    <SuccessButton onClick={handleConfirmReturned} data-renterid={returnItem.renterUserId} data-id={returnItem._id}>Confirm</SuccessButton>
+                                    {/* <RejectButton onClick={handlePageChange} data-id={returnItem._id}>Report</RejectButton> */}
                                 </ProfileItemContainer>
                             )):<div>No Returns</div>}</>
                             : <div className="box">

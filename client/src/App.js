@@ -13,6 +13,7 @@ import ItemPage from "./pages/Item/Item";
 import RentalConfirmation from './pages/RentalConfirmation/RentalConfirmation';
 import Profile from "./pages/Profile/Profile";
 import EditProfile from "./pages/EditProfile/EditProfile";
+import { getAllItems } from "./utils/API/API";
 
 const connectEnsureLogin = require('connect-ensure-login');
 
@@ -23,11 +24,9 @@ function App() {
   useEffect(() => {
     //API call
     //setItemListings(results)
-    fetch('/api/items')
-    .then(response => response.json())
-    .then(results => {
-      console.log(results);
-      setItemListings(results);
+    getAllItems()
+    .then(data => {
+      console.log(data);
     })
     .catch(err => console.log(err));
   }, []);

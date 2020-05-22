@@ -8,15 +8,15 @@
     /* scroll-snap-align: center; */
 }
 
-label{
+/* label{
     color: black;
 }
 
 input{
     min-width: 20%;
-}
+} */
 
-.content{
+.sidebar{
     position: fixed;
     list-style: none;
 }

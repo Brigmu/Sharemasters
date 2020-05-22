@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const itemSchema = new mongoose.Schema({
     ownerId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: "Profile",
     },
     name: {
         type: String,
@@ -51,6 +51,10 @@ const itemSchema = new mongoose.Schema({
     pendingRequest: {
         type: Boolean,
         default: false
+    },
+    renterUserId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Profile'
     },
     isRented: {
         type: Boolean,

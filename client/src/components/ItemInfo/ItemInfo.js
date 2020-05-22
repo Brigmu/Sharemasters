@@ -15,30 +15,31 @@ function ItemInfo() {
     const { id } = useParams();
 
     useEffect(() => {
-        getItem(id, (res) => {
+        getItem(id)
+        .then(res => {
             console.log('hi from useEffect/getItem')
-            res = res[0]
-            console.log(res);
-            setItem(res)
+            console.log(res.data);
+            setItem(res.data)
         })
+            
     }, []);
 
     
 
     return (
-        <div class="container">
-            <div class="title">{item.name}</div>
-            <div class="columns">
-                <figure class="image">
+        <div className="container">
+            <div className="title">{item.name}</div>
+            <div className="columns">
+                <figure className="image">
                     <img src={item.img} size={64} alt=""></img>
                 </figure>
             </div>
-            <div class="column is-half">
-                <div class="content">
-                    <div class="title is-5">Description: {item.description}</div>
-                    <div class="title is-5">Price: ${item.price} per day</div>
-                    <div class="title is-5">Location: {item.city}, {item.state}</div>
-                    <div class="title is-5">Owner: {item.firstName} ", " {item.lastName}</div>
+            <div className="column is-half">
+                <div className="content">
+                    <div className="title is-5">Description: {item.description}</div>
+                    <div className="title is-5">Price: ${item.price} per day</div>
+                    <div className="title is-5">Location: {item.city}, {item.state}</div>
+                    <div className="title is-5">Owner: {item.firstName} ", " {item.lastName}</div>
                     <MessageOwnerButton></MessageOwnerButton>
                 </div>
             </div>

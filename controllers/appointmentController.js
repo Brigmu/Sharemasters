@@ -15,7 +15,7 @@ module.exports = {
     },
     create: function(req, res) {
         db.Appointment.create(req.body)
-        .then(res => res.json(res))
+        .then(data => res.json(data))
         .catch(err => console.log(err));
     },
     updateCancel: function(req, res) {
