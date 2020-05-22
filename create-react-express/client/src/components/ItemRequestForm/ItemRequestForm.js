@@ -4,7 +4,7 @@ import Field from '../../components/Field/Field';
 // import DatePicker from 'react-datepicker';
 import { useParams } from 'react-router-dom';
 import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
-import { updateItem, postAppointment, renterRequest, getAppointment, getItem } from '../../utils/API/API';
+import { updateItem, postAppointment, renterRequest, getAppointment, getItem, rentalCancel } from '../../utils/API/API';
 
 function ItemRequestForm() {
     const { id } = useParams();
@@ -56,6 +56,7 @@ function ItemRequestForm() {
 
     const handleCancel = (e) => {
         e.preventDefault();
+        rentalCancel(id);
 
     }
 

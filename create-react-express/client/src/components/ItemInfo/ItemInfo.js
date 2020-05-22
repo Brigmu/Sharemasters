@@ -6,9 +6,7 @@ import { Section, Container, Tile, Heading, Columns } from "react-bulma-componen
 import { useParams } from 'react-router-dom';
 import { getItem } from '../../utils/API/API';
 
-
 import MessageOwnerButton from '../MessageOwnerButton/MessageOwnerButton';
-
 
 function ItemInfo() {
     const [item, setItem] = useState({})
@@ -25,8 +23,6 @@ function ItemInfo() {
             setOwnerInfo(res.ownerInfo[0])
         })
     }, []);
-
-    
 
     return (
         <div class="container">
@@ -46,9 +42,6 @@ function ItemInfo() {
                 </div>
             </div>
         </div>
-
-
-
     )
 }
 

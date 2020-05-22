@@ -240,7 +240,7 @@ const itemSeed = [
     // }
 ];
 
-const userSeed = [
+const profileSeed = [
     {
         userId: mongoose.Types.ObjectId("5ec24cc7c7e382486c6ff128"),
         username: "setoc",
@@ -355,11 +355,11 @@ db.Item
     process.exit(1);
   });
 
-  db.User
+  db.Profile
   .remove({})
-  .then(() => db.User.collection.insertMany(userSeed))
+  .then(() => db.Profile.collection.insertMany(profileSeed))
   .then(data => {
-    console.log(data.result.n + " user records inserted!");
+    console.log(data.result.n + " profile records inserted!");
     process.exit(0);
   })
   .catch(err => {

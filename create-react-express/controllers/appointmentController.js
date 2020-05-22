@@ -19,17 +19,15 @@ module.exports = {
         // .then(res => console.log('Hi from controller'))
         .catch(err => console.log(err));
     },
-    updateCancel: function(req, res) {
-        db.Appointments.findOneAndUpdate({ _id: req.params.id }, { isCanceled: true }, function(err, doc) {
-            if (err) return res.send(500, {error: err})
-            return res.send('Successfully cancelled.');
-        } )
+    updateCancelled: function(req, res) {
+        db.Item.findOneAndUpdate({ _id: req.params.id }, { isCanceled: true })
+        .then(res => res.json(res))
+        .catch(err => res.status(422).json(err));
     },
     updateReturn: function(req, res) {
-        db.Appointments.findOneAndUpdate({ _id: req.params.id }, { isReturned: true }, function(err, doc) {
-            if (err) return res.send(500, {error: err})
-            return res.send('Succesfully returned.');
-        })
+        db.Appointments.findOneAndUpdate({ _id: req.params.id }, { isReturned: true })
+        .then(res => res.json(res))
+        .catch(err => res.status(422).json(err));
     }
 
 }

@@ -56,6 +56,14 @@ module.exports = {
         .then(res => res.json(res))
         .catch(err => res.status(422).json(err));
     },
+
+    itemAppointmentCancelled: function(req, res) {
+        db.Item.findOneAndUpdate({ _id: req.params.id }, { pendingRequest: false, appointments: "" })
+        .then(res => console.log('Appointment Cancelled'))
+        .catch(err => res.status(422).json(err));
+    },
+
+
     ownerApprove: function(req, res) {
         db.Item.findOneAndUpdate({ _id: mongoose.Types.ObjectId(req.params.id) }, { pendingRequest: false, isRented: true } )
         .then(data => res.json(data))
