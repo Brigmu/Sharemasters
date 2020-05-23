@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles.css'
 
 function MessageOwnerButton() {
 
@@ -7,7 +8,7 @@ function MessageOwnerButton() {
     }
 
     return (
-        <button className="button is-primary is-light is-outlined" onClick={handleMessage}>
+        <button className="button is-primary is-light is-outlined message-owner" onClick={handleMessage}>
             Message the Owner
         </button>
     )

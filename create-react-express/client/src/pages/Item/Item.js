@@ -16,7 +16,7 @@ function ItemPage() {
         <div>
             <Nav />
             <ItemInfo />
-            <ItemRequestForm />
+            {/* <ItemRequestForm /> */}
             <ItemGoogleMaps />
         </div>
 
