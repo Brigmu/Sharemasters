@@ -8,7 +8,7 @@ import { useStoreContext } from '../../utils/UserContext/UserContext';
 import Field from '../../components/Field/Field';
 import DropdownMenu from '../../components/Dropdown/Dropdown';
 import ItemImage from '../../components/ItemImage/ItemImage';
-import {uploadImageToDB, postListing, getCoordinates} from '../../utils/API/API';
+import {uploadImageToDB, postListing, getCoordinates, addOwned} from '../../utils/API/API';
 
 
 const ListingPage = (props) => {
