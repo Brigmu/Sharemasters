@@ -17,7 +17,22 @@ const reducer = (state, action) => {
         case CLEAR_USER:
             return {
                 ...state,
-                user: {}
+                user: {
+                    userId: "",
+                    id: "",
+                    username: "",
+                    firstName: "",
+                    lastName: "",
+                    email: "",
+                    coordinates: {
+                        lat: null,
+                        lng: null
+                    },
+                    address: "",
+                    city: "",
+                    state: "",
+                    zipCode: null
+                }
             }
     }
 }
