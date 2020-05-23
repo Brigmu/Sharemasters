@@ -118,9 +118,8 @@ const ListingPage = (props) => {
         //     postListing(data);
         // })}
 
-        // upated with userContext
+        // upated with userContext from authentication-pages
         const data = {
-            // manually putting in ownId, this will be provided through the usercontext
             ownerId: state.user._id,
             name: itemNameRef.current.value,
             description: descriptionRef.current.value,
