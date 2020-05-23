@@ -1,11 +1,13 @@
-import React, { useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './styles.css';
-import Field from '../../components/Field/Field';
-// import DatePicker from 'react-datepicker';
+// import Field from '../../components/Field/Field';
+import DatePicker from 'react-datepicker';
 import { useParams } from 'react-router-dom';
-import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
-import { updateItem, postAppointment, renterRequest, getItem} from '../../utils/API/API';
 import { useStoreContext } from '../../utils/UserContext/UserContext';
+import { Container } from "react-bulma-components";
+import { postAppointment, renterRequest, getItem, rentalCancel } from '../../utils/API/API';
+import "react-datepicker/dist/react-datepicker.css";
+
 
 function ItemRequestForm() {
     const [item, setItem] = useState({})
@@ -13,8 +15,9 @@ function ItemRequestForm() {
     const { id } = useParams();
     const startDateRef = useRef();
     const endDateRef = useRef();
-    const [startDate, setStartDate] = useState(new Date());
-    const [endDate, setEndDate] = useState(new Date());
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+    const [appointmentInfo, setAppointmentInfo] = useState({});
 
     // console.log(state.user._id);
     console.log(id);
@@ -32,26 +35,57 @@ function ItemRequestForm() {
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-
+        if (startDate > endDate) {
+            return alert('The start date cannot be after the end date!')
+        }
         const appointment = {
             itemId: id,
             // renter id will be the userId from user context for this field
-            renterId: state.user._id,
-            startDate: startDateRef.current.value,
-            endDate: endDateRef.current.value
+            
+            // previous code before merge
+            // renterId: state.user._id,
+            // startDate: startDateRef.current.value,
+            // endDate: endDateRef.current.value
+            renterId: "5ec24cc7c7e382486c6ff129",
+            startDate: startDate,
+            endDate: endDate
         }
-        console.log(appointment);
+ 
+            //submit data to appointments as a request to owner
+            postAppointment(appointment);
+            
+            //getting appointment information to update the the item information with the appointment id
+            setTimeout(() => {
+                getItem(id, (res) => {
+                    console.log(res)
+                    res = res[0].appointmentInfo[res[0].appointmentInfo.length - 1]._id
+                    console.log(res)
+                    let renterRequestUpdate = { 
+                        pendingRequest: true,
+                        appointments: res   
+                    } 
+                    renterRequest(id, renterRequestUpdate)
+                })
+                
+            }, 3000);
+            
 
-        
-        
-        //submit data to appointments as a request to owner
-        postAppointment(appointment);
         //update item pendingRequest to true
+        
         // first parameter of this function needs to be the userId from the usercontext
-        renterRequest({renterUserId: state.user._id, pendingRequest: true}, id)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
 
+        // also previous code before merge
+        // renterRequest({renterUserId: state.user._id, pendingRequest: true}, id)
+        // .then(res => console.log(res))
+        // .catch(err => console.log(err));
+        
+        // renterRequest("5ec24cc7c7e382486c6ff129", id)
+    }
+
+
+    const handleCancel = (e) => {
+        e.preventDefault();
+        rentalCancel(id);
 
     }
 
@@ -60,24 +94,36 @@ function ItemRequestForm() {
     }
 
     return (
-        <>
-        {!state.user ? <div>Please login to rent this item</div> : 
-        state.user._id == item.ownerId ? <div>This is your item </div> : <div className="notification">
-            <div className="title is-5">Request Rental</div>
+        // not sure if we still need this but keeping it commented for now -cna
+        // {!state.user ? <div>Please login to rent this item</div> : 
+        // state.user._id == item.ownerId ? <div>This is your item </div> : <div className="notification">
+        //     <div className="title is-5">Request Rental</div> 
+        <Container className="notification">
+            <div className="title is-4">Request Rental</div>
             <div className='item-request-form'>
-                <Field title='Start Date' placeholder='01/01/2020' reference={startDateRef} />
-                <Field title='End Date' placeholder='01/30/2020' reference={endDateRef} />
+                <div className="date-picker">
+                    <span className="title is-6">Start Date</span>
+                    <div>
+                        <DatePicker showPopperArrow={false} selected={startDate} onChange={date => setStartDate(date)} placeholderText="Please choose start date.."/> 
+                    </div>
+                </div> 
+                <div className="date-picker">
+                    <span className="title is-6">End Date</span>
+                    <div>
+                        <DatePicker showPopperArrow={false} selected={endDate} onChange={date => setEndDate(date)} minDate={startDate} placeholderText="Please choose end date.." />
+                    </div>
+                </div>
             </div>
+
             <div className="field is-grouped button-container">
                 <div className="control">
-                    <button className="button is-link" onClick={handleFormSubmit}>Submit</button>
+                    <button className="button is-primary" onClick={handleFormSubmit}>Submit</button>
                 </div>
                 <div className="control">
-                    <button className="button is-link is-light is-outlined">Cancel</button>
+                    <button className="button is-warning is-light" onClick={handleCancel}>Cancel</button>
                 </div>
             </div>
-        </div>}
-        </>
+        </Container>
     )
 }
 

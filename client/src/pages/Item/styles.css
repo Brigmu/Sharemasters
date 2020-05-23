@@ -40,7 +40,7 @@ h2 {
 button {
     margin: 10px 0 0 0;
 
-    width: 45%;
+    width: 100%;
 }
 
 .half-button {
@@ -48,3 +48,4 @@ button {
 
     margin: 10px 10px 0 0;
 }
+

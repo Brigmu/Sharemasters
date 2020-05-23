@@ -24,20 +24,22 @@ module.exports = {
           .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
-    //     db.Item.aggregate([
-    //     { $match: { _id : mongoose.Types.ObjectId(req.params.id) } },
-    //     { $lookup: {
-    //         from: "users",
-    //         localField: "ownerId",
-    //         foreignField: "userId",
-    //         as: "ownerInfo"
-    //     }},
-    // ])
-    //     // .populate("ownerInfo")
-    //     .then(data => res.json(data))
-    //     .catch(err => res.status(422).json(err));
-        db.Item.findById(req.params.id)
-        .populate('ownerId')
+        db.Item.aggregate([
+        { $match: { _id : mongoose.Types.ObjectId(req.params.id) } },
+        { $lookup: {
+            from: "users",
+            localField: "ownerId",
+            foreignField: "userId",
+            as: "ownerInfo"
+        }},
+        { $lookup: {
+            from: "appointments",
+            localField: "_id",
+            foreignField: "itemId",
+            as: "appointmentInfo"
+        }}
+    ])
+        // .populate("ownerInfo")
         .then(data => res.json(data))
         .catch(err => res.status(422).json(err));
     },
@@ -49,16 +51,38 @@ module.exports = {
         // })
         .catch(err => console.log(err));
     },
-    renterRequest: function(req, res) {
-        db.Item.findOneAndUpdate({ _id: mongoose.Types.ObjectId(req.params.id) }, { pending_request: true } )
-        .then(data => console.log(data))
-        .catch(err => res.status(422).json(err));
-    }
-    // ownerApprove: function(req, res) {
-    //     db.Item.findOneAndUpdate({ _id: req.params.id }, { pendingRequest: true,  })
+    // getAppointmentInfo: function(req, res) {
+    //     db.Item.aggregate([
+    //     { $match: { _id : mongoose.Types.ObjectId(req.params.id) } },
+    //     { $lookup: {
+    //         from: "appointments",
+    //         localField: "_id",
+    //         foreignField: "itemId",
+    //         as: "appointmentInfo"
+    //     }}
+    // ])
+    //     // .populate("ownerInfo")
     //     .then(data => res.json(data))
     //     .catch(err => res.status(422).json(err));
-    // }
+    // },
+    renterRequest: function(req, res) {
+        db.Item.findOneAndUpdate({ _id: req.params.id }, req.body )
+        .then(res => res.json(res))
+        .catch(err => res.status(422).json(err));
+    },
+
+    itemAppointmentCancelled: function(req, res) {
+        db.Item.findOneAndUpdate({ _id: req.params.id }, { pendingRequest: false, appointments: "" })
+        .then(res => console.log('Appointment Cancelled'))
+        .catch(err => res.status(422).json(err));
+    },
+
+
+    ownerApprove: function(req, res) {
+        db.Item.findOneAndUpdate({ _id: mongoose.Types.ObjectId(req.params.id) }, { pendingRequest: false, isRented: true } )
+        .then(data => res.json(data))
+        .catch(err => res.status(422).json(err));
+    }
 
 
 }

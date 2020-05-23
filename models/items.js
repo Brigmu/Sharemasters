@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const itemSchema = new mongoose.Schema({
     ownerId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Profile",
+        ref: 'Profile',
     },
     name: {
         type: String,
@@ -61,18 +61,18 @@ const itemSchema = new mongoose.Schema({
         default: false
     },
     appointments: {
-        current: [
-            {
+        // current: [
+        //     {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: "Appointments"
-            }
-        ],
-        history: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "Appointments"
-            }
-        ],
+            // }
+        // ],
+        // history: [
+        //     {
+        //         type: mongoose.Schema.Types.ObjectId,
+        //         ref: "Appointments"
+        //     }
+        // ],
     },
     active: {
         type: Boolean,
