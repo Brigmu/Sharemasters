@@ -13,7 +13,10 @@ const cors = require("cors")
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(__dirname + "/client/public"));
+// app.use(express.static(__dirname + "/client/public"));
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static(__dirname + "/client/build"));
+// }
 
 // adding cors so that frontend can talk to backend
 app.use(cors());

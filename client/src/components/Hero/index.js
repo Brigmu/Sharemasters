@@ -12,7 +12,7 @@ function Hero(props) {
                     <div className="container">
                         <div className="navbar-brand">
                         <a className="navbar-item">
-                            <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo" />
+                            {/* <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo" /> */}
                         </a>
                         {/* need to figure out how to get navbar to show in mobile */}
                         <span className="navbar-burger burger" data-target="navbarMenuHeroA">
@@ -31,7 +31,7 @@ function Hero(props) {
                                     Browse
                                 {/* <NavLink to="/listings" activeClassName="is-active">Browse</NavLink> */}
                                 </a>
-                                <a href="/profile" className="navbar-item">
+                                <a href="/signup" className="navbar-item" disabled>
                                     Profile
                                 {/* <NavLink to="/profile" activeClassName="is-active">Profile</NavLink> */}
                                 </a>
