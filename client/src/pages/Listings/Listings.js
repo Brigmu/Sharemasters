@@ -210,7 +210,7 @@ const Listings = (props) => {
     return (
         <FilteredContext.Provider value={filtered}>
             <div className='listings-page'>
-                <Nav/>
+                <Nav />
                 <section className = 'section'>
                     <Columns>
                         <Column size='is-2'>
