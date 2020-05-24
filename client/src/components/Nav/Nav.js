@@ -11,7 +11,9 @@ const Nav = (props) => {
 
 
     return (
-        <Navbar>
+        <Navbar
+            color = "primary"
+        >
             <Navbar.Brand>
                 <Navbar.Item>
                     <h1>SHAREISH</h1>
@@ -24,19 +26,22 @@ const Nav = (props) => {
                         {state.user ? state.user.username : ""}
                     </Navbar.Item>
                     <Navbar.Item>
-                        {state.user ? <LogoutButton /> : <SignUpButton />}
+                        {props.signup ? "" : <NavLink to="/newlisting" activeClassName="is-active">Post a Listing</NavLink>}
                     </Navbar.Item>
+                </Navbar.Container>
+                <Navbar.Container position="end">
                     <Navbar.Item>
                         <NavLink to="/" activeClassName="is-active">Home</NavLink>
                     </Navbar.Item>
                     <Navbar.Item>
                         <NavLink to="/profile" activeClassName="is-active">Profile</NavLink>
                     </Navbar.Item>
-                </Navbar.Container>
-                <Navbar.Container position="end">
-                    <Navbar.Item href="/">
-                        At the end
-                    </Navbar.Item>
+
+                    {props.signup ? "" : 
+                    <Navbar.Item>
+                        {state.user ? <LogoutButton /> : <SignUpButton />}
+                    </Navbar.Item>}
+
                 </Navbar.Container>
             </Navbar.Menu>
         </Navbar>      
