@@ -34,6 +34,8 @@ const reducer = (state, action) => {
                     zipCode: null
                 }
             }
+        default : 
+            return;
     }
 }
 

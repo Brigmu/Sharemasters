@@ -31,6 +31,10 @@ const reducer = (state, action) => {
                 ...state,
                 owned: []
             }
+        default :
+            return {
+                ...state
+            }
     }
 }
 

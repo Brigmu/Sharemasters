@@ -4,13 +4,11 @@ const appointmentController = require("../../controllers/appointmentController")
 router.route("/")
     .post(appointmentController.create)
 
-router.route("/:id")
-    .get(appointmentController.findById)
 
-// router.route("/cancel")
-//     .put(appointmentController.updateCancel)
+router.route("/cancel")
+    .put(appointmentController.updateCancel)
 
-// router.route("/return")
-//     .put(appointmentController.updateReturn)
+router.route("/return")
+    .put(appointmentController.updateReturn)
 
 module.exports = router;

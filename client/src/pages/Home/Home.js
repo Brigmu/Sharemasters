@@ -3,7 +3,7 @@ import './styles.css';
 
 //user context
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-import { SET_USER, CLEAR_USER } from "../../utils/UserContext/UserActions";
+import { SET_USER } from "../../utils/UserContext/UserActions";
 import {getCurrentUser, getProfile} from '../../utils/API/API';
 
 //pages
@@ -43,10 +43,8 @@ const Home = () => {
         if (!state.user) {
             getCurrentUser().then(res => {
                 if (res.data.user) {
-                    console.log(res.data.user);
                     getProfile(res.data.user._id)
                         .then(res => {
-                            console.log(res.data[0]);
                             setUserState(res.data[0]);
                     });
                 }
@@ -72,9 +70,9 @@ const Home = () => {
                 <Container>
                     <Columns>
                         {options.map(option =>  
-                            <Columns.Column>
+                            <Columns.Column key={option.link}>
                                 <Link to={"/" + option.link}>
-                                    <div key={option.link} className={"notification has-text-centered " + option.color}>
+                                    <div className={"notification has-text-centered " + option.color}>
                                     {option.message}
                                     </div>    
                                 </Link> 

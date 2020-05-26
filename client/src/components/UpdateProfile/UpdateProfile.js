@@ -1,10 +1,11 @@
-import React, {useRef, useState } from 'react';
+import React, {useRef, useState, useEffect } from 'react';
 import FormField from "../FormField/FormField";
 import FormControl from "../FormControl/FormControl";
 import FormIcon from "../FormIcon/FormIcon";
 import FormHelp from "../FormHelp/FormHelp";
 import { updateProfile } from '../../utils/API/API';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
+import {getCurrentUser, getProfile} from '../../utils/API/API';
 import { SET_USER } from "../../utils/UserContext/UserActions";
 
 const UpdateProfile = (props) => {
@@ -16,6 +17,20 @@ const UpdateProfile = (props) => {
             user: user
         });
     };
+
+    
+    useEffect(()=>{
+        if (!state.user) {
+            getCurrentUser().then(res => {
+                if (res.data.user) {
+                    getProfile(res.data.user._id)
+                        .then(res => {
+                            setUserState(res.data[0]);
+                    });
+                }
+            });
+        }
+    }, []);
 
     //profile fields refs
     const emailRef = useRef();
@@ -30,23 +45,32 @@ const UpdateProfile = (props) => {
         e.preventDefault();
 
         const updatedUser = {
-            address: addressRef.current.value,
-            city: cityRef.current.value,
-            state: stateRef.current.value,
-            zipCode: zipCodeRef.current.value,
-            email: emailRef.current.value,
+            address: addressRef.current.value.length > 0  ? addressRef.current.value : state.user.address,
+            city: cityRef.current.value.length > 0 ? cityRef.current.value : state.user.city,
+            state: stateRef.current.value.length > 0 ? stateRef.current.value : state.user.state,
+            zipCode: zipCodeRef.current.value.length > 0 ? zipCodeRef.current.value : state.user.zipCode,
+            email: emailRef.current.value.length > 0 ? emailRef.current.value : state.user.email,
         }
 
         updateProfile(state.user.userId, updatedUser)
         .then(() => {
             //updatesuccess
             setSignupError({});
-            console.log("User Updated");
-            setUserState(updatedUser);
+            alert("Profile Updated");
+            updateUserState();
         })
         .catch(err => {
             // update fail
             setSignupError(err.response.data.err);
+        });
+    }
+
+    const updateUserState = () => {
+        getCurrentUser().then(res => {
+            getProfile(res.data.user._id)
+                .then(res => {
+                    setUserState(res.data[0]);
+            });
         });
     }
 

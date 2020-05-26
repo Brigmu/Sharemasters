@@ -21,6 +21,7 @@ const connectEnsureLogin = require('connect-ensure-login');
 function App() {
   const [itemListings, setItemListings] = useState([]);
 
+<<<<<<< HEAD:client/src/App.js
   useEffect(() => {
     //API call
     //setItemListings(results)
@@ -30,6 +31,19 @@ function App() {
     })
     .catch(err => console.log(err));
   }, []);
+=======
+  // useEffect(() => {
+  //   //API call
+  //   //setItemListings(results)
+  //   fetch('/api/items')
+  //   .then(response => response.json())
+  //   .then(results => {
+  //     console.log(results);
+  //     setItemListings(results);
+  //   })
+  //   .catch(err => console.log(err));
+  // }, []);
+>>>>>>> MVP:create-react-express/client/src/App.js
 
   return (
     <UserProvider>

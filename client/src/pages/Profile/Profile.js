@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import 'react-bulma-components/dist/react-bulma-components.min.css';
+import React, { useState, useEffect } from "react";
+import { Button } from 'react-bulma-components/dist/react-bulma-components.min.css';
 
 //user context
 import { useStoreContext } from "../../utils/UserContext/UserContext";
@@ -136,6 +136,7 @@ const Profile = () => {
     }
 
     const setRentalsHelper = (items) => {
+<<<<<<< HEAD:client/src/pages/Profile/Profile.js
         // setItems({
         //     type: SET_RENTALS,
         //     rentals: items
@@ -147,16 +148,34 @@ const Profile = () => {
         //     type: SET_OWNED,
         //     owned: items
         // });
+=======
+        setItems({
+            type: SET_RENTALS,
+            rentals: items
+        });
+    };
+
+    const setOwnedHelper= (items) => {
+        setItems({
+            type: SET_OWNED,
+            owned: items
+        });
+>>>>>>> MVP:create-react-express/client/src/pages/Profile/Profile.js
     };
 
     const setAll = () => {
         getProfile(state.user.userId)
             .then(res => {
+<<<<<<< HEAD:client/src/pages/Profile/Profile.js
                 console.log(res.data);
                 // setRentalsHelper(res.data.rentals);
                 // setOwned(res.data.owned);
+=======
+                setRentalsHelper(res.data.rentals);
+                setOwnedHelper(res.data.owned);
+>>>>>>> MVP:create-react-express/client/src/pages/Profile/Profile.js
             })
-            .catch(err => {console.log(err.response)})
+            .catch(err => console.log(err.response))
     }
 
     useEffect(() => {
@@ -226,6 +245,7 @@ const Profile = () => {
                             </div>
                                 <div className='title is-5'>Total listings: {state.user ? state.user.owned.length : 'no listing'}</div>
                                 <div className='title is-5'>Items Renting: {state.user ? state.user.rentals.length : 'no listing'}</div>
+                                <Button href="/EditProfile"><i className={`fas fa-pencil`}></i></Button>
                             </div>}
                     </Container>
 
