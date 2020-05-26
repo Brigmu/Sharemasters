@@ -14,22 +14,29 @@ import Column from '../../components/Column/Column';
 import ItemCard from '../../components/ItemCard/ItemCard';
 import Card from '../../components/Card/index';
 import Title from '../../components/Title/Title';
-import {getAllItems} from '../../utils/API/API';
+import {getAllUnrentedItems, getAllItems} from '../../utils/API/API';
 
 const Listings = (props) => {
     const itemListings = useContext(ItemContext);
     // const allItems = getAllItems();
     // console.log(allItems);
+    const filterRef = useRef();
 
     useEffect(() => {
         console.log('happened')
-        getAllItems()
+        getAllUnrentedItems()
+        // getAllItems()
         .then(res => {
             console.log(res.data);
             console.log('function happened')
             setAllItems(res.data);
         })
         .catch(err => console.log(err))
+        const serachTerm = localStorage.getItem('searchTerm');
+        console.log(serachTerm);
+        setFilter(serachTerm);
+        filterRef.current.value = serachTerm;
+        localStorage.removeItem('searchTerm');
     }, [])
 
     const [allItems, setAllItems] = useState([])
@@ -47,7 +54,11 @@ const Listings = (props) => {
     useEffect(()=> {
         switch(filterType){
             case 'name':
-                const filterKeyword = new RegExp(filter);
+                let lowercaseFilter;
+                if(filter) {
+                    lowercaseFilter = filter.toLowerCase();
+                }
+                const filterKeyword = new RegExp(lowercaseFilter);
                 let filteredListings = allItems.filter(item => {
                     return filterKeyword.test(item.name.toLowerCase());
                 });
@@ -210,7 +221,7 @@ const Listings = (props) => {
     return (
         <FilteredContext.Provider value={filtered}>
             <div className='listings-page'>
-                <Nav>
+                <Nav currentPage ='browse'>
                 </Nav>
                 <section className = 'section'>
                     <Columns>
@@ -243,7 +254,7 @@ const Listings = (props) => {
                                 
                                 {/* <label>Filter:</label> */}
                                 
-                                <input type='text' id='filter' onChange={e => setFilter(e.target.value)}></input>
+                                <input type='text' id='filter' ref={filterRef} onChange={e => setFilter(e.target.value)}></input>
                                 <hr></hr>
                             <div className="title is-4">
                                 Category List

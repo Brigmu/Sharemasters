@@ -16,8 +16,8 @@ const reducer = (state, action) => {
             };
         case CLEAR_USER:
             return {
-                ...state,
-                user: {}
+                // ...state,
+                // user: {}
             }
     }
 }

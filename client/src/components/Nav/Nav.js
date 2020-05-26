@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './styles.css';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
 import LogoutButton from "../LogoutButton/LogoutButton";
@@ -20,15 +20,29 @@ const Nav = (props) => {
                 <div className="navbar-item">
                     {state.user ? state.user.username : ""}
                 </div>
+                {props.currentPage !== 'signup' ?
                 <div className="navbar-item">
                     {state.user ? <LogoutButton /> : <SignUpButton />}
                 </div>
+                : <> </>}
                 <div className="navbar-item">
-                    <NavLink to="/" activeClassName="is-active">Home</NavLink>
+                    <Link to="/" activeclassname="is-active">Home</Link>
                 </div>
+                {props.currentPage !== 'browse' ? 
                 <div className="navbar-item">
-                    <NavLink to="/profile" activeClassName="is-active">Profile</NavLink>
+                    <Link to="/listings" activeclassname="is-active">Browse</Link>
                 </div>
+                : <> </>}
+                {props.currentPage !== 'post' ? 
+                <div className="navbar-item">
+                    <Link to="/newlisting" activeclassname="is-active">Post</Link>
+                </div>
+                : <> </>}
+                {props.currentPage !== 'profile' ? 
+                <div className="navbar-item">
+                    <Link to="/profile" activeclassname="is-active">Profile</Link>
+                </div>
+                : <> </>}
                 {/* fix burger menu for mobile */}
                 <div className="navbar-item">
                     <div className="burger">

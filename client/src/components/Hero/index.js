@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import SearchBar from "../SearchBar";
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-import { NavLink } from "react-router-dom"; 
+import { Link, useHistory } from "react-router-dom"; 
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 function Hero(props) {
+    const [state, dispatch] = useStoreContext();
+
+    const searchTermRef = useRef();
+    const history = useHistory();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+        console.log(searchTermRef.current.value);
+        localStorage.setItem('searchTerm', searchTermRef.current.value);
+        history.push('/listings');
+    }
     return (
         <section className="hero is-primary is-small is-mobile">
             {/* <!-- Hero head: will stick at the top --> */}
@@ -23,22 +36,23 @@ function Hero(props) {
                         </div>
                         <div id="navbarMenuHeroA" className="navbar-menu">
                             <div className="navbar-end">
-                                <a href="/" className="navbar-item">
+                                <Link to={'/'}><div className = 'navbar-item'>Home</div></Link>
+                                <Link to={'/listings'}><div className = 'navbar-item'>Browse</div></Link>
+                                <Link to={'/profile'}><div className = 'navbar-item'>Profile</div></Link>
+                                <Link to={'/newlisting'}><div className = 'navbar-item'>Post</div></Link>
+                                {/* <a href="/" className="navbar-item">
                                     Home
-                                {/* <NavLink to="/" activeClassName="is-active">Home</NavLink> */}
                                 </a>
                                 <a href="/listings" className="navbar-item">
                                     Browse
-                                {/* <NavLink to="/listings" activeClassName="is-active">Browse</NavLink> */}
                                 </a>
                                 <a href="/profile" className="navbar-item">
                                     Profile
-                                {/* <NavLink to="/profile" activeClassName="is-active">Profile</NavLink> */}
-                                </a>
-                                <span className="navbar-item">
+                                </a> */}
+                                <span className="navbar-item">{state.user ? <LogoutButton></LogoutButton> :
                                 <a href="/signup" className="button is-primary is-inverted">
                                     <span>Log In</span>
-                                </a>
+                                </a>}
                                 </span>
                             </div>
                         </div>
@@ -57,7 +71,7 @@ function Hero(props) {
                 </h2>
                 </div>
                 <br></br>
-                <SearchBar />
+                <SearchBar reference={searchTermRef} handleSearch={handleSearch}/>
             </div>
         </section>
     );

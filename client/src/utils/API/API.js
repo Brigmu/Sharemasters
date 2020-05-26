@@ -22,13 +22,11 @@ export const getAllItems = () => {
     return axios.get('/api/items/all');
 }
 
+export const getAllUnrentedItems = () => {
+    return axios.get('/api/items/all/unrented');
+}
+
 export const getItem = (id) => {
-    // fetch('/api/items/' + id)
-    // .then(response => response.json())
-    // .then(data => {
-    //     cb(data);
-    // })
-    // .catch(err => console.log(err));
     return axios.get('/api/items/' + id)
 }
 
@@ -40,17 +38,9 @@ export const postAppointment = (data) => {
     return axios.post('/api/appointments', data)
 }
 
-
-
-// export const getUserData = (id, cb) => {
-//     fetch(`/api/user/${id}`)
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log(data);
-//         cb(data);
-//     })
-//     .catch(err => console.log(err));
-// }
+export const removeAppointment = (itemId, appointmentData) => {
+    return axios.put(`/api/items/appointments/${itemId}`, appointmentData)
+}
 
 export const postListing = (data) => {
     return axios.post('/api/items', data);

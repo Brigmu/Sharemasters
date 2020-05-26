@@ -11,22 +11,23 @@ import Hero from '../../components/Hero';
 import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
 import { Link } from 'react-router-dom';
 
+
 const Home = () => {
     const [state, dispatch] = useStoreContext();
     const options = [
         {
-            message:"Browse Listings",
-            color: "is-primary is-light is-outlined",
-            link: "listings"
-        },
-        {
             message: "Post a Listing",
-            color: "is-primary",
+            color: "is-primary is-light is-outlined",
             link:"newlisting"
         },
         {
+            message:"Browse Listings",
+            color: "is-primary",
+            link: "listings"
+        },
+        {
             message: "View Your Profile",
-            color: "",
+            color: "is-primary is-light is-outlined",
             link: "profile"
         }
     ];

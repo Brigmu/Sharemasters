@@ -6,7 +6,7 @@ import NavLogin from '../../components/NavLogin/NavLogin';
 const Signup = () => {
     return (
         <div className='signup-page'>
-            <Nav>
+            <Nav currentPage = 'signup'>
                 <NavLogin />
             </Nav>
             <UserForm />

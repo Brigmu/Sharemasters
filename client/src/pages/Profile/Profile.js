@@ -6,7 +6,7 @@ import { useStoreContext } from "../../utils/UserContext/UserContext";
 import { useUserItemsContext } from "../../utils/UserItemsContext/UserItemsContext";
 import { UserItemsProvider } from "../../utils/UserItemsContext/UserItemsContext";
 import { SET_OWNED, SET_RENTALS } from "../../utils/UserItemsContext/UserItemsActions";
-import { getProfile, addRental, removeRental } from '../../utils/API/API';
+import { getProfile, addRental, removeRental, removeAppointment } from '../../utils/API/API';
 
 import Nav from "../../components/Nav/Nav";
 import NavTabs from "../../components/NavTabs/NavTabs";
@@ -36,10 +36,6 @@ const Profile = () => {
     const [state, dipatch] = useStoreContext();
     // const [userItems, setItems] = useUserItemsContext(); //userItems.rented and userItems.owned
     const history = useHistory();
-
-    // if(!state.user) {
-    //     history.push('/signup');
-    // }
 
     console.log(state);
     console.log(state.user);
@@ -90,6 +86,7 @@ const Profile = () => {
         confirmReturn(id, statusData)
         .then(res => {
             //pull item from rented user
+            removeAppointment(id, {appointmendId: res.data.currentAppointment[0]})
             removeRental(requestId, {itemId: id})
             const filtered = filterOffItem(id, state.user.owned)
             filterReturns(state.user.rentals)
@@ -167,14 +164,12 @@ const Profile = () => {
         } else {
             history.push('/signup')
         }
-        // filterRental()
-        // filterReturns()
     }, [])
 
     return (
         <UserItemsProvider>
             <div className='profile-page'>
-                <Nav />
+                <Nav currentPage = 'profile'/>
                 <br />
                 <Container>
                     <NavTabs handlePageChange={handlePageChange} tabs={['Profile', 'Rentals', 'Requests', 'Returns']} />
