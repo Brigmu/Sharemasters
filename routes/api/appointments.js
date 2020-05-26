@@ -6,7 +6,7 @@ router.route("/")
 
 
 router.route("/cancel")
-    .put(appointmentController.updateCancel)
+    .put(appointmentController.updateCancelled)
 
 router.route("/return")
     .put(appointmentController.updateReturn)

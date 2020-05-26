@@ -21,17 +21,6 @@ const connectEnsureLogin = require('connect-ensure-login');
 function App() {
   const [itemListings, setItemListings] = useState([]);
 
-<<<<<<< HEAD:client/src/App.js
-  useEffect(() => {
-    //API call
-    //setItemListings(results)
-    getAllItems()
-    .then(data => {
-      console.log(data);
-    })
-    .catch(err => console.log(err));
-  }, []);
-=======
   // useEffect(() => {
   //   //API call
   //   //setItemListings(results)
@@ -43,7 +32,6 @@ function App() {
   //   })
   //   .catch(err => console.log(err));
   // }, []);
->>>>>>> MVP:create-react-express/client/src/App.js
 
   return (
     <UserProvider>
@@ -53,6 +41,7 @@ function App() {
         <Switch>
           <Route exact path = '/' component={Home} />
           <Route exact path = '/signup' component={Signup} />
+          <Route exact path = '/login' component={Signup} />
           <Route exact path = '/listings' component={Listings} />
           <Route exact path = '/newlisting' component={ListingPage} />
           <Route exact path = '/items/:id' component={ItemPage} />

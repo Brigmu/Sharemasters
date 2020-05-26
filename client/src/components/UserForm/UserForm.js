@@ -4,11 +4,11 @@ import FormField from "../FormField/FormField";
 import FormControl from "../FormControl/FormControl";
 import FormIcon from "../FormIcon/FormIcon";
 import FormHelp from "../FormHelp/FormHelp";
-import StatesDropdown from "../StatesDropdown/";
+import StatesDropdown from "../StatesDropdown/StatesDropdown";
 import { loginUser, signupUser, getCurrentUser, createProfile, getProfile, deleteUser } from '../../utils/API/API';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
 import { SET_USER } from "../../utils/UserContext/UserActions";
-import { Button, Section, Columns, Column } from "react-bulma-components";
+import { Button, Section, Columns} from "react-bulma-components";
 
 
 const UserForm = (props) => {
@@ -82,7 +82,7 @@ const UserForm = (props) => {
             })
             .catch(err => {
                 // signup fail
-                console.log(err.message);
+                console.log(err.response);
                 setSignupError(err.response.data.err ? err.response.data.err : err.response.data);
             });
     }
@@ -155,8 +155,8 @@ const UserForm = (props) => {
                             </FormControl>
                         </FormField>
                     </Columns.Column>
-                    <Columns.Column>
-                        <FormField label="Zip Code" className="is-narrow">
+                    <Columns.Column className="is-narrow">
+                        <FormField label="Zip Code">
                             <FormControl>
                                 <input className={`input ${signupErrorState.zipCode ? "is-danger" : ""}`} type="text" placeholder="98001" ref={zipCodeRef} />
                             </FormControl>

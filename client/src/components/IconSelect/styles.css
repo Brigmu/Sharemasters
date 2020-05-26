@@ -1,6 +1,6 @@
-.user-form{
-    max-width: 500px;
-    height: 150px;
+
+img .selected {
+    border: 5px solid blue;
 }
 
 .form-div{

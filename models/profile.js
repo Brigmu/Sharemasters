@@ -58,7 +58,7 @@ const ProfileSchema = new Schema({
   ],
   icon: {
     type: String,
-    default: "octopus.png"
+    default: "./assets/icons/octopus.png"
   },
   createdAt: {
     type: Date,
@@ -66,6 +66,6 @@ const ProfileSchema = new Schema({
   }
 });
 
-const Profile = mongoose.model("Profiles", ProfileSchema);
+const Profile = mongoose.model("Profile", ProfileSchema);
 
 module.exports = Profile;

@@ -34,15 +34,15 @@ const Profile = () => {
     const [rentals, setRentals] = useState([]);
     const [returns, setReturns] = useState([]);
     const [state, dipatch] = useStoreContext();
-    // const [userItems, setItems] = useUserItemsContext(); //userItems.rented and userItems.owned
+    const [userItems, setItems] = useUserItemsContext(); //userItems.rented and userItems.owned
     const history = useHistory();
 
-    // if(!state.user) {
-    //     history.push('/signup');
-    // }
+    useEffect(()=>{
+        if(!state.user) {
+            history.push('/signup');
+        }
+    }, []);
 
-    console.log(state);
-    console.log(state.user);
 
     const [selected, setSelected] = useState('Profile');
 
@@ -136,19 +136,6 @@ const Profile = () => {
     }
 
     const setRentalsHelper = (items) => {
-<<<<<<< HEAD:client/src/pages/Profile/Profile.js
-        // setItems({
-        //     type: SET_RENTALS,
-        //     rentals: items
-        // });
-    };
-
-    const setOwned= (items) => {
-        // setItems({
-        //     type: SET_OWNED,
-        //     owned: items
-        // });
-=======
         setItems({
             type: SET_RENTALS,
             rentals: items
@@ -160,20 +147,13 @@ const Profile = () => {
             type: SET_OWNED,
             owned: items
         });
->>>>>>> MVP:create-react-express/client/src/pages/Profile/Profile.js
     };
 
     const setAll = () => {
         getProfile(state.user.userId)
             .then(res => {
-<<<<<<< HEAD:client/src/pages/Profile/Profile.js
-                console.log(res.data);
-                // setRentalsHelper(res.data.rentals);
-                // setOwned(res.data.owned);
-=======
                 setRentalsHelper(res.data.rentals);
                 setOwnedHelper(res.data.owned);
->>>>>>> MVP:create-react-express/client/src/pages/Profile/Profile.js
             })
             .catch(err => console.log(err.response))
     }
@@ -192,6 +172,7 @@ const Profile = () => {
 
     return (
         <UserItemsProvider>
+            { state.user ? 
             <div className='profile-page'>
                 <Nav />
                 <br />
@@ -234,9 +215,9 @@ const Profile = () => {
                             : <div className="box">
                             <div className="title">Username: {state.user ? state.user.username : <></>}</div>
                             <br />
-                            {/* <figure class="image is-128x128">
-                                <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" alt="" />
-                            </figure> */}
+                            <figure class="image is-32x32">
+                                <img class="is-rounded" src={state.user.icon}/>
+                            </figure>
                             <br />
                             <div className="content">
                                 <div className="title is-5">Name: {state.user ? state.user.firstName: <></>} {state.user ? state.user.lastName: <></>}
@@ -251,9 +232,8 @@ const Profile = () => {
 
 
                 </Section>
-            </div>
+            </div> : <div></div> }
         </UserItemsProvider>
-        
     )
 }
 

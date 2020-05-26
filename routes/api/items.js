@@ -7,8 +7,8 @@ router.route("/:id")
   // .get(itemController.getAppointmentInfo)
   .put(itemController.renterRequest)
 
-router.route("/:id/rental-cancel")
-  .put(itemController.itemAppointmentCancelled)
+// router.route("/:id/rental-cancel")
+//   .put(itemController.itemAppointmentCancelled)
 
   // will make isRented true and pendingRequest false
 // router.route("/:id/rental-approved")

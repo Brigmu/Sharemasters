@@ -45,12 +45,7 @@ const NavLogin = () => {
                     getProfile(res.data.user._id)
                         .then(res => {
                             setUserState(res.data[0]);
-<<<<<<< HEAD:client/src/components/NavLogin/NavLogin.js
-                            history.push("/");
-                            // history.goBack();
-=======
-                            history.push("/editprofile");
->>>>>>> MVP:create-react-express/client/src/components/NavLogin/NavLogin.js
+                            history.push("/editprofile"); //need to change before final push
                     });
                 });
             })
@@ -64,34 +59,6 @@ const NavLogin = () => {
 
     return (
         <div className="container">
-<<<<<<< HEAD:client/src/components/NavLogin/NavLogin.js
-            <FormField fieldClass="is-horizontal">
-                <FormControl controlClass="has-icons-left">
-                    <input 
-                        className={`input ${ loginErrorState.error ? "is-danger" : "" }`}
-                        type="text"
-                        placeholder="Username"
-                        ref={usernameLoginRef} />
-                    <FormIcon size="small" side="left" icon="user" />
-                </FormControl>
-            </FormField>
-            <FormField fieldClass="is-horizontal">
-                <FormControl controlClass="has-icons-left has-icons-right">
-                    <input 
-                        className={`input ${ loginErrorState.error ? "is-danger" : "" }`}
-                        type="password"
-                        placeholder="Enter a secure password"
-                        ref={passwordLoginRef} />
-                    <FormIcon size="small" side="left" icon="lock" />
-                    <FormIcon size="small" side="right" icon="exclamation-triangle" />
-                </FormControl>
-            </FormField>
-            <FormField fieldClass="is-horizontal">
-                <FormControl>
-                    <button className="button is-info" onClick={handleLogin}>Log In</button>
-                </FormControl>
-            </FormField>
-=======
             <Columns>
                 <Columns.Column>
                     <FormField fieldClass="is-horizontal">
@@ -110,7 +77,7 @@ const NavLogin = () => {
                         <FormControl controlClass="has-icons-left has-icons-right">
                             <input 
                                 className={`input ${ loginErrorState.error ? "is-danger" : "" }`}
-                                type="text"
+                                type="password"
                                 placeholder="Password"
                                 ref={passwordLoginRef} />
                             <FormIcon size="small" side="left" icon="lock" />
@@ -122,7 +89,6 @@ const NavLogin = () => {
                     <Button style={ { width: "75px" } } className="button is-info" onClick={handleLogin}>Log In</Button>
                 </Columns.Column>
             </Columns>
->>>>>>> MVP:create-react-express/client/src/components/NavLogin/NavLogin.js
         </div>
     )
 }
