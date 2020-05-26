@@ -31,7 +31,8 @@ const reducer = (state, action) => {
                     address: "",
                     city: "",
                     state: "",
-                    zipCode: null
+                    zipCode: null,
+                    icon: "octopus.png"
                 }
             }
         default : 
@@ -54,7 +55,8 @@ const UserProvider = ({ value = [], ...props }) => {
         address: "",
         city: "",
         state: "",
-        zipCode: null
+        zipCode: null,
+        icon: "octopus.png"
     });
 
     return <Provider value={[state, dispatch]} {...props} />;

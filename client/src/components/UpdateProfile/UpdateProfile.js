@@ -3,6 +3,8 @@ import FormField from "../FormField/FormField";
 import FormControl from "../FormControl/FormControl";
 import FormIcon from "../FormIcon/FormIcon";
 import FormHelp from "../FormHelp/FormHelp";
+import StatesDropdown from "../StatesDropdown/";
+import IconDropdown from "../IconDropdown/IconDropdown";
 import { updateProfile } from '../../utils/API/API';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
 import { getCurrentUser, getProfile } from '../../utils/API/API';
@@ -18,7 +20,6 @@ const UpdateProfile = (props) => {
         });
     };
 
-    
     useEffect(()=>{
         if (!state.user) {
             getCurrentUser().then(res => {
@@ -51,6 +52,7 @@ const UpdateProfile = (props) => {
             state: stateRef.current.value.length > 0 ? stateRef.current.value : state.user.state,
             zipCode: zipCodeRef.current.value.length > 0 ? zipCodeRef.current.value : state.user.zipCode,
             email: emailRef.current.value.length > 0 ? emailRef.current.value : state.user.email,
+            icon: iconRef.current.value.length > 0 ? iconRef.current.value : state.user.icon
         }
 
         updateProfile(state.user.userId, updatedUser)
@@ -78,6 +80,11 @@ const UpdateProfile = (props) => {
     return (
         <section className="section">
             <div className="container notification is-info is-light">
+                <FormField label="Profile Icon">
+                    <FormControl>
+                        <IconDropdown iconRef={iconRef}></IconDropdown>
+                    </FormControl>
+                </FormField>
                 <FormField label="First Name" >
                     <FormControl>
                         <div>{state.user.firstName}</div>
@@ -101,7 +108,7 @@ const UpdateProfile = (props) => {
                     </FormField>
                     <FormField label="State">
                         <FormControl>
-                            <input className={`input ${signupErrorState.state ? "is-danger" : ""}`} type="text" placeholder="Washington" ref={stateRef} />
+                            <StatesDropdown stateRef={stateRef}></StatesDropdown>
                         </FormControl>
                     </FormField>
                     <FormField label="Zip Code">

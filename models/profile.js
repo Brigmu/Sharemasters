@@ -57,7 +57,8 @@ const ProfileSchema = new Schema({
     }
   ],
   icon: {
-    type: String
+    type: String,
+    default: "octopus.png"
   },
   createdAt: {
     type: Date,
