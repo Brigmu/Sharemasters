@@ -1,9 +1,15 @@
 import React from "react";
 import SearchBar from "../SearchBar";
 import { useStoreContext } from "../../utils/UserContext/UserContext";
+import LogoutButton from "../LogoutButton/LogoutButton";
+import SignUpButton from '../SignUpButton';
+import { useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom"; 
 
 function Hero(props) {
+    const [state, dispatch] = useStoreContext();
+    const location = useLocation();
+
     return (
         <section className="hero is-primary is-small is-mobile">
             {/* <!-- Hero head: will stick at the top --> */}
@@ -36,9 +42,7 @@ function Hero(props) {
                                 {/* <NavLink to="/profile" activeClassName="is-active">Profile</NavLink> */}
                                 </a>
                                 <span className="navbar-item">
-                                <a href="/signup" className="button is-primary is-inverted">
-                                    <span>Log In</span>
-                                </a>
+                                    {state.user ? <LogoutButton /> : <SignUpButton />}
                                 </span>
                             </div>
                         </div>

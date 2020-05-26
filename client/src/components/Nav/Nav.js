@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavLink } from "react-router-dom";
 import './styles.css';
 import { useLocation } from "react-router-dom";
@@ -16,13 +16,17 @@ const Nav = (props) => {
                 <div className="navbar-item">
                     Logo Image
                 </div>
+
             </div>
             <div className="navbar-item">
                 {props.children}
             </div>
             <div className="navbar-end">
-                <div className="navbar-item">
-                    {state.user ? state.user.username : ""}
+                <div className="navbar-item is-hidden-mobile">
+                    { state.user ? state.user.username : ""} 
+                </div>
+                <div className="navbar-item is-hidden-mobile">
+                    <img src={state.user ? state.user.icon : ""} />
                 </div>
                 <div className="navbar-item">
                     {state.user ? <LogoutButton /> : location.pathname !== "/signup" ? <SignUpButton /> : <div></div> }

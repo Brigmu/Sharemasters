@@ -86,7 +86,7 @@ const NavLogin = () => {
                     </FormField>
                 </Columns.Column>
                 <Columns.Column className="is-narrow">
-                    <Button style={ { width: "75px" } } className="button is-info" onClick={handleLogin}>Log In</Button>
+                    <Button style={ { width: "75px", marginTop: "8px"} } className="button is-info" onClick={handleLogin}>Log In</Button>
                 </Columns.Column>
             </Columns>
         </div>
