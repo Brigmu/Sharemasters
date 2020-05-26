@@ -5,7 +5,7 @@ import FormIcon from "../FormIcon/FormIcon";
 import FormHelp from "../FormHelp/FormHelp";
 import { updateProfile } from '../../utils/API/API';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-import {getCurrentUser, getProfile} from '../../utils/API/API';
+import { getCurrentUser, getProfile } from '../../utils/API/API';
 import { SET_USER } from "../../utils/UserContext/UserActions";
 
 const UpdateProfile = (props) => {
@@ -38,6 +38,7 @@ const UpdateProfile = (props) => {
     const cityRef = useRef();
     const stateRef = useRef();
     const zipCodeRef = useRef();
+    const iconRef = useRef();
 
     const [signupErrorState, setSignupError] = useState({});
 
