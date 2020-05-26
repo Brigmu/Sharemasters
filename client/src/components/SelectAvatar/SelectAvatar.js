@@ -31,7 +31,7 @@ const SelectAvatar = (props) => {
         e.preventDefault();
 
         const updatedUser = {
-            avatar: `/images/${selected}.png`
+            icon: `/images/${selected}.png`
         }
 
         updateProfile(state.user.userId, updatedUser)

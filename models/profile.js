@@ -58,7 +58,7 @@ const ProfileSchema = new Schema({
       ref: "Item"
     }
   ],
-  avatar: {
+  icon: {
     type: String
   },
   createdAt: {
