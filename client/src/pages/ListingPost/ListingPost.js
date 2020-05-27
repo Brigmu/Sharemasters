@@ -65,7 +65,51 @@ const ListingPage = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(category);
+        // let address;
+        // let city;
+        // let addressState;
+        // let zipcode;
+        // if(locationPref === 'Use my location') {
+        //     address = state.user.address;
+        //     city = state.user.city;
+        //     addressState = state.user.state;
+        //     zipcode = state.user.zipCode
+        // } else {
+        //     address = streetRef.current.value;
+        //     city = cityRef.current.value;
+        //     addressState = stateRef.current.value;
+        //     zipcode = parseInt(zipcodeRef.current.value)
+        // }
+        // const data = {
+        //     // manually putting in ownId, this will be provided through the usercontext
+        //     ownerId: state.user._id,
+        //     name: itemNameRef.current.value,
+        //     description: descriptionRef.current.value,
+        //     category: category,
+        //     address: address,
+        //     city: city,
+        //     state: addressState,
+        //     zipCode: zipcode,
+        //     fullAddress: `${address} ${city} ${addressState} ${zipcode}`,
+        //     coordinates: {
+        //         lat: 47.733,
+        //         lng: -122.313
+        //     },
+        //     price: priceRef.current.value,
+        //     img: image,
+        //     pendingRequest: false,
+        //     isRented: false,
+        //     active: true,
+        // }
+        // console.log(data);
+        // postListing(data)
+        // .then(res => {
+        //     console.log(res);
+        //     addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
+        //     .then(res => console.log(res))
+        //     .catch(err => console.log(err))
+        // })
+        // .catch(err => console.log(err));
         if (locationPref === 'Use my location') {
             const data = {
                 ownerId: state.user._id,
@@ -180,7 +224,7 @@ const ListingPage = (props) => {
     }
     return (
         <div className = 'listing-page'>
-            <Nav />
+            <Nav currentPage ='post'/>
             <section className='section'>
                 <div className='container notification is-info is-light'>
                     <Field title='Item Name' placeholder='lawnmower' reference={itemNameRef}/>
@@ -195,10 +239,14 @@ const ListingPage = (props) => {
                         let geolocateLng = data.coords.longitude.toFixed(3)
                         setLat(geolocateLat)
                         setLng(geolocateLng)}) : <> </>}
+                    {/* {locationPref === 'Use my location' ? <Field disabled={true} value={state.user.address}/> : <> </>}
+                    {locationPref === 'Use my location' ? <Field disabled={true} value={state.user.city}/> : <> </>}
+                    {locationPref === 'Use my location' ? <Field disabled={true} value={state.user.state}/> : <> </>}
+                    {locationPref === 'Use my location' ? <Field disabled={true} value={state.user.zipCode}/> : <> </>} */}
                     {locationPref === 'Enter a location' ? <Field placeholder='Street' reference={streetRef} /> : <> </>}
                     {locationPref === 'Enter a location' ? <Field placeholder='City' reference={cityRef} /> : <> </>}
-                    {locationPref === 'Enter a location' ? <Field placeholder='State' reference={stateRef} /> : <> </>}
-                    {locationPref === 'Enter a location' ? <Field placeholder='Zipcode' reference={zipcodeRef} /> : <> </>}
+                    {locationPref === 'Enter a location' ? <Field placeholder='State' reference={stateRef} maxlength={2}/> : <> </>}
+                    {locationPref === 'Enter a location' ? <Field placeholder='Zipcode' reference={zipcodeRef} maxlength={5}/> : <> </>}
                     <div className='field'>
                         <label className="label">Item Image</label>
                         <ItemImage image={image} uploadImage={uploadImage}/>

@@ -16,15 +16,14 @@ function SearchBar(props) {
                         type="text"
                         placeholder="What are you looking for?"
                         id="term"
+                        ref={props.reference}
                     />
                 </div>
                 <div className="control">
-                    <button className="button is-info" 
-                    // onClick={props.handleFormSubmit}
-                    >
-                    <span className="icon">
-                        <i className="fas fa-search"></i>
-                    </span>
+                    <button className="button is-info" onClick={props.handleSearch}>
+                        <span className="icon">
+                            <i className="fas fa-search"></i>
+                        </span>
                     </button>
                 </div>
             </form>

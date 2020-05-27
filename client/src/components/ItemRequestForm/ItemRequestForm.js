@@ -5,32 +5,16 @@ import Field from '../../components/Field/Field';
 import { useParams } from 'react-router-dom';
 import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
 import { updateItem, postAppointment, renterRequest } from '../../utils/API/API';
+import { useStoreContext } from '../../utils/UserContext/UserContext';
 
 function ItemRequestForm() {
     const { id } = useParams();
     const startDateRef = useRef();
     const endDateRef = useRef();
-<<<<<<< HEAD
-    const [startDate, setStartDate] = useState();
-    const [endDate, setEndDate] = useState();
-    const [appointmentInfo, setAppointmentInfo] = useState({});
-
-    // console.log(state.user._id);
-    // console.log(id);
-
-    // useEffect(() => {
-    //     getItem(id)
-    //     .then(res => {
-    //         console.log('hi from useEffect/getItem in ItemRequestForm')
-    //         console.log(res.data);
-    //         setItem(res.data)
-    //     })
-            
-    // }, []);
-=======
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
->>>>>>> authentication-pages
+    const [appointmentInfo, setAppointmentInfo] = useState({});
+    const [state, dispatch] = useStoreContext();
 
 
     const handleFormSubmit = (e) => {
@@ -39,7 +23,6 @@ function ItemRequestForm() {
         const appointment = {
             itemId: id,
             // renter id will be the userId from user context for this field
-<<<<<<< HEAD
             
             // previous code before merge
             renterId: state.user._id,
@@ -48,21 +31,24 @@ function ItemRequestForm() {
             // renterId: "5ec24cc7c7e382486c6ff129",
             startDate: startDate,
             endDate: endDate
-=======
-            renterId: "5ec24cc7c7e382486c6ff129",
-            startDate: startDateRef.current.value,
-            endDate: endDateRef.current.value
->>>>>>> authentication-pages
         }
         console.log(appointment);
 
         
         
         //submit data to appointments as a request to owner
-        postAppointment(appointment);
+        postAppointment(appointment)
+        .then(res => {
+            const appointmentId = res.data._id;
+            console.log(appointmentId);
+            renterRequest({renterUserId: state.user._id, pendingRequest: true, $push: {currentAppointment: appointmentId}}, id)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+        })
         //update item pendingRequest to true
         // first parameter of this function needs to be the userId from the usercontext
-        renterRequest("5ec24cc7c7e382486c6ff129", id)
+
+        
 
 
     }

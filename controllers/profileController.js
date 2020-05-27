@@ -11,9 +11,18 @@ module.exports = {
     },
     findOne: function(req, res) {
         db.Profile.find({ userId: req.params.id })
-            .populate("owned")
-            .populate("rentals")
-            .populate("rentalHistory")
+            .populate({path: "owned", populate: {
+                path: 'currentAppointment',
+                model: 'Appointment'
+            }})
+            .populate({path:"rentals", populate: {
+                path: 'currentAppointment',
+                model: 'Appointment'
+            }})
+            .populate({path: "rentalHistory", populate: {
+                path: 'currentAppointment',
+                model: 'Appointment'
+            }})
             .then(data => res.json(data))
             .catch(err => res.status(422).json(err));
             
@@ -45,8 +54,13 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     addOwned: function(req, res) {
-        db.Profile.update({ _id: req.params.id }, { $push: { owned: req.body.itemId }})
+    db.Profile.update({ _id: req.params.id }, { $push: { owned: req.body.itemId }})
+        .then(data => res.json(data))
+    .catch(err => res.status(422).json(err));
+    } ,
+    removeRental: function(req, res) {
+        db.Profile.update({ _id: req.params.id }, { $pull: { rentals: req.body.itemId }, $push : {rentalHistory: req.body.itemId}})
             .then(data => res.json(data))
             .catch(err => res.status(422).json(err));
-    } 
+    }
 }

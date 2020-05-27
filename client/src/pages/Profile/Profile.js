@@ -23,7 +23,7 @@ import SuccessButton from "../../components/SuccessButton";
 import RejectButton from "../../components/RejectButton";
 
 //API functions
-import {approveRental, declineRental, returnItem, confirmReturn} from '../../utils/API/API';
+import {approveRental, declineRental, returnItem, confirmReturn, removeAppointment} from '../../utils/API/API';
 
 const Profile = () => {
     // state information
@@ -100,6 +100,7 @@ const Profile = () => {
         confirmReturn(id, statusData)
         .then(res => {
             //pull item from rented user
+            removeAppointment(id, {appointmendId: res.data.currentAppointment[0]})
             removeRental(requestId, {itemId: id})
             const filtered = filterOffItem(id, state.user.owned)
             filterReturns(state.user.rentals)
@@ -160,7 +161,7 @@ const Profile = () => {
         <div>
             { state.user ? 
             <div className='profile-page'>
-                <Nav />
+                <Nav currentPage = 'profile'/>
                 <br />
                 <Container>
                     <NavTabs handlePageChange={handlePageChange} tabs={['Profile', 'Rentals', 'Requests', 'Returns']} />
@@ -172,8 +173,8 @@ const Profile = () => {
                                 <ProfileItemContainer 
                                     image={rental.img}
                                     title={rental.name}
-                                    startDate={''}
-                                    endDate={''}>
+                                    startDate={rental.currentAppointment[0].startDate}
+                                    endDate={rental.currentAppointment[0].endDate}>
                                     <ReturnButton onClick={handleItemReturn} data-id={rental._id}>Return</ReturnButton>
                                     <MessageOwnerButton></MessageOwnerButton>
                                 </ProfileItemContainer>
@@ -182,8 +183,8 @@ const Profile = () => {
                                 <ProfileItemContainer 
                                     image={request.img}
                                     title={request.name}
-                                    startDate={''}
-                                    endDate={''}>
+                                    startDate={request.currentAppointment[0].startDate}
+                                    endDate={request.currentAppointment[0].endDate}>
                                     <SuccessButton onClick={handleAccept} data-renterid={request.renterUserId} data-id={request._id}>Accept</SuccessButton>
                                     <RejectButton onClick={handleReject} data-id={request._id}>Reject</RejectButton>
                                 </ProfileItemContainer>
@@ -192,8 +193,8 @@ const Profile = () => {
                                 <ProfileItemContainer 
                                     image={returnItem.img}
                                     title={returnItem.name}
-                                    startDate={''}
-                                    endDate={'test'}>
+                                    startDate={returnItem.currentAppointment[0].startDate}
+                                    endDate={returnItem.currentAppointment[0].endDate}>
                                     <SuccessButton onClick={handleConfirmReturned} data-renterid={returnItem.renterUserId} data-id={returnItem._id}>Confirm</SuccessButton>
                                     {/* <RejectButton onClick={handlePageChange} data-id={returnItem._id}>Report</RejectButton> */}
                                 </ProfileItemContainer>

@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useRef } from "react";
 import "./styles.css";
 import SearchBar from "../SearchBar";
 import { Navbar } from "react-bulma-components";
 
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-import LogoutButton from "../LogoutButton/LogoutButton";
-import SignUpButton from '../SignUpButton';
 import { useLocation } from "react-router-dom";
-import { NavLink } from "react-router-dom"; 
+import { NavLink, useHistory } from "react-router-dom";
 import SignUpButton from "../SignUpButton";
 import LogoutButton from "../LogoutButton/LogoutButton";
 
@@ -15,10 +13,18 @@ function Hero(props) {
 
     const [state, dispatch] = useStoreContext();
     const location = useLocation();
-    
-    useEffect(()=>{
-        
-    }, []);
+
+    const searchTermRef = useRef();
+    const history = useHistory();
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+
+        console.log(searchTermRef.current.value);
+        localStorage.setItem('searchTerm', searchTermRef.current.value);
+        history.push('/listings');
+    }
+
 
     const renderLogoutButton = () => {
         if (!state.user) {
@@ -89,7 +95,7 @@ function Hero(props) {
                 </h2>
                 </div>
                 <br></br>
-                <SearchBar />
+                <SearchBar reference={searchTermRef} handleSearch={handleSearch}/>
             </div>
         </section>
     );

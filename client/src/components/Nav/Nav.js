@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, useLocation } from "react-router-dom";
 import './styles.css';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-
+import {Navbar} from 'react-bulma-components';
 import LogoutButton from "../LogoutButton/LogoutButton";
 import SignUpButton from '../SignUpButton';
 
@@ -47,6 +47,9 @@ const Nav = (props) => {
                     <Navbar.Item>
                         {state.user ? "" : <NavLink to="/newlisting" className="inactive" activeClassName="is-active">Post a Listing</NavLink>}
                     </Navbar.Item>
+                </Navbar.Container>
+                <Navbar.Container>
+                    {props.children}
                 </Navbar.Container>
                 <Navbar.Container position="end">
                     <NavLink className="navbar-item" to="/profile">{ state.user ? state.user.username : ""}<img style={ { marginLeft: "10px"} } src={state.user ? state.user.icon : ""} /></NavLink> 

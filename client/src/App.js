@@ -13,8 +13,6 @@ import ItemPage from "./pages/Item/Item";
 import RentalConfirmation from './pages/RentalConfirmation/RentalConfirmation';
 import Profile from "./pages/Profile/Profile";
 import EditProfile from "./pages/EditProfile/EditProfile";
-import { getAllItems } from "./utils/API/API";
-import Login from "./pages/Login/Login";
 
 const connectEnsureLogin = require('connect-ensure-login');
 
@@ -22,17 +20,6 @@ const connectEnsureLogin = require('connect-ensure-login');
 function App() {
   const [itemListings, setItemListings] = useState([]);
 
-  // useEffect(() => {
-  //   //API call
-  //   //setItemListings(results)
-  //   fetch('/api/items')
-  //   .then(response => response.json())
-  //   .then(results => {
-  //     console.log(results);
-  //     setItemListings(results);
-  //   })
-  //   .catch(err => console.log(err));
-  // }, []);
 
   return (
     <UserProvider>
@@ -49,7 +36,6 @@ function App() {
           <Route exact path = '/rentalconfirm' component={RentalConfirmation} />
           <Route exact path = '/profile' component={Profile} />
           <Route exact path = '/editprofile' component={EditProfile} />
-          <Route exact path = '/login' component={Login} />
         </Switch>
   
       </div>
