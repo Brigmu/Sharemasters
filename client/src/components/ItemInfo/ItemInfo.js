@@ -15,14 +15,29 @@ function ItemInfo() {
     const { id } = useParams();
     const [ownerInfo, setOwnerInfo] = useState({})
 
-    useEffect(() => {
-        getItem(id, (res) => {
-            res = res[0]
+    // useEffect(() => {
+    //     getItem(id, (res) => {
+    //         res = res[0]
+    //         console.log('hi from useeffect in ItemInfo')
+    //         console.log(res);
+    //         console.log(res.ownerInfo[0]);
+
+    //         setItem(res)
+    //         setOwnerInfo(res.ownerInfo[0])
+    //     })
+            
+    // }, []);
+
+        useEffect(() => {
+        getItem(id)
+        .then(res => {
+            res = res.data
+            console.log('hi from useeffect in ItemInfo')
             console.log(res);
-            console.log(res.ownerInfo[0]);
+            // console.log(res.ownerInfo[0]);
 
             setItem(res)
-            setOwnerInfo(res.ownerInfo[0])
+            // setOwnerInfo(res.ownerInfo[0])
         })
             
     }, []);
@@ -40,10 +55,10 @@ function ItemInfo() {
                     </div>
 
                     <div className="column is-half">
-                        <div class="title is-5">Price: ${item.price}/day</div>
-                        <div class="title is-5">User: {ownerInfo.username}</div>
-                        {item.city ? <div class="title is-5">Location: {item.city}, {item.state}</div> : <div class="title is-5">Location: See map below</div>}
-                        <div class="title is-5">Description: {item.description}</div>
+                        <div className="title is-5">Price: ${item.price}/day</div>
+                        <div className="title is-5">User: {ownerInfo.username}</div>
+                        {item.city ? <div className="title is-5">Location: {item.city}, {item.state}</div> : <div className="title is-5">Location: See map below</div>}
+                        <div className="title is-5">Description: {item.description}</div>
                         <MessageOwnerButton />
                         <br />
                         <br />
