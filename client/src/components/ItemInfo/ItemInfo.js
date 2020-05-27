@@ -46,7 +46,7 @@ function ItemInfo() {
 
                     <div className="column is-half">
                         <div className="title is-5">Price: ${item.price}/day</div>
-                        <div className="title is-5">User: {owner.username}</div>
+                        {/* <div className="title is-5">User: {owner.username}</div> */}
                         {item.city ? <div className="title is-5">Location: {item.city}, {item.state}</div> : <div className="title is-5">Location: See map below</div>}
                         <div className="title is-5">Description: {item.description}</div>
                         <MessageOwnerButton />
