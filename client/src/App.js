@@ -22,15 +22,17 @@ const connectEnsureLogin = require('connect-ensure-login');
 function App() {
   const [itemListings, setItemListings] = useState([]);
 
-  useEffect(() => {
-    //API call
-    //setItemListings(results)
-    getAllItems()
-    .then(data => {
-      console.log(data);
-    })
-    .catch(err => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   //API call
+  //   //setItemListings(results)
+  //   fetch('/api/items')
+  //   .then(response => response.json())
+  //   .then(results => {
+  //     console.log(results);
+  //     setItemListings(results);
+  //   })
+  //   .catch(err => console.log(err));
+  // }, []);
 
   return (
     <UserProvider>
@@ -40,6 +42,7 @@ function App() {
         <Switch>
           <Route exact path = '/' component={Home} />
           <Route exact path = '/signup' component={Signup} />
+          <Route exact path = '/login' component={Signup} />
           <Route exact path = '/listings' component={Listings} />
           <Route exact path = '/newlisting' component={ListingPage} />
           <Route exact path = '/items/:id' component={ItemPage} />

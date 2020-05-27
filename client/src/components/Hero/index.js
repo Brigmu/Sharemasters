@@ -4,8 +4,9 @@ import SearchBar from "../SearchBar";
 import { Navbar } from "react-bulma-components";
 
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-
-
+import LogoutButton from "../LogoutButton/LogoutButton";
+import SignUpButton from '../SignUpButton';
+import { useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom"; 
 import SignUpButton from "../SignUpButton";
 import LogoutButton from "../LogoutButton/LogoutButton";
@@ -13,6 +14,7 @@ import LogoutButton from "../LogoutButton/LogoutButton";
 function Hero(props) {
 
     const [state, dispatch] = useStoreContext();
+    const location = useLocation();
     
     useEffect(()=>{
         
@@ -38,13 +40,13 @@ function Hero(props) {
     return (
         <section className="hero is-primary is-small is-mobile">
             {/* <!-- Hero head: will stick at the top --> */}
-            <div className="hero-head">
+            <div className="hero-head"> 
                 <nav className="navbar">
                     <div className="container">
                         <div className="navbar-brand">
-                        <a className="navbar-item">
+                        <NavLink to="/"className="navbar-item">
                             {/* <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo" /> */}
-                        </a>
+                        </NavLink>
                         {/* need to figure out how to get navbar to show in mobile */}
                         <span className="navbar-burger burger" data-target="navbarMenuHeroA">
                             <span></span>
@@ -54,9 +56,22 @@ function Hero(props) {
                         </div>
                         <div id="navbarMenuHeroA" className="navbar-menu">
                             <div className="navbar-end">
-                                <NavLink to="/listings" className="navbar-item" activeClassName="is-active">Browse</NavLink>
+                                {/* <NavLink to="/listings" className="navbar-item" activeClassName="is-active">Browse</NavLink>
                                 {/* <NavLink to="/profile" className="navbar-item" activeClassName="is-active">Profile</NavLink> */}
-                                {state.user ? renderLogoutButton : <Navbar.Item><SignUpButton /></Navbar.Item>}
+                                {/* {state.user ? renderLogoutButton : <Navbar.Item><SignUpButton /></Navbar.Item>} */}
+                                <NavLink to="/"className="navbar-item">
+                                    Home
+                                </NavLink>
+                                <NavLink to="/listings"className="navbar-item">
+                                    Browse
+                                </NavLink>
+                                <NavLink to="/profile"className="navbar-item" disabled>
+                                    Profile
+                                {/* <NavLink to="/profile" activeClassName="is-active">Profile</NavLink> */}
+                                </NavLink>
+                                <span className="navbar-item">
+                                    {state.user ? <LogoutButton /> : <SignUpButton />}
+                                </span>
                             </div>
                         </div>
                     </div>

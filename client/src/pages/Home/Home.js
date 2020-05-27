@@ -45,10 +45,8 @@ const Home = () => {
         if (!state.user) {
             getCurrentUser().then(res => {
                 if (res.data.user) {
-                    console.log(res.data.user);
                     getProfile(res.data.user._id)
                         .then(res => {
-                            console.log(res.data[0]);
                             setUserState(res.data[0]);
                     });
                 }

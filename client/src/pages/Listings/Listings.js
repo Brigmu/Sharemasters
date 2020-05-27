@@ -218,7 +218,7 @@ const Listings = (props) => {
                                 <p>Select filter type</p>
                                 {filterType === 'price' ?
                                 <ul id='filters'>
-                                     
+            
                                     <li>
                                     <input type='radio' id='nameFilter' value='name' name='filter'onChange={nameFilterCheck}></input>
                                     <label htmlFor='nameFilter'>Name</label>

@@ -1,18 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
-import 'react-bulma-components/dist/react-bulma-components.min.css';
+import React, { useState, useEffect } from "react";
+import { Button } from 'react-bulma-components/dist/react-bulma-components.min.css';
 
 //user context
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-import { useUserItemsContext } from "../../utils/UserItemsContext/UserItemsContext";
-import { UserItemsProvider } from "../../utils/UserItemsContext/UserItemsContext";
-import { SET_OWNED, SET_RENTALS } from "../../utils/UserItemsContext/UserItemsActions";
+import { SET_USER } from "../../utils/UserContext/UserActions";
 import { getProfile, addRental, removeRental } from '../../utils/API/API';
 
 import Nav from "../../components/Nav/Nav";
 import NavTabs from "../../components/NavTabs/NavTabs";
 import {Section, Container} from 'react-bulma-components';
 import ProfileItemContainer from "../../components/ProfileItemContainer";
-import { useHistory } from 'react-router-dom';
+import { useHistory, NavLink} from 'react-router-dom';
 
 //put buttons in ProfileItemContent children
 // Rental Buttons
@@ -33,18 +31,17 @@ const Profile = () => {
     const [requests, setRequests] = useState([]);
     const [rentals, setRentals] = useState([]);
     const [returns, setReturns] = useState([]);
-    const [state, dipatch] = useStoreContext();
-    // const [userItems, setItems] = useUserItemsContext(); //userItems.rented and userItems.owned
+    const [state, dispatch] = useStoreContext();
     const history = useHistory();
 
-    // if(!state.user) {
-    //     history.push('/signup');
-    // }
-
-    console.log(state);
-    console.log(state.user);
-
     const [selected, setSelected] = useState('Profile');
+
+    const setUserState = (user) => {
+        dispatch({
+            type: SET_USER,
+            user: user
+        });
+    };
 
     const filterRequests = (array) => {
         const filteredItems = array.filter(item => {
@@ -70,6 +67,19 @@ const Profile = () => {
     const handlePageChange = (e) => {
         const nextPage = e.target.getAttribute('data-page');
         setSelected(nextPage);
+        switch(selected) {
+            case 'Rentals':
+                filterRentals(state.user.rentals);
+                break;
+            case 'Requests':
+                filterRequests(state.user.owned);
+                break;
+            case 'Returns':
+                filterReturns(state.user.owned);
+                break;
+            default:
+                break;
+        }
     }
 
     const handleItemReturn = (e) => {
@@ -135,44 +145,20 @@ const Profile = () => {
         return filteredItems;
     }
 
-    const setRentalsHelper = (items) => {
-        // setItems({
-        //     type: SET_RENTALS,
-        //     rentals: items
-        // });
-    };
-
-    const setOwned= (items) => {
-        // setItems({
-        //     type: SET_OWNED,
-        //     owned: items
-        // });
-    };
-
-    const setAll = () => {
-        getProfile(state.user.userId)
-            .then(res => {
-                console.log(res.data);
-                // setRentalsHelper(res.data.rentals);
-                // setOwned(res.data.owned);
-            })
-            .catch(err => {console.log(err.response)})
-    }
-
     useEffect(() => {
-        if(state.user){
-        filterRequests(state.user.owned);
-        filterRentals(state.user.rentals)
-        filterReturns(state.user.owned)
+        if(!state.user) {
+            history.push('/signup');
         } else {
-            history.push('/signup')
+            getProfile(state.user.userId)
+            .then(res => {
+                setUserState(res.data[0]);
+            })
         }
-        // filterRental()
-        // filterReturns()
     }, [])
 
     return (
-        <UserItemsProvider>
+        <div>
+            { state.user ? 
             <div className='profile-page'>
                 <Nav />
                 <br />
@@ -213,27 +199,23 @@ const Profile = () => {
                                 </ProfileItemContainer>
                             )):<div>No Returns</div>}</>
                             : <div className="box">
-                            <div className="title">Username: {state.user ? state.user.username : <></>}</div>
-                            <br />
-                            {/* <figure class="image is-128x128">
-                                <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png" alt="" />
-                            </figure> */}
-                            <br />
-                            <div className="content">
-                                <div className="title is-5">Name: {state.user ? state.user.firstName: <></>} {state.user ? state.user.lastName: <></>}
+                                <h2 className="subtitle is-2">{`${state.user ? state.user.firstName: <></>} ${state.user ? state.user.lastName: <></>} (${state.user.username})`}</h2>
+                                <figure class="image is-32x32">
+                                    <img class="is-rounded" src={state.user.icon}/>
+                                </figure>
+                                <div className="content">
+                                    <h6 className="subtitle is-6">{state.user ? `${state.user.address} ${state.user.city}, ${state.user.state} ${state.user.zipCode}`: <> </>}</h6>
+                                    <h6 className="subtitle is-6">Total listings: {state.user ? state.user.owned.length : 'no listing'}</h6>
+                                    <h6 className="subtitle is-6">Items Renting: {state.user ? state.user.rentals.length : 'no listing'}</h6>
+                                    <NavLink to="/editprofile"><i className={`fas fa-pencil-alt`}></i></NavLink>
                                 </div>
-                        <div className="title is-5">Location: {state.user ? `${state.user.address} ${state.user.city} ${state.user.state}`: <> </>}</div>
-                            </div>
-                                <div className='title is-5'>Total listings: {state.user ? state.user.owned.length : 'no listing'}</div>
-                                <div className='title is-5'>Items Renting: {state.user ? state.user.rentals.length : 'no listing'}</div>
                             </div>}
                     </Container>
 
 
                 </Section>
-            </div>
-        </UserItemsProvider>
-        
+            </div> : <div></div> }
+        </div>
     )
 }
 

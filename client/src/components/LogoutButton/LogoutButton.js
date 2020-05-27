@@ -14,13 +14,12 @@ const LogoutButton = (props) => {
             type: CLEAR_USER
         });
     };
+    
     const handleLogout = (e) => {
-        e.preventDefault();
         logoutUser()
-            .then(res => {
-                history.push('/');
+            .then(() => {
                 clearUserState();
-                alert(res.data.message);
+                history.push('/');
             })
     }
 

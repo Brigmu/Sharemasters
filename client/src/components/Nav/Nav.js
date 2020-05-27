@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { NavLink, useLocation } from "react-router-dom";
 import './styles.css';
-
 import { useStoreContext } from "../../utils/UserContext/UserContext";
 
 import LogoutButton from "../LogoutButton/LogoutButton";
 import SignUpButton from '../SignUpButton';
-import { Navbar } from "react-bulma-components";
 
 const Nav = (props) => {
     const [state, dispatch] = useStoreContext();
@@ -51,11 +49,15 @@ const Nav = (props) => {
                     </Navbar.Item>
                 </Navbar.Container>
                 <Navbar.Container position="end">
-                    {state.user ? renderProfile : ""}
+                    <NavLink className="navbar-item" to="/profile">{ state.user ? state.user.username : ""}<img style={ { marginLeft: "10px"} } src={state.user ? state.user.icon : ""} /></NavLink> 
+                    <div className="navbar-item">
+                        {state.user ? <LogoutButton /> : location.pathname !== "/signup" ? <SignUpButton /> : <div></div> }
+                    </div>
+                    {/* {state.user ? renderProfile : ""}
                     <Navbar.Item>
                         <span>{location.pathname}</span>
                     </Navbar.Item>
-                    {location.pathname != "/signup" ? renderSignUp : ""}
+                    {location.pathname != "/signup" ? renderSignUp : ""} */}
                 </Navbar.Container>
             </Navbar.Menu>
         </Navbar>      
