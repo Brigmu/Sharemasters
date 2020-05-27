@@ -22,13 +22,7 @@ function App() {
   const [itemListings, setItemListings] = useState([]);
 
   useEffect(() => {
-    //API call
-    //setItemListings(results)
-    getAllItems()
-    .then(data => {
-      console.log(data);
-    })
-    .catch(err => console.log(err));
+    
   }, []);
 
   return (

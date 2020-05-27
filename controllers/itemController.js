@@ -3,6 +3,11 @@ const db = require("../models");
 const mongoose = require("mongoose");
 
 module.exports = {
+    getAllUnrented: function(req, res) {
+        db.Item.find({isRented: false})
+        .then(data => res.json(data))
+        .catch(err => res.status(422).json(err));
+    },
     findAll: function(req, res) {
         // db.Item.find({})
         // .populate('ownerId')
@@ -24,22 +29,10 @@ module.exports = {
         //   .catch(err => res.status(422).json(err));
     },
     findById: function(req, res) {
-    //     db.Item.aggregate([
-    //     { $match: { _id : mongoose.Types.ObjectId(req.params.id) } },
-    //     { $lookup: {
-    //         from: "users",
-    //         localField: "ownerId",
-    //         foreignField: "userId",
-    //         as: "ownerInfo"
-    //     }},
-    // ])
-    //     // .populate("ownerInfo")
-    //     .then(data => res.json(data))
-    //     .catch(err => res.status(422).json(err));
-        // db.Item.findById(req.params.id)
-        // .populate('ownerId')
-        // .then(data => res.json(data))
-        // .catch(err => res.status(422).json(err));
+        db.Item.find({_id: req.params.id})
+            .populate('ownerId')
+            .then(data => res.json(data))
+            .catch(err => res.status(422).json(err));
     },
     create: function(req, res) {
         db.Item.create(req.body)
@@ -49,10 +42,26 @@ module.exports = {
         // })
         .catch(err => console.log(err));
     },
-    renterRequest: function(req, res) {
-        db.Item.findOneAndUpdate({ _id: mongoose.Types.ObjectId(req.params.id) }, { pending_request: true } )
-        .then(data => console.log(data))
+    itemUpdate: function(req, res) {
+        db.Item.findOneAndUpdate({ _id: mongoose.Types.ObjectId(req.params.id) }, req.body)
+        .then(data => res.json(data))
         .catch(err => res.status(422).json(err));
+    },
+    updateRentStatus: function(req, res) {
+        db.Item.findByIdAndUpdate(req.params.id, req.body)
+        .then(data => res.json(data))
+        .catch(err => res.status(422).json(err))
+    },
+    updatePendingStatus: function(req, res) {
+        db.Item.findByIdAndUpdate(req.params.id, req.body)
+        .then(data => res.json(data))
+        .catch(err => res.status(422).json(err))
+    },
+
+    updateAppointments: function(req,res) {
+        db.Item.update({_id: req.params.id}, {$pull: {currentAppointment: req.body.appointmendId}, $push: {appointmentHistory: req.body.appointmendId}})
+        .then(data => res.json(data))
+        .catch(err => res.status(422).json(err))
     }
     // ownerApprove: function(req, res) {
     //     db.Item.findOneAndUpdate({ _id: req.params.id }, { pendingRequest: true,  })
