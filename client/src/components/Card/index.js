@@ -3,7 +3,7 @@ import './styles.css';
 
 function Card(props) {
     return (
-        <div onClick={props.handleItemClick} className={"box"} key={props.id} data-id={props.itemId}>
+        <div className={"box"} key={props._id} data-id={props.itemId} onClick={props.handleItemClick}>
             <figure className="image is-156x156">
                 <img data-id={props.itemId}src={props.img} alt =''></img>
             </figure>

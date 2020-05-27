@@ -1,45 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
-import { Section, Container, Columns } from "react-bulma-components";
+import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
+import ItemRequestForm from '../ItemRequestForm/ItemRequestForm';
 
 //pages
 import { useParams } from 'react-router-dom';
 import { getItem } from '../../utils/API/API';
 
+
 import MessageOwnerButton from '../MessageOwnerButton/MessageOwnerButton';
-import ItemRequestForm from '../ItemRequestForm/ItemRequestForm'
 
 
 function ItemInfo() {
     const [item, setItem] = useState({})
     const { id } = useParams();
-    const [ownerInfo, setOwnerInfo] = useState({})
+    const [owner, setOwner] = useState({})
 
-    // useEffect(() => {
-    //     getItem(id, (res) => {
-    //         res = res[0]
-    //         console.log('hi from useeffect in ItemInfo')
-    //         console.log(res);
-    //         console.log(res.ownerInfo[0]);
 
-    //         setItem(res)
-    //         setOwnerInfo(res.ownerInfo[0])
-    //     })
-            
-    // }, []);
 
         useEffect(() => {
         getItem(id)
         .then(res => {
-            res = res.data
+            res = res.data[0]
             console.log('hi from useeffect in ItemInfo')
             console.log(res);
             // console.log(res.ownerInfo[0]);
 
             setItem(res)
-            // setOwnerInfo(res.ownerInfo[0])
+            setOwner(res.ownerId)
+
         })
-            
     }, []);
 
     return (
@@ -56,7 +46,7 @@ function ItemInfo() {
 
                     <div className="column is-half">
                         <div className="title is-5">Price: ${item.price}/day</div>
-                        <div className="title is-5">User: {ownerInfo.username}</div>
+                        <div className="title is-5">User: {owner.username}</div>
                         {item.city ? <div className="title is-5">Location: {item.city}, {item.state}</div> : <div className="title is-5">Location: See map below</div>}
                         <div className="title is-5">Description: {item.description}</div>
                         <MessageOwnerButton />
@@ -74,21 +64,6 @@ function ItemInfo() {
 
         </Section>
 
-
-
-        // <div class="container">
-        //     <div class="title">{item.name}</div>
-        //     <div class="columns">
-        //         <figure class="image">
-        //             <img src={item.img} size={64} alt=""></img>
-        //         </figure>
-        //     </div>
-        //     <div class="column is-half">
-        //         <div class="content">
-
-        //         </div>
-        //     </div>
-        // </div>
     )
 }
 

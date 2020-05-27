@@ -37,7 +37,7 @@ h2 {
 .buttons-div {
     text-align: center;
 }
-button {
+/* button {
     margin: 10px 0 0 0;
 
     width: 100%;
@@ -46,6 +46,6 @@ button {
 .half-button {
     /* min-width: 82px; */
 
-    margin: 10px 10px 0 0;
-}
+    /* margin: 10px 10px 0 0;
+} */
 

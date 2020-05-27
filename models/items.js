@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
 const itemSchema = new mongoose.Schema({
     ownerId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Profile',
+        type: Schema.Types.ObjectId,
+        ref: "Profile",
     },
     name: {
         type: String,
@@ -53,27 +54,26 @@ const itemSchema = new mongoose.Schema({
         default: false
     },
     renterUserId: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'Profile'
     },
     isRented: {
         type: Boolean,
         default: false
     },
-    appointments: {
-        // current: [
-        //     {
-                type: mongoose.Schema.Types.ObjectId,
+    currentAppointment: 
+         [
+            {
+                type: Schema.Types.ObjectId,
                 ref: "Appointments"
-            // }
-        // ],
-        // history: [
-        //     {
-        //         type: mongoose.Schema.Types.ObjectId,
-        //         ref: "Appointments"
-        //     }
-        // ],
-    },
+            }
+        ],
+    appointmentHistory: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Appointments"
+            }
+        ],
     active: {
         type: Boolean,
         default: true

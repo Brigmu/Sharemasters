@@ -1,35 +1,29 @@
 import React, {useRef, useState, useEffect, useContext} from 'react'
 import './styles.css';
 import Nav from '../../components/Nav/Nav';
-import CategoryWrapper from '../../components/CategoryWrapper/CategoryWrapper'
-import ItemContext from '../../utils/ItemContext/ItemContext';
-import FilteredContext from '../../utils/API/FilteredContext/FilteredContext';
 import { useHistory } from 'react-router-dom';
-// import Section from "../../components/Section";
-// import ColumnContainer from '../../components/ColumnContainer';
-// import Column from '../../components/Column';
-// import categories from "../../utils/categories.json";
 import Columns from '../../components/Columns/Columns';
 import Column from '../../components/Column/Column';
-import ItemCard from '../../components/ItemCard/ItemCard';
 import Card from '../../components/Card/index';
 import Title from '../../components/Title/Title';
-import {getAllItems} from '../../utils/API/API';
+import {getAllUnrentedItems, getAllItems} from '../../utils/API/API';
 
 const Listings = (props) => {
-    const itemListings = useContext(ItemContext);
-    // const allItems = getAllItems();
-    // console.log(allItems);
+    const filterRef = useRef();
 
     useEffect(() => {
         console.log('happened')
-        getAllItems()
+        getAllUnrentedItems()
         .then(res => {
             console.log(res.data);
             console.log('function happened')
             setAllItems(res.data);
         })
         .catch(err => console.log(err))
+        const searchTerm = localStorage.getItem('searchTerm');;
+        setFilter(searchTerm);
+        filterRef.current.value = searchTerm;
+        localStorage.removeItem('searchTerm');
     }, [])
 
     const [allItems, setAllItems] = useState([])
@@ -47,7 +41,11 @@ const Listings = (props) => {
     useEffect(()=> {
         switch(filterType){
             case 'name':
-                const filterKeyword = new RegExp(filter);
+                let lowercaseFilter;
+                if(filter) {
+                    lowercaseFilter = filter.toLowerCase();
+                }
+                const filterKeyword = new RegExp(lowercaseFilter);
                 let filteredListings = allItems.filter(item => {
                     return filterKeyword.test(item.name.toLowerCase());
                 });
@@ -55,7 +53,7 @@ const Listings = (props) => {
             break;
             case 'price':
                 if(!filter){
-                    setFiltered(itemListings);
+                    setFiltered(allItems);
                 } else{
                 filteredListings = allItems.filter(item => {
                     return parseInt(item.price) <= parseInt(filter);
@@ -64,7 +62,7 @@ const Listings = (props) => {
                 }
             break;
             default:
-                setFiltered(itemListings);
+                setFiltered(allItems);
         }
     }, [filter, allItems, filterType])
 
@@ -126,8 +124,6 @@ const Listings = (props) => {
     const miscCategoryRef = useRef();
     const recreationCategoryRef = useRef();
 
-    // const filterRef = useRef();
-
     const handleScrollClick = (e) => {
         console.log(e.target);
         const direction = e.target.getAttribute('data-direction');
@@ -182,17 +178,6 @@ const Listings = (props) => {
         };
     };
 
-    const handleSwipe = (e) => {
-        console.log(e);
-        let type = e.type
-        console.log(type);
-        if(type === 'touchmove'){
-            console.log(e.nativeEvent);
-            // console.log(e.screenX);
-            // console.log(e.screenY);
-        }
-    }
-
     const history = useHistory();
 
     const nameFilterCheck = (e) => {
@@ -208,9 +193,8 @@ const Listings = (props) => {
 
 
     return (
-        <FilteredContext.Provider value={filtered}>
             <div className='listings-page'>
-                <Nav/>
+                <Nav />
                 <section className = 'section'>
                     <Columns>
                         <Column size='is-2'>
@@ -218,7 +202,7 @@ const Listings = (props) => {
                                 <p>Select filter type</p>
                                 {filterType === 'price' ?
                                 <ul id='filters'>
-                                     
+            
                                     <li>
                                     <input type='radio' id='nameFilter' value='name' name='filter'onChange={nameFilterCheck}></input>
                                     <label htmlFor='nameFilter'>Name</label>
@@ -242,7 +226,7 @@ const Listings = (props) => {
                                 
                                 {/* <label>Filter:</label> */}
                                 
-                                <input type='text' id='filter' onChange={e => setFilter(e.target.value)}></input>
+                                <input type='text' id='filter' ref={filterRef} onChange={e => setFilter(e.target.value)}></input>
                                 <hr></hr>
                             <div className="title is-4">
                                 Category List
@@ -269,7 +253,7 @@ const Listings = (props) => {
                                 </Column> */}
                                 {filtered.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : filtered.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -277,7 +261,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={electronicsCategoryRef}>
                             {electonicsItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : electonicsItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
                                         {/* <ItemCard img={item.img} itemName={item.name} id={item.id} handleItemClick={props.handleItemClick}/> */}
                                     </Column>
                                 ))}
@@ -286,7 +270,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={eventsCategoryRef}>
                                 {eventItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : eventItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -294,7 +278,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={homeCategoryRef}>
                                 {homeImpovementItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : homeImpovementItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -302,7 +286,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={kitchenCategoryRef}>
                                 {kitchenItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : kitchenItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -310,7 +294,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={miscCategoryRef}>
                                 {miscItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : miscItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -318,7 +302,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={recreationCategoryRef}>
                                 {recreationItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : recreationItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -326,7 +310,7 @@ const Listings = (props) => {
                             <Columns size='carousel' reference={yardCategoryRef}>
                                 {yardItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : yardItems.map(item => (
                                     <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item.id}></Card>
+                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
                                     </Column>
                                 ))}
                             </Columns>
@@ -334,7 +318,6 @@ const Listings = (props) => {
                     </Columns>
                 </section>
             </div>
-        </FilteredContext.Provider>
     )
 }
 

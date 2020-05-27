@@ -19,18 +19,6 @@ function ItemRequestForm() {
     const [endDate, setEndDate] = useState();
     const [appointmentInfo, setAppointmentInfo] = useState({});
 
-    // console.log(state.user._id);
-    // console.log(id);
-
-    // useEffect(() => {
-    //     getItem(id)
-    //     .then(res => {
-    //         console.log('hi from useEffect/getItem in ItemRequestForm')
-    //         console.log(res.data);
-    //         setItem(res.data)
-    //     })
-            
-    // }, []);
 
 
     const handleFormSubmit = (e) => {
@@ -44,9 +32,7 @@ function ItemRequestForm() {
             
             // previous code before merge
             renterId: state.user._id,
-            // startDate: startDateRef.current.value,
-            // endDate: endDateRef.current.value
-            // renterId: "5ec24cc7c7e382486c6ff129",
+
             startDate: startDate,
             endDate: endDate
         }
@@ -70,16 +56,7 @@ function ItemRequestForm() {
             }, 3000);
             
 
-        //update item pendingRequest to true
-        
-        // first parameter of this function needs to be the userId from the usercontext
 
-        // also previous code before merge
-        // renterRequest({renterUserId: state.user._id, pendingRequest: true}, id)
-        // .then(res => console.log(res))
-        // .catch(err => console.log(err));
-        
-        // renterRequest("5ec24cc7c7e382486c6ff129", id)
     }
 
 
@@ -95,10 +72,6 @@ function ItemRequestForm() {
     }
 
     return (
-        // not sure if we still need this but keeping it commented for now -cna
-        // {!state.user ? <div>Please login to rent this item</div> : 
-        // state.user._id == item.ownerId ? <div>This is your item </div> : <div className="notification">
-        //     <div className="title is-5">Request Rental</div> 
         <Container className="notification">
             <div className="title is-4">Request Rental</div>
             <div className='item-request-form'>

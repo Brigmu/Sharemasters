@@ -25,4 +25,7 @@ router.route("/history/:id")
 router.route("/owned/:id")
   .put(profileController.addOwned)
 
+router.route('/rentals/reomve/:id')
+  .put(profileController.removeRental)
+
 module.exports = router;
