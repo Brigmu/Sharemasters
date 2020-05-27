@@ -11,15 +11,16 @@ function Map() {
     const [lng, setLng] = useState({})
     const { id } = useParams();
 
-    useEffect(() => {
-        getItem(id, (res) => {
-            console.log(res);
-            let coordinates = res[0].coordinates
-            console.log(coordinates)
-            setLat(coordinates.lat)
-            setLng(coordinates.lng)
-        })
-    }, []);
+    // useEffect(() => {
+    //     getItem(id)
+    //     .then(res => {
+    //         console.log(res);
+    //         let coordinates = res.data.coordinates
+    //         console.log(coordinates)
+    //         setLat(coordinates.lat)
+    //         setLng(coordinates.lng)
+    //     })
+    // }, []);
 
 
     return (

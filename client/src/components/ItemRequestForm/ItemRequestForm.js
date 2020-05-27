@@ -20,17 +20,17 @@ function ItemRequestForm() {
     const [appointmentInfo, setAppointmentInfo] = useState({});
 
     // console.log(state.user._id);
-    console.log(id);
+    // console.log(id);
 
-    useEffect(() => {
-        getItem(id)
-        .then(res => {
-            console.log('hi from useEffect/getItem')
-            console.log(res.data);
-            setItem(res.data)
-        })
+    // useEffect(() => {
+    //     getItem(id)
+    //     .then(res => {
+    //         console.log('hi from useEffect/getItem in ItemRequestForm')
+    //         console.log(res.data);
+    //         setItem(res.data)
+    //     })
             
-    }, []);
+    // }, []);
 
 
     const handleFormSubmit = (e) => {
@@ -43,10 +43,10 @@ function ItemRequestForm() {
             // renter id will be the userId from user context for this field
             
             // previous code before merge
-            // renterId: state.user._id,
+            renterId: state.user._id,
             // startDate: startDateRef.current.value,
             // endDate: endDateRef.current.value
-            renterId: "5ec24cc7c7e382486c6ff129",
+            // renterId: "5ec24cc7c7e382486c6ff129",
             startDate: startDate,
             endDate: endDate
         }
