@@ -60,57 +60,9 @@ const ListingPage = (props) => {
     const stateRef = useRef();
     const browserLocationRef = useRef();
 
-    // const locationDropdownRef = useRef();
-    // const categoryDropdownRef = useRef();
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        // let address;
-        // let city;
-        // let addressState;
-        // let zipcode;
-        // if(locationPref === 'Use my location') {
-        //     address = state.user.address;
-        //     city = state.user.city;
-        //     addressState = state.user.state;
-        //     zipcode = state.user.zipCode
-        // } else {
-        //     address = streetRef.current.value;
-        //     city = cityRef.current.value;
-        //     addressState = stateRef.current.value;
-        //     zipcode = parseInt(zipcodeRef.current.value)
-        // }
-        // const data = {
-        //     // manually putting in ownId, this will be provided through the usercontext
-        //     ownerId: state.user._id,
-        //     name: itemNameRef.current.value,
-        //     description: descriptionRef.current.value,
-        //     category: category,
-        //     address: address,
-        //     city: city,
-        //     state: addressState,
-        //     zipCode: zipcode,
-        //     fullAddress: `${address} ${city} ${addressState} ${zipcode}`,
-        //     coordinates: {
-        //         lat: 47.733,
-        //         lng: -122.313
-        //     },
-        //     price: priceRef.current.value,
-        //     img: image,
-        //     pendingRequest: false,
-        //     isRented: false,
-        //     active: true,
-        // }
-        // console.log(data);
-        // postListing(data)
-        // .then(res => {
-        //     console.log(res);
-        //     addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
-        //     .then(res => console.log(res))
-        //     .catch(err => console.log(err))
-        // })
-        // .catch(err => console.log(err));
-        if (locationPref === 'Use my location') {
+        if (locationPref === 'Use current location') {
             const data = {
                 ownerId: state.user._id,
                 name: itemNameRef.current.value,
@@ -137,13 +89,54 @@ const ListingPage = (props) => {
                 console.log(res);
                 addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
                 .then(res => {
-                    console.log(res);
+                    alert('Item posted successfully')
                     history.push("/profile");
                 })
                 .catch(err => console.log(err))
             })
             .catch(err => console.log(err));
-        } else {
+        } else if ('Use profile location') {
+        getCoordinates(`${state.user.address} ${state.user.city} ${state.user.state} ${state.user.zipCode}`, (res) => {
+        const address = state.user.address;
+        const city = state.user.city;
+        const addressState = state.user.state;
+        const zipcode = state.user.zipCode
+        const data = {
+            // manually putting in ownId, this will be provided through the usercontext
+            ownerId: state.user._id,
+            name: itemNameRef.current.value,
+            description: descriptionRef.current.value,
+            category: category,
+            address: address,
+            city: city,
+            state: addressState,
+            zipCode: zipcode,
+            fullAddress: `${address} ${city} ${addressState} ${zipcode}`,
+            coordinates: {
+                lat: res.results[0].geometry.lat.toFixed(3),
+                lng: res.results[0].geometry.lng.toFixed(3)
+            },
+            price: priceRef.current.value,
+            img: image,
+            pendingRequest: false,
+            isRented: false,
+            active: true,
+        }
+        console.log(data);
+        postListing(data)
+        .then(res => {
+            console.log(res);
+            addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
+            .then(res => { 
+                alert('Item posted successfully')
+                history.push("/profile");})
+            .catch(err => console.log(err))
+            
+        })
+        .catch(err => console.log(err));
+        })
+    }
+        else {
         getCoordinates(`${streetRef.current.value} ${zipcodeRef.current.value} ${cityRef.current.value} ${stateRef.current.value}`, (res) => {
             console.log(res)
             const data = {
@@ -172,47 +165,13 @@ const ListingPage = (props) => {
                 console.log(res);
                 addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
                 .then(res => {
-                    console.log(res);
+                    alert('Item posted successfully')
                     history.push("/profile");
                 })
                 .catch(err => console.log(err))
             })
             .catch(err => console.log(err));
         })}
-
-        // upated with userContext from authentication-pages
-        // const data = {
-        //     ownerId: state.user._id,
-        //     name: itemNameRef.current.value,
-        //     description: descriptionRef.current.value,
-        //     category: category,
-        //     address: streetRef.current.value,
-        //     city: cityRef.current.value,
-        //     state: stateRef.current.value,
-        //     zipCode: zipcodeRef.current.value,
-        //     fullAddress: `${streetRef.current.value} ${zipcodeRef.current.value} ${stateRef.current.value}`,
-        //     coordinates: {
-        //         lat: 47.733,
-        //         lng: -122.313
-        //     },
-        //     price: priceRef.current.value,
-        //     img: image,
-        //     pendingRequest: false,
-        //     isRented: false,
-        //     active: true,
-        // }
-        // console.log(data);
-        // postListing(data)
-        // .then(res => {
-        //     console.log(res);
-        //     addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
-        //     .then(res => {
-        //         console.log(res);
-        //         history.push("/profile");
-        //     })
-        //     .catch(err => console.log(err))
-        // })
-        // .catch(err => console.log(err));
     }
 
     const handleLocationPref = (locationValue) => {
@@ -233,16 +192,16 @@ const ListingPage = (props) => {
                     <label className="label">Category</label>
                     <DropdownMenu label='Select Category' items={['Electronics', 'Events', 'Home Improvement', 'Kitchen Appliances', 'Miscellaneous', 'Recreation', 'Yardwork']} extraFunction={handleCategoryDropdown}/>
                     <label className="label">Location</label>
-                    <DropdownMenu label='Select Location' items={['Use my location', 'Enter a location']} extraFunction={handleLocationPref}/>
+                    <DropdownMenu label='Select Location' items={['Use current location','Use profile location', 'Enter a location']} extraFunction={handleLocationPref}/>
                     {locationPref === 'Use my location' ? navigator.geolocation.getCurrentPosition((data) => {
                         let geolocateLat = data.coords.latitude.toFixed(3)
                         let geolocateLng = data.coords.longitude.toFixed(3)
                         setLat(geolocateLat)
                         setLng(geolocateLng)}) : <> </>}
-                    {/* {locationPref === 'Use my location' ? <Field disabled={true} value={state.user.address}/> : <> </>}
-                    {locationPref === 'Use my location' ? <Field disabled={true} value={state.user.city}/> : <> </>}
-                    {locationPref === 'Use my location' ? <Field disabled={true} value={state.user.state}/> : <> </>}
-                    {locationPref === 'Use my location' ? <Field disabled={true} value={state.user.zipCode}/> : <> </>} */}
+                    {locationPref === 'Use profile location' ? <Field disabled={true} value={state.user.address}/> : <> </>}
+                    {locationPref === 'Use profile location' ? <Field disabled={true} value={state.user.city}/> : <> </>}
+                    {locationPref === 'Use profile location' ? <Field disabled={true} value={state.user.state}/> : <> </>}
+                    {locationPref === 'Use profile location' ? <Field disabled={true} value={state.user.zipCode}/> : <> </>}
                     {locationPref === 'Enter a location' ? <Field placeholder='Street' reference={streetRef} /> : <> </>}
                     {locationPref === 'Enter a location' ? <Field placeholder='City' reference={cityRef} /> : <> </>}
                     {locationPref === 'Enter a location' ? <Field placeholder='State' reference={stateRef} maxlength={2}/> : <> </>}
