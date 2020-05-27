@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
+import "react-datepicker/dist/react-datepicker.css";
 import Field from '../../components/Field/Field';
-// import DatePicker from 'react-datepicker';
+import DatePicker from 'react-datepicker';
 import { useParams } from 'react-router-dom';
 import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
 import { updateItem, postAppointment, renterRequest } from '../../utils/API/API';
@@ -58,21 +59,48 @@ function ItemRequestForm() {
     }
 
     return (
-        <div class="notification">
-            <div class="title is-5">Request Rental</div>
-            <div className='item-request-form'>
-                <Field title='Start Date' placeholder='01/01/2020' reference={startDateRef} />
-                <Field title='End Date' placeholder='01/30/2020' reference={endDateRef} />
-            </div>
-            <div class="field is-grouped button-container">
-                <div class="control">
-                    <button class="button is-link" onClick={handleFormSubmit}>Submit</button>
+        // <div class="notification">
+        //     <div class="title is-5">Request Rental</div>
+        //     <div className='item-request-form'>
+        //         <Field title='Start Date' placeholder='01/01/2020' reference={startDateRef} />
+        //         <Field title='End Date' placeholder='01/30/2020' reference={endDateRef} />
+        //     </div>
+        //     <div class="field is-grouped button-container">
+        //         <div class="control">
+        //             <button class="button is-link" onClick={handleFormSubmit}>Submit</button>
+        //         </div>
+        //         <div class="control">
+        //             <button class="button is-link is-light is-outlined">Cancel</button>
+        //         </div>
+        //     </div>
+        // </div>
+
+        <Container className="notification">
+        <div className="title is-4">Request Rental</div>
+        <div className='item-request-form'>
+            <div className="date-picker">
+                <span className="title is-6">Start Date</span>
+                <div>
+                    <DatePicker showPopperArrow={false} selected={startDate} onChange={date => setStartDate(date)} placeholderText="Please choose start date.."/> 
                 </div>
-                <div class="control">
-                    <button class="button is-link is-light is-outlined">Cancel</button>
+            </div> 
+            <div className="date-picker">
+                <span className="title is-6">End Date</span>
+                <div>
+                    <DatePicker showPopperArrow={false} selected={endDate} onChange={date => setEndDate(date)} minDate={startDate} placeholderText="Please choose end date.." />
                 </div>
             </div>
         </div>
+
+        <div className="field is-grouped button-container">
+            <div className="control">
+                <button className="button is-primary" onClick={handleFormSubmit}>Submit</button>
+            </div>
+            <div className="control">
+                <button className="button is-warning is-light" onClick={handleCancel}>Cancel</button>
+            </div>
+        </div>
+        </Container>
 
     )
 }
