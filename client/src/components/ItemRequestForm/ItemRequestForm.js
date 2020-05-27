@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './styles.css';
 import Field from '../../components/Field/Field';
-// import DatePicker from 'react-datepicker';
+import DatePicker from 'react-datepicker';
 import { useParams } from 'react-router-dom';
 import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
 import { updateItem, postAppointment, renterRequest } from '../../utils/API/API';
