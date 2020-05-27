@@ -54,7 +54,7 @@ const Nav = (props) => {
                 <Navbar.Container position="end">
                     <NavLink className="navbar-item" to="/profile">{ state.user ? state.user.username : ""}<img style={ { marginLeft: "10px"} } src={state.user ? state.user.icon : ""} /></NavLink> 
                     <div className="navbar-item">
-                        {state.user ? <LogoutButton /> : location.pathname !== "/signup" ? <SignUpButton /> : <div></div> }
+                        {state.user ? <LogoutButton /> : location.pathname !== "/signup" ? <SignUpButton /> : "" }
                     </div>
                     {/* {state.user ? renderProfile : ""}
                     <Navbar.Item>

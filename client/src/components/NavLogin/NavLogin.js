@@ -2,7 +2,7 @@ import React, {useRef, useState } from 'react'
 import { useHistory, StaticRouter } from 'react-router-dom';
 import FormField from "../FormField/FormField";
 import FormControl from "../FormControl/FormControl";
-import { Button, Columns} from "react-bulma-components";
+import { Button, Columns, Modal} from "react-bulma-components";
 import FormIcon from "../FormIcon/FormIcon";
 import {loginUser, getCurrentUser, getProfile} from '../../utils/API/API';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
@@ -50,7 +50,7 @@ const NavLogin = () => {
                 });
             })
             .catch(err => {
-                setLoginError({ error: true, message: err.message });
+                setLoginError({ error: true, message: "Incorrect username/password combination" });
             })
 
         // reset form
@@ -87,6 +87,11 @@ const NavLogin = () => {
                 </Columns.Column>
                 <Columns.Column className="is-narrow">
                     <Button style={ { width: "75px", marginTop: "8px"} } className="button is-info" onClick={handleLogin}>Log In</Button>
+                </Columns.Column>
+                <Columns.Column className="is-horizontal is-narrow">
+                    <FormField fieldClass="is-horizontal">
+                        {loginErrorState.error ? <div className="has-text-danger">{loginErrorState.message}</div>  : <></>}
+                    </FormField>
                 </Columns.Column>
             </Columns>
         </div>
