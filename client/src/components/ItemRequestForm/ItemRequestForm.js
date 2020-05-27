@@ -53,10 +53,10 @@ function ItemRequestForm() {
 
 
     }
-
-    const handleFormCancel = (e) => {
-        console.log('clear form');
-    }
+    // // cancel function
+    // const handleFormCancel = (e) => {
+    //     console.log('clear form');
+    // }
 
     return (
         // <div class="notification">
@@ -96,9 +96,9 @@ function ItemRequestForm() {
             <div className="control">
                 <button className="button is-primary" onClick={handleFormSubmit}>Submit</button>
             </div>
-            <div className="control">
-                <button className="button is-warning is-light" onClick={handleCancel}>Cancel</button>
-            </div>
+            {/* <div className="control">
+                <button className="button is-warning is-light" onClick={handleFormCancel}>Cancel</button>
+            </div> */}
         </div>
         </Container>
 
