@@ -12,7 +12,7 @@ import Nav from "../../components/Nav/Nav";
 import NavTabs from "../../components/NavTabs/NavTabs";
 import {Section, Container} from 'react-bulma-components';
 import ProfileItemContainer from "../../components/ProfileItemContainer";
-import { useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 //put buttons in ProfileItemContent children
 // Rental Buttons
