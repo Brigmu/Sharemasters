@@ -66,91 +66,109 @@ const ListingPage = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(category);
-        // if (locationPref === 'Use my location') {
-        //     const data = {
-        //         // manually putting in ownId, this will be provided through the usercontext
-        //         ownerId: "5ec24cc7c7e382486c6ff128",
-        //         name: itemNameRef.current.value,
-        //         description: descriptionRef.current.value,
-        //         category: category,
-        //         address: "",
-        //         city: "",
-        //         state: "",
-        //         zipCode: "",
-        //         fullAddress: "",
-        //         coordinates: {
-        //             lat: lat,
-        //             lng: lng
-        //         },
-        //         price: priceRef.current.value,
-        //         img: image,
-        //         pendingRequest: false,
-        //         isRented: false,
-        //         active: false,
-        //     }
-        //     console.log(data);
-        //     postListing(data);
-        // } else {
-        // getCoordinates(`${streetRef.current.value} ${zipcodeRef.current.value} ${cityRef.current.value} ${stateRef.current.value}`, (res) => {
-        //     console.log(res)
-        //     const data = {
-        //         // manually putting in ownId, this will be provided through the usercontext
-        //         ownerId: "5ec24cc7c7e382486c6ff128",
-        //         name: itemNameRef.current.value,
-        //         description: descriptionRef.current.value,
-        //         category: category,
-        //         address: streetRef.current.value,
-        //         city: cityRef.current.value,
-        //         state: stateRef.current.value,
-        //         zipCode: zipcodeRef.current.value,
-        //         fullAddress: `${streetRef.current.value} ${zipcodeRef.current.value} ${cityRef.current.value} ${stateRef.current.value}`,
-        //         coordinates: {
-        //             lat: res.results[0].geometry.lat.toFixed(3),
-        //             lng: res.results[0].geometry.lng.toFixed(3)
-        //         },
-        //         price: priceRef.current.value,
-        //         img: image,
-        //         pendingRequest: false,
-        //         isRented: false,
-        //         active: false,
-        //     }
-        //     console.log(data);
-        //     postListing(data);
-        // })}
-
-        // upated with userContext from authentication-pages
-        const data = {
-            ownerId: state.user._id,
-            name: itemNameRef.current.value,
-            description: descriptionRef.current.value,
-            category: category,
-            address: streetRef.current.value,
-            city: cityRef.current.value,
-            state: stateRef.current.value,
-            zipCode: zipcodeRef.current.value,
-            fullAddress: `${streetRef.current.value} ${zipcodeRef.current.value} ${stateRef.current.value}`,
-            coordinates: {
-                lat: 47.733,
-                lng: -122.313
-            },
-            price: priceRef.current.value,
-            img: image,
-            pendingRequest: false,
-            isRented: false,
-            active: true,
-        }
-        console.log(data);
-        postListing(data)
-        .then(res => {
-            console.log(res);
-            addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
+        if (locationPref === 'Use my location') {
+            const data = {
+                ownerId: state.user._id,
+                name: itemNameRef.current.value,
+                description: descriptionRef.current.value,
+                category: category,
+                address: "",
+                city: "",
+                state: "",
+                zipCode: "",
+                fullAddress: "",
+                coordinates: {
+                    lat: lat,
+                    lng: lng
+                },
+                price: priceRef.current.value,
+                img: image,
+                pendingRequest: false,
+                isRented: false,
+                active: false,
+            }
+            console.log(data);
+            postListing(data)
             .then(res => {
                 console.log(res);
-                history.push("/profile");
+                addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
+                .then(res => {
+                    console.log(res);
+                    history.push("/profile");
+                })
+                .catch(err => console.log(err))
             })
-            .catch(err => console.log(err))
-        })
-        .catch(err => console.log(err));
+            .catch(err => console.log(err));
+        } else {
+        getCoordinates(`${streetRef.current.value} ${zipcodeRef.current.value} ${cityRef.current.value} ${stateRef.current.value}`, (res) => {
+            console.log(res)
+            const data = {
+                ownerId: state.user._id,
+                name: itemNameRef.current.value,
+                description: descriptionRef.current.value,
+                category: category,
+                address: streetRef.current.value,
+                city: cityRef.current.value,
+                state: stateRef.current.value,
+                zipCode: zipcodeRef.current.value,
+                fullAddress: `${streetRef.current.value} ${zipcodeRef.current.value} ${cityRef.current.value} ${stateRef.current.value}`,
+                coordinates: {
+                    lat: res.results[0].geometry.lat.toFixed(3),
+                    lng: res.results[0].geometry.lng.toFixed(3)
+                },
+                price: priceRef.current.value,
+                img: image,
+                pendingRequest: false,
+                isRented: false,
+                active: false,
+            }
+            console.log(data);
+            postListing(data)
+            .then(res => {
+                console.log(res);
+                addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
+                .then(res => {
+                    console.log(res);
+                    history.push("/profile");
+                })
+                .catch(err => console.log(err))
+            })
+            .catch(err => console.log(err));
+        })}
+
+        // upated with userContext from authentication-pages
+        // const data = {
+        //     ownerId: state.user._id,
+        //     name: itemNameRef.current.value,
+        //     description: descriptionRef.current.value,
+        //     category: category,
+        //     address: streetRef.current.value,
+        //     city: cityRef.current.value,
+        //     state: stateRef.current.value,
+        //     zipCode: zipcodeRef.current.value,
+        //     fullAddress: `${streetRef.current.value} ${zipcodeRef.current.value} ${stateRef.current.value}`,
+        //     coordinates: {
+        //         lat: 47.733,
+        //         lng: -122.313
+        //     },
+        //     price: priceRef.current.value,
+        //     img: image,
+        //     pendingRequest: false,
+        //     isRented: false,
+        //     active: true,
+        // }
+        // console.log(data);
+        // postListing(data)
+        // .then(res => {
+        //     console.log(res);
+        //     addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
+        //     .then(res => {
+        //         console.log(res);
+        //         history.push("/profile");
+        //     })
+        //     .catch(err => console.log(err))
+        // })
+        // .catch(err => console.log(err));
     }
 
     const handleLocationPref = (locationValue) => {

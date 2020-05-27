@@ -1,43 +1,67 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import './styles.css';
-import { useLocation } from "react-router-dom";
 import { useStoreContext } from "../../utils/UserContext/UserContext";
+
 import LogoutButton from "../LogoutButton/LogoutButton";
 import SignUpButton from '../SignUpButton';
 
 const Nav = (props) => {
     const [state, dispatch] = useStoreContext();
-    const location = useLocation();
+
+    let location = useLocation();
+
+
+    const renderProfile = () => {
+            return (
+                <Navbar.Item>
+                    <NavLink to="/profile" className="inactive" activeClassName="is-active">Profile</NavLink>
+                </Navbar.Item>
+            );
+    }
+
+    const renderSignUp = () => {
+        return (
+            <Navbar.Item>
+                <SignUpButton />
+            </Navbar.Item>
+        )
+    }
 
     return (
-        <div className="section navbar is-primary">
-            <div className="navbar-start">
-                <div className="navbar-item">
-                    Logo Image
-                </div>
-
-            </div>
-            <div className="navbar-item">
-                {props.children}
-            </div>
-            <div className="navbar-end">
-                <NavLink className="navbar-item" to="/profile">{ state.user ? state.user.username : ""}<img style={ { marginLeft: "10px"} } src={state.user ? state.user.icon : ""} /></NavLink> 
-                <div className="navbar-item">
-                    {state.user ? <LogoutButton /> : location.pathname !== "/signup" ? <SignUpButton /> : <div></div> }
-                </div>
-                <NavLink to="/" className="navbar-item">Home</NavLink>
-                {/* fix burger menu for mobile */}
-                <div className="navbar-item">
-                    <div className="burger">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+        <Navbar
+            color = "primary"
+            className="is-fixed-top"
+        >
+            <Navbar.Brand>
+                <Navbar.Item>
+                    <NavLink to="/" className="inactive" activeClassName="is-active"><h1>SHAREISH</h1></NavLink>
+                </Navbar.Item>
+                <Navbar.Burger/>
+            </Navbar.Brand>
+            <Navbar.Menu>
+                <Navbar.Container>
+                    <Navbar.Item>
+                        {state.user ? state.user.username : "Guest"}
+                    </Navbar.Item>
+                    <Navbar.Item>
+                        {state.user ? "" : <NavLink to="/newlisting" className="inactive" activeClassName="is-active">Post a Listing</NavLink>}
+                    </Navbar.Item>
+                </Navbar.Container>
+                <Navbar.Container position="end">
+                    <NavLink className="navbar-item" to="/profile">{ state.user ? state.user.username : ""}<img style={ { marginLeft: "10px"} } src={state.user ? state.user.icon : ""} /></NavLink> 
+                    <div className="navbar-item">
+                        {state.user ? <LogoutButton /> : location.pathname !== "/signup" ? <SignUpButton /> : <div></div> }
                     </div>
-                </div>
-            </div>
-        </div>
-    )
+                    {/* {state.user ? renderProfile : ""}
+                    <Navbar.Item>
+                        <span>{location.pathname}</span>
+                    </Navbar.Item>
+                    {location.pathname != "/signup" ? renderSignUp : ""} */}
+                </Navbar.Container>
+            </Navbar.Menu>
+        </Navbar>      
+    );
 }
 
 export default Nav;

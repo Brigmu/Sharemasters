@@ -1,15 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
+import "./styles.css";
 import SearchBar from "../SearchBar";
+import { Navbar } from "react-bulma-components";
+
 import { useStoreContext } from "../../utils/UserContext/UserContext";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import SignUpButton from '../SignUpButton';
 import { useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom"; 
+import SignUpButton from "../SignUpButton";
+import LogoutButton from "../LogoutButton/LogoutButton";
 
 function Hero(props) {
+
     const [state, dispatch] = useStoreContext();
     const location = useLocation();
+    
+    useEffect(()=>{
+        
+    }, []);
 
+    const renderLogoutButton = () => {
+        if (!state.user) {
+            return (
+                <Navbar.Item dropdown hoverable href="/profile">
+                    <Navbar.Link arrowless={true} className="profile">
+                        Profile
+                    </Navbar.Link>
+                    <Navbar.Dropdown>
+                        <Navbar.Item>
+                            <LogoutButton />
+                        </Navbar.Item>
+                    </Navbar.Dropdown>
+                </Navbar.Item>
+            );
+        } 
+    }
+    
     return (
         <section className="hero is-primary is-small is-mobile">
             {/* <!-- Hero head: will stick at the top --> */}
@@ -29,6 +56,9 @@ function Hero(props) {
                         </div>
                         <div id="navbarMenuHeroA" className="navbar-menu">
                             <div className="navbar-end">
+                                {/* <NavLink to="/listings" className="navbar-item" activeClassName="is-active">Browse</NavLink>
+                                {/* <NavLink to="/profile" className="navbar-item" activeClassName="is-active">Profile</NavLink> */}
+                                {/* {state.user ? renderLogoutButton : <Navbar.Item><SignUpButton /></Navbar.Item>} */}
                                 <NavLink to="/"className="navbar-item">
                                     Home
                                 </NavLink>

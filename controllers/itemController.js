@@ -1,4 +1,3 @@
-// const db = require('../models');
 const db = require("../models");
 const mongoose = require("mongoose");
 
@@ -13,11 +12,22 @@ module.exports = {
         db.Item.aggregate([
         { $match: { _id : mongoose.Types.ObjectId(req.params.id) } },
         { $lookup: {
-            from: "users",
+            from: "profiles",
             localField: "ownerId",
             foreignField: "userId",
             as: "ownerInfo"
+<<<<<<< HEAD
+        }}
+        // ,
+        // { $lookup: {
+        //     from: "appointments",
+        //     localField: "_id",
+        //     foreignField: "itemId",
+        //     as: "appointmentInfo"
+        // }}
+=======
         }},
+>>>>>>> authentication-pages
     ])
         // .populate("ownerInfo")
         .then(data => res.json(data))

@@ -2,6 +2,25 @@ import React from 'react';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, Circle } from 'react-google-maps';
 
 function Map() {
+<<<<<<< HEAD
+    const [lat, setLat] = useState({})
+    const [lng, setLng] = useState({})
+    const { id } = useParams();
+
+    // useEffect(() => {
+    //     getItem(id)
+    //     .then(res => {
+    //         console.log(res);
+    //         let coordinates = res.data.coordinates
+    //         console.log(coordinates)
+    //         setLat(coordinates.lat)
+    //         setLng(coordinates.lng)
+    //     })
+    // }, []);
+
+
+=======
+>>>>>>> authentication-pages
     return (
         <GoogleMap
             defaultZoom={15} 

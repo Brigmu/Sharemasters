@@ -12,6 +12,7 @@ import { Section, Container, Tile, Heading, Columns } from "react-bulma-componen
 import { Link } from 'react-router-dom';
 
 const Home = () => {
+    // initialize user state -- checks if there is a user logged in 
     const [state, dispatch] = useStoreContext();
     const options = [
         {
@@ -26,17 +27,18 @@ const Home = () => {
         },
         {
             message: "View Your Profile",
-            color: "",
+            color: "profile",
             link: "profile"
         }
     ];
     
-
+    // grab user data from profile?
     const setUserState = (user) => {
         dispatch({
             type: SET_USER,
             user: user
         });
+        console.log(user);
     };
     
     useEffect(()=>{
@@ -70,9 +72,9 @@ const Home = () => {
                 <Container>
                     <Columns>
                         {options.map(option =>  
-                            <Columns.Column key={option.link}>
-                                <Link to={"/" + option.link}>
-                                    <div className={"notification has-text-centered " + option.color}>
+                            <Columns.Column>
+                                <Link to={"/" + option.link} activeClassName="is-active">
+                                    <div key={option.link} className={"notification has-text-centered " + option.color}>
                                     {option.message}
                                     </div>    
                                 </Link> 

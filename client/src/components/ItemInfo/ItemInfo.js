@@ -14,16 +14,76 @@ function ItemInfo() {
     const [item, setItem] = useState({})
     const { id } = useParams();
 
+<<<<<<< HEAD
+    // useEffect(() => {
+    //     getItem(id, (res) => {
+    //         res = res[0]
+    //         console.log('hi from useeffect in ItemInfo')
+    //         console.log(res);
+    //         console.log(res.ownerInfo[0]);
+
+    //         setItem(res)
+    //         setOwnerInfo(res.ownerInfo[0])
+    //     })
+            
+    // }, []);
+
+        useEffect(() => {
+        getItem(id)
+        .then(res => {
+            res = res.data
+            console.log('hi from useeffect in ItemInfo')
+            console.log(res);
+            // console.log(res.ownerInfo[0]);
+
+            setItem(res)
+            // setOwnerInfo(res.ownerInfo[0])
+=======
     useEffect(() => {
         getItem(id, (res) => {
             console.log('hi from useEffect/getItem')
             res = res[0]
             console.log(res);
             setItem(res)
+>>>>>>> authentication-pages
         })
     }, []);
 
+<<<<<<< HEAD
+    return (
+
+        <Section>
+            <Container>
+            <h1 className="is-size-3 has-text-weight-bold">{item.name}</h1>
+                <Columns>
+                    <div className="column is-half">
+                        <figure className="image">
+                            {item.img ? <img src={item.img} alt={item.name}/>: <img src="https://bulma.io/images/placeholders/128x128.png"/>}
+                        </figure>
+                    </div>
+
+                    <div className="column is-half">
+                        <div className="title is-5">Price: ${item.price}/day</div>
+                        <div className="title is-5">User: {ownerInfo.username}</div>
+                        {item.city ? <div className="title is-5">Location: {item.city}, {item.state}</div> : <div className="title is-5">Location: See map below</div>}
+                        <div className="title is-5">Description: {item.description}</div>
+                        <MessageOwnerButton />
+                        <br />
+                        <br />
+                        <ItemRequestForm />
+
+                    </div>
+
+                </Columns>
+
+            </Container>
+
+
+
+        </Section>
+=======
     
+>>>>>>> authentication-pages
 
     return (
         <div class="container">
