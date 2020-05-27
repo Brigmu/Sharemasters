@@ -14,18 +14,17 @@ const LogoutButton = (props) => {
             type: CLEAR_USER
         });
     };
+    
     const handleLogout = (e) => {
-        e.preventDefault();
         logoutUser()
-            .then(res => {
-                history.push('/');
+            .then(() => {
                 clearUserState();
-                alert(res.data.message);
+                history.push('/');
             })
     }
 
     return (
-        <button onClick={handleLogout} className="button is-danger is-small">Logout</button>
+        <button onClick={handleLogout} className="button is-danger">Logout</button>
     )
 }
 

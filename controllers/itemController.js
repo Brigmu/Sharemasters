@@ -1,4 +1,3 @@
-// const db = require('../models');
 const db = require("../models");
 const mongoose = require("mongoose");
 
@@ -8,26 +7,6 @@ module.exports = {
         .then(data => res.json(data))
         .catch(err => res.status(422).json(err));
     },
-    findAll: function(req, res) {
-        // db.Item.find({})
-        // .populate('ownerId')
-        // .populate({path: 'appointments', 
-        //     populate: [{
-        //         path: 'current',
-        //         model: 'Appointments'
-        //     },
-        //     {
-        //         path: 'history',
-        //         model: 'Appointments'
-        //     }
-        //     ]
-        // })
-        //   .then(data => {
-        //       res.json(data)
-            //   console.log(data);
-            // })
-        //   .catch(err => res.status(422).json(err));
-    },
     findById: function(req, res) {
         db.Item.find({_id: req.params.id})
             .populate('ownerId')
@@ -36,10 +15,7 @@ module.exports = {
     },
     create: function(req, res) {
         db.Item.create(req.body)
-        .then(data => res.json(data))
-        // .then(function(req, res) {
-        //     db.Item.update( { _id: })
-        // })
+        .then(res => console.log(res))
         .catch(err => console.log(err));
     },
     itemUpdate: function(req, res) {
@@ -63,11 +39,6 @@ module.exports = {
         .then(data => res.json(data))
         .catch(err => res.status(422).json(err))
     }
-    // ownerApprove: function(req, res) {
-    //     db.Item.findOneAndUpdate({ _id: req.params.id }, { pendingRequest: true,  })
-    //     .then(data => res.json(data))
-    //     .catch(err => res.status(422).json(err));
-    // }
 
 
 }

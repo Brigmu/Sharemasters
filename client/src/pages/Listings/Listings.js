@@ -221,8 +221,7 @@ const Listings = (props) => {
     return (
         <FilteredContext.Provider value={filtered}>
             <div className='listings-page'>
-                <Nav currentPage ='browse'>
-                </Nav>
+                <Nav />
                 <section className = 'section'>
                     <Columns>
                         <Column size='is-2'>
@@ -230,7 +229,7 @@ const Listings = (props) => {
                                 <p>Select filter type</p>
                                 {filterType === 'price' ?
                                 <ul id='filters'>
-                                     
+            
                                     <li>
                                     <input type='radio' id='nameFilter' value='name' name='filter'onChange={nameFilterCheck}></input>
                                     <label htmlFor='nameFilter'>Name</label>

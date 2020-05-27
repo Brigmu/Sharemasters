@@ -13,7 +13,6 @@ import ItemPage from "./pages/Item/Item";
 import RentalConfirmation from './pages/RentalConfirmation/RentalConfirmation';
 import Profile from "./pages/Profile/Profile";
 import EditProfile from "./pages/EditProfile/EditProfile";
-import { getAllItems } from "./utils/API/API";
 
 const connectEnsureLogin = require('connect-ensure-login');
 
@@ -21,9 +20,6 @@ const connectEnsureLogin = require('connect-ensure-login');
 function App() {
   const [itemListings, setItemListings] = useState([]);
 
-  useEffect(() => {
-    
-  }, []);
 
   return (
     <UserProvider>
@@ -33,6 +29,7 @@ function App() {
         <Switch>
           <Route exact path = '/' component={Home} />
           <Route exact path = '/signup' component={Signup} />
+          <Route exact path = '/login' component={Signup} />
           <Route exact path = '/listings' component={Listings} />
           <Route exact path = '/newlisting' component={ListingPage} />
           <Route exact path = '/items/:id' component={ItemPage} />

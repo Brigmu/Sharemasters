@@ -3,7 +3,7 @@ import './styles.css';
 
 //user context
 import { useStoreContext } from "../../utils/UserContext/UserContext";
-import { SET_USER, CLEAR_USER } from "../../utils/UserContext/UserActions";
+import { SET_USER } from "../../utils/UserContext/UserActions";
 import {getCurrentUser, getProfile} from '../../utils/API/API';
 
 //pages
@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom';
 
 
 const Home = () => {
+    // initialize user state -- checks if there is a user logged in 
     const [state, dispatch] = useStoreContext();
     const options = [
         {
@@ -32,22 +33,21 @@ const Home = () => {
         }
     ];
     
-
+    // grab user data from profile?
     const setUserState = (user) => {
         dispatch({
             type: SET_USER,
             user: user
         });
+        console.log(user);
     };
     
     useEffect(()=>{
         if (!state.user) {
             getCurrentUser().then(res => {
                 if (res.data.user) {
-                    console.log(res.data.user);
                     getProfile(res.data.user._id)
                         .then(res => {
-                            console.log(res.data[0]);
                             setUserState(res.data[0]);
                     });
                 }
@@ -74,7 +74,7 @@ const Home = () => {
                     <Columns>
                         {options.map(option =>  
                             <Columns.Column>
-                                <Link to={"/" + option.link}>
+                                <Link to={"/" + option.link} activeClassName="is-active">
                                     <div key={option.link} className={"notification has-text-centered " + option.color}>
                                     {option.message}
                                     </div>    

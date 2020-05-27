@@ -1,59 +1,70 @@
-import React, { useContext } from 'react';
-import { Link } from "react-router-dom";
+import React from 'react';
+import { NavLink, useLocation } from "react-router-dom";
 import './styles.css';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
+import {Navbar} from 'react-bulma-components';
 import LogoutButton from "../LogoutButton/LogoutButton";
 import SignUpButton from '../SignUpButton';
 
 const Nav = (props) => {
     const [state, dispatch] = useStoreContext();
 
+    let location = useLocation();
+
+
+    const renderProfile = () => {
+            return (
+                <Navbar.Item>
+                    <NavLink to="/profile" className="inactive" activeClassName="is-active">Profile</NavLink>
+                </Navbar.Item>
+            );
+    }
+
+    const renderSignUp = () => {
+        return (
+            <Navbar.Item>
+                <SignUpButton />
+            </Navbar.Item>
+        )
+    }
+
     return (
-        <div className="section navbar is-primary">
-            <div className="navbar-start">
-                <div className="navbar-item">
-                    Logo Image
-                </div>
-            </div>
-            {props.children}
-            <div className="navbar-end">
-                <div className="navbar-item">
-                    {state.user ? state.user.username : ""}
-                </div>
-                {props.currentPage !== 'signup' ?
-                <div className="navbar-item">
-                    {state.user ? <LogoutButton /> : <SignUpButton />}
-                </div>
-                : <> </>}
-                <div className="navbar-item">
-                    <Link to="/" activeclassname="is-active">Home</Link>
-                </div>
-                {props.currentPage !== 'browse' ? 
-                <div className="navbar-item">
-                    <Link to="/listings" activeclassname="is-active">Browse</Link>
-                </div>
-                : <> </>}
-                {props.currentPage !== 'post' ? 
-                <div className="navbar-item">
-                    <Link to="/newlisting" activeclassname="is-active">Post</Link>
-                </div>
-                : <> </>}
-                {props.currentPage !== 'profile' ? 
-                <div className="navbar-item">
-                    <Link to="/profile" activeclassname="is-active">Profile</Link>
-                </div>
-                : <> </>}
-                {/* fix burger menu for mobile */}
-                <div className="navbar-item">
-                    <div className="burger">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+        <Navbar
+            color = "primary"
+            className="is-fixed-top"
+        >
+            <Navbar.Brand>
+                <Navbar.Item>
+                    <NavLink to="/" className="inactive" activeClassName="is-active"><h1>SHAREISH</h1></NavLink>
+                </Navbar.Item>
+                <Navbar.Burger/>
+            </Navbar.Brand>
+            <Navbar.Menu>
+                <Navbar.Container>
+                    <Navbar.Item>
+                        {state.user ? state.user.username : "Guest"}
+                    </Navbar.Item>
+                    <Navbar.Item>
+                        {state.user ? "" : <NavLink to="/newlisting" className="inactive" activeClassName="is-active">Post a Listing</NavLink>}
+                    </Navbar.Item>
+                </Navbar.Container>
+                <Navbar.Container>
+                    {props.children}
+                </Navbar.Container>
+                <Navbar.Container position="end">
+                    <NavLink className="navbar-item" to="/profile">{ state.user ? state.user.username : ""}<img style={ { marginLeft: "10px"} } src={state.user ? state.user.icon : ""} /></NavLink> 
+                    <div className="navbar-item">
+                        {state.user ? <LogoutButton /> : location.pathname !== "/signup" ? <SignUpButton /> : <div></div> }
                     </div>
-                </div>
-            </div>
-        </div>
-    )
+                    {/* {state.user ? renderProfile : ""}
+                    <Navbar.Item>
+                        <span>{location.pathname}</span>
+                    </Navbar.Item>
+                    {location.pathname != "/signup" ? renderSignUp : ""} */}
+                </Navbar.Container>
+            </Navbar.Menu>
+        </Navbar>      
+    );
 }
 
 export default Nav;

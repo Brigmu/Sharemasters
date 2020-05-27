@@ -41,12 +41,15 @@ passport.serializeUser(db.User.serializeUser());
 passport.deserializeUser(db.User.deserializeUser());
 
 // front-end test data code
+
+
+
+// Add routes, both API and view
+// Define any API routes before this runs
 app.use(routes);
 
 // Send every other request to the React app
 
-// Add routes, both API and view
-// Define any API routes before this runs
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/public/index.html"));
 });

@@ -5,15 +5,6 @@ const itemController = require("../../controllers/itemController");
 router.route("/:id")
   .get(itemController.findById)
   .put(itemController.itemUpdate)
-  
-  // .put(itemController.update)
-
-// doesn't work
-// router.route("/all")
-//   .get(itemController.findAll)
-
-// router.route('/unrented')
-//   .get(itemController.getAllUnrented)
 
 router.route('/all/unrented')
   .get(itemController.getAllUnrented)
