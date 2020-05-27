@@ -33,11 +33,9 @@ const ProfileSchema = new Schema({
   city: String,
   state: {
     type: String,
-    maxlength: [2, 'Please enter two-letter state abbreviation']
   },
   zipCode: {
-    type: String,
-    maxlength: 5
+    type: String
   },
   fullAddress: String,
   rentals: [
@@ -58,12 +56,16 @@ const ProfileSchema = new Schema({
       ref: "Item"
     }
   ],
+  icon: {
+    type: String,
+    default: "./assets/icons/octopus.png"
+  },
   createdAt: {
     type: Date,
     default: Date.now
   }
 });
 
-const Profile = mongoose.model("Profiles", ProfileSchema);
+const Profile = mongoose.model("Profile", ProfileSchema);
 
 module.exports = Profile;

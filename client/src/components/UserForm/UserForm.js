@@ -4,9 +4,12 @@ import FormField from "../FormField/FormField";
 import FormControl from "../FormControl/FormControl";
 import FormIcon from "../FormIcon/FormIcon";
 import FormHelp from "../FormHelp/FormHelp";
+import StatesDropdown from "../StatesDropdown/StatesDropdown";
 import { loginUser, signupUser, getCurrentUser, createProfile, getProfile, deleteUser } from '../../utils/API/API';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
 import { SET_USER } from "../../utils/UserContext/UserActions";
+import { Button, Section, Columns} from "react-bulma-components";
+
 
 const UserForm = (props) => {
     const [state, dispatch] = useStoreContext();
@@ -29,7 +32,7 @@ const UserForm = (props) => {
     const stateRef = useRef();
     const zipCodeRef = useRef();
 
-    const [signupErrorState, setSignupError] = useState({});
+    const [signupErrorState, setSignupError] = useState({ });
 
     const profileInputs = [usernameRef, passwordRef, firstNameRef, lastNameRef, emailRef, zipCodeRef, addressRef, cityRef, stateRef];
 
@@ -46,7 +49,7 @@ const UserForm = (props) => {
             address: addressRef.current.value,
             city: cityRef.current.value,
             state: stateRef.current.value,
-            zipCode: parseInt(zipCodeRef.current.value),
+            zipCode: zipCodeRef.current.value,
             email: emailRef.current.value,
             password: passwordRef.current.value
         }
@@ -57,15 +60,12 @@ const UserForm = (props) => {
             password: passwordRef.current.value
         }
 
-        console.log(user);
-
-        signupUser(newUser)
+        signupUser(user)
             .then(() => {
                 //signup success
                 setSignupError({});
                 createProfile(newUser)
                     .then(res => {
-                        alert(`Profile for ${res.data.username} has been created`);
                         loginHelper(user);
                         // reset form
                         profileInputs.forEach(input => input.current.value = '');
@@ -78,7 +78,7 @@ const UserForm = (props) => {
             })
             .catch(err => {
                 // signup fail
-                setSignupError(err.response.data.err);
+                setSignupError(err.response.data.err ? err.response.data.err : err.response.data);
             });
     }
 
@@ -90,7 +90,7 @@ const UserForm = (props) => {
                 getProfile(res.data.user._id)
                     .then(res => {
                         setUserState(res.data[0]);
-                        history.push("/profile");
+                        history.push("/");
                 });
             })
             .catch(err => {
@@ -100,18 +100,25 @@ const UserForm = (props) => {
     };
 
     return (
-        <section className="section">
+        <Section>
             <div className="container notification is-info is-light">
-                <FormField label="First Name" >
-                    <FormControl>
-                        <input className={`input ${signupErrorState.firstName ? "is-danger" : ""}`} type="text" placeholder="Alex" ref={firstNameRef} />
-                    </FormControl>
-                </FormField>
-                <FormField label="Last Name">
-                    <FormControl>
-                        <input className={`input ${signupErrorState.lastName ? "is-danger" : ""}`} type="text" placeholder="Lee" ref={lastNameRef} />
-                    </FormControl>
-                </FormField>
+                <h1>Sign Up!</h1>
+                <Columns>
+                    <Columns.Column>
+                        <FormField label="First Name" >
+                            <FormControl>
+                                <input className={`input ${signupErrorState.firstName ? "is-danger" : ""}`} type="text" placeholder="Alex" ref={firstNameRef} />
+                            </FormControl>
+                        </FormField>
+                    </Columns.Column>
+                    <Columns.Column>
+                        <FormField label="Last Name">
+                            <FormControl>
+                                <input className={`input ${signupErrorState.lastName ? "is-danger" : ""}`} type="text" placeholder="Lee" ref={lastNameRef} />
+                            </FormControl>
+                        </FormField>
+                    </Columns.Column>
+                </Columns>
                 <FormField label="Email">
                     <FormControl controlClass="has-icons-left has-icons-right">
                         <input
@@ -128,23 +135,29 @@ const UserForm = (props) => {
                         <input className="input" type="text" placeholder="5555 N Main St" ref={addressRef} />
                     </FormControl>
                 </FormField>
-                <div className="is-horizontal">
-                    <FormField label="City">
-                        <FormControl>
-                            <input className="input" type="text" placeholder="Seattle" ref={cityRef} />
-                        </FormControl>
-                    </FormField>
-                    <FormField label="State">
-                        <FormControl>
-                            <input className={`input ${signupErrorState.state ? "is-danger" : ""}`} type="text" placeholder="WA" ref={stateRef} />
-                        </FormControl>
-                    </FormField>
-                    <FormField label="Zip Code">
-                        <FormControl>
-                            <input className={`input ${signupErrorState.zipCode ? "is-danger" : ""}`} type="text" placeholder="98001" ref={zipCodeRef} />
-                        </FormControl>
-                    </FormField>
-                </div>
+                <Columns>
+                    <Columns.Column>
+                        <FormField label="City">
+                            <FormControl>
+                                <input className="input" type="text" placeholder="Seattle" ref={cityRef} />
+                            </FormControl>
+                        </FormField>
+                    </Columns.Column>
+                    <Columns.Column className="is-narrow">
+                        <FormField label="State">
+                            <FormControl>
+                                <StatesDropdown stateRef={stateRef}></StatesDropdown>
+                            </FormControl>
+                        </FormField>
+                    </Columns.Column>
+                    <Columns.Column className="is-narrow">
+                        <FormField label="Zip Code">
+                            <FormControl>
+                                <input className={`input ${signupErrorState.zipCode ? "is-danger" : ""}`} type="text" placeholder="98001" ref={zipCodeRef} />
+                            </FormControl>
+                        </FormField>
+                    </Columns.Column>
+                </Columns>
                 <FormField label="Username">
                     <FormControl controlClass="has-icons-left has-icons-right">
                         <input
@@ -167,14 +180,12 @@ const UserForm = (props) => {
                         <FormIcon size="small" side="right" icon="exclamation-triangle" />
                     </FormControl>
                 </FormField>
-                <div className="field is-grouped">
-                    <div className="control">
-                        <button className="button is-link" type="submit" onClick={handleSubmit}>Submit</button>
-                    </div>
+                <div className="field">
+                    <Button style={ { width: "75px" } } className="button is-link" type="submit" onClick={handleSubmit}>Submit</Button>
                     <FormHelp type="danger" message={signupErrorState ? signupErrorState.message : ""} />
                 </div>
             </div>
-        </section>
+        </Section>
     );
 }
 

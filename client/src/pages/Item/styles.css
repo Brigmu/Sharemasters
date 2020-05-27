@@ -37,14 +37,15 @@ h2 {
 .buttons-div {
     text-align: center;
 }
-button {
+/* button {
     margin: 10px 0 0 0;
 
-    width: 45%;
+    width: 100%;
 }
 
 .half-button {
     /* min-width: 82px; */
 
-    margin: 10px 10px 0 0;
-}
+    /* margin: 10px 10px 0 0;
+} */
+

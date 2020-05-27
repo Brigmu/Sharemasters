@@ -15,30 +15,14 @@ const reducer = (state, action) => {
                 user: action.user
             };
         case CLEAR_USER:
-            return {
-                ...state,
-                user: {}
-            }
+            return {}
+        default : 
+            return;
     }
 }
 
 const UserProvider = ({ value = [], ...props }) => {
-    const [state, dispatch] = useReducer(reducer, {
-        userId: "",
-        id: "",
-        username: "",
-        firstName: "",
-        lastName: "",
-        email: "",
-        coordinates: {
-            lat: null,
-            lng: null
-        },
-        address: "",
-        city: "",
-        state: "",
-        zipCode: null
-    });
+    const [state, dispatch] = useReducer(reducer, {});
 
     return <Provider value={[state, dispatch]} {...props} />;
 }

@@ -2,6 +2,10 @@ import React from 'react';
 import { GoogleMap, withScriptjs, withGoogleMap, Marker, Circle } from 'react-google-maps';
 
 function Map() {
+    // const [lat, setLat] = useState({})
+    // const [lng, setLng] = useState({})
+    // const { id } = useParams();
+
     return (
         <GoogleMap
             defaultZoom={15} 

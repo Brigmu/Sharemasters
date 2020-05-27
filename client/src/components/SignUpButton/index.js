@@ -1,10 +1,11 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 const SignUpButton = () => {
     return (
-        <a href="/signup" className="button is-primary is-inverted">
+        <NavLink to="/signup" className="button is-primary is-inverted">
             <span>Sign Up</span>
-        </a>
+        </NavLink>
     );
 }
 

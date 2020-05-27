@@ -5,3 +5,20 @@
     background-attachment: fixed;
     background-position: center;
 }
+
+.a {
+    color: #4a4a4a;
+}
+
+.profile {
+    color: #363636;
+    text-decoration: none;
+}
+
+.navbar-cover {
+    position: fixed;
+    width: 100%;
+    height: 52px;
+    top: 0;
+    z-index: 10;
+}

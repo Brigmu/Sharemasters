@@ -1,0 +1,8 @@
+.hero .is-primary .nav-link .profile {
+    color: black;
+}
+
+.inactive {
+    color: #ffffff;
+    text-decoration: none;
+}

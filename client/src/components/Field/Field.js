@@ -6,7 +6,7 @@ const Field = (props) => {
         <div className = 'field'>
             <label className="label">{props.title}</label>
                 <div className="control">
-                    <input className="input" type="text" placeholder={props.placeholder} ref={props.reference}/>
+                    <input className="input" type="text" placeholder={props.placeholder} ref={props.reference} {...props}/>
             </div>
         </div>
     )

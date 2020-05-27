@@ -6,10 +6,11 @@ import NavLogin from '../../components/NavLogin/NavLogin';
 const Signup = () => {
     return (
         <div className='signup-page'>
-            <Nav>
+            <Nav signup = {true}>
                 <NavLogin />
             </Nav>
             <UserForm />
+            <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/"     title="Flaticon">www.flaticon.com</a></div>
         </div>
     )
 }
