@@ -181,8 +181,9 @@ const ListingPage = (props) => {
                     {locationPref === 'Enter a location' ? <Field placeholder='City' reference={cityRef} /> : <> </>}
                     {locationPref === 'Enter a location' ? <Field placeholder='State' reference={stateRef} /> : <> </>}
                     {locationPref === 'Enter a location' ? <Field placeholder='Zipcode' reference={zipcodeRef} /> : <> </>}
-                    <div className='field is-grouped'>
-                    <ItemImage image={image} uploadImage={uploadImage}/>
+                    <div className='field'>
+                        <label className="label">Item Image</label>
+                        <ItemImage image={image} uploadImage={uploadImage}/>
                     </div>
                     <div className="control">
                         <button className="button is-link" onClick={handleSubmit}>Submit</button>
