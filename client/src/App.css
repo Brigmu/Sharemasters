@@ -35,6 +35,10 @@ body{
   height: 80px;
 }
 
+.App{
+  margin-top: 52px;
+}
+
 .App-header {
   background-color: #222;
   height: 150px;

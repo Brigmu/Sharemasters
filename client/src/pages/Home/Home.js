@@ -57,6 +57,8 @@ const Home = () => {
     
     return (
         <div>
+            <div className = 'navbar is-fixed-top is-primary'>
+            </div>
             <Hero />
             <Section>
                 <Tile

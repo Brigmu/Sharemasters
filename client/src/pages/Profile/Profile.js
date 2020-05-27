@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Button } from 'react-bulma-components/dist/react-bulma-components.min.css';
 
 //user context
 import { useStoreContext } from "../../utils/UserContext/UserContext";
