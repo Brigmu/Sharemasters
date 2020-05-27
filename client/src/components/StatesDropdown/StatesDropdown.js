@@ -8,9 +8,9 @@ const StatesDropdown = (props) => {
     return(
         <div className="select">
             <select ref={props.stateRef}>
-                <option value='default'>{props.defaultState ? props.defaultState : "Select State"}</option>
+                <option value='default' disabled>Select State</option>
                 { stateCodes.map(state => {
-                    return <option key={ state } value={ state }> { state } </option>
+                    return <option key={ state } value={ state } selected={ state === props.defaultState ? true : false}> { state } </option>
                 }) }
             </select>
         </div>

@@ -60,21 +60,17 @@ const UserForm = (props) => {
             password: passwordRef.current.value
         }
 
-        console.log(user);
-
         signupUser(user)
             .then(() => {
                 //signup success
                 setSignupError({});
                 createProfile(newUser)
                     .then(res => {
-                        alert(`Profile for ${res.data.username} has been created`);
                         loginHelper(user);
                         // reset form
                         profileInputs.forEach(input => input.current.value = '');
                     })
                     .catch(err => {
-                        console.log(err.message);
                         //delete user from passport if profile create fails
                         deleteUser(newUser.username);
                         setSignupError(err.response.data.err.errors);
@@ -82,7 +78,6 @@ const UserForm = (props) => {
             })
             .catch(err => {
                 // signup fail
-                console.log(err.response);
                 setSignupError(err.response.data.err ? err.response.data.err : err.response.data);
             });
     }

@@ -45,7 +45,7 @@ const NavLogin = () => {
                     getProfile(res.data.user._id)
                         .then(res => {
                             setUserState(res.data[0]);
-                            history.push("/editprofile"); //need to change before final push
+                            history.push("/");
                     });
                 });
             })

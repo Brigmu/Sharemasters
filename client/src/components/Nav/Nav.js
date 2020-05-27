@@ -22,21 +22,11 @@ const Nav = (props) => {
                 {props.children}
             </div>
             <div className="navbar-end">
-                <div className="navbar-item is-hidden-mobile">
-                    { state.user ? state.user.username : ""} 
-                </div>
-                <div className="navbar-item is-hidden-mobile">
-                    <img src={state.user ? state.user.icon : ""} />
-                </div>
+                <NavLink className="navbar-item" to="/profile">{ state.user ? state.user.username : ""}<img style={ { marginLeft: "10px"} } src={state.user ? state.user.icon : ""} /></NavLink> 
                 <div className="navbar-item">
                     {state.user ? <LogoutButton /> : location.pathname !== "/signup" ? <SignUpButton /> : <div></div> }
                 </div>
-                <div className="navbar-item">
-                    <NavLink to="/" activeClassName="is-active">Home</NavLink>
-                </div>
-                <div className="navbar-item">
-                    <NavLink to="/profile" activeClassName="is-active">Profile</NavLink>
-                </div>
+                <NavLink to="/" className="navbar-item">Home</NavLink>
                 {/* fix burger menu for mobile */}
                 <div className="navbar-item">
                     <div className="burger">

@@ -13,13 +13,13 @@ function Hero(props) {
     return (
         <section className="hero is-primary is-small is-mobile">
             {/* <!-- Hero head: will stick at the top --> */}
-            <div className="hero-head">
+            <div className="hero-head"> 
                 <nav className="navbar">
                     <div className="container">
                         <div className="navbar-brand">
-                        <a className="navbar-item">
+                        <NavLink to="/"className="navbar-item">
                             {/* <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo" /> */}
-                        </a>
+                        </NavLink>
                         {/* need to figure out how to get navbar to show in mobile */}
                         <span className="navbar-burger burger" data-target="navbarMenuHeroA">
                             <span></span>
@@ -29,18 +29,16 @@ function Hero(props) {
                         </div>
                         <div id="navbarMenuHeroA" className="navbar-menu">
                             <div className="navbar-end">
-                                <a href="/" className="navbar-item">
+                                <NavLink to="/"className="navbar-item">
                                     Home
-                                {/* <NavLink to="/" activeClassName="is-active">Home</NavLink> */}
-                                </a>
-                                <a href="/listings" className="navbar-item">
+                                </NavLink>
+                                <NavLink to="/listings"className="navbar-item">
                                     Browse
-                                {/* <NavLink to="/listings" activeClassName="is-active">Browse</NavLink> */}
-                                </a>
-                                <a href="/signup" className="navbar-item" disabled>
+                                </NavLink>
+                                <NavLink to="/profile"className="navbar-item" disabled>
                                     Profile
                                 {/* <NavLink to="/profile" activeClassName="is-active">Profile</NavLink> */}
-                                </a>
+                                </NavLink>
                                 <span className="navbar-item">
                                     {state.user ? <LogoutButton /> : <SignUpButton />}
                                 </span>
