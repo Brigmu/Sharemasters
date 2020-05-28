@@ -72,8 +72,7 @@ const UpdateProfile = (props) => {
     return (
         <Section>
             <Container className="notification is-info is-light">
-                <h3 className="subtitle is-3">{`${state.user.firstName} ${state.user.lastName}`}</h3>
-                <h5 className="subtitle is-5">{state.user.username}</h5>
+                <h3 className="subtitle is-3">{`${state.user.firstName} ${state.user.lastName} (${state.user.username})`}</h3>
                 <Columns>
                     <Columns.Column className="is-narrow">
                         <FormField label="Profile Icon">

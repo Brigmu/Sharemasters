@@ -18,7 +18,6 @@ module.exports = {
         db.Appointment.create(req.body)
         // not sure if this is incomplete but keeping both just in case during merge -cna
         .then(data => res.json(data))
-        // .then(res => console.log('Hi from controller'))
         .catch(err => console.log(err));
     },
     updateCancelled: function(req, res) {

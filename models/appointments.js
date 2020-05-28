@@ -10,10 +10,10 @@ const appointmentSchema = new mongoose.Schema({
         ref: 'User'
     },
     startDate: {
-        type: Date,
+        type: String,
     },
     endDate: {
-        type: Date,
+        type: String,
     },
     isReturned: {
         type: Boolean,

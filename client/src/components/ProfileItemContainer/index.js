@@ -13,9 +13,13 @@ const ProfileItemContainer = (props) => {
                 </div>
                 <div className="media-content">
                     <div className="content">
-                        <div className="title is-5">{props.title}</div>
-                        <div className="title is-5">Start Date: <span>{props.startDate}</span></div>
-                        <div className="title is-5">End Date: <span>{props.endDate}</span></div>
+                        <div className="title is-5">Item Name: {props.title}</div>
+                        {props.startDate ? <div className="title is-5">Start Date: <span>{props.startDate}</span></div> : <></>}
+                        {props.endDate ?<div className="title is-5">End Date: <span>{props.endDate}</span></div> : <></>}
+                        {props.description ? <div className="title is-5">Description: <span>{props.description}</span> </div>: <></>}
+                        {props.price ? <div className="title is-5">Price: <span>${props.price}/day</span> </div>: <></>}
+                        {props.rented ? <div className="title is-5">Rental Status: <span>{props.rented.itemStatus ? 'Rented' : 'Available'}</span> </div>: <></>}
+                        {props.history ? <div className="title is-5">Number of times rented: <span>{props.history.length}</span> </div>: <></>}
                     </div>
                 </div>
             </article>

@@ -7,7 +7,7 @@ import { SET_USER } from "../../utils/UserContext/UserActions";
 import {getCurrentUser, getProfile} from '../../utils/API/API';
 
 //pages
-import Hero from '../../components/Hero';
+import Hero from '../../components/Hero/Hero';
 import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
 import { Link } from 'react-router-dom';
 

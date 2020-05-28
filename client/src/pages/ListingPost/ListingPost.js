@@ -1,14 +1,13 @@
 import React, {useContext, useState, useRef, useEffect} from 'react'
 import './styles.css';
-import Nav from '../../components/Nav/Nav'
-// import UserForm from '../../components/UserForm/UserForm';
-// import Container from '../../components/Container/Container'
+import Nav from '../../components/Nav/Nav';
 import { useHistory } from 'react-router-dom';
 import { useStoreContext } from '../../utils/UserContext/UserContext';
 import Field from '../../components/Field/Field';
 import DropdownMenu from '../../components/Dropdown/Dropdown';
 import ItemImage from '../../components/ItemImage/ItemImage';
 import {uploadImageToDB, postListing, getCoordinates, addOwned} from '../../utils/API/API';
+import 'react-bulma-components/dist/react-bulma-components.min.css';
 
 
 const ListingPage = (props) => {
@@ -17,7 +16,6 @@ const ListingPage = (props) => {
     const [image, setImage] = useState('');
     const history = useHistory();
     // merge conflict 1/2
-    console.log(state.user);
     if(!state.user){
         history.push('/signup');
     }
@@ -62,6 +60,10 @@ const ListingPage = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const validation = validateInputs()
+        if(!validation){
+            alert('Please fill out all fields')
+        } else {
         if (locationPref === 'Use current location') {
             const data = {
                 ownerId: state.user._id,
@@ -83,14 +85,15 @@ const ListingPage = (props) => {
                 isRented: false,
                 active: false,
             }
-            console.log(data);
             postListing(data)
             .then(res => {
                 console.log(res);
                 addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
                 .then(res => {
+                    console.log('got here')
                     alert('Item posted successfully')
                     history.push("/profile");
+                    console.log('this happened')
                 })
                 .catch(err => console.log(err))
             })
@@ -122,14 +125,15 @@ const ListingPage = (props) => {
             isRented: false,
             active: true,
         }
-        console.log(data);
         postListing(data)
         .then(res => {
             console.log(res);
             addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
             .then(res => { 
+                console.log('got here')
                 alert('Item posted successfully')
                 history.push("/profile");})
+                console.log('this happened')
             .catch(err => console.log(err))
             
         })
@@ -165,14 +169,17 @@ const ListingPage = (props) => {
                 console.log(res);
                 addOwned(`${res.data.ownerId}`, {itemId: res.data._id})
                 .then(res => {
+                    console.log('got here');
                     alert('Item posted successfully')
                     history.push("/profile");
+                    console.log('this happened')
                 })
                 .catch(err => console.log(err))
             })
             .catch(err => console.log(err));
         })}
     }
+}
 
     const handleLocationPref = (locationValue) => {
         setLocationPref(locationValue);
@@ -181,6 +188,42 @@ const ListingPage = (props) => {
     const handleCategoryDropdown = (selectedCategory) => {
         setCategory(selectedCategory);
     }
+
+    const validateInputs = () => {
+        let valid = true;
+        if(itemNameRef.current.value === ''){
+            valid = false;
+        }
+
+        if(descriptionRef.current.value === ''){
+            valid = false;
+        }
+
+        if(priceRef.current.value === ''){
+            valid = false;
+        }
+
+        if(!category) {
+            valid = false;
+        }
+
+        if(!image) {
+            valid = false;
+        }
+
+        if(locationPref === ''){
+            valid = false;
+        }
+
+        if(locationPref === 'Enter a location'){
+            if(streetRef.current.value ==='' || cityRef.current.value === '' || stateRef.current.value === '' || zipcodeRef.current.value === '') {
+                valid = false;
+            }
+        }
+
+        return valid;
+    }
+
     return (
         <div className = 'listing-page'>
             <Nav currentPage ='post'/>
@@ -204,8 +247,8 @@ const ListingPage = (props) => {
                     {locationPref === 'Use profile location' ? <Field disabled={true} value={state.user.zipCode}/> : <> </>}
                     {locationPref === 'Enter a location' ? <Field placeholder='Street' reference={streetRef} /> : <> </>}
                     {locationPref === 'Enter a location' ? <Field placeholder='City' reference={cityRef} /> : <> </>}
-                    {locationPref === 'Enter a location' ? <Field placeholder='State' reference={stateRef} maxlength={2}/> : <> </>}
-                    {locationPref === 'Enter a location' ? <Field placeholder='Zipcode' reference={zipcodeRef} maxlength={5}/> : <> </>}
+                    {locationPref === 'Enter a location' ? <Field placeholder='State' reference={stateRef} maxLength={2}/> : <> </>}
+                    {locationPref === 'Enter a location' ? <Field placeholder='Zipcode' reference={zipcodeRef} maxLength={5}/> : <> </>}
                     <div className='field'>
                         <label className="label">Item Image</label>
                         <ItemImage image={image} uploadImage={uploadImage}/>

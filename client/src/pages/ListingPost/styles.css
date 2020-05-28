@@ -13,3 +13,15 @@
 .App{
     min-height: 100vh;
 }
+
+.modalContent{
+    background-color: white;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: solid blue 3px;
+    box-shadow: white 1px 1px 1px 1px;
+}
