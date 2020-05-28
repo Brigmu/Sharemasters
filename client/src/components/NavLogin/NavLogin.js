@@ -1,10 +1,10 @@
 import React, {useRef, useState } from 'react'
-import { useHistory, StaticRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import FormField from "../FormField/FormField";
 import FormControl from "../FormControl/FormControl";
-import { Button, Columns, Container, Section} from "react-bulma-components";
+import { Columns, Container, Section } from "react-bulma-components";
 import FormIcon from "../FormIcon/FormIcon";
-import {loginUser, getCurrentUser, getProfile} from '../../utils/API/API';
+import { loginUser, getCurrentUser, getProfile } from '../../utils/API/API';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
 import { SET_USER } from "../../utils/UserContext/UserActions";
 
@@ -40,7 +40,7 @@ const NavLogin = () => {
         loginUser(user)
             .then(res => {
                 // login success  -> get user profile -> set user state
-                setLoginError({ error: false});
+                setLoginError({ error: false });
                 getCurrentUser().then(res => {
                     getProfile(res.data.user._id)
                         .then(res => {
@@ -50,7 +50,7 @@ const NavLogin = () => {
                 });
             })
             .catch(err => {
-                setLoginError({ error: true, message: err.message });
+                setLoginError({ error: true, message: "Incorrect username/password combination" });
             })
 
         // reset form
@@ -91,6 +91,11 @@ const NavLogin = () => {
                             <input className="button is-info" type="submit" value="Log In" />
                     </FormControl>
                     </form>
+                </Columns.Column>
+                <Columns.Column className="is-horizontal is-narrow">
+                    <FormField fieldClass="is-horizontal">
+                        { loginErrorState.error ? <div className="has-text-danger">{loginErrorState.message}</div>  : <></> }
+                    </FormField>
                 </Columns.Column>
             </Columns>
             </Container>

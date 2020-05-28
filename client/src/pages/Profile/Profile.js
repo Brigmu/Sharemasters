@@ -225,12 +225,10 @@ const Profile = () => {
                                 </ProfileItemContainer>
                             )):<div>No Returns</div>}</>
                             : <div className="box">
-                                <h2 className="subtitle is-2">{`${state.user ? state.user.firstName: <></>} ${state.user ? state.user.lastName: <></>} (${state.user.username})`}</h2>
-                                <figure className="image is-32x32">
-                                    <img className="is-rounded" src={state.user.icon}/>
-                                </figure>
+                                <h2 className="subtitle is-2">{`${state.user ? state.user.firstName: <></>} ${state.user ? state.user.lastName: <></>} (${state.user.username})`} <img  src={state.user.icon}/></h2>
                                 <div className="content">
                                     <h6 className="subtitle is-6">{state.user ? `${state.user.address} ${state.user.city}, ${state.user.state} ${state.user.zipCode}`: <> </>}</h6>
+                                    <h6 className="subtitle is-6">{state.user ? `${state.user.email}`: <> </>}</h6>
                                     <h6 className="subtitle is-6">Total listings: {state.user ? state.user.owned.length : 'no listing'}</h6>
                                     <h6 className="subtitle is-6">Items Renting: {state.user ? state.user.rentals.length : 'no listing'}</h6>
                                     <NavLink to="/editprofile"><i className={`fas fa-pencil-alt`}></i></NavLink>
