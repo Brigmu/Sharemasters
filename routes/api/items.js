@@ -18,7 +18,7 @@ router.route('/rentstatus/:id')
 router.route('/pendingstatus/:id')
   .put(itemController.updatePendingStatus)
 
-router.route('appointments/:id')
+router.route('/appointments/:id')
   .put(itemController.updateAppointments)
 
 module.exports = router;

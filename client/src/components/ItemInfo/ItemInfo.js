@@ -9,12 +9,14 @@ import { getItem } from '../../utils/API/API';
 
 
 import MessageOwnerButton from '../MessageOwnerButton/MessageOwnerButton';
+import { useStoreContext } from '../../utils/UserContext/UserContext';
 
 
 function ItemInfo() {
     const [item, setItem] = useState({})
     const { id } = useParams();
     const [owner, setOwner] = useState({})
+    const [state] = useStoreContext();
 
 
 
@@ -52,7 +54,8 @@ function ItemInfo() {
                         <MessageOwnerButton />
                         <br />
                         <br />
-                        <ItemRequestForm />
+                        {!state.user ? <h2>Please login to rent an item</h2> : state.user.username === owner.username ? <h2>This is your item</h2> :
+                        <ItemRequestForm />}
 
                     </div>
 

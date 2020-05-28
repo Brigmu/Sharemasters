@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './styles.css';
 // import Field from '../../components/Field/Field';
 import DatePicker from 'react-datepicker';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useStoreContext } from '../../utils/UserContext/UserContext';
 import { Container } from "react-bulma-components";
 import { postAppointment, renterRequest, getItem, rentalCancel } from '../../utils/API/API';
@@ -18,6 +18,7 @@ function ItemRequestForm() {
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [appointmentInfo, setAppointmentInfo] = useState({});
+    const history = useHistory();
 
 
 
@@ -38,22 +39,17 @@ function ItemRequestForm() {
         }
  
             //submit data to appointments as a request to owner
-            postAppointment(appointment);
+            postAppointment(appointment)
+            .then(res => {
+                const appointmentId = res.data._id;
+                renterRequest({renterUserId: state.user._id, pendingRequest: true, $push: {currentAppointment: appointmentId}}, id)
+                .then(res => console.log(res))
+                .catch(err => console.log(err));
+                alert('Request sent')
+                history.push('/listings');
+            })
+            .catch(err => console.log(err));
             
-            //getting appointment information to update the the item information with the appointment id
-            setTimeout(() => {
-                getItem(id, (res) => {
-                    console.log(res)
-                    res = res[0].appointmentInfo[res[0].appointmentInfo.length - 1]._id
-                    console.log(res)
-                    let renterRequestUpdate = { 
-                        pendingRequest: true,
-                        appointments: res   
-                    } 
-                    renterRequest(id, renterRequestUpdate)
-                })
-                
-            }, 3000);
             
 
 

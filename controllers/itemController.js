@@ -15,8 +15,8 @@ module.exports = {
     },
     create: function(req, res) {
         db.Item.create(req.body)
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+        .then(data => res.json(data))
+        .catch(err => res.status(422).json(err));
     },
     itemUpdate: function(req, res) {
         db.Item.findOneAndUpdate({ _id: mongoose.Types.ObjectId(req.params.id) }, req.body)
@@ -35,7 +35,7 @@ module.exports = {
     },
 
     updateAppointments: function(req,res) {
-        db.Item.update({_id: req.params.id}, {$pull: {currentAppointment: req.body.appointmendId}, $push: {appointmentHistory: req.body.appointmendId}})
+        db.Item.update({_id: req.params.id}, {$pull: {currentAppointment: req.body.appointmentId}, $push: {appointmentHistory: req.body.appointmentId}})
         .then(data => res.json(data))
         .catch(err => res.status(422).json(err))
     }

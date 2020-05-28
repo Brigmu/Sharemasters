@@ -35,12 +35,12 @@ const Profile = () => {
 
     const [selected, setSelected] = useState('Profile');
 
-    const setUserState = (user) => {
-        dispatch({
-            type: SET_USER,
-            user: user
-        });
-    };
+    // const setUserState = (user) => {
+    //     dispatch({
+    //         type: SET_USER,
+    //         user: user
+    //     });
+    // };
 
     const filterRequests = (array) => {
         const filteredItems = array.filter(item => {
@@ -65,8 +65,7 @@ const Profile = () => {
 
     const handlePageChange = (e) => {
         const nextPage = e.target.getAttribute('data-page');
-        setSelected(nextPage);
-        switch(selected) {
+        switch(nextPage) {
             case 'Rentals':
                 filterRentals(state.user.rentals);
                 break;
@@ -79,6 +78,7 @@ const Profile = () => {
             default:
                 break;
         }
+        setSelected(nextPage);
     }
 
     const handleItemReturn = (e) => {
@@ -99,23 +99,21 @@ const Profile = () => {
         confirmReturn(id, statusData)
         .then(res => {
             //pull item from rented user
-            removeAppointment(id, {appointmendId: res.data.currentAppointment[0]})
+            console.log(res)
+            removeAppointment(id, {appointmentId: res.data.currentAppointment[0]})
             removeRental(requestId, {itemId: id})
             const filtered = filterOffItem(id, state.user.owned)
-            filterReturns(state.user.rentals)
+            filterReturns(filtered)
         })
     }
 
     const handleAccept = (e) => {
         //make api call to set item with id to rented and pending to false
         const id = e.target.getAttribute('data-id');
-        console.log(id);
         const requestId = e.target.getAttribute('data-renterid')
-        console.log(requestId);
         let statusData = {pendingRequest: false, isRented: true}
         approveRental(id, statusData)
         .then(res => {
-            console.log(res.data);
             addRental(requestId, {itemId: id});
             const filtered = filterOffItem(id, state.user.owned);
             filterRequests(filtered)
@@ -127,12 +125,12 @@ const Profile = () => {
     const handleReject = (e) => {
         //make api call to set pending to false. handle rejection message?
         const id = e.target.getAttribute('data-id');
-        console.log(id);
-        let statusData = {pendingRequest: false};
+        const requestId = e.target.getAttribute('data-appointmentid')
+        let statusData = {pendingRequest: false, $pull: {currentAppointment: requestId}};
         declineRental(id, statusData)
-        .then(() => {
+        .then((res) => {
             const filtered = filterOffItem(id, state.user.owned);
-            filterRentals(filtered);
+            filterRequests(filtered);
         })
         .catch(res => console.log(res));
     }
@@ -148,12 +146,13 @@ const Profile = () => {
     useEffect(() => {
         if(!state.user) {
             history.push('/signup');
-        } else {
-            getProfile(state.user.userId)
-            .then(res => {
-                setUserState(res.data[0]);
-            })
-        }
+        } 
+        // else {
+        //     getProfile(state.user.userId)
+        //     .then(res => {
+        //         setUserState(res.data[0]);
+        //     })
+        // }
     }, [])
 
     return (
@@ -185,7 +184,7 @@ const Profile = () => {
                                     startDate={request.currentAppointment[0].startDate}
                                     endDate={request.currentAppointment[0].endDate}>
                                     <SuccessButton onClick={handleAccept} data-renterid={request.renterUserId} data-id={request._id}>Accept</SuccessButton>
-                                    <RejectButton onClick={handleReject} data-id={request._id}>Reject</RejectButton>
+                                    <RejectButton onClick={handleReject} data-appointmentid={request.currentAppointment[0]._id} data-id={request._id}>Reject</RejectButton>
                                 </ProfileItemContainer>
                             )):<div>No Requests</div>}</>
                             : selected === 'Returns' ? <>{returns.length !== 0 ? returns.map(returnItem => (                
@@ -200,8 +199,8 @@ const Profile = () => {
                             )):<div>No Returns</div>}</>
                             : <div className="box">
                                 <h2 className="subtitle is-2">{`${state.user ? state.user.firstName: <></>} ${state.user ? state.user.lastName: <></>} (${state.user.username})`}</h2>
-                                <figure class="image is-32x32">
-                                    <img class="is-rounded" src={state.user.icon}/>
+                                <figure className="image is-32x32">
+                                    <img className="is-rounded" src={state.user.icon}/>
                                 </figure>
                                 <div className="content">
                                     <h6 className="subtitle is-6">{state.user ? `${state.user.address} ${state.user.city}, ${state.user.state} ${state.user.zipCode}`: <> </>}</h6>
