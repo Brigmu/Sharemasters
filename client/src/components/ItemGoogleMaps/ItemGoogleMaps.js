@@ -3,6 +3,7 @@ import { Container, Columns } from "react-bulma-components";
 import { GoogleMap, withScriptjs, withGoogleMap, Circle } from 'react-google-maps';
 import { getItem } from "../../utils/API/API";
 import { useParams } from 'react-router-dom';
+import "./ItemGoogleMaps.css"
 
 
 function Map() {
@@ -50,7 +51,7 @@ const WrapperMap = withScriptjs(withGoogleMap(Map));
 
 export default function ItemMap() {
     return (
-        <Container>
+        <Container className="google-maps-container">
             <Columns>
                 <div style={{width: "100vw", height: "69vh"}}>
                     <WrapperMap googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyAH6mTxzDGvX1DWOPmZDMAJazm7tDvuAt0`} 
