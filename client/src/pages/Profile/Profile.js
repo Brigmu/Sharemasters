@@ -30,6 +30,8 @@ const Profile = () => {
     const [requests, setRequests] = useState([]);
     const [rentals, setRentals] = useState([]);
     const [returns, setReturns] = useState([]);
+    const [listings, setListings] = useState([])
+    const [myHistory, setMyHistory] = useState([]);
     const [state, dispatch] = useStoreContext();
     const history = useHistory();
 
@@ -66,6 +68,12 @@ const Profile = () => {
     const handlePageChange = (e) => {
         const nextPage = e.target.getAttribute('data-page');
         switch(nextPage) {
+            case 'My items':
+                setListings(state.user.owned)
+                break;
+            case 'Rental History':
+                setMyHistory(state.user.rentalHistory)
+                break;
             case 'Rentals':
                 filterRentals(state.user.rentals);
                 break;
@@ -146,7 +154,7 @@ const Profile = () => {
     useEffect(() => {
         if(!state.user) {
             history.push('/signup');
-        } 
+        }
         // else {
         //     getProfile(state.user.userId)
         //     .then(res => {
@@ -162,12 +170,31 @@ const Profile = () => {
                 <Nav currentPage = 'profile'/>
                 <br />
                 <Container>
-                    <NavTabs handlePageChange={handlePageChange} tabs={['Profile', 'Rentals', 'Requests', 'Returns']} />
+                    <NavTabs handlePageChange={handlePageChange} tabs={['Profile','My items', 'Rental History', 'Rentals', 'Requests', 'Returns']} />
                 </Container>
                 <Section>
                     <Container>
                         {
-                            selected === 'Rentals' ? <>{rentals.length !== 0 ? rentals.map(rental => (                
+                            selected === 'My items' ? <>{listings.length !== 0 ? listings.map(listing => (
+                                <ProfileItemContainer
+                                    image={listing.img}
+                                    title={listing.name}
+                                    description={listing.description}
+                                    price={listing.price}
+                                    rented={{itemStatus: listing.isRented}}
+                                    history={listing.appointmentHistory}
+                                    >
+                                </ProfileItemContainer>
+                            )):<div>No items posted yet</div>}</>
+                            : selected === 'Rental History' ? <>{myHistory.length !== 0 ? myHistory.map((item, i) => (
+                                <ProfileItemContainer
+                                    image={item.img}
+                                    title={item.name}
+                                    startDate={item.appointmentHistory[i].startDate}
+                                    endDate={item.appointmentHistory[i].endDate}>
+                                    </ProfileItemContainer>
+                            )): <div>You havent rented any itmes yet</div>} </>
+                            : selected === 'Rentals' ? <>{rentals.length !== 0 ? rentals.map(rental => (                
                                 <ProfileItemContainer 
                                     image={rental.img}
                                     title={rental.name}

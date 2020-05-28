@@ -27,6 +27,8 @@ function ItemRequestForm() {
         if (startDate > endDate) {
             return alert('The start date cannot be after the end date!')
         }
+        const formattedStartDate = `${startDate.getMonth()}-${startDate.getDate()}-${startDate.getFullYear()}`
+        const formattedEndDate = `${endDate.getMonth()}-${endDate.getDate()}-${endDate.getFullYear()}`
         const appointment = {
             itemId: id,
             // renter id will be the userId from user context for this field
@@ -34,8 +36,8 @@ function ItemRequestForm() {
             // previous code before merge
             renterId: state.user._id,
 
-            startDate: startDate,
-            endDate: endDate
+            startDate: formattedStartDate,
+            endDate: formattedEndDate
         }
  
             //submit data to appointments as a request to owner

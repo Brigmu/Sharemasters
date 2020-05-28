@@ -20,7 +20,7 @@ module.exports = {
                 model: 'Appointment'
             }})
             .populate({path: "rentalHistory", populate: {
-                path: 'currentAppointment',
+                path: 'appointmentHistory',
                 model: 'Appointment'
             }})
             .then(data => res.json(data))
