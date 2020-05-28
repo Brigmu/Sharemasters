@@ -57,11 +57,6 @@ const Nav = (props) => {
                     {props.children}
                 </Navbar.Container>
                 <Navbar.Container position="end">
-<<<<<<< HEAD
-                    <NavLink className="navbar-item" to="/profile">{ state.user ? state.user.username : ""}<img style={ { marginLeft: "10px"} } src={state.user ? state.user.icon : ""} /></NavLink> 
-                    <div className="navbar-item">
-                        {state.user ? <LogoutButton /> : location.pathname !== "/signup" ? <SignUpButton /> : "" }
-=======
                 {state.user ? 
                     <div className="navbar-item dropdown is-hoverable">
                         <div className="dropdown-trigger">
@@ -75,9 +70,6 @@ const Nav = (props) => {
                         </div>
                         <div className="dropdown-menu" id="dropdown-menu4" role="menu">
                             <div className="dropdown-content">
-                            {/* <div className="dropdown-item">
-                                <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
-                            </div> */}
                             <div className="dropdown-item">
                                 <NavLink activeClassName="is-active" to="/profile">Profile</NavLink> 
                             </div>
@@ -86,18 +78,13 @@ const Nav = (props) => {
                             </div>
                             </div>
                         </div>
->>>>>>> 77475a49a08a10384e7135a842301ca18c0155d8
                     </div>
                 : ""}
                 {state.user || location.pathname === "/signup" ? "" :
                 <Navbar.Item> 
                     <SignUpButton />
                 </Navbar.Item>}
-                {/* {state.user ? renderProfile : ""}
-                <Navbar.Item>
-                    <span>{location.pathname}</span>
-                </Navbar.Item>
-                {location.pathname != "/signup" ? renderSignUp : ""} */}
+
                 </Navbar.Container>
             </Navbar.Menu>
         </Navbar>      
