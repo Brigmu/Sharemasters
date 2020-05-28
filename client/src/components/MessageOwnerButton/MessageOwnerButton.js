@@ -23,7 +23,7 @@ function MessageOwnerButton() {
 
     return (
         <div>
-            <a href={ownerEmail} >
+            <a href={ownerEmail} target="_blank">
                 <button className="button is-primary is-light is-outlined message-owner">
                     Message the Owner
                 </button>
