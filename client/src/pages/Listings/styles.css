@@ -19,6 +19,7 @@ input{
 .sidebar{
     position: fixed;
     list-style: none;
+    display: inline-block;
 }
 
 .carousel{
