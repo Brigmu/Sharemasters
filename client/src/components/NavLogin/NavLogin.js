@@ -2,7 +2,7 @@ import React, {useRef, useState } from 'react'
 import { useHistory, StaticRouter } from 'react-router-dom';
 import FormField from "../FormField/FormField";
 import FormControl from "../FormControl/FormControl";
-import { Button, Columns} from "react-bulma-components";
+import { Button, Columns, Container, Section} from "react-bulma-components";
 import FormIcon from "../FormIcon/FormIcon";
 import {loginUser, getCurrentUser, getProfile} from '../../utils/API/API';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
@@ -58,10 +58,15 @@ const NavLogin = () => {
     }
 
     return (
-        <div className="container">
-            <Columns>
+        <Section>
+            <Container class="notification">
+                <div className="title">Welcome back</div>
+                <h1>Log In</h1>
+                <br></br>
+                <Columns>
                 <Columns.Column>
-                    <FormField fieldClass="is-horizontal">
+                    <form onSubmit={handleLogin}>
+                    <FormField>
                         <FormControl controlClass="has-icons-left">
                             <input 
                                 className={`input ${ loginErrorState.error ? "is-danger" : "" }`}
@@ -71,9 +76,7 @@ const NavLogin = () => {
                             <FormIcon size="small" side="left" icon="user" />
                         </FormControl>
                     </FormField>
-                </Columns.Column>
-                <Columns.Column>
-                    <FormField fieldClass="is-horizontal">
+                    <FormField>
                         <FormControl controlClass="has-icons-left has-icons-right">
                             <input 
                                 className={`input ${ loginErrorState.error ? "is-danger" : "" }`}
@@ -84,12 +87,14 @@ const NavLogin = () => {
                             <FormIcon size="small" side="right" icon="exclamation-triangle" />
                         </FormControl>
                     </FormField>
-                </Columns.Column>
-                <Columns.Column className="is-narrow">
-                    <Button style={ { width: "75px", marginTop: "8px"} } className="button is-info" onClick={handleLogin}>Log In</Button>
+                    <FormControl>
+                            <input className="button is-info" type="submit" value="Log In" />
+                    </FormControl>
+                    </form>
                 </Columns.Column>
             </Columns>
-        </div>
+            </Container>
+        </Section>
     )
 }
 

@@ -1,20 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import './styles.css';
-// import Field from '../../components/Field/Field';
 import DatePicker from 'react-datepicker';
 import { useParams, useHistory } from 'react-router-dom';
 import { useStoreContext } from '../../utils/UserContext/UserContext';
 import { Container } from "react-bulma-components";
-import { postAppointment, renterRequest, getItem, rentalCancel } from '../../utils/API/API';
+import { postAppointment, renterRequest } from '../../utils/API/API';
 import "react-datepicker/dist/react-datepicker.css";
 
-
 function ItemRequestForm() {
-    const [item, setItem] = useState({})
     const [state, dispatch] = useStoreContext();
     const { id } = useParams();
-    const startDateRef = useRef();
-    const endDateRef = useRef();
     const [startDate, setStartDate] = useState();
     const [endDate, setEndDate] = useState();
     const [appointmentInfo, setAppointmentInfo] = useState({});
@@ -58,16 +53,16 @@ function ItemRequestForm() {
     }
 
 
-    const handleCancel = (e) => {
-        e.preventDefault();
-        rentalCancel(id);
+    // const handleCancel = (e) => {
+    //     e.preventDefault();
+    //     rentalCancel(id);
 
-    }
+    // }
 
-    const handleFormCancel = (e) => {
-        startDateRef.current.value = "";
-        endDateRef.current.value = "";
-    }
+    // const handleFormCancel = (e) => {
+    //     startDateRef.current.value = "";
+    //     endDateRef.current.value = "";
+    // }
 
     return (
         <Container className="notification">
@@ -76,7 +71,7 @@ function ItemRequestForm() {
                 <div className="date-picker">
                     <span className="title is-6">Start Date</span>
                     <div>
-                        <DatePicker showPopperArrow={false} selected={startDate} onChange={date => setStartDate(date)} placeholderText="Please choose start date.."/> 
+                        <DatePicker showPopperArrow={false} selected={startDate} onChange={date => setStartDate(date)} minDate={Date.now()} placeholderText="Please choose start date.."/> 
                     </div>
                 </div> 
                 <div className="date-picker">
@@ -90,9 +85,6 @@ function ItemRequestForm() {
             <div className="field is-grouped button-container">
                 <div className="control">
                     <button className="button is-primary" onClick={handleFormSubmit}>Submit</button>
-                </div>
-                <div className="control">
-                    <button className="button is-warning is-light" onClick={handleCancel}>Cancel</button>
                 </div>
             </div>
         </Container>

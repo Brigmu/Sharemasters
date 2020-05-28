@@ -127,3 +127,7 @@ export const returnItem = (id, status) => {
 export const confirmReturn = (id, status) => {
     return axios.put(`/api/items/rentstatus/${id}`, status)
 }
+
+export const initMessage = (data) => {
+    return axios.post('/api/messages', data)
+}
