@@ -1,11 +1,14 @@
 import React, { useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+
 import FormField from "../FormField/FormField";
 import FormControl from "../FormControl/FormControl";
 import FormIcon from "../FormIcon/FormIcon";
 import FormHelp from "../FormHelp/FormHelp";
 import StatesDropdown from "../StatesDropdown/StatesDropdown";
+
 import { loginUser, signupUser, getCurrentUser, createProfile, getProfile, deleteUser } from '../../utils/API/API';
+
 import { useStoreContext } from "../../utils/UserContext/UserContext";
 import { SET_USER } from "../../utils/UserContext/UserActions";
 import { Button, Section, Columns} from "react-bulma-components";
@@ -32,7 +35,7 @@ const UserForm = (props) => {
     const stateRef = useRef();
     const zipCodeRef = useRef();
 
-    const [signupErrorState, setSignupError] = useState({ error: null });
+    const [signupErrorState, setSignupError] = useState({ error: false });
 
     const profileInputs = [usernameRef, passwordRef, firstNameRef, lastNameRef, emailRef, zipCodeRef, addressRef, cityRef, stateRef];
 
@@ -120,7 +123,7 @@ const UserForm = (props) => {
     return (
         <Section>
             <div className="container notification is-info is-light">
-                <h1>Sign Up!</h1>
+                <h1>Sign Up</h1>
                 <Columns>
                     <Columns.Column>
                         <FormField label="First Name" >
@@ -199,7 +202,7 @@ const UserForm = (props) => {
                     </FormControl>
                 </FormField>
                 <div className="field">
-                    <Button style={ { width: "75px" } } className="button is-link" type="submit" onClick={handleSubmit}>Submit</Button>
+                    <Button style={ { width: "75px" } } className="button is-link" type="submit" onSubmit={handleSubmit}>Submit</Button>
                     <FormHelp type="danger" message={signupErrorState ? signupErrorState.message : ""} />
                 </div>
             </div>

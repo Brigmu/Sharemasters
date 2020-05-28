@@ -4,7 +4,7 @@ import Nav from '../../components/Nav/Nav';
 import { useHistory } from 'react-router-dom';
 import Columns from '../../components/Columns/Columns';
 import Column from '../../components/Column/Column';
-import Card from '../../components/Card/index';
+import Card from '../../components/Card/Card';
 import Title from '../../components/Title/Title';
 import {getAllUnrentedItems, getAllItems} from '../../utils/API/API';
 
@@ -197,7 +197,7 @@ const Listings = (props) => {
                 <Nav />
                 <section className = 'section'>
                     <Columns>
-                        <Column size='is-2'>
+                        <Column size='is-2 is-mobile'>
                             <div className='sidebar'>
                                 <p>Select filter type</p>
                                 {filterType === 'price' ?
