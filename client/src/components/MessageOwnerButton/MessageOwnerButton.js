@@ -1,21 +1,35 @@
-import React from 'react';
-import { Button } from "react-bulma-components";
-import './styles.css'
+import React, { useState, useEffect }from 'react';
+import './styles.css';
+import { useParams } from 'react-router-dom';
+import { getItem, initMessage } from '../../utils/API/API';
+import { useStoreContext } from '../../utils/UserContext/UserContext';
 
-function MessageOwnerButton(props) {
+function MessageOwnerButton() {
+    const { id } = useParams();
+    const [state, dispatch] = useStoreContext();
+    const [item, setItem] = useState({})
+    const [owner, setOwner] = useState({})
+    const [ownerEmail, setOwnerEmail] = useState({})
 
-    const handleMessage = (e) => {
-        console.log('navigate user to email form or chat window');
-    }
+        useEffect(() => {
+        getItem(id)
+        .then(res => {
+            console.log(res)
+            res = res.data[0]
+            // setOwnerEmail('mailto:'+res.ownerId.email)
+        })
+    }, []);
+
 
     return (
-        // <button className="button is-primary is-light is-outlined message-owner" onClick={handleMessage}>
-        //     Message the Owner
-        // </button>
-        <Button className="is-primary is-light is-outlined message-owner" onClick={handleMessage} {...props}>
-            Message the Owner
-        </Button>
-    );
+        <div>
+            <a href={ownerEmail} >
+                <button className="button is-primary is-light is-outlined message-owner">
+                    Message the Owner
+                </button>
+            </a>
+        </div>
+    )
 }
 
 export default MessageOwnerButton;
