@@ -17,22 +17,28 @@ nav {
     color: white;
 }
 
-.navbar-item {
-    color: white;
-}
-
 .dark button a {
     color: #4a4a4a;
 }
 
-.navbar-item .is-primary a {
-    color: white;
+p {
+    color: #ffffff;
 }
 
-#nav-toggle-state {
-    display: none;
+:hover {
+    color: #4a4a4a;
 }
 
-#nav-toggle-state:checked ~ .navbar-menu {
-    display: block;
+@media screen and (max-width: 1023px) {
+    .navbar {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .navbar-brand {
+      min-width: 100%;
+    }
+    .navbar-menu {
+      margin-left: auto;
+      min-width: 50%;
+    }
 }
