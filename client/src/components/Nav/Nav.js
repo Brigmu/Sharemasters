@@ -40,8 +40,6 @@ const Nav = (props) => {
             </Navbar.Brand>
             {/* menu collapses into burger on mobile */}
             <Navbar.Menu className={toggle.currentClassName}>
-                <Navbar.Container>
-                </Navbar.Container>
                 <Navbar.Container position="end">
                 {location.pathname === "/profile" ?
                     <Navbar.Item>
@@ -75,8 +73,8 @@ const Nav = (props) => {
                             </div>
                         </div>
                     </div>
-                : ""}
-                {state.user || location.pathname === "/signup" ? "" :
+                :
+                state.user || location.pathname === "/signup" ? "" :
                 <Navbar.Item> 
                     <SignUpButton />
                 </Navbar.Item>}
