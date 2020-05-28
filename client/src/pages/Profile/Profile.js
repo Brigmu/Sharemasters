@@ -37,12 +37,12 @@ const Profile = () => {
 
     const [selected, setSelected] = useState('Profile');
 
-    // const setUserState = (user) => {
-    //     dispatch({
-    //         type: SET_USER,
-    //         user: user
-    //     });
-    // };
+    const setUserState = (user) => {
+        dispatch({
+            type: SET_USER,
+            user: user
+        });
+    };
 
     const filterRequests = (array) => {
         const filteredItems = array.filter(item => {
@@ -155,12 +155,12 @@ const Profile = () => {
         if(!state.user) {
             history.push('/signup');
         }
-        // else {
-        //     getProfile(state.user.userId)
-        //     .then(res => {
-        //         setUserState(res.data[0]);
-        //     })
-        // }
+        else {
+            getProfile(state.user.userId)
+            .then(res => {
+                setUserState(res.data[0]);
+            })
+        }
     }, [])
 
     return (
