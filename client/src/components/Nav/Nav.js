@@ -49,7 +49,7 @@ const Nav = (props) => {
                     </Navbar.Item> : ""}
                 {location.pathname === "/profile" ?
                     <Navbar.Item>
-                        <NavLink to="/newlisting" className="button is-primary is-light">Browse Listings</NavLink>    
+                        <NavLink to="/listings" className="button is-primary is-light">Browse Listings</NavLink>    
                     </Navbar.Item> : ""}
                 </Navbar.Container>
                 <Navbar.Container>
