@@ -32,7 +32,7 @@ const UserForm = (props) => {
     const stateRef = useRef();
     const zipCodeRef = useRef();
 
-    const [signupErrorState, setSignupError] = useState({ });
+    const [signupErrorState, setSignupError] = useState({ error: null });
 
     const profileInputs = [usernameRef, passwordRef, firstNameRef, lastNameRef, emailRef, zipCodeRef, addressRef, cityRef, stateRef];
 
@@ -63,7 +63,7 @@ const UserForm = (props) => {
         signupUser(user)
             .then(() => {
                 //signup success
-                setSignupError({});
+                setSignupError({ error: null});
                 createProfile(newUser)
                     .then(res => {
                         loginHelper(user);
@@ -71,9 +71,27 @@ const UserForm = (props) => {
                         profileInputs.forEach(input => input.current.value = '');
                     })
                     .catch(err => {
+
                         //delete user from passport if profile create fails
                         deleteUser(newUser.username);
-                        setSignupError(err.response.data.err.errors);
+
+                        if (err.response.data.err.errors) {
+                            // missing field errors
+                            setSignupError(err.response.data.err.errors);
+
+                        } else if (err.response.data.err.keyValue){
+                            //mongodb errors
+                            if (err.response.data.err.keyValue.email) {
+                                //duplicate email error
+                                setSignupError({ 
+                                    email: true, 
+                                    message: "Email has already been registered"
+                                 });
+                            }
+                        } else {
+                            setSignupError(err.response.data);
+                        }
+                        
                     })
             })
             .catch(err => {
@@ -94,7 +112,7 @@ const UserForm = (props) => {
                 });
             })
             .catch(err => {
-                console.log(err.response.data.message);
+                setSignupError(err.response.data);
             })
         });
     };
@@ -161,7 +179,7 @@ const UserForm = (props) => {
                 <FormField label="Username">
                     <FormControl controlClass="has-icons-left has-icons-right">
                         <input
-                            className="input"
+                            className={`input ${signupErrorState.name === "UserExistsError" ? "is-danger" : ""}`}
                             type="text"
                             placeholder="Username"
                             ref={usernameRef} />
@@ -172,7 +190,7 @@ const UserForm = (props) => {
                 <FormField label="Password">
                     <FormControl controlClass="has-icons-left has-icons-right">
                         <input
-                            className="input"
+                            className={`input ${signupErrorState.name === "MissingPasswordError" ? "is-danger" : ""}`}
                             type="password"
                             placeholder="Enter a secure password"
                             ref={passwordRef} />
