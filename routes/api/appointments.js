@@ -4,7 +4,6 @@ const appointmentController = require("../../controllers/appointmentController")
 router.route("/")
     .post(appointmentController.create)
 
-
 router.route("/cancel")
     .put(appointmentController.updateCancelled)
 

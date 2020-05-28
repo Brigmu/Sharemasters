@@ -54,9 +54,9 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     addOwned: function(req, res) {
-    db.Profile.update({ _id: req.params.id }, { $push: { owned: req.body.itemId }})
-        .then(data => res.json(data))
-    .catch(err => res.status(422).json(err));
+        db.Profile.update({ _id: req.params.id }, { $push: { owned: req.body.itemId }})
+            .then(data => res.json(data))
+            .catch(err => res.status(422).json(err));
     } ,
     removeRental: function(req, res) {
         db.Profile.update({ _id: req.params.id }, { $pull: { rentals: req.body.itemId }, $push : {rentalHistory: req.body.itemId}})
