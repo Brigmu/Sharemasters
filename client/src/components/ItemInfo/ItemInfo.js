@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
-import { Section, Container, Tile, Heading, Columns } from "react-bulma-components";
+import { Section, Container, Columns } from "react-bulma-components";
 import ItemRequestForm from '../ItemRequestForm/ItemRequestForm';
-
-//pages
 import { useParams } from 'react-router-dom';
 import { getItem } from '../../utils/API/API';
-
-
 import MessageOwnerButton from '../MessageOwnerButton/MessageOwnerButton';
 
-
 function ItemInfo() {
-    const [item, setItem] = useState({})
     const { id } = useParams();
+    const [item, setItem] = useState({})
     const [owner, setOwner] = useState({})
-
-
 
         useEffect(() => {
         getItem(id)
@@ -24,11 +17,8 @@ function ItemInfo() {
             res = res.data[0]
             console.log('hi from useeffect in ItemInfo')
             console.log(res);
-            // console.log(res.ownerInfo[0]);
-
             setItem(res)
             setOwner(res.ownerId)
-
         })
     }, []);
 
@@ -46,13 +36,13 @@ function ItemInfo() {
 
                     <div className="column is-half">
                         <div className="title is-5">Price: ${item.price}/day</div>
-                        <div className="title is-5">User: {owner.username}</div>
+                        {/* <div className="title is-5">User: {owner.username}</div> */}
                         {item.city ? <div className="title is-5">Location: {item.city}, {item.state}</div> : <div className="title is-5">Location: See map below</div>}
                         <div className="title is-5">Description: {item.description}</div>
                         <MessageOwnerButton />
                         <br />
                         <br />
-                        <ItemRequestForm />
+                        {item.pendingRequest || item.isRented ? <p className="not-available-alert">*** This item is rented or an appointment is pending. Check back later or message the owner for more info.</p> : <ItemRequestForm />}
 
                     </div>
 

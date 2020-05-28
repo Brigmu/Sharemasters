@@ -30,12 +30,12 @@ export const getItem = (id) => {
     return axios.get('/api/items/' + id)
 }
 
-export const renterRequest = (id, appointmentId) => {
-    return axios.put('http://localhost:3001/api/items/' + id, appointmentId)
+export const renterRequest = (id, status) => {
+    return axios.put('/api/items/rentalrequest/' + id, status)
 }
 
 export const rentalApprove = (id) => {
-    return axios.put('http://localhost:3001/api/items/' + id + '/rental-approve')
+    return axios.put('/api/items/' + id + '/rental-approve')
 }
 
 export const rentalCancel = (id) => {
@@ -135,4 +135,8 @@ export const returnItem = (id, status) => {
 
 export const confirmReturn = (id, status) => {
     return axios.put(`/api/items/rentstatus/${id}`, status)
+}
+
+export const initMessage = (data) => {
+    return axios.post('/api/messages', data)
 }
