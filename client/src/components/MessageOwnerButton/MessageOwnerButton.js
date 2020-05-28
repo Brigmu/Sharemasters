@@ -16,7 +16,7 @@ function MessageOwnerButton() {
         .then(res => {
             console.log(res)
             res = res.data[0]
-            // setOwnerEmail('mailto:'+res.ownerId.email)
+            setOwnerEmail('mailto:'+res.ownerId.email)
         })
     }, []);
 
