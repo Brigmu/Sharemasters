@@ -21,6 +21,10 @@ nav {
     color: white;
 }
 
-.navbar-item a {
+.dark button a {
+    color: #4a4a4a;
+}
+
+.navbar-item .is-primary a {
     color: white;
 }

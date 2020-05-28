@@ -32,7 +32,7 @@ const UserForm = (props) => {
     const stateRef = useRef();
     const zipCodeRef = useRef();
 
-    const [signupErrorState, setSignupError] = useState({ });
+    const [signupErrorState, setSignupError] = useState({});
 
     const profileInputs = [usernameRef, passwordRef, firstNameRef, lastNameRef, emailRef, zipCodeRef, addressRef, cityRef, stateRef];
 
@@ -102,7 +102,7 @@ const UserForm = (props) => {
     return (
         <Section>
             <div className="container notification is-info is-light">
-                <h1>Sign Up!</h1>
+                <h1>Sign Up</h1>
                 <Columns>
                     <Columns.Column>
                         <FormField label="First Name" >
@@ -181,7 +181,7 @@ const UserForm = (props) => {
                     </FormControl>
                 </FormField>
                 <div className="field">
-                    <Button style={ { width: "75px" } } className="button is-link" type="submit" onClick={handleSubmit}>Submit</Button>
+                    <Button style={ { width: "75px" } } className="button is-link" type="submit" onSubmit={handleSubmit}>Submit</Button>
                     <FormHelp type="danger" message={signupErrorState ? signupErrorState.message : ""} />
                 </div>
             </div>

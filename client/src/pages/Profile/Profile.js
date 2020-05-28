@@ -14,12 +14,12 @@ import { useHistory, NavLink} from 'react-router-dom';
 //put buttons in ProfileItemContent children
 // Rental Buttons
 import ReturnButton from "../../components/ReturnButton";
-import MessageOwnerButton from "../../components/MessageOwnerButton";
+import MessageOwnerButton from "../../components/MessageOwnerButton/MessageOwnerButton";
 
 // Listings and Return Buttons 
 // Accept/Reject for Listings and Confirm/Report for Returns
-import SuccessButton from "../../components/SuccessButton";
-import RejectButton from "../../components/RejectButton";
+import SuccessButton from "../../components/SuccessButton/SuccessButton";
+import RejectButton from "../../components/RejectButton/RejectButton";
 
 //API functions
 import {approveRental, declineRental, returnItem, confirmReturn, removeAppointment} from '../../utils/API/API';
