@@ -1,31 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useLocation } from "react-router-dom";
 import './styles.css';
 import { useStoreContext } from "../../utils/UserContext/UserContext";
 import {Navbar} from 'react-bulma-components';
 import LogoutButton from "../LogoutButton/LogoutButton";
 import SignUpButton from '../SignUpButton';
+import { set } from 'mongoose';
 
 const Nav = (props) => {
     const [state, dispatch] = useStoreContext();
+    const [toggle, setToggle] = useState({
+        currentClassName: "",
+        isClicked: true
+    });
 
     let location = useLocation();
 
-
-    const renderProfile = () => {
-            return (
-                <Navbar.Item>
-                    <NavLink to="/profile" className="inactive" activeClassName="is-active">Profile</NavLink>
-                </Navbar.Item>
-            );
-    }
-
-    const renderSignUp = () => {
-        return (
-            <Navbar.Item>
-                <SignUpButton />
-            </Navbar.Item>
-        )
+    const handleBurgerToggle = () => {
+        if (toggle.isClicked) {
+            setToggle({isClicked: false, currentClassName: "is-active"});
+        } else {
+            setToggle({currentClassName: "", isClicked: true});
+        }
+        console.log(toggle);
     }
 
     return (
@@ -39,11 +36,13 @@ const Nav = (props) => {
                 <Navbar.Item>
                     <NavLink to="/" className="inactive" activeClassName="is-active"><h1>SHAREISH</h1></NavLink>
                 </Navbar.Item> }
-                <Navbar.Burger/>
+                <Navbar.Burger onClick={handleBurgerToggle}/>
             </Navbar.Brand>
             {/* menu collapses into burger on mobile */}
-            <Navbar.Menu>
+            <Navbar.Menu className={toggle.currentClassName}>
                 <Navbar.Container>
+                </Navbar.Container>
+                <Navbar.Container position="end">
                 {location.pathname === "/profile" ?
                     <Navbar.Item>
                         <NavLink to="/newlisting" className="button is-primary is-light">Post a Listing</NavLink>    
@@ -54,9 +53,6 @@ const Nav = (props) => {
                     </Navbar.Item> : ""}
                 </Navbar.Container>
                 <Navbar.Container>
-                    {props.children}
-                </Navbar.Container>
-                <Navbar.Container position="end">
                 {state.user ? 
                     <div className="navbar-item dropdown is-hoverable">
                         <div className="dropdown-trigger">
@@ -70,9 +66,6 @@ const Nav = (props) => {
                         </div>
                         <div className="dropdown-menu" id="dropdown-menu4" role="menu">
                             <div className="dropdown-content">
-                            {/* <div className="dropdown-item">
-                                <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
-                            </div> */}
                             <div className="dropdown-item">
                                 <NavLink activeClassName="is-active" to="/profile">Profile</NavLink> 
                             </div>
@@ -87,11 +80,6 @@ const Nav = (props) => {
                 <Navbar.Item> 
                     <SignUpButton />
                 </Navbar.Item>}
-                {/* {state.user ? renderProfile : ""}
-                <Navbar.Item>
-                    <span>{location.pathname}</span>
-                </Navbar.Item>
-                {location.pathname != "/signup" ? renderSignUp : ""} */}
                 </Navbar.Container>
             </Navbar.Menu>
         </Navbar>      
