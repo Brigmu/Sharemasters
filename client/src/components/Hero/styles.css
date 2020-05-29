@@ -11,10 +11,6 @@
     color: #4a4a4a;
 }
 
-.hero .is-primary .navbar-link{
-    color: #4a4a4a;
-}
-
 @media screen and (max-width: 1023px) {
     .hero.is-primary .navbar-item a{
         color: #ffffff;
