@@ -17,7 +17,7 @@ input{
 } */
 
 .sidebar{
-    position: fixed;
+    /* position: fixed; */
     list-style: none;
     display: inline-block;
 }
