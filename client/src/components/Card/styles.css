@@ -7,3 +7,9 @@
 .box img {
     max-height: 156px;
 }
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
