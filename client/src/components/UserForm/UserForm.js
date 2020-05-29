@@ -202,7 +202,7 @@ const UserForm = (props) => {
                     </FormControl>
                 </FormField>
                 <div className="field">
-                    <Button style={ { width: "75px" } } className="button is-link" type="submit" onSubmit={handleSubmit}>Submit</Button>
+                        <Button style={ { width: "75px" } } className="button is-link" type="submit" onSubmit={handleSubmit}>Submit</Button>
                     <FormHelp type="danger" message={signupErrorState ? signupErrorState.message : ""} />
                 </div>
             </div>
