@@ -43,9 +43,7 @@ const Nav = (props) => {
             <Navbar.Menu className={`${toggle.currentClassName} is-right`} color={toggle.mobileColor}>
                 <Navbar.Container position="end">
                 {state.user ? 
-                    <Navbar.Item dropdown
-                    hoverable
-                    >
+                    <Navbar.Item dropdown hoverable>
                         <Navbar.Item className="user">
                             { state.user ? <p>{state.user.username}</p> : ""}
                             <img style={ { marginLeft: "10px"} } src={state.user ? state.user.icon : ""} />
