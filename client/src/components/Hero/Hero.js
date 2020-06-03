@@ -5,9 +5,7 @@ import { Navbar } from "react-bulma-components";
 
 import { useStoreContext } from "../../utils/UserContext/UserContext";
 import { useLocation } from "react-router-dom";
-import { NavLink, useHistory } from "react-router-dom";
-import SignUpButton from "../SignUpButton";
-import LogoutButton from "../LogoutButton/LogoutButton";
+import { useHistory } from "react-router-dom";
 import Nav from "../Nav/Nav";
 
 function Hero(props) {

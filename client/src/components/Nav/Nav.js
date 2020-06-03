@@ -64,7 +64,9 @@ const Nav = (props) => {
                 :
                 state.user || location.pathname === "/signup" ? "" :
                 <Navbar.Item> 
+                    <p>
                     <SignUpButton />
+                    </p>
                 </Navbar.Item>}
                 </Navbar.Container>
             </Navbar.Menu>
