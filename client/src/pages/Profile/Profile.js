@@ -201,7 +201,7 @@ const Profile = () => {
                                     startDate={rental.currentAppointment[0].startDate}
                                     endDate={rental.currentAppointment[0].endDate}>
                                     <ReturnButton onClick={handleItemReturn} data-id={rental._id}>Return</ReturnButton>
-                                    <MessageOwnerButton></MessageOwnerButton>
+                                    {/* <MessageOwnerButton></MessageOwnerButton> */}
                                 </ProfileItemContainer>
                             )):<div>No Rentals</div>}</>
                             : selected === 'Requests' ? <>{requests.length !== 0 ? requests.map(request => (                

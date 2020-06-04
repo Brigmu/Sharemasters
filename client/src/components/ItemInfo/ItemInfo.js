@@ -17,7 +17,7 @@ function ItemInfo() {
         getItem(id)
         .then(res => {
             res = res.data[0]
-            console.log('hi from useeffect in ItemInfo')
+            // console.log('hi from useeffect in ItemInfo')
             console.log(res);
             setItem(res)
             setOwner(res.ownerId)
@@ -31,8 +31,8 @@ function ItemInfo() {
             <h1 className="is-size-3 has-text-weight-bold item-name">{item.name}</h1>
                 <Columns>
                     <div className="column is-half">
-                        <figure className="">
-                            {item.img ? <img className="item-page" src={item.img} alt={item.name}/>: <img className="item-page" src="https://bulma.io/images/placeholders/128x128.png"/>}
+                        <figure className="item-page-image">
+                            {item.img ? <img className="item-page-image" src={item.img} alt={item.name}/>: <img className="item-page" src="https://bulma.io/images/placeholders/128x128.png"/>}
                         </figure>
                     </div>
 

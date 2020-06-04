@@ -9,7 +9,7 @@ function MessageOwnerButton() {
     const [state, dispatch] = useStoreContext();
     const [item, setItem] = useState({})
     const [owner, setOwner] = useState({})
-    const [ownerEmail, setOwnerEmail] = useState({})
+    const [ownerEmail, setOwnerEmail] = useState("")
 
         useEffect(() => {
         getItem(id)
