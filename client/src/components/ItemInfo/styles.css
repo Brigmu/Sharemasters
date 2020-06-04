@@ -1,3 +1,12 @@
 .not-available-alert {
     font-weight: bold
 }
+
+.item-name {
+    padding-bottom: 10px;
+}
+
+.item-page {
+    max-height: 500px;
+    width: auto;
+}

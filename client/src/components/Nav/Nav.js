@@ -40,8 +40,18 @@ const Nav = (props) => {
                 <Navbar.Burger className={toggle.currentClassName} onClick={handleBurgerToggle} />
             </Navbar.Brand>
             {/* menu collapses into burger on mobile */}
+            { location.pathname === "/signup" ? 
             <Navbar.Menu className={`${toggle.currentClassName} is-right`} color={toggle.mobileColor}>
                 <Navbar.Container position="end">
+                    <Navbar.Dropdown className="is-right">
+                        <NavLink to="/" className="navbar-item">Home</NavLink>
+                        <NavLink to="/listings" className="navbar-item" activeClassName="is-active">Browse Listings</NavLink>
+                    </Navbar.Dropdown>
+                </Navbar.Container>
+            </Navbar.Menu> :
+            <Navbar.Menu className={`${toggle.currentClassName} is-right`} color={toggle.mobileColor}>
+                <Navbar.Container position="end">
+                {/* if user is logged in, display this */}
                 {state.user ? 
                     <Navbar.Item dropdown hoverable>
                         <Navbar.Item className="user">
@@ -62,14 +72,14 @@ const Nav = (props) => {
                         </Navbar.Dropdown>
                     </Navbar.Item>
                 :
-                state.user || location.pathname === "/signup" ? "" :
                 <Navbar.Item> 
                     <p>
-                    <SignUpButton />
+                        {!toggle.isClicked ? <NavLink to="/signup" className="navbar-item" activeClassName="is-active">Signup</NavLink>:
+                    <SignUpButton />}
                     </p>
                 </Navbar.Item>}
                 </Navbar.Container>
-            </Navbar.Menu>
+            </Navbar.Menu>}
         </Navbar>      
     );
 }

@@ -2,10 +2,11 @@ import React, {useRef, useState, useEffect, useContext} from 'react'
 import './styles.css';
 import Nav from '../../components/Nav/Nav';
 import { useHistory } from 'react-router-dom';
-import Columns from '../../components/Columns/Columns';
+// import Columns from '../../components/Columns/Columns';
 import Column from '../../components/Column/Column';
-import Card from '../../components/Card/index';
+import Card from '../../components/Card/Card';
 import Title from '../../components/Title/Title';
+import { Container, Columns } from "react-bulma-components";
 import {getAllUnrentedItems, getAllItems} from '../../utils/API/API';
 
 const Listings = (props) => {
@@ -124,6 +125,66 @@ const Listings = (props) => {
     const miscCategoryRef = useRef();
     const recreationCategoryRef = useRef();
 
+    const categories = [
+        {
+            id: "all",
+            title: "All",
+            ref: allCategoryRef,
+            items: filtered,
+            color: "is-info"
+        },
+        {
+            id: "electronics",
+            title: "Electronics",
+            ref: electronicsCategoryRef,
+            items: electonicsItems,
+            color: "is-warning"
+        },
+        {
+            id: "events",
+            title: "Events",
+            ref: eventsCategoryRef,
+            items: eventItems,
+            color: "is-danger"
+        },
+        {
+            id: "home-imp",
+            title: "Home Improvement",
+            ref: homeCategoryRef,
+            items:homeImpovementItems,
+            color: "is-link"
+        },
+        {
+            id: "kitchen",
+            title: "Kitchen",
+            ref: kitchenCategoryRef,
+            items: kitchenItems,
+            color: "is-warning"
+
+        },
+        {
+            id: "recreation",
+            title: "Recreation",
+            ref: recreationCategoryRef,
+            items: recreationItems,
+            color: "is-danger"
+        },
+        {
+            id: "yard",
+            title: "Yard",
+            ref: yardCategoryRef,
+            items: yardItems,
+            color: "is-success"
+        },
+        {
+            id: "misc",
+            title: "Miscellaneous",
+            ref: miscCategoryRef,
+            items: miscItems,
+            color: "is-light"
+        }
+    ];
+
     const handleScrollClick = (e) => {
         console.log(e.target);
         const direction = e.target.getAttribute('data-direction');
@@ -197,7 +258,38 @@ const Listings = (props) => {
                 <Nav />
                 <section className = 'section'>
                     <Columns>
-                        <Column size='is-2'>
+                        <Column size='is-3'>
+                            <div className="mobilebar">
+                                <p>Select filter type</p>
+                                {filterType === 'price' ?
+                                <ul id='filters'>
+            
+                                    <li>
+                                    <input type='radio' id='nameFilter' value='name' name='filter'onChange={nameFilterCheck}></input>
+                                    <label htmlFor='nameFilter'>Name</label>
+                                    </li>
+                                    <li>
+                                    <input type='radio' id='priceFilter' value='price' name='filter' onChange={nameFilterCheck} checked></input>
+                                    <label htmlFor='priceFilter'>Price</label>
+                                    </li>
+                                </ul>
+                                     :
+                                <ul id='filters'>
+                                    <li>
+                                        <input type='radio' id='nameFilter' value='name' name='filter' checked onChange={nameFilterCheck}></input>
+                                        <label htmlFor='nameFilter'>Name</label>
+                                    </li>
+                                    <li>
+                                        <input type='radio' id='priceFilter' value='price' name='filter' onChange={nameFilterCheck}></input>
+                                        <label htmlFor='priceFilter'>Price</label>
+                                    </li>
+                                </ul>}
+                                
+                                {/* <label>Filter:</label> */}
+                                
+                                <input className="input" type='text' id='filter' ref={filterRef} onChange={e => setFilter(e.target.value)}></input>
+                                <hr></hr>
+                            </div>
                             <div className='sidebar'>
                                 <p>Select filter type</p>
                                 {filterType === 'price' ?
@@ -226,12 +318,12 @@ const Listings = (props) => {
                                 
                                 {/* <label>Filter:</label> */}
                                 
-                                <input type='text' id='filter' ref={filterRef} onChange={e => setFilter(e.target.value)}></input>
+                                <input className="input" type='text' id='filter' ref={filterRef} onChange={e => setFilter(e.target.value)}></input>
                                 <hr></hr>
                             <div className="title is-4">
                                 Category List
                             </div>
-                            <div className=''>
+                            <div>
                                 <li><a href='#all'>All</a></li>
                                 <li><a href='#electronics'>Electronics</a></li>
                                 <li><a href='#events'>Events</a></li>
@@ -244,76 +336,44 @@ const Listings = (props) => {
                             </div>
                         </Column>
                         <Column>
-                            <Title title='All' colorClass='is-info' id='all' handleScrollClick={handleScrollClick}/>
-                            <Columns size='carousel' reference={allCategoryRef}>
-                                {/* <Column>
-                                    <button><span class="icon is-small">
-                                        <i class="fas fa-angle-left"></i>
-                                    </span></button>
-                                </Column> */}
-                                {filtered.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : filtered.map(item => (
-                                    <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
-                                    </Column>
-                                ))}
-                            </Columns>
-                            <Title title='Electronics' colorClass='is-danger' id='electronics' handleScrollClick={handleScrollClick}/>
-                            <Columns size='carousel' reference={electronicsCategoryRef}>
-                            {electonicsItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : electonicsItems.map(item => (
-                                    <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
-                                        {/* <ItemCard img={item.img} itemName={item.name} id={item.id} handleItemClick={props.handleItemClick}/> */}
-                                    </Column>
-                                ))}
-                            </Columns>
-                            <Title title='Events' colorClass='is-primary' id='events' handleScrollClick={handleScrollClick}/>
-                            <Columns size='carousel' reference={eventsCategoryRef}>
-                                {eventItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : eventItems.map(item => (
-                                    <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
-                                    </Column>
-                                ))}
-                            </Columns>
-                            <Title title='Home Improvement' colorClass='is-info' id='home-imp' handleScrollClick={handleScrollClick}/>
-                            <Columns size='carousel' reference={homeCategoryRef}>
-                                {homeImpovementItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : homeImpovementItems.map(item => (
-                                    <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
-                                    </Column>
-                                ))}
-                            </Columns>
-                            <Title title='Kitchen Appliances' colorClass='is-danger' id='kitchen' handleScrollClick={handleScrollClick}/>
-                            <Columns size='carousel' reference={kitchenCategoryRef}>
-                                {kitchenItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : kitchenItems.map(item => (
-                                    <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
-                                    </Column>
-                                ))}
-                            </Columns>
-                            <Title title='Miscellaneous' colorClass='is-primary' id='misc' handleScrollClick={handleScrollClick}/>
-                            <Columns size='carousel' reference={miscCategoryRef}>
-                                {miscItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : miscItems.map(item => (
-                                    <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
-                                    </Column>
-                                ))}
-                            </Columns>
-                            <Title title='Recreation' colorClass='is-info' id='recreation' handleScrollClick={handleScrollClick}/>
-                            <Columns size='carousel' reference={recreationCategoryRef}>
-                                {recreationItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : recreationItems.map(item => (
-                                    <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
-                                    </Column>
-                                ))}
-                            </Columns>
-                            <Title title='Yardwork' colorClass='is-danger' id='yard' handleScrollClick={handleScrollClick}/>
-                            <Columns size='carousel' reference={yardCategoryRef}>
-                                {yardItems.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : yardItems.map(item => (
-                                    <Column size='is-2 carousel-item'>
-                                        <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
-                                    </Column>
-                                ))}
-                            </Columns>
+                            <Container>
+                                {categories.map(category => {
+                                    return (
+                                        <div className="item-section" key={category.title}>
+                                            <div id={category.id} className={`notification ${category.color}`}><h1 className="title is-3">{category.title}</h1></div>
+                                            <Columns className="is-mobile">
+                                                <Columns.Column size={1}>
+                                                <button className="button scroll" data-direction='left' data-category={category.title} onClick={handleScrollClick}>
+                                                    <span className="icon is-small" data-direction='left' data-category={category.title}>
+                                                        <i className="fas fa-angle-left" data-direction='left' data-category={category.title}></i>
+                                                    </span>
+                                                </button>
+                                                </Columns.Column>
+                                                <Columns.Column size={10}>
+                                                    <div className="item-section">
+                                                        <div className='is-tablet carousel' ref={category.ref}>
+                                                            {category.items.length < 1 ? <h1 className='nomatch'>No Matches Found</h1> : category.items.map(item => (
+                                                                <div className="carousel-item">
+                                                                    <Card handleItemClick={handlePageChangeOnItemClick} itemId={item._id} price={item.price} img={item.img} itemName={item.name} id={item._id}></Card>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </Columns.Column>
+                                                <Columns.Column size={1}>
+                                                <button className="button scroll" data-direction='right' data-category={category.title} onClick={handleScrollClick}>
+                                                    <span className="icon is-small" data-direction='right' data-category={category.title}>
+                                                        <i className="fas fa-angle-right" data-direction='right' data-category={category.title}></i>
+                                                    </span>
+                                                </button>
+                                                </Columns.Column>
+                                            </Columns>
+                                        </div>
+                                    );
+                                    })
+                                }
+                           </Container>
                         </Column>
                     </Columns>
                 </section>

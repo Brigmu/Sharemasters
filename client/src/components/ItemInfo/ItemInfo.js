@@ -28,11 +28,11 @@ function ItemInfo() {
 
         <Section>
             <Container>
-            <h1 className="is-size-3 has-text-weight-bold">{item.name}</h1>
+            <h1 className="is-size-3 has-text-weight-bold item-name">{item.name}</h1>
                 <Columns>
                     <div className="column is-half">
-                        <figure className="image">
-                            {item.img ? <img src={item.img} alt={item.name}/>: <img src="https://bulma.io/images/placeholders/128x128.png"/>}
+                        <figure className="">
+                            {item.img ? <img className="item-page" src={item.img} alt={item.name}/>: <img className="item-page" src="https://bulma.io/images/placeholders/128x128.png"/>}
                         </figure>
                     </div>
 

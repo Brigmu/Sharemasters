@@ -193,7 +193,7 @@ const Profile = () => {
                                     startDate={item.appointmentHistory[i].startDate}
                                     endDate={item.appointmentHistory[i].endDate}>
                                     </ProfileItemContainer>
-                            )): <div>You havent rented any itmes yet</div>} </>
+                            )): <div>You havent rented any items yet</div>} </>
                             : selected === 'Rentals' ? <>{rentals.length !== 0 ? rentals.map(rental => (                
                                 <ProfileItemContainer 
                                     image={rental.img}

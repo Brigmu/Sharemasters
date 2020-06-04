@@ -39,6 +39,20 @@ p {
     }
     .navbar-menu {
       margin-left: auto;
-      min-width: 50%;
+      min-width: 25%;
     }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .navbar-brand {
+    min-width: 100%;
+  }
+  .navbar-menu {
+    margin-left: auto;
+    min-width: 50%;
+  }
 }

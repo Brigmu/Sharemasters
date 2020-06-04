@@ -27,12 +27,12 @@ function Hero(props) {
     return (
         <section className="hero is-primary is-small">
             {/* <!-- Hero head: will stick at the top --> */}
-            <div className="hero-head"> 
+            <div className="hero-head is-fixed-top"> 
                 <Nav />
             </div>
 
             {/* <!-- Hero content: will be in the middle --> */}
-            <div className="hero-body">
+            <div className="hero-body is-fixed-top">
                 <div className="container has-text-centered">
                 <h1 className="title">
                     Shareish!

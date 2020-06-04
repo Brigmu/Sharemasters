@@ -9,14 +9,24 @@
 
 .scroll-btn{
     position: absolute;
-    max-width: 30px;
-    top: 200px;
+    top: 175px;
+    background-color: #fff;
+    border-color: #dbdbdb;
+    border-width: 1px;
+    border-style: solid;
+    color: #363636;
+    cursor: pointer;
+    justify-content: center;
+    padding: calc(.375em - 1px) .75em;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 5px;
 }
 
 .scroll-left{
-    left: -40px;
+    left: 0px;
 }
 
 .scroll-right{
-    right: -20px;
+    right: 0px;
 }

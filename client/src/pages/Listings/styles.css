@@ -17,21 +17,49 @@ input{
 } */
 
 .sidebar{
-    /* position: fixed; */
     list-style: none;
-    display: inline-block;
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 790px) {
+    /* Styles */
+    .sidebar {
+        position: fixed;
+    }
+    .mobilebar {
+        display: none;
+    }
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 768px) {
+    .sidebar {
+        display: none;
+    }
+    .carousel {
+        max-width: 700px;
+    }
+    
 }
 
 .carousel{
     max-width: 1550px;
-    position: relative;
+    /* position: relative; */
     text-align: center;
+    overflow: scroll;
+    overflow-y: hidden;
+    height: fit-content;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
 }
 
 .carousel h1 {
-    font-size: 40px;
+    font-size: 25px;
     /* margin: 40px 60px; */
-    margin: 60px 0px 60px 100px;
+    margin-top: 60px;
+    margin-bottom: 60px; 
+    margin-left: auto;
+    margin-right: auto;
     /* min-height: 200px; */
 }
 
@@ -41,7 +69,8 @@ input{
 
 .carousel-item{
     transition: transform 250ms ease-in;
-    background-color: rgb(241, 238, 238);
+    /* background-color: rgb(241, 238, 238); */
+    margin-right: 15px;
 }
 
 .carousel-item:hover{
@@ -51,4 +80,12 @@ input{
 .section {
     max-width: 100%;
     padding-right: 50px;
+}
+
+.scroll {
+    margin-top: 88px;
+}
+
+.notification .orange{
+    background-color: hsl(22, 100%, 61%);
 }
