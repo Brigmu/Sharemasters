@@ -1,9 +1,32 @@
-.box{
-    min-width: 200px;
+.item {
+    width: fit-content;
+    min-width: 175px;
     margin: 0px 5px;
-    box-shadow: black 1px 1px 5px 1px;
+    height: 224px;
+} 
+.item-image {
+    display: block;
+    max-width:128px;
+    max-height:128px;
+    width: auto;
+    justify-content: center;
 }
-
-.box img {
-    max-height: 156px;
+.item-figure {
+    justify-content: center;
+    height: 128px;
+}
+.item-section {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+}
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+@media only screen and (min-device-width : 320px) and (max-device-width : 928px) {
+    .mobile-font {
+        font-size: 17px;
+    }
+    
 }

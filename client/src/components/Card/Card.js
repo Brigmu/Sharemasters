@@ -3,12 +3,15 @@ import './styles.css';
 
 function Card(props) {
     return (
-        <div className={"box"} key={props._id} data-id={props.itemId} onClick={props.handleItemClick}>
-            <figure className="image is-156x156">
-                <img data-id={props.itemId}src={props.img} alt =''></img>
-            </figure>
-            <h2 data-id={props.itemId}>{props.itemName}</h2>
-            <h2 data-id={props.itemId}>${props.price}/day</h2>
+        <div className={"box item has-text-centered"} key={props._id} data-id={props.itemId} onClick={props.handleItemClick}>
+                <figure class="item-figure center" data-id={props.itemId} onClick={props.handleItemClick}>
+                    <img className="item-image" data-id={props.itemId} src={props.img} alt ='' onClick={props.handleItemClick}></img>
+                </figure>
+            <div className="is-mobile">
+                <h2 className="mobile-font" data-id={props.itemId} onClick={props.handleItemClick}>{props.itemName}</h2>
+                <h2 className="mobile-font" data-id={props.itemId} onClick={props.handleItemClick}>${props.price}/day</h2>
+            </div>
+            
         </div>
     )
 }

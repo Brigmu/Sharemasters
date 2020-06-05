@@ -1,17 +1,18 @@
 import React from "react";
+import "./styles.css";
 
-import { Notification } from 'react-bulma-components';
+import { Notification, Columns } from 'react-bulma-components';
 
 const ProfileItemContainer = (props) => {
     return (
-        <Notification className="level">
-            <article className="media">
-                <div className="media-left">
-                    <figure className="image is-128x128">
-                        <img src={props.image} />
+        <Notification>
+            <Columns>
+                <Columns.Column size={3}>
+                    <figure className="item-page">
+                        <img className="item-page" src={props.image} />
                     </figure>
-                </div>
-                <div className="media-content">
+                </Columns.Column>
+                <Columns.Column size={6}>
                     <div className="content">
                         <div className="title is-5">Item Name: {props.title}</div>
                         {props.startDate ? <div className="title is-5">Start Date: <span>{props.startDate}</span></div> : <></>}
@@ -21,11 +22,13 @@ const ProfileItemContainer = (props) => {
                         {props.rented ? <div className="title is-5">Rental Status: <span>{props.rented.itemStatus ? 'Rented' : 'Available'}</span> </div>: <></>}
                         {props.history ? <div className="title is-5">Number of times rented: <span>{props.history.length}</span> </div>: <></>}
                     </div>
-                </div>
-            </article>
-            <div className="field is-grouped">
-                {props.children}
-            </div>
+                </Columns.Column>
+                <Columns.Column size={3}>
+                    <div className="field is-grouped">
+                        {props.children}
+                    </div>
+                </Columns.Column>
+            </Columns>
         </Notification>
     );
 };

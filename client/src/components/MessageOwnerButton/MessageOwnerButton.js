@@ -9,7 +9,7 @@ function MessageOwnerButton() {
     const [state, dispatch] = useStoreContext();
     const [item, setItem] = useState({})
     const [owner, setOwner] = useState({})
-    const [ownerEmail, setOwnerEmail] = useState({})
+    const [ownerEmail, setOwnerEmail] = useState("")
 
         useEffect(() => {
         getItem(id)
@@ -23,7 +23,7 @@ function MessageOwnerButton() {
 
     return (
         <div>
-            <a href={ownerEmail} >
+            <a href={ownerEmail} target="_blank">
                 <button className="button is-primary is-light is-outlined message-owner">
                     Message the Owner
                 </button>

@@ -1,8 +1,18 @@
 .hero .is-primary .nav-link .profile {
-    color: black;
+    color: #4a4a4a;
 }
 
 .inactive {
     color: #ffffff;
     text-decoration: none;
+}
+
+.hero.is-primary .navbar-item a{
+    color: #4a4a4a;
+}
+
+@media screen and (max-width: 1023px) {
+    .hero.is-primary .navbar-item a{
+        color: #ffffff;
+    }    
 }

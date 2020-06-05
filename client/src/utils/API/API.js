@@ -28,6 +28,7 @@ export const getAllUnrentedItems = () => {
 
 export const getItem = (id) => {
     return axios.get('/api/items/' + id)
+    // return axios.get('/api/items/' + id)
 }
 
 export const renterRequest = (renterId, id ) => {
