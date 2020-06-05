@@ -258,7 +258,7 @@ const Listings = (props) => {
                 <Nav />
                 <section className = 'section'>
                     <Columns>
-                        <Column size='is-3'>
+                        <Columns.Column size={3}>
                             <div className="mobilebar">
                                 <p>Select filter type</p>
                                 {filterType === 'price' ?
@@ -334,8 +334,8 @@ const Listings = (props) => {
                                 <li><a href='#yard'>Yardwork</a></li>
                             </div>
                             </div>
-                        </Column>
-                        <Column>
+                        </Columns.Column>
+                        <Columns.Column size={9}>
                             <Container>
                                 {categories.map(category => {
                                     return (
@@ -374,7 +374,7 @@ const Listings = (props) => {
                                     })
                                 }
                            </Container>
-                        </Column>
+                        </Columns.Column>
                     </Columns>
                 </section>
             </div>
