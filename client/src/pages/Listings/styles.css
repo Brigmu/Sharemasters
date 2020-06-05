@@ -21,7 +21,7 @@ input{
 }
 
 /* iPads (portrait) ----------- */
-@media only screen and (min-device-width : 790px) {
+@media only screen and (min-device-width : 768px) {
     /* Styles */
     .sidebar {
         position: fixed;
@@ -31,7 +31,7 @@ input{
     }
 }
 
-@media only screen and (min-device-width : 320px) and (max-device-width : 768px) {
+@media only screen and (max-device-width : 767px) {
     .sidebar {
         display: none;
     }
