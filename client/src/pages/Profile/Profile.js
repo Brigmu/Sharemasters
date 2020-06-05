@@ -60,7 +60,7 @@ const Profile = () => {
 
     const filterReturns = (array) => {
         const filteredItems = array.filter(item => {
-            return (!item.active)
+            return (!item.active);
         })
         setReturns(filteredItems);
     }
@@ -198,8 +198,8 @@ const Profile = () => {
                                 <ProfileItemContainer 
                                     image={rental.img}
                                     title={rental.name}
-                                    startDate={rental.currentAppointment[0].startDate}
-                                    endDate={rental.currentAppointment[0].endDate}>
+                                    startDate={rental.currentAppointment.length > 0 ? rental.currentAppointment[0].startDate : ""}
+                                    endDate={rental.currentAppointment.length > 0 ? rental.currentAppointment[0].endDate : ""}>
                                     <ReturnButton onClick={handleItemReturn} data-id={rental._id}>Return</ReturnButton>
                                     {/* <MessageOwnerButton></MessageOwnerButton> */}
                                 </ProfileItemContainer>
@@ -208,8 +208,8 @@ const Profile = () => {
                                 <ProfileItemContainer 
                                     image={request.img}
                                     title={request.name}
-                                    startDate={request.currentAppointment[0].startDate}
-                                    endDate={request.currentAppointment[0].endDate}>
+                                    startDate={request.currentAppointment.length > 0 ? request.currentAppointment[0].startDate : ""}
+                                    endDate={request.currentAppointment.length > 0 ? request.currentAppointment[0].endDate : ""}>
                                     <SuccessButton onClick={handleAccept} data-renterid={request.renterUserId} data-id={request._id}>Accept</SuccessButton>
                                     <RejectButton onClick={handleReject} data-appointmentid={request.currentAppointment[0]._id} data-id={request._id}>Reject</RejectButton>
                                 </ProfileItemContainer>
@@ -218,8 +218,8 @@ const Profile = () => {
                                 <ProfileItemContainer 
                                     image={returnItem.img}
                                     title={returnItem.name}
-                                    startDate={returnItem.currentAppointment[0].startDate}
-                                    endDate={returnItem.currentAppointment[0].endDate}>
+                                    startDate={returnItem.currentAppointment.length > 0 ? returnItem.currentAppointment[0].startDate : ""}
+                                    endDate={returnItem.currentAppointment.length > 0 ? returnItem.currentAppointment[0].endDate : ""}>
                                     <SuccessButton onClick={handleConfirmReturned} data-renterid={returnItem.renterUserId} data-id={returnItem._id}>Confirm</SuccessButton>
                                     {/* <RejectButton onClick={handlePageChange} data-id={returnItem._id}>Report</RejectButton> */}
                                 </ProfileItemContainer>
